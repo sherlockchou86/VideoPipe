@@ -16,9 +16,9 @@
 using namespace cv;
 using namespace std;
 
-float scoreThreshold = 0.7;
-float nmsThreshold = 0.5;
-int topK = 50;
+float scoreThreshold = 0.5;
+float nmsThreshold = 0.3;
+int topK = 100;
 int inputW;
 int inputH;
 std::vector<Rect2f> priors;
@@ -230,7 +230,7 @@ void visualize(const std::vector<Mat>& inputs, int frame, const std::vector<Mat>
 
 int main() {
     cv::VideoCapture capture("./6.mp4");
-    auto image = cv::imread("./13.png");
+    auto image = cv::imread("./15.jpg");
     auto image2 = cv::imread("./13.png");
     TickMeter tm;
 
@@ -240,6 +240,7 @@ int main() {
     auto frame_index = 1;
     while (1)
     {
+        /*
         if(!capture.read(image))
         {
             continue;
@@ -248,7 +249,7 @@ int main() {
         if (!capture.read(image2))
         {
             continue;
-        }
+        }*/
         
 
         tm.start();
@@ -274,7 +275,7 @@ int main() {
         imshow("yunet_face", image);
         imshow("yunet_face_2", image2);
 
-        waitKey(1);
+        waitKey(0);
     }
 }
 

@@ -20,6 +20,7 @@
 #include "../nodes/infers/vp_yunet_face_detector_node.h"
 #include "../nodes/osd/vp_pose_osd_node.h"
 #include "../nodes/osd/vp_face_osd_node.h"
+#include "../nodes/osd/vp_face_osd_node_v2.h"
 #include "VP.h"
 
 #if MAIN5
@@ -54,9 +55,13 @@ int main() {
     auto osd_1 = std::make_shared<vp_nodes::vp_pose_osd_node>("osd_1");
     auto osd_2 = std::make_shared<vp_nodes::vp_pose_osd_node>("osd_2"); */
 
-    auto osd_0 = std::make_shared<vp_nodes::vp_face_osd_node>("osd_0");
+    auto osd_0 = std::make_shared<vp_nodes::vp_osd_node>("osd_0", vp_nodes::vp_osd_option{});
     auto osd_1 = std::make_shared<vp_nodes::vp_osd_node>("osd_1", vp_nodes::vp_osd_option{});
-    auto osd_2 = std::make_shared<vp_nodes::vp_face_osd_node>("osd_2");  
+    auto osd_2 = std::make_shared<vp_nodes::vp_osd_node>("osd_2", vp_nodes::vp_osd_option{});
+
+    auto osd_00 = std::make_shared<vp_nodes::vp_face_osd_node_v2>("osd_00");
+    auto osd_11 = std::make_shared<vp_nodes::vp_face_osd_node_v2>("osd_11");
+    auto osd_22 = std::make_shared<vp_nodes::vp_face_osd_node_v2>("osd_22");
 
     // display on screen for debug purpose
     auto screen_des_0 = std::make_shared<vp_nodes::vp_screen_des_node>("screen_des_0", 0);
@@ -81,14 +86,18 @@ int main() {
     osd_1->attach_to({split});
     osd_2->attach_to({split});
 
-    screen_des_0->attach_to(std::vector<std::shared_ptr<vp_nodes::vp_node>>{osd_0});
-    rtmp_des_0->attach_to(std::vector<std::shared_ptr<vp_nodes::vp_node>>{osd_0});
+    osd_00->attach_to({osd_0});
+    osd_11->attach_to({osd_1});
+    osd_22->attach_to({osd_2});
+
+    screen_des_0->attach_to(std::vector<std::shared_ptr<vp_nodes::vp_node>>{osd_00});
+    rtmp_des_0->attach_to(std::vector<std::shared_ptr<vp_nodes::vp_node>>{osd_00});
     
-    screen_des_1->attach_to(std::vector<std::shared_ptr<vp_nodes::vp_node>>{osd_1});
-    rtmp_des_1->attach_to(std::vector<std::shared_ptr<vp_nodes::vp_node>>{osd_1});
+    screen_des_1->attach_to(std::vector<std::shared_ptr<vp_nodes::vp_node>>{osd_11});
+    rtmp_des_1->attach_to(std::vector<std::shared_ptr<vp_nodes::vp_node>>{osd_11});
     
-    screen_des_2->attach_to(std::vector<std::shared_ptr<vp_nodes::vp_node>>{osd_2});
-    rtmp_des_2->attach_to(std::vector<std::shared_ptr<vp_nodes::vp_node>>{osd_2});
+    screen_des_2->attach_to(std::vector<std::shared_ptr<vp_nodes::vp_node>>{osd_22});
+    rtmp_des_2->attach_to(std::vector<std::shared_ptr<vp_nodes::vp_node>>{osd_22});
     
     // start one/all channels
     file_src_0->start();

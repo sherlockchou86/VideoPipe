@@ -42,20 +42,20 @@ namespace vp_nodes {
         // make sure heads of output are not zero
         assert(raw_outputs.size() > 0);
         assert(frame_meta_with_batch.size() == 1);
-        auto& frame_meta = frame_meta_with_batch[0];
 
         // just one head of output
         auto& output = raw_outputs[0];
         assert(output.dims == 2);
 
-        auto batch = output.rows;
+        auto count = output.rows;
         auto index = 0;
 
+        auto& frame_meta = frame_meta_with_batch[0];
         cv::Point class_id_point;
         int class_id;
         double score;
 
-        for (int i = 0; i < batch; i++) {
+        for (int i = 0; i < count; i++) {
             for (int j = index; j < frame_meta->targets.size(); j++)
             {
                 if (!need_apply(frame_meta->targets[j]->primary_class_id)) {

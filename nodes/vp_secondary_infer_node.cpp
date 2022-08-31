@@ -42,7 +42,7 @@ namespace vp_nodes {
         // crop to get small images in frame 
         auto& frame_meta = frame_meta_with_batch[0];
 
-        // batch by batch insdie s single frame
+        // batch by batch inside single frame
         for (auto& i : frame_meta->targets) {
             // check if we need infer on the target
             if (!need_apply(i->primary_class_id)) {

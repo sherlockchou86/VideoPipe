@@ -3,6 +3,8 @@
 #include "../vp_node.h"
 
 namespace vp_nodes {
+    // on screen display(short as osd) node.
+    // mainly used to display vp_frame_face_target on frame.
     class vp_face_osd_node: public vp_node
     {
     private:

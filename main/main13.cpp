@@ -148,6 +148,13 @@ void feature(Mat& _aligned_img, Mat& _face_feature, cv::dnn::Net& net)
     net.forward(_face_feature);
 }
 
+void feature_v2(std::vector<Mat>& aligned_imgs, std::vector<Mat>& face_features, cv::dnn::Net net) {
+    //Mat inputBolb = dnn::blobFromImage(_aligned_img, 1, Size(112, 112), Scalar(0, 0, 0), true, false);
+    Mat inputBolb = dnn::blobFromImages(aligned_imgs, 1, Size(112, 112), Scalar(0, 0, 0), true, false);
+    net.setInput(inputBolb);
+    net.forward(face_features);
+}
+
 double match(Mat& _face_feature1, Mat& _face_feature2, int dis_type)
 {
     normalize(_face_feature1, _face_feature1);
@@ -451,6 +458,16 @@ int main() {
 
     feature(aligned_face_2, face_feature_2, net_r);
     face_feature_2 = face_feature_2.clone();
+
+/*
+    std::vector<Mat> aligned_faces {aligned_face_1, aligned_face_2};
+    std::vector<Mat> face_features;
+    feature_v2(aligned_faces, face_features, net_r);
+    
+    Mat face_feature_1 = face_features[0].row(0);
+    Mat face_feature_2 = face_features[0].row(1);
+
+*/
 
     double cos_score = match(face_feature_1, face_feature_2, 0);
     double L2_score = match(face_feature_1, face_feature_2, 1);
