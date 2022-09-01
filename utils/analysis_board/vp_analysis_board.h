@@ -18,7 +18,7 @@ namespace vp_utils {
     {
     private:
         // configure for render
-        const int node_width = 120;
+        const int node_width = 140;
         const int node_height = 140;
         const int canvas_gap_horizontal = 120;
         const int canvas_gap_vertical = 60;

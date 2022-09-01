@@ -14,7 +14,7 @@
 
 int main() {
 
-    auto file_src_0 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_0", 0, "./1.mp4");
+    auto file_src_0 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_0", 0, "./test_video//1.mp4", 0.5);
     //auto file_src_1 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_1", 1, "./1.mp4");
 
     //auto primary_infer = std::make_shared<vp_nodes::vp_primary_infer_node>("primary_infer", "");
