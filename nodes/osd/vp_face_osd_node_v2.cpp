@@ -26,7 +26,7 @@ namespace vp_nodes {
         // scan face targets in current frame
         for(auto& i : meta->face_targets) {
             // the first one
-            if (the_baseline_face.empty() || the_baseline_face_feature.size() == 0) {
+            if (the_baseline_face.empty()) {
                 auto face = meta->frame(cv::Rect(i->x, i->y, i->width, i->height));
                 cv::resize(face, the_baseline_face, cv::Size(gap_height, gap_height));   
                 the_baseline_face_feature = i->embeddings;
@@ -89,8 +89,12 @@ namespace vp_nodes {
         }
         
         // display the baseline face
-        auto roi = canvas(cv::Rect(padding, canvas.rows - gap_height * 2 - padding * 2, gap_height, gap_height));
-        the_baseline_face.copyTo(roi);
+        if (!the_baseline_face.empty()) {  
+            auto roi = canvas(cv::Rect(padding, canvas.rows - gap_height * 2 - padding * 2, gap_height, gap_height));
+            the_baseline_face.copyTo(roi);
+        }
+
+        return meta;
     }
 
     double vp_face_osd_node_v2::match(std::vector<float>& feature1, std::vector<float>& feature2, int dis_type) {

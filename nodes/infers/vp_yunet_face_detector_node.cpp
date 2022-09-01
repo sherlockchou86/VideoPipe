@@ -126,6 +126,12 @@ namespace vp_nodes {
                 auto y = int(nms_faces.at<float>(i, 1));
                 auto w = int(nms_faces.at<float>(i, 2));
                 auto h = int(nms_faces.at<float>(i, 3));
+                
+                // check value range
+                x = std::max(x, 0);
+                y = std::max(y, 0);
+                w = std::min(w, frame_meta->frame.cols - x);
+                h = std::min(h, frame_meta->frame.rows - y);
 
                 auto kp1 = std::pair<int, int>(int(nms_faces.at<float>(0, 4)), int(nms_faces.at<float>(0, 5)));
                 auto kp2 = std::pair<int, int>(int(nms_faces.at<float>(0, 6)), int(nms_faces.at<float>(0, 7)));
