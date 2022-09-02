@@ -30,7 +30,7 @@ namespace vp_nodes {
         // 0 cosine distance 
         // 1 l2 distance
         double match(std::vector<float>& feature1, std::vector<float>& feature2, int dis_type);
-
+        
     protected:
         virtual std::shared_ptr<vp_objects::vp_meta> handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) override;
     public:

@@ -30,7 +30,7 @@
 int main() {
     // create src nodes
     auto file_src_0 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_0", 0, "./test_video/1.mp4", 0.5);
-    auto file_src_1 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_1", 1, "./test_video/8.mp4", 0.4);
+    auto file_src_1 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_1", 1, "./test_video/10.mp4", 0.4);
     auto rtsp_src_2 = std::make_shared<vp_nodes::vp_rtsp_src_node>("rtsp_src_2", 2, "rtsp://192.168.77.82/file6", 0.3);
 
     // primary infer node, face detector and vehicle detector
@@ -73,13 +73,13 @@ int main() {
     osd_1->attach_to({sface_face_encoder_1});
     osd_2->attach_to({resnet_classifier_2});
 
-    screen_des_0->attach_to({osd_0});
+    //screen_des_0->attach_to({osd_0});
     rtmp_des_0->attach_to({osd_0});
     
-    screen_des_1->attach_to({osd_1});
+    //screen_des_1->attach_to({osd_1});
     rtmp_des_1->attach_to({osd_1});
 
-    screen_des_2->attach_to({osd_2});
+    //screen_des_2->attach_to({osd_2});
     rtmp_des_2->attach_to({osd_2});
 
     // start one/all channels

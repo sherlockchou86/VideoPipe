@@ -83,4 +83,15 @@ namespace vp_utils {
             cv::Point(rect.x + (rect.width - text_size.width) / 2, rect.y + rect.height - (rect.height - text_size.height) / 2), 
             font_face, font_scale, color);
     }
+
+    inline std::string round_any(double input, int precision) {
+        input = input * std::pow(10, precision) + 0.5;
+        auto output = std::to_string(std::floor(input) / std::pow(10, precision));
+
+        output.erase(std::find_if(output.rbegin(), output.rend(), [](unsigned char ch) {
+            return ch != '0';
+        }).base(), output.end());
+
+        return output;
+    }
 }

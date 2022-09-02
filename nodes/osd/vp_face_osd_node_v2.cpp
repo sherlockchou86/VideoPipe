@@ -1,5 +1,6 @@
 
 #include "vp_face_osd_node_v2.h"
+#include "../../utils/vp_utils.h"
 
 namespace vp_nodes {
         
@@ -94,18 +95,28 @@ namespace vp_nodes {
 
         assert(canvas.rows > (gap_height + padding) * 2);
 
-        // display faces in list
-        for (int i = 0; i < faces_list.size(); i++) {
-            auto roi = canvas(cv::Rect((padding + gap_height) * i + padding, canvas.rows - gap_height - padding, gap_height, gap_height));
-            faces_list[i].copyTo(roi);
-        }
-        
         // display the baseline face
         if (!the_baseline_face.empty()) {  
             auto roi = canvas(cv::Rect(padding, canvas.rows - gap_height * 2 - padding * 2, gap_height, gap_height));
             the_baseline_face.copyTo(roi);
         }
 
+        // display faces in list
+        for (int i = 0; i < faces_list.size(); i++) {
+            auto roi = canvas(cv::Rect((padding + gap_height) * i + padding, canvas.rows - gap_height - padding, gap_height, gap_height));
+            faces_list[i].copyTo(roi);
+
+            // distance between face and the baseline
+            cv::line(canvas, cv::Point(padding + gap_height / 2, canvas.rows - gap_height - padding * 2 - gap_height / 2), 
+                            cv::Point((padding + gap_height) * i + padding + gap_height / 2, canvas.rows - gap_height - padding), cv::Scalar(255, 0, 0), 1, cv::LINE_AA);
+            cv::putText(canvas, 
+                        "cos_dis:" + vp_utils::round_any(cosine_distances[i], 3), 
+                        cv::Point((padding + gap_height) * i + padding, canvas.rows - gap_height - padding + 20), 1, 0.9, cv::Scalar(255, 255, 0));
+            cv::putText(canvas, 
+                        "l2_dis:" + vp_utils::round_any(l2_distances[i], 3), 
+                        cv::Point((padding + gap_height) * i + padding, canvas.rows - gap_height - padding + 40), 1, 0.9, cv::Scalar(255, 255, 0));
+        }
+        
         return meta;
     }
 
