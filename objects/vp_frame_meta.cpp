@@ -42,6 +42,10 @@ namespace vp_objects {
             for(auto& i: meta.face_targets) {
                 this->face_targets.push_back(i->clone());
             }
+            // deep copy text targets
+            for(auto& i: meta.text_targets) {
+                this->text_targets.push_back(i->clone());
+            }
             // deep copy ba_flag_map
             // we need re-find map relationship of pointers between elements and targets since they are deep copyed above.
             for(auto& i: meta.ba_flags_map) {

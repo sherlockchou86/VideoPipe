@@ -5,13 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "C/C++: g++ project",
+            "name": "C/C++: g++ vp project",  // debug for vp framework
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/main",
+            "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
@@ -23,7 +23,28 @@
                 "ignoreFailures": true
               }
             ],
-            "preLaunchTask": "C/C++: g++ project"
-          }
+            "preLaunchTask": "C/C++: g++ vp project"
+        },
+        {
+          "name": "C/C++: g++ paddle_ocr",  // debug for paddle ocr
+          "type": "cppdbg",
+          "request": "launch",
+          "program": "${fileDirname}/${fileBasenameNoExtension}",
+          "args": [],
+          "stopAtEntry": false,
+          "cwd": "${fileDirname}",
+          "environment": [],
+          "externalConsole": false,
+          "MIMode": "gdb",
+          "miDebuggerPath": "/usr/bin/gdb",
+          "setupCommands": [
+            {
+              "description": "Enable pretty-printing for gdb",
+              "text": "-enable-pretty-printing",
+              "ignoreFailures": true
+            }
+          ],
+          "preLaunchTask": "C/C++: g++ paddle_ocr"
+      }
     ]
 }

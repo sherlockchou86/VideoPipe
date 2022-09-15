@@ -9,6 +9,7 @@
 #include "vp_frame_target.h"
 #include "vp_frame_pose_target.h"
 #include "vp_frame_face_target.h"
+#include "vp_frame_text_target.h"
 #include "elements/vp_frame_element.h"
 #include "../ba/vp_ba_analyser.h"
 
@@ -74,6 +75,9 @@ namespace vp_objects {
 
         // face targets created/appened by primary infer nodes.
         std::vector<std::shared_ptr<vp_objects::vp_frame_face_target>> face_targets;
+
+        // text targets created/appened by primary infer nodes.
+        std::vector<std::shared_ptr<vp_objects::vp_frame_text_target>> text_targets;
 
         // ba results filled by vp_ba_node if exists, it is a map relationship of element, target and ba_flag.
         // 1. element   : where

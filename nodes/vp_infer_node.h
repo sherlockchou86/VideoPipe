@@ -17,13 +17,11 @@ namespace vp_nodes {
     // base class for infer node, can't be instanstiated directly. 
     // note: 
     // the class is based on opencv::dnn module which is the default way for all deep learning inference in code, 
-    // we can implement it using other backends such as tensorrt with cuda acceleration.
+    // we can implement it using other backends such as tensorrt with cuda acceleration, see vp_ppocr_text_detector_node which is based on PaddlePaddle dl framework from BaiDu corporation.
     class vp_infer_node: public vp_node {
     private:
         // load labels if need
         void load_labels();
-        // infer operations(prepare/preprocess/infer/postprocess)
-        void run_infer_combinations(const std::vector<std::shared_ptr<vp_objects::vp_frame_meta>>& frame_meta_with_batch);
     protected:
         vp_infer_type infer_type;
         std::string model_path;
@@ -69,6 +67,10 @@ namespace vp_nodes {
 
         // debug purpose(ms)
         virtual void infer_combinations_time_cost(int data_size, int prepare_time, int preprocess_time, int infer_time, int postprocess_time);
+
+        // infer operations(call prepare/preprocess/infer/postprocess by default)
+        // we can define new logic for infer operations by overriding it.
+        virtual void run_infer_combinations(const std::vector<std::shared_ptr<vp_objects::vp_frame_meta>>& frame_meta_with_batch);
 
         // labels as text format
         std::vector<std::string> labels;

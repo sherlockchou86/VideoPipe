@@ -22,7 +22,7 @@ namespace vp_objects {
         return "";
     }
 
-
+/*
     void vp_meta::attach_trace(std::string node_name) {
         if (trace_table.count(node_name)) {
             return;
@@ -66,5 +66,5 @@ namespace vp_objects {
                 }
             }
         }
-    }
+    }*/
 }

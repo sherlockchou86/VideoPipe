@@ -29,7 +29,7 @@ namespace vp_nodes {
                             std(std),
                             swap_rb(swap_rb) {
         // try to load network from file,
-        // failing means maybe it has a custom implementation for model loading in derived class.
+        // failing means maybe it has a custom implementation for model loading in derived class such as using other backends other than opencv::dnn.
         try {
             net = cv::dnn::readNet(model_path, model_config_path);
             net.setPreferableBackend(cv::dnn::DNN_BACKEND_CUDA);
@@ -103,7 +103,7 @@ namespace vp_nodes {
 
     void vp_infer_node::run_infer_combinations(const std::vector<std::shared_ptr<vp_objects::vp_frame_meta>>& frame_meta_with_batch) {
         /*
-        * call logic
+        * call logic by default:
         * frame_meta_with_batch -> mats_to_infer -> blob_to_infer -> raw_outputs -> frame_meta_with_batch
         */
         std::vector<cv::Mat> mats_to_infer;

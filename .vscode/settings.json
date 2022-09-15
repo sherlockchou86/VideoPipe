@@ -76,7 +76,16 @@
         "set": "cpp",
         "fstream": "cpp",
         "iomanip": "cpp",
-        "optional": "cpp"
+        "optional": "cpp",
+        "hash_map": "cpp",
+        "hash_set": "cpp",
+        "bitset": "cpp",
+        "codecvt": "cpp",
+        "unordered_set": "cpp",
+        "filesystem": "cpp",
+        "future": "cpp",
+        "cfenv": "cpp",
+        "cinttypes": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

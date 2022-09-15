@@ -75,7 +75,7 @@ namespace vp_objects {
             }
         }
         */
-        std::map<std::string, std::map<vp_meta_trace_field, std::any>> trace_table;
+        //std::map<std::string, std::map<vp_meta_trace_field, std::any>> trace_table;
     public:
         vp_meta(vp_meta_type meta_type, int channel_index);
         ~vp_meta();
@@ -103,10 +103,10 @@ namespace vp_objects {
         virtual std::shared_ptr<vp_meta> clone() = 0;
 
         // attach a new trace record for specific node (initialize key-value for current node)
-        void attach_trace(std::string node_name);
+        //void attach_trace(std::string node_name);
 
         // update trace record
-        void update_trace(std::string node_name, vp_meta_trace_field trace_key, std::any trace_value);
+        //void update_trace(std::string node_name, vp_meta_trace_field trace_key, std::any trace_value);
     };
 
 }

@@ -2,41 +2,12 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: cl.exe 生成活动文件",
-            "command": "cl.exe",
-            "args": [
-                "/Zi",
-                "/EHsc",
-                "/nologo",
-                "/Fe:",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe",
-                "${file}"
-            ],
-            "options": {
-                "cwd": "${fileDirname}"
-            },
-            "problemMatcher": [
-                "$msCompile"
-            ],
-            "group": "build",
-            "detail": "调试器生成的任务。"
-        },
-        {
-            "type": "cppbuild",
-            "label": "C/C++: g++ project",
+            "label": "C/C++: g++ vp project",
             "command": "/usr/bin/g++",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${workspaceFolder}/main/*.cpp",
-                "${workspaceFolder}/nodes/*.cpp",
-                "${workspaceFolder}/nodes/infers/*.cpp",
-                "${workspaceFolder}/nodes/osd/*.cpp",
-                "${workspaceFolder}/objects/*.cpp",
-                "${workspaceFolder}/objects/elements/*.cpp",
-                "${workspaceFolder}/objects/shapes/*.cpp",
-                "${workspaceFolder}/ba/*.cpp",
-                "${workspaceFolder}/utils/analysis_board/*.cpp",
+                "${workspaceFolder}/main/*.cpp",   // demo source code for vp framework
                 "-lopencv_core",
                 "-lopencv_videoio",
                 "-lopencv_highgui",
@@ -44,7 +15,7 @@
                 "-lopencv_imgcodecs",
                 "-lopencv_dnn",
                 "-lopencv_video",
-                "-lpthread",
+                "-lvp",  // generated already by build.sh
                 "-std=c++17",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
@@ -63,17 +34,19 @@
         },
         {
             "type": "cppbuild",
-            "label": "C/C++: g++ 生成活动文件",
+            "label": "C/C++: g++ paddle_ocr",
             "command": "/usr/bin/g++",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${file}",
+                "${workspaceFolder}/third_party/paddle_ocr/main/main.cpp",  // demo source code for paddle ocr
                 "-lopencv_core",
-                "-lopencv_videoio",
-                "-lopencv_highgui",
                 "-lopencv_imgproc",
                 "-lopencv_imgcodecs",
+                "-lopencv_highgui",
+                "-lopencv_videoio",
+                "-lopencv_freetype",
+                "-lpaddle_ocr",  // generated already by build.sh
                 "-std=c++17",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
@@ -86,7 +59,7 @@
             ],
             "group": {
                 "kind": "build",
-                "isDefault": false
+                "isDefault": true
             },
             "detail": "调试器生成的任务。"
         }

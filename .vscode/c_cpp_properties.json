@@ -3,7 +3,8 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "/usr/local/include/**"
             ],
             "defines": [
                 "_DEBUG",
@@ -11,10 +12,10 @@
                 "_UNICODE"
             ],
             "windowsSdkVersion": "8.1",
-            "compilerPath": "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\\\VC/bin/cl.exe",
+            "compilerPath": "/usr/bin/g++",
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "windows-msvc-x64"
+            "intelliSenseMode": "linux-gcc-x64"
         }
     ],
     "version": 4
