@@ -10,7 +10,7 @@ namespace vp_nodes {
                                                             std::string rec_model_dir, 
                                                             std::string rec_char_dict_path):
                                                             vp_primary_infer_node(node_name, "") {
-        // to make the code simpler, paddle ocr has no more config other than model path
+        // to make the code simpler, paddle_ocr has no more config other than model path
         // we need modify source code at ../../third_party/paddle_ocr/ if we need tune the parameters 
         ocr = std::make_shared<PaddleOCR::PPOCR>(det_model_dir, cls_model_dir, rec_model_dir, rec_char_dict_path);
         this->initialized();
@@ -23,6 +23,7 @@ namespace vp_nodes {
     void vp_ppocr_text_detector_node::postprocess(const std::vector<cv::Mat>& raw_outputs, const std::vector<std::shared_ptr<vp_objects::vp_frame_meta>>& frame_meta_with_batch) {
 
     }
+    
     // please refer to vp_infer_node::run_infer_combinations
     void vp_ppocr_text_detector_node::run_infer_combinations(const std::vector<std::shared_ptr<vp_objects::vp_frame_meta>>& frame_meta_with_batch) {
         assert(frame_meta_with_batch.size() == 1);
@@ -58,6 +59,6 @@ namespace vp_nodes {
         auto infer_time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - start_time);
 
         // can not calculate preprocess time and postprocess time, set 0 by default.
-        vp_infer_node::infer_combinations_time_cost(frame_meta_with_batch.size(), prepare_time.count(), 0, infer_time.count(), 0);
+        vp_infer_node::infer_combinations_time_cost(mats_to_infer.size(), prepare_time.count(), 0, infer_time.count(), 0);
     }
 }

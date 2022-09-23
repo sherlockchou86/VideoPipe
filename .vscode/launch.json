@@ -45,6 +45,27 @@
             }
           ],
           "preLaunchTask": "C/C++: g++ paddle_ocr"
-      }
+        },
+        {
+          "name": "C/C++: g++ trt_vehicle",  // debug for paddle ocr
+          "type": "cppdbg",
+          "request": "launch",
+          "program": "${fileDirname}/${fileBasenameNoExtension}",
+          "args": [],
+          "stopAtEntry": false,
+          "cwd": "${fileDirname}",
+          "environment": [],
+          "externalConsole": false,
+          "MIMode": "gdb",
+          "miDebuggerPath": "/usr/bin/gdb",
+          "setupCommands": [
+            {
+              "description": "Enable pretty-printing for gdb",
+              "text": "-enable-pretty-printing",
+              "ignoreFailures": true
+            }
+          ],
+          "preLaunchTask": "C/C++: g++ trt_vehicle"
+        }
     ]
 }

@@ -2,6 +2,7 @@
 
 #include <string>
 #include <memory>
+#include <vector>
 
 #include "shapes/vp_rect.h"
 
@@ -45,6 +46,9 @@ namespace vp_objects {
         int frame_index;
         // channel the sub target belongs to
         int channel_index;
+
+        // save some info
+        std::vector<std::string> attachments;
 
         // clone myself
         std::shared_ptr<vp_sub_target> clone();

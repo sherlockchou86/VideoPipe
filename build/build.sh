@@ -28,6 +28,7 @@ g++ -shared ./*.o \
 -lopencv_video \
 -lopencv_freetype \
 -lpaddle_ocr \
+-ltrt_vehicle \
 -lpthread \
 -std=c++17 \
 -o ./libvp.so

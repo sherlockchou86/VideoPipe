@@ -1,8 +1,9 @@
+# install paddle inference correctly first
 
 # compile
 g++ -c -g -fPIC ../src/*.cpp
 
-# create shared lib
+# link to shared lib
 g++ -shared ./*.o \
 -lopencv_core \
 -lopencv_imgproc \

@@ -5,8 +5,8 @@
 
 namespace vp_nodes {
     // ocr based on paddle ocr
-    // paddle ocr project: https://github.com/PaddlePaddle/PaddleOCR
-    // Paddle project: https://github.com/PaddlePaddle/Paddle
+    // paddle ocr project(official): https://github.com/PaddlePaddle/PaddleOCR
+    // source code(modified based on official): ../../third_party/paddle_ocr
     // note:
     // this class is not based on opencv::dnn module but paddle, a few data members declared in base class are not usable any more(just ignore), such as vp_infer_node::net.
     class vp_ppocr_text_detector_node: public vp_primary_infer_node

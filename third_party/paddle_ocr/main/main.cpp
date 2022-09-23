@@ -45,7 +45,7 @@ int main(int argc, char **argv) {
     frames.push_back(frame);
 
     auto start = std::chrono::system_clock::now();
-    auto ocr_results = ppocr.ocr(frames);
+    auto ocr_results = ppocr.ocr(frames, true, true, false);
     auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - start);
     std::cout << "time cost:===" << delta.count() << std::endl;
 

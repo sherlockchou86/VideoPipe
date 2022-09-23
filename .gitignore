@@ -6,6 +6,7 @@ __pycache__/
 # C extensions
 *.so
 
+# model and video
 *.cfg
 *.onnx
 *.caffemodel
@@ -13,7 +14,7 @@ __pycache__/
 *.mp4
 *.weights
 *.h264
-
+*.trt
 
 # Distribution / packaging
 .Python

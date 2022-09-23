@@ -85,7 +85,9 @@
         "filesystem": "cpp",
         "future": "cpp",
         "cfenv": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "__nullptr": "cpp",
+        "__locale": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
