@@ -5,10 +5,12 @@
 
 namespace vp_nodes {
         
-    vp_osd_node::vp_osd_node(std::string node_name, 
-                            vp_osd_option options):
-                            vp_node(node_name),
-                            osd_options(options) {
+    vp_osd_node::vp_osd_node(std::string node_name, std::string font):
+                            vp_node(node_name) {
+        if (!font.empty()) {
+            ft2 = cv::freetype::createFreeType2();
+            ft2->loadFontData(font, 0);   
+        }       
         this->initialized();
     }
     
@@ -26,16 +28,34 @@ namespace vp_nodes {
         if (meta->osd_frame.empty()) {
             meta->osd_frame = meta->frame.clone();
         }
+
         auto& canvas = meta->osd_frame;
         // scan targets
         for (auto& i : meta->targets) {
             auto labels_to_display = i->primary_label;
-            for ( auto& label : i->secondary_labels) {
+            for (auto& label : i->secondary_labels) {
                 labels_to_display += "/" + label;
             }
             
-            cv::putText(canvas, labels_to_display, cv::Point(i->x, i->y), 1, 1, cv::Scalar(255, 0, 255));
             cv::rectangle(canvas, cv::Rect(i->x, i->y, i->width, i->height), cv::Scalar(255, 255, 0), 2);
+            if (ft2 != nullptr) {
+                ft2->putText(canvas, labels_to_display, cv::Point(i->x, i->y), 20, cv::Scalar(255, 0, 255), cv::FILLED, cv::LINE_AA, true);
+            }
+            else {               
+                cv::putText(canvas, labels_to_display, cv::Point(i->x, i->y), 1, 1, cv::Scalar(255, 0, 255));
+            }
+
+            // scan sub targets
+            for (auto& sub_target: i->sub_targets) {
+                cv::rectangle(canvas, cv::Rect(sub_target->x, sub_target->y, sub_target->width, sub_target->height), cv::Scalar(255));
+                if (ft2 != nullptr) {
+                    ft2->putText(canvas, sub_target->label, cv::Point(sub_target->x, sub_target->y), 20, cv::Scalar(0, 0, 255), cv::FILLED, cv::LINE_AA, true);
+                }
+                else {
+                    cv::putText(canvas, sub_target->label, cv::Point(sub_target->x, sub_target->y), 1, 1, cv::Scalar(0, 0, 255));
+                }
+            }
+            
         }
         return meta;
     }

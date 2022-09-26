@@ -6,6 +6,8 @@
 #include "../vp_node.h"
 
 namespace vp_nodes {
+    // on screen display(short as osd) node.
+    // mainly used to display vp_frame_text_target on frame.
     class vp_text_osd_node: public vp_node
     {
     private:

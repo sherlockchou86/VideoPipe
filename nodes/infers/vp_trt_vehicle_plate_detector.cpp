@@ -43,10 +43,8 @@ namespace vp_nodes {
 
                 // create sub target and update back into frame meta
                 // we treat vehicle plate as sub target of those in vp_frame_meta.targets
-                auto sub_target = std::make_shared<vp_objects::vp_sub_target>(plate.x, plate.y, plate.width, plate.height, 
-                                                    -1, 0, "", frame_meta->frame_index, frame_meta->channel_index);
-                sub_target->attachments.push_back(plate.color);
-                sub_target->attachments.push_back(plate.text);
+                auto sub_target = std::make_shared<vp_objects::vp_sub_target>(plate.x + frame_meta->targets[i]->x, plate.y + frame_meta->targets[i]->y, plate.width, plate.height, 
+                                                    -1, 0, plate.color + "_" + plate.text, frame_meta->frame_index, frame_meta->channel_index);
                 frame_meta->targets[i]->sub_targets.push_back(sub_target);
             }
         }

@@ -7,7 +7,7 @@
 
 namespace vp_nodes {
     // on screen display(short as osd) node.
-    // another version for face display, including displaying similarity between faces.
+    // another version for vp_frame_face_target display, including displaying similarity between faces.
     class vp_face_osd_node_v2: public vp_node
     {
     private:
