@@ -99,7 +99,8 @@ int main() {
     file_src_2->start();
 
     vp_utils::vp_analysis_board board({file_src_1, file_src_2});
-    board.display();
+    //board.display();
+    board.push_rtmp("rtmp://192.168.77.105/live/vp_analysis_board");
 
     std::getchar();
 }

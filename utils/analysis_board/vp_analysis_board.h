@@ -5,6 +5,7 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/imgcodecs.hpp>
+#include <opencv2/videoio.hpp>
 
 #include "../../nodes/vp_node.h"
 #include "../../nodes/vp_src_node.h"
@@ -28,6 +29,12 @@ namespace vp_utils {
         int canvas_width = 0;
         int canvas_height = 0;
 
+        std::string gst_template = "appsrc ! videoconvert ! x264enc bitrate=%d ! h264parse ! flvmux ! rtmpsink location=%s";
+        cv::VideoWriter rtmp_writer;
+
+        // 
+        bool displaying = false;
+        
         // width of pipe
         int pipe_width;
         // height of pipe
@@ -43,8 +50,11 @@ namespace vp_utils {
         // canvas to draw
         cv::Mat bg_canvas;
         
-        // display thread
+        // display thread(on screen)
         std::thread display_th;
+
+        // display thread(via rtmp)
+        std::thread rtmp_th;
 
         // render nodes in a layer
         void render_layer(std::vector<std::shared_ptr<vp_node_on_screen>> nodes_in_layer, cv::Mat& canvas, bool static_parts = true);
@@ -62,7 +72,10 @@ namespace vp_utils {
         // save pipe structure to png
         void save(std::string path);
 
-        // display pipe and refresh it automatically
+        // display pipe on screen and refresh it automatically
         void display(int interval = 1, bool block = true);
+
+        // display pipe by rtmp and refresh it automatically
+        void push_rtmp(std::string rtmp, int bitrate = 1024);
     };
 }

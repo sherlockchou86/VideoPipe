@@ -41,8 +41,9 @@ namespace vp_utils {
 
     void vp_analysis_board::display(int interval, bool block) {
         assert(interval > 0);
+        assert(!displaying);
 
-        auto display_func = [&](){
+        auto display_func = [&, interval](){
             while (true) {
                 auto loop_start = std::chrono::system_clock::now();
 
@@ -58,11 +59,39 @@ namespace vp_utils {
 
                 cv::waitKey(wait_time.count());
             }};
-        
+        displaying = true;
         display_th = std::thread(display_func);
         if (block) {
             display_th.join();
         }
+    }
+
+    void vp_analysis_board::push_rtmp(std::string rtmp, int bitrate) {
+        assert(!displaying);
+        auto fps = 1;
+        auto rtmp_url = vp_utils::string_format(gst_template, bitrate, rtmp.c_str());
+        // 1 fps by default
+        assert(rtmp_writer.open(rtmp_url, cv::CAP_GSTREAMER, fps, {bg_canvas.cols, bg_canvas.rows}));
+
+        auto display_func = [&, fps](){
+            while (true) {
+                auto loop_start = std::chrono::system_clock::now();
+
+                // deep copy the static background
+                cv::Mat mat_to_display = bg_canvas.clone();
+                // render dynamic parts starting with 1 st layer
+                render_layer(src_nodes_on_screen, mat_to_display, false);
+
+                rtmp_writer.write(mat_to_display);
+
+                // calculate the time need wait for
+                auto loop_cost = std::chrono::system_clock::now() - loop_start;
+                auto wait_time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::seconds(fps) - loop_cost);
+
+                std::this_thread::sleep_for(wait_time);
+            }};
+        displaying = true;
+        rtmp_th = std::thread(display_func);
     }
 
     void vp_analysis_board::render_layer(std::vector<std::shared_ptr<vp_node_on_screen>> nodes_in_layer, cv::Mat& canvas, bool static_parts) {
