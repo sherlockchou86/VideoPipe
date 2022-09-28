@@ -41,11 +41,33 @@ namespace vp_nodes {
             for (int j = 0; j < plates[i].size(); j++) {
                 auto& plate = plates[i][j];
 
+                // only plate detection but no recognition result
+                if (plate.text.empty()) {
+                    continue;
+                }
+                
+                // check value range
+                auto x = std::max(0, plate.x + frame_meta->targets[i]->x - 10);  // offset
+                auto y = std::max(0, plate.y + frame_meta->targets[i]->y - 8);   // offset
+                auto w = std::min(plate.width, frame_meta->frame.cols - x);
+                auto h = std::min(plate.height, frame_meta->frame.rows - y);
+                if (w <= 0 || h <=0) {
+                    continue;
+                }
+                
                 // create sub target and update back into frame meta
                 // we treat vehicle plate as sub target of those in vp_frame_meta.targets
-                auto sub_target = std::make_shared<vp_objects::vp_sub_target>(plate.x + frame_meta->targets[i]->x, plate.y + frame_meta->targets[i]->y, plate.width, plate.height, 
+                auto sub_target = std::make_shared<vp_objects::vp_sub_target>(x, y, w, h, 
                                                     -1, 0, plate.color + "_" + plate.text, frame_meta->frame_index, frame_meta->channel_index);
                 frame_meta->targets[i]->sub_targets.push_back(sub_target);
+                
+                // test for debug
+                /*
+                auto ori = frame_meta->frame(cv::Rect(x, y, w, h));
+                cv::imwrite("debug/" + std::to_string(frame_meta->frame_index) + ".jpg", ori);
+
+                ori = frame_meta->frame(cv::Rect(frame_meta->targets[i]->x, frame_meta->targets[i]->y, frame_meta->targets[i]->width, frame_meta->targets[i]->height));
+                cv::imwrite("debug/__" + std::to_string(frame_meta->frame_index) + ".jpg", ori);*/
             }
         }
         auto infer_time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - start_time);

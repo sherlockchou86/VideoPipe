@@ -27,6 +27,7 @@
 #include "../nodes/osd/vp_face_osd_node.h"
 #include "../nodes/osd/vp_face_osd_node_v2.h"
 #include "../nodes/osd/vp_text_osd_node.h"
+#include "../nodes/osd/vp_osd_node_v2.h"
 #include "VP.h"
 
 #if MAIN16
@@ -36,7 +37,7 @@ int main() {
     //auto file_src_0 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_0", 0, "./test_video/1.mp4", 0.5);
     auto file_src_1 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_1", 1, "./test_video/11.mp4");
     //auto rtsp_src_2 = std::make_shared<vp_nodes::vp_rtsp_src_node>("rtsp_src_2", 2, "rtsp://192.168.77.82/file6", 0.3);
-    auto file_src_2 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_2", 2, "./test_video/12.mp4");
+    auto file_src_2 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_2", 2, "./test_video/output.mp4");
 
     // primary infer node, face detector and vehicle detector
     //auto openpose_detector_0 = std::make_shared<vp_nodes::vp_openpose_detector_node>("openpose_detector_0", "./models/openpose/pose/body_25_pose_iter_584000.caffemodel", "./models/openpose/pose/body_25_pose_deploy.prototxt","",368,368,1,0,0.1,vp_objects::vp_pose_type::body_25);
@@ -58,13 +59,13 @@ int main() {
 
     // draw something nodes
     //auto osd_0 = std::make_shared<vp_nodes::vp_pose_osd_node>("osd_0");
-    auto osd_1 = std::make_shared<vp_nodes::vp_osd_node>("osd_1", "/windows2/zhzhi/video_pipe_c/third_party/paddle_ocr/font/NotoSansCJKsc-Medium.otf");
-    auto osd_2 = std::make_shared<vp_nodes::vp_osd_node>("osd_2", "/windows2/zhzhi/video_pipe_c/third_party/paddle_ocr/font/NotoSansCJKsc-Medium.otf");
+    auto osd_1 = std::make_shared<vp_nodes::vp_osd_node_v2>("osd_1", "/windows2/zhzhi/video_pipe_c/third_party/paddle_ocr/font/NotoSansCJKsc-Medium.otf");
+    auto osd_2 = std::make_shared<vp_nodes::vp_osd_node_v2>("osd_2", "/windows2/zhzhi/video_pipe_c/third_party/paddle_ocr/font/NotoSansCJKsc-Medium.otf");
 
     // push rtmp stream to cloud
     //auto rtmp_des_0 = std::make_shared<vp_nodes::vp_rtmp_des_node>("rtmp_des_0", 0, "rtmp://192.168.77.105/live/10000");
-    auto rtmp_des_1 = std::make_shared<vp_nodes::vp_rtmp_des_node>("rtmp_des_1", 1, "rtmp://192.168.77.105/live/10000", vp_objects::vp_size{720, 576});
-    auto rtmp_des_2 = std::make_shared<vp_nodes::vp_rtmp_des_node>("rtmp_des_2", 2, "rtmp://192.168.77.105/live/10000", vp_objects::vp_size{720, 576});
+    auto rtmp_des_1 = std::make_shared<vp_nodes::vp_rtmp_des_node>("rtmp_des_1", 1, "rtmp://192.168.77.105/live/10000", vp_objects::vp_size{1280, 720});
+    auto rtmp_des_2 = std::make_shared<vp_nodes::vp_rtmp_des_node>("rtmp_des_2", 2, "rtmp://192.168.77.105/live/10000", vp_objects::vp_size{720, 404});
 
     // construct the pipe using previous nodes, just attach them one by one
     //openpose_detector_0->attach_to({file_src_0});

@@ -94,7 +94,10 @@ namespace vp_nodes {
                 box.y = std::max(box.y, 0);
                 box.width = std::min(box.width, frame_meta->frame.cols - box.x);
                 box.height = std::min(box.height, frame_meta->frame.rows - box.y);
-
+                if (box.width <= 0 || box.height <= 0) {
+                    continue;
+                }
+                
                 // apply offset to class id since multi detectors can exist at front of this one.
                 // later we MUST use the new class id (applied offset) instead of orignal one.
                 class_id += class_id_offset;

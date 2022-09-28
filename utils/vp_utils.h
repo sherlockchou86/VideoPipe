@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <memory>
+#include <string>
 #include <opencv2/imgproc.hpp>
 using namespace std;
 
@@ -93,5 +94,15 @@ namespace vp_utils {
         }).base(), output.end());
 
         return output;
+    }
+
+    inline std::vector<std::string> string_split(const std::string& s, char delimiter) {
+        std::vector<std::string> tokens;
+        std::string token;
+        std::istringstream tokenStream(s);
+        while (std::getline(tokenStream, token, delimiter)) {
+            tokens.push_back(token);
+        }
+        return tokens;
     }
 }

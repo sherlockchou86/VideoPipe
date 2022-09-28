@@ -64,7 +64,7 @@ namespace vp_nodes {
                     cv::resize(frame, resize_frame, cv::Size(), resize_ratio, resize_ratio);
                 }
                 else {
-                    resize_frame = frame;
+                    resize_frame = frame.clone(); // clone!;
                 }
 
                 this->frame_index++;

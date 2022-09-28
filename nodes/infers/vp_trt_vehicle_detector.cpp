@@ -37,6 +37,15 @@ namespace vp_nodes {
         for (int i = 0; i < vehicle_list.size(); i++) {
             auto& objbox = vehicle_list[i];
 
+            // check value range
+            objbox.x = std::max(objbox.x, 0);
+            objbox.y = std::max(objbox.y, 0);
+            objbox.width = std::min(objbox.width, frame_meta->frame.cols - objbox.x);
+            objbox.height = std::min(objbox.height, frame_meta->frame.rows - objbox.y);
+            if (objbox.width <= 0 || objbox.height <= 0) {
+                continue;
+            }
+            
             auto target = std::make_shared<vp_objects::vp_frame_target>(objbox.x, objbox.y, objbox.width, objbox.height, 
                                                                         objbox.class_, objbox.score, frame_meta->frame_index, frame_meta->channel_index, objbox.label);
             // create target and update back into frame meta
