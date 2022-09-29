@@ -1,9 +1,11 @@
 
 
-## VideoPipe
+## VideoPipe[under development yet]
+![](https://live.csdn.net/v/239688)
 A framework for video structured. It could handle complex tasks such as stream reading(from local or network), video decoding, inference based on deeplearning models, osd(on screen display), message broker via middleware(like kafka), video encoding and stream pushing(rtmp or local file). It's Plugin-Oriented coding style, we can construct different types of pipeline using independent plugins namely `Node` in framework. 
 
 VideoPipe works like DeepStream from Nvidia and MindX SDK from Huawei, but it is more simple to use, more portable and has few dependency on third-party modules such as gstreamer which is hard to learn(coding style or debug). The framework is written purely by native C++ STL, and depends on popular modules like OpenCV, so the code is more portable for different platforms.
+![](./doc//p1.png)
 
 The framework can be used in such situations:
 1. Video Structure
@@ -41,7 +43,7 @@ The framework can be used in such situations:
 ## Dependency
 
 Basicis
-- ubuntu 18.04
+- ubuntu 18.04 x64 (other platforms waiting for test)
 - vscode (remote development on windows)
 - c++ 17
 - opencv 4.6
