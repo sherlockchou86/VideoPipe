@@ -20,7 +20,9 @@ The framework can be used in such situations:
 > NOTE: <br/>
 > VideoPipe is a framework aimed to make model-integration more simple in CV field, it is not a deeplearning related frameworks such as tensorflow, tensorrt.
 
-[中文说明](https://zhuanlan.zhihu.com/p/544978583)
+[中文说明(知乎)](https://zhuanlan.zhihu.com/p/544978583)<br>
+[中文说明(CSDN)](https://blog.csdn.net/xiaozhi_5638/article/details/126352185)<br>
+[中文说明(博客园)](https://www.cnblogs.com/xiaozhi_5638/p/16520710.html)
 
 ## Key Features
 - `Stream Reading`. Support popular protocals such as udp, rtsp, rtmp, file.
@@ -138,7 +140,7 @@ the above code will generate 3 visualizations:
 
 ![](./doc/p2.png)
 
-## how to contribute
+## How to contribute
 The project is under development currently, any PRs would be appreciated.
 
 note, the code, architecture may be not stable (2022/9/29)
