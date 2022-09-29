@@ -43,8 +43,14 @@ The framework can be used in such situations:
 5. Many node classes are already built-in in VideoPipe, but all nodes in framework can be re-implemented by yourself and also you can implement more based on your requirements.
 6. The whole framework is written mainly by native C++ which is portable to all paltforms. 
 
+2 modes to transfer data:
+
+![](./doc/p3.png)
+![](./doc/p4.png)
+
 ## Project structure
 
+waiting for update...
 
 ## Dependency
 
@@ -139,4 +145,4 @@ note, the code, architecture may be not stable (2022/9/29)
 
 ## Compared to other similar sdk
 
-VideoPipe is opensource totally and more portable for different soft/hard-ware platforms. DeepStream/MindX are platform-depended, maybe they can get better performance for some modules like decoding, inference, osd.
+VideoPipe is opensource totally and more portable for different soft/hard-ware platforms. DeepStream/MindX are platform-depended, maybe they can get better performance for some modules like decoding, inference, osd (for example, memory shared in GPU/NPU for all operations).
