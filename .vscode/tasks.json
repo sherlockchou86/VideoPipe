@@ -30,7 +30,7 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "调试器生成的任务。"
+            "detail": "build demo code for VideoPipe project"
         },
         {
             "type": "cppbuild",
@@ -39,7 +39,7 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${workspaceFolder}/third_party/paddle_ocr/main/main.cpp",  // demo source code for paddle ocr
+                "${workspaceFolder}/third_party/paddle_ocr/main/main.cpp",  // demo source code for paddle_ocr
                 "-lopencv_core",
                 "-lopencv_imgproc",
                 "-lopencv_imgcodecs",
@@ -61,7 +61,7 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "调试器生成的任务。"
+            "detail": "build demo code for paddle_ocr sub project"
         },
         {
             "type": "cppbuild",
@@ -75,6 +75,7 @@
                 "-lopencv_imgproc",
                 "-lopencv_imgcodecs",
                 "-lopencv_highgui",
+                "-lopencv_freetype",
                 "-ltrt_vehicle",  // generated already by build.sh
                 "-std=c++17",
                 "-o",
@@ -90,7 +91,7 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "调试器生成的任务。"
+            "detail": "build demo code for trt_vehicle sub project"
         }
     ],
     "version": "2.0.0"
