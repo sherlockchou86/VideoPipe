@@ -91,7 +91,11 @@ Optional, if you need implement(or use built-in) infer nodes based on other infe
 - build VideoPipe first and use shared library.
 - referencing source code directly and build you whole application.
 
-demo code show how to construct pipeline and run it:
+[download models and test files from Google Drive](https://drive.google.com/file/d/14J8RFK_vJFXBp_ER4sb5Oh8uJTyLyyK_/view?usp=sharing)
+
+[download models and test files from Baidu Pan(wait for update)]()
+
+demo code show how to construct pipeline and run it(first change file path in code):
 ```c++
 #include "VP.h"
 

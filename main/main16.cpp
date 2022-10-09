@@ -63,8 +63,8 @@ int main() {
 
     // draw something nodes
     //auto osd_0 = std::make_shared<vp_nodes::vp_pose_osd_node>("osd_0");
-    auto osd_1 = std::make_shared<vp_nodes::vp_osd_node_v2>("osd_1", "/windows2/zhzhi/video_pipe_c/third_party/paddle_ocr/font/NotoSansCJKsc-Medium.otf");
-    auto osd_2 = std::make_shared<vp_nodes::vp_osd_node_v2>("osd_2", "/windows2/zhzhi/video_pipe_c/third_party/paddle_ocr/font/NotoSansCJKsc-Medium.otf");
+    auto osd_1 = std::make_shared<vp_nodes::vp_osd_node_v2>("osd_1", "../third_party/paddle_ocr/font/NotoSansCJKsc-Medium.otf");
+    auto osd_2 = std::make_shared<vp_nodes::vp_osd_node_v2>("osd_2", "../third_party/paddle_ocr/font/NotoSansCJKsc-Medium.otf");
 
     // push rtmp stream to cloud
     //auto rtmp_des_0 = std::make_shared<vp_nodes::vp_rtmp_des_node>("rtmp_des_0", 0, "rtmp://192.168.77.105/live/10000");

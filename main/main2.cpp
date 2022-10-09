@@ -23,7 +23,7 @@ int main() {
     auto file_src_0 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_0", 0, "./test_video/13.mp4");
     auto trt_vehicle_detector = std::make_shared<vp_nodes::vp_trt_vehicle_detector>("vehicle_detector", "./models/trt/vehicle/vehicle.trt");
     auto trt_vehicle_plate_detector = std::make_shared<vp_nodes::vp_trt_vehicle_plate_detector>("vehicle_plate_detector", "./models/trt/plate/det.trt", "./models/trt/plate/rec.trt");
-    auto osd_0 = std::make_shared<vp_nodes::vp_osd_node_v2>("osd_0", "/windows2/zhzhi/video_pipe_c/third_party/paddle_ocr/font/NotoSansCJKsc-Medium.otf");
+    auto osd_0 = std::make_shared<vp_nodes::vp_osd_node_v2>("osd_0", "../third_party/paddle_ocr/font/NotoSansCJKsc-Medium.otf");
     auto screen_des_0 = std::make_shared<vp_nodes::vp_screen_des_node>("screen_des_0", 0, true, vp_objects::vp_size{640, 360});
     auto rtmp_des_0 = std::make_shared<vp_nodes::vp_rtmp_des_node>("rtmp_des_0", 0, "rtmp://192.168.77.105/live/10000", vp_objects::vp_size{1280, 720});
     auto file_des_0 = std::make_shared<vp_nodes::vp_file_des_node>("file_des_0", 0, ".");
