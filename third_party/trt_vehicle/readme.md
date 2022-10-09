@@ -12,7 +12,7 @@
 ## how to install tensorrt and cuda ?
 refer to NVIDIA official web
 
-`cuda 11.1  tensorrt 7.2 for this repository`
+`cuda 11.1  tensorrt 7.2 for this repository (tested)`
 
 ## how to generate trt model from onnx ?
 `trtexec --onnx=./vehicle.onnx --saveEngine=vehicle.trt --buildOnly=true`
