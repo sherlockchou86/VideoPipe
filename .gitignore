@@ -1,3 +1,9 @@
+
+# binary files
+*
+!*/
+!*.*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -16,6 +22,7 @@ __pycache__/
 *.h264
 *.trt
 
+# doc
 *.pptx
 
 # Distribution / packaging

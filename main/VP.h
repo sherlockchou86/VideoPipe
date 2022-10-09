@@ -1,9 +1,8 @@
 
 #pragma once
 
-#define MAIN 1
-#define MAIN2 0
-#define TEST 0
+#define MAIN 0
+#define MAIN2 1
 #define MAIN3 0
 #define MAIN4 0
 #define MAIN5 0

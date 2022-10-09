@@ -31,6 +31,7 @@ g++ -shared ./*.o \
 -ltrt_vehicle \
 -lpthread \
 -std=c++17 \
+-lstdc++fs \
 -o ./libvp.so
 
 # copy to system path

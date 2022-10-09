@@ -30,6 +30,10 @@
 #include "../nodes/osd/vp_osd_node_v2.h"
 #include "VP.h"
 
+/*
+* complex sample
+*/
+
 #if MAIN16
 
 int main() {
