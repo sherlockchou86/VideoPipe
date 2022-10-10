@@ -28,6 +28,7 @@ namespace vp_nodes {
         int frames_need_record = 0;
 
         // create file name
+        // example: save_dir/name_prefix_stamp.mp4
         std::string get_new_file_name();
     protected:
         // re-implementation, return nullptr.
@@ -47,7 +48,7 @@ namespace vp_nodes {
 
         // save directory
         std::string save_dir;
-        // prefix of file name, format of filename: prefix_starttime.mp4
+        // prefix of file name
         std::string name_prefix;
         // max duration for single file (minutes)
         int max_duration_for_single_file;
