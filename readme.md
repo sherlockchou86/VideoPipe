@@ -69,6 +69,7 @@ Optional, if you need implement(or use built-in) infer nodes based on other infe
 - onnx runtime
 - anything you like
 
+[environment for reference](./doc/env.md)
 
 ## How to build and debug
 
