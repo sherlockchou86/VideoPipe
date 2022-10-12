@@ -151,3 +151,16 @@ note, the code, architecture may be not stable (2022/9/29)
 ## Compared to other similar sdk
 
 VideoPipe is opensource totally and more portable for different soft/hard-ware platforms. DeepStream/MindX are platform-depended, maybe they can get better performance for some modules like decoding, inference, osd (for example, memory shared in GPU/NPU for all operations).
+
+
+## Can do
+
+The products below borrow some experience/ideas from VideoPipe:
+> Note: they are not developed by VideoPipe totally.
+
+### behaviour analysis
+![](./doc/p6.png)
+
+
+### image/video search
+![](./doc/p7.png)
