@@ -8,10 +8,11 @@ ELEMENTS_OBJECTS=../objects/elements/*.cpp
 SHAPES_OBJECTS=../objects/shapes/*.cpp
 BA=../ba/*.cpp
 UTILS_ANALYSIS_BOARD=../utils/analysis_board/*.cpp
+LOGGER=../utils/logger/*cpp
 
 # compile
 g++ -c -g -fPIC \
-$NODES $INFERS_NODES $OSD_NODES $OBJECTS $ELEMENTS_OBJECTS $SHAPES_OBJECTS $BA $UTILS_ANALYSIS_BOARD
+$NODES $INFERS_NODES $OSD_NODES $OBJECTS $ELEMENTS_OBJECTS $SHAPES_OBJECTS $BA $UTILS_ANALYSIS_BOARD $LOGGER
 
 
 # create shared library

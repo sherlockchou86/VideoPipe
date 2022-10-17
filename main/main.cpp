@@ -9,7 +9,7 @@
 #include "../nodes/vp_screen_des_node.h"
 #include "../nodes/vp_rtmp_des_node.h"
 #include "../utils/analysis_board/vp_analysis_board.h"
-
+#include "../utils/logger/vp_logger.h"
 /*
 * simple sample
 */
@@ -17,6 +17,9 @@
 #if MAIN
 
 int main() {
+    VP_SET_LOG_LEVEL(vp_utils::vp_log_level::INFO);
+    VP_LOGGER_INIT();
+
     // create nodes
     auto file_src_0 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_0", 0, "./test_video/13.mp4");
     auto trt_vehicle_detector = std::make_shared<vp_nodes::vp_trt_vehicle_detector>("vehicle_detector", "./models/trt/vehicle/vehicle.trt");

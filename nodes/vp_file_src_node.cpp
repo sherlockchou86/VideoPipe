@@ -1,7 +1,7 @@
 
 #include <iostream>
 
-
+#include "../utils/logger/vp_logger.h"
 #include "vp_file_src_node.h"
 
 namespace vp_nodes {
@@ -58,8 +58,9 @@ namespace vp_nodes {
                 
                 file_capture >> frame;
                 if(frame.empty()) {
-                    std::cout << "frame is empty, total frame==>" << this->frame_index << std::endl;
+                    VP_INFO(vp_utils::string_format("[%s] reading frame complete, total frame==>%d", node_name.c_str(), frame_index));
                     if (cycle) {
+                        VP_INFO(vp_utils::string_format("[%s] cycle flag is true, continue!", node_name.c_str()));
                         file_capture.set(cv::CAP_PROP_POS_FRAMES, 0);
                     }
                     continue;
@@ -90,7 +91,7 @@ namespace vp_nodes {
 
                     // important! notify consumer of out_queue in case it is waiting.
                     this->out_queue_semaphore.signal();
-                    std::cout << this->node_name << ", handle meta, after out_queue.size()==>" << this->out_queue.size() << std::endl;
+                    VP_DEBUG(vp_utils::string_format("[%s] after handling meta, out_queue.size()==>%d", node_name.c_str(), out_queue.size()));
                 }
 
                 // for fps
