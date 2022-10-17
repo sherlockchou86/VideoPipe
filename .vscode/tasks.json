@@ -15,6 +15,7 @@
                 "-lopencv_imgcodecs",
                 "-lopencv_dnn",
                 "-lopencv_video",
+                "-lpthread",
                 "-lvp",  // generated already by build.sh
                 "-std=c++17",
                 "-o",

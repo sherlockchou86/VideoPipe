@@ -9,6 +9,8 @@
 #include <chrono>
 
 #include "../utils/vp_semaphore.h"
+#include "../utils/vp_utils.h"
+#include "../utils/logger/vp_logger.h"
 #include "vp_meta_publisher.h"
 #include "vp_meta_hookable.h"
 #include "../objects/vp_control_meta.h"
