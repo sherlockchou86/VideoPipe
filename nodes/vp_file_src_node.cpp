@@ -81,7 +81,6 @@ namespace vp_nodes {
                     std::make_shared<vp_objects::vp_frame_meta>(resize_frame, this->frame_index, this->channel_index, video_width, video_height, fps);
 
                 if (out_meta != nullptr) {
-                    //std::cout << this->node_name << ", handle meta, before out_queue.size()==>" << this->out_queue.size() << std::endl;
                     this->out_queue.push(out_meta);
 
                     // handled hooker activated if need

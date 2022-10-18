@@ -16,7 +16,7 @@ namespace vp_nodes {
                                         vp_src_node(node_name, channel_index, resize_ratio),
                                         rtsp_url(rtsp_url) {
         this->gst_template = vp_utils::string_format(this->gst_template, rtsp_url.c_str());
-        std::cout << this->gst_template << std::endl;
+        VP_INFO(vp_utils::string_format("[%s] [%s]", node_name.c_str(), gst_template.c_str()));
         this->initialized();
     }
     
@@ -58,7 +58,7 @@ namespace vp_nodes {
 
                 rtsp_capture >> frame;
                 if(frame.empty()) {
-                    std::cout << "frame is empty, total frame==>" << this->frame_index << std::endl;
+                    VP_WARN(vp_utils::string_format("[%s] reading frame empty, total frame==>%d", node_name.c_str(), frame_index));
                     continue;
                 }
 
@@ -76,7 +76,6 @@ namespace vp_nodes {
                     std::make_shared<vp_objects::vp_frame_meta>(resize_frame, this->frame_index, this->channel_index, video_width, video_height, fps);
 
                 if (out_meta != nullptr) {
-                    //std::cout << this->node_name << ", handle meta, before out_queue.size()==>" << this->out_queue.size() << std::endl;
                     this->out_queue.push(out_meta);
                     
                     // handled hooker activated if need
@@ -86,7 +85,7 @@ namespace vp_nodes {
 
                     // important! notify consumer of out_queue in case it is waiting.
                     this->out_queue_semaphore.signal();
-                    std::cout << this->node_name << ", handle meta, after out_queue.size()==>" << this->out_queue.size() << std::endl;
+                    VP_DEBUG(vp_utils::string_format("[%s] after handling meta, out_queue.size()==>%d", node_name.c_str(), out_queue.size()));
                 }
             }
             else {

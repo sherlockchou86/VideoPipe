@@ -21,7 +21,7 @@ namespace vp_nodes {
         // then the modified rtmp_url is rtmp://192.168.77.105/live/10000_10
         this->rtmp_url = this->rtmp_url + "_" + std::to_string(channel_index);
         this->gst_template = vp_utils::string_format(this->gst_template, bitrate, this->rtmp_url.c_str());
-        std::cout << this->gst_template << std::endl;
+        VP_INFO(vp_utils::string_format("[%s] [%s]", node_name.c_str(), gst_template.c_str()));
         this->initialized();
     }
     
@@ -32,7 +32,7 @@ namespace vp_nodes {
     // re-implementation, return nullptr.
     std::shared_ptr<vp_objects::vp_meta> 
         vp_rtmp_des_node::handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) {
-            std::cout << this->node_name << ", received frame meta, channel_index=>" << meta->channel_index << ", frame_index=>" << meta->frame_index << " " << std::endl;
+            VP_DEBUG(vp_utils::string_format("[%s] received frame meta, channel_index=>%d, frame_index=>%d", node_name.c_str(), meta->channel_index, meta->frame_index));
             
             cv::Mat resize_frame;
             if (this->resolution_w_h.width != 0 && this->resolution_w_h.height != 0) {                 

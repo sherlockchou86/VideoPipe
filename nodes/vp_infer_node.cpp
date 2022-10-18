@@ -36,7 +36,7 @@ namespace vp_nodes {
             net.setPreferableTarget(cv::dnn::DNN_TARGET_CUDA);
         }
         catch(const std::exception& e) {
-            std::cout << node_name << " cv::dnn::readNet load network failed!" << std::endl;
+            VP_WARN(vp_utils::string_format("[%s] cv::dnn::readNet load network failed!", node_name.c_str()));
         }
 
         // load labels if labels_path is specified
