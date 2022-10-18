@@ -20,6 +20,10 @@
 #if MAIN5
 
 int main() {
+    VP_SET_LOG_INCLUDE_CODE_LOCATION(false);
+    VP_SET_LOG_INCLUDE_THREAD_ID(false);
+    VP_LOGGER_INIT();
+
     // create nodes
     auto file_src_0 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_0", 0, "./test_video/10.mp4", 0.6);
     auto yunet_face_detector_0 = std::make_shared<vp_nodes::vp_yunet_face_detector_node>("yunet_face_detector_0", "./models/face/face_detection_yunet_2022mar.onnx");

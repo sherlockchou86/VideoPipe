@@ -84,8 +84,6 @@ namespace vp_nodes {
                 frame_meta->targets[j]->secondary_scores.push_back(score);
                 frame_meta->targets[j]->secondary_labels.push_back(label);
 
-                std::cout << "class_id---" << class_id << "   score---" << score << "   label---" << label << std::endl;
-                
                 // break as we found the right target!
                 index = j + 1;
                 break;

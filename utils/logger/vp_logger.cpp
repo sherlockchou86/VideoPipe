@@ -40,11 +40,6 @@ namespace vp_utils {
             new_log += "[" + log_level_names.at(level) + "]";
         }
 
-        // code location
-        if (include_code_location) {
-            new_log += "[" + std::string(code_file) + ":" + std::to_string(code_line) + "]";
-        }
-
         // thread id
         if (include_thread_id) {
             auto id = std::this_thread::get_id();
@@ -54,9 +49,15 @@ namespace vp_utils {
             new_log += "[" + thread_id + "]";
         }
         
+        // code location
+        if (include_code_location) {
+            new_log += "[" + std::string(code_file) + ":" + std::to_string(code_line) + "]";
+        }
+
         new_log += " " + message;
 
         /* write to cache */
+        // min lock range
         std::lock_guard<std::mutex> guard(log_cache_mutex);
         log_cache.push(new_log);
         // notify

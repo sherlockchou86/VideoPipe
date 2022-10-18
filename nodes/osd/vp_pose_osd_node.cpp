@@ -19,13 +19,12 @@ namespace vp_nodes {
 
         // scan pose targets
         for (int i = 0; i < meta->pose_targets.size(); i++) {
-            std::cout << "points count-------------" << meta->pose_targets[i]->key_points.size() << "----------" << std::endl;
             auto& pose_target = meta->pose_targets[i];
 
             auto nPairs = posePairs_map.at(pose_target->type).size() - 2;
             std::vector<cv::Scalar> colors;
             populateColorPalette(colors, nPairs);
-            std::cout << "pairs count-------------" <<  nPairs << "----------" << std::endl;
+
             for (int j = 0; j < nPairs; j++) {
                 auto& a = pose_target->key_points[posePairs_map.at(pose_target->type)[j].first];
                 auto& b = pose_target->key_points[posePairs_map.at(pose_target->type)[j].second];

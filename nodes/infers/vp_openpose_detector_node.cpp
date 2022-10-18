@@ -63,9 +63,7 @@ namespace vp_nodes {
             auto start2 = std::chrono::system_clock::now();
             std::vector<cv::Mat> netOutputParts;
             splitNetOutputBlobToParts(netOutputBlob, cv::Size(frame_meta->frame.cols, frame_meta->frame.rows), netOutputParts);
-            std::cout << "split cost-----" << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-start2).count() << "ms" << std::endl;
             
-
             auto start3 = std::chrono::system_clock::now();
             for(int i = 0; i < points_map.at(type); ++i) {
                 std::vector<KeyPoint> keyPoints;
@@ -104,9 +102,6 @@ namespace vp_nodes {
                 auto pose_target = std::make_shared<vp_objects::vp_frame_pose_target>(type, kps);
                 frame_meta->pose_targets.push_back(pose_target);
             }
-            std::cout << "parse cost-----" << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-start3).count() << "ms" << std::endl;
         }
-
-        std::cout << "postprocess cost-----" << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-start1).count() << "ms" << std::endl;
     }
 }
