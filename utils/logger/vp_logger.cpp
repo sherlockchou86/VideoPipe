@@ -13,6 +13,11 @@ namespace vp_utils {
 
     void vp_logger::init() {
         inited = true;
+
+        // initialize file writer
+        file_writer.init(log_dir, log_file_name_template);
+
+        // run thread
         auto t = std::thread(&vp_logger::log_write_run, this); 
         log_writer_th = std::move(t);
     }
@@ -92,7 +97,8 @@ namespace vp_utils {
     }
 
     void vp_logger::write_to_file(const std::string& log) {
-
+        // file_writer.write(log);
+        file_writer << log;
     }
 
     void vp_logger::write_to_kafka(const std::string& log) {
