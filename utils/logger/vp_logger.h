@@ -10,6 +10,7 @@
 
 #include "../vp_semaphore.h"
 #include "../vp_utils.h"
+#include "vp_log_file_writer.h"
 
 namespace vp_utils {
     // log levels
@@ -42,9 +43,16 @@ namespace vp_utils {
         void write_to_file(const std::string& log);
         void write_to_kafka(const std::string& log);
 
+        // writing log func
         void log_write_run();
 
-        const std::map<vp_log_level, std::string> log_level_names = {{ERROR, "Error"},{WARN, "Warn "},{INFO, "Info "},{DEBUG, "Debug"}};
+        // file writer
+        vp_utils::vp_log_file_writer file_writer;
+
+        const std::map<vp_log_level, std::string> log_level_names = {{ERROR, "Error"},
+                                                                    {WARN, "Warn "},
+                                                                    {INFO, "Info "},
+                                                                    {DEBUG, "Debug"}};
     public:
         // non-copable
         vp_logger(const vp_logger&) = delete;
@@ -59,7 +67,7 @@ namespace vp_utils {
 
         // CONFIG
         vp_log_level log_level = vp_log_level::DEBUG; // filter
-        std::string log_dir = ".";                    // folder saving log file
+        std::string log_dir = "./log";                // folder saving log file
         const std::string log_file_name_template = "<year>-<mon>-<day>.txt";
         const std::string log_time_templete = "[<year>-<mon>-<day> <hour>:<min>:<sec>.<mili>]";
         
