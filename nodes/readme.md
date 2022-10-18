@@ -16,13 +16,14 @@
 |  10  |  vp_rtmp_des_node        | pushing video to server via rtmp | tested |               |
 |  11  |  vp_rtsp_src_node        | reading video from rtsp server | tested |               |
 |  12  |  vp_screen_des_node      | displaying video on screen | tested |               |
-|  13  |  vp_secondary_infer_node | base class for all secondary infer nodes, which infer on croped small image | tested |               |
+|  13  |  vp_secondary_infer_node | base class for all secondary infer nodes, which infer on small cropped image | tested |               |
 |  14  |  vp_skip_node            | skip node which setting skipping rule for infer | not implemented yet |               |
-|  15  |  vp_split_node           | split pipe into multi braches, support by channel and deep-copy | tested |               |
+|  15  |  vp_split_node           | split pipe into multi branches, support by channel and deep-copy | tested |               |
 |  16  |  vp_src_node             | base class for all SRC nodes | tested |               |
 |  17  |  vp_track_node           | ++++ | not implemented yet |
 |  18  |  vp_udp_src_node         | reading video from network via udp/rtp | tested |               |
 |  19  |  vp_record_node          | video/image recording node | on the way |               |
+|  *   |  `more`                  | wait for your contribution | on the way |               |
 
 ## infers node list [with some customization] ##
 -------
@@ -39,6 +40,7 @@
 |  7   |  vp_trt_vehicle_plate_detector  | vehicle plate detector based on tensorrt(yolov5s) | tested         |               |
 |  8   |  vp_yolo_detector_node          | object detector based on opencv::dnn(yolo series) | tested         |               |
 |  9   |  vp_yunet_face_detector_node    | face detector based on opencv::dnn(yunet) | tested         |               |
+|  *   |  `more`                         | wait for your contribution | on the way         |               |
 
 
 ## osd node list [with some customization] ##
@@ -52,3 +54,4 @@
 |  4   |  vp_osd_node             | target display | tested         |               |
 |  5   |  vp_pose_osd_node        | pose target display | tested         |               |
 |  6   |  vp_text_osd_node        | text target display | tested         |               |
+|  *   |  `more`                  | wait for your contribution | on the way         |               |

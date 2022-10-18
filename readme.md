@@ -48,9 +48,12 @@ The framework can be used in such situations:
 ![](./doc/p3.png)
 ![](./doc/p4.png)
 
-## Project structure
+## Help doc
 
-waiting for update...
+- [node table](./nodes/readme.md)
+- [how record works](./nodes/record/readme.md)
+- [environment for reference](./doc/env.md)
+- wait for update...
 
 ## Dependency
 
