@@ -49,7 +49,7 @@ The framework can be used in such situations:
 ![](./doc/p4.png)
 
 ## Help doc
-
+- [sample code](./sample/readme.md)
 - [node table](./nodes/readme.md)
 - [how record works](./nodes/record/readme.md)
 - [environment for reference](./doc/env.md)
@@ -83,7 +83,7 @@ Optional, if you need implement(or use built-in) infer nodes based on other infe
 
 
 - Debug VideoPipe (via vscode)
-    - select the cpp file you want to debug (keep it activated), like `./main/main.cpp`
+    - select the cpp file you want to debug (keep it activated), like `./sample/1-1-1_sample.cpp`
     - press `run` button at debug menu in vscode
     - select a launch item at the top of window (something like `C/C++: g++ vp project`)
 
