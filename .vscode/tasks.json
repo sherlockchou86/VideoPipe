@@ -7,7 +7,7 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${workspaceFolder}/main/*.cpp",   // demo source code for vp framework
+                "${workspaceFolder}/sample/*.cpp",   // demo source code for vp framework
                 "-lopencv_core",
                 "-lopencv_videoio",
                 "-lopencv_highgui",

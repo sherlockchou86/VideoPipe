@@ -21,6 +21,10 @@ __pycache__/
 *.weights
 *.h264
 *.trt
+models/
+test_video/
+log/
+debug/
 
 # doc
 *.pptx
