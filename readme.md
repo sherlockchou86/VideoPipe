@@ -90,10 +90,33 @@ Optional, if you need implement(or use built-in) infer nodes based on other infe
 
 > All sub projects in `./third_party/` are independent projects and can be built and debug like above, please refer to readme.md in sub folder.
 
+## Building with CMake
+### enviroments
+
+Place `heads` to `/usr/local/include`,  `libraries` to `/usr/lib/x86_64-linux-gnu`, or use soft link.
+
+For example, `cuda` include directories is `/usr/local/include/cuda`. 
+
+You can also organize the header files and the libraries to your liking. 
+
+### build samples
+```asm
+mkdir build
+cd build
+cmake ..
+make
+```
+You will get dynamic libraries and executable samples in `build`.
+
+### debug
+Use IDEs such as *CLion* which will read the `CMakeLists.txt` and generate debug configurations.
+
+
+
 ## How to use 
 
 - build VideoPipe first and use shared library.
-- referencing source code directly and build you whole application.
+- referencing source code directly and build your whole application.
 
 [download models and test files from Google Drive](https://drive.google.com/file/d/14J8RFK_vJFXBp_ER4sb5Oh8uJTyLyyK_/view?usp=sharing)
 
