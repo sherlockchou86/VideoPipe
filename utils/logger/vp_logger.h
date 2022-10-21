@@ -70,6 +70,9 @@ namespace vp_utils {
         std::string log_dir = "./log";                // folder saving log file
         const std::string log_file_name_template = "<year>-<mon>-<day>.txt";
         const std::string log_time_templete = "[<year>-<mon>-<day> <hour>:<min>:<sec>.<mili>]";
+
+        // watch
+        int log_cache_warn_threshold = 100;           // warning if cache size greater than threshold
         
         // where
         bool log_to_console = true;                   // to console
@@ -99,6 +102,7 @@ namespace vp_utils {
     #define VP_SET_LOG_INCLUDE_LEVEL(_include_level) vp_utils::vp_logger::get_logger().include_level = _include_level
     #define VP_SET_LOG_INCLUDE_CODE_LOCATION(_include_code_location) vp_utils::vp_logger::get_logger().include_code_location = _include_code_location
     #define VP_SET_LOG_INCLUDE_THREAD_ID(_include_thread_id) vp_utils::vp_logger::get_logger().include_thread_id = _include_thread_id
+    #define VP_SET_LOG_CACHE_WARN_THRES(_log_cache_warn_threshold) vp_utils::vp_logger::get_logger().log_cache_warn_threshold = _log_cache_warn_threshold
 
     // log Macros
     // use vp_utils::string_format to format log content first if need

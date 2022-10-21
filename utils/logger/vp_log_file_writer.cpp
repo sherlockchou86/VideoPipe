@@ -70,5 +70,6 @@ namespace vp_utils {
 
     vp_log_file_writer& vp_log_file_writer::operator<<(std::string log) {
         write(log);
+        return *this;
     }
 }
