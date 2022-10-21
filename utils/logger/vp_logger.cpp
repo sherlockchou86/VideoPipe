@@ -70,14 +70,25 @@ namespace vp_utils {
     }
 
     void vp_logger::log_write_run() {
+        bool log_thres_warned = false;
+        /* below code runs in single thread */
         while (inited) {
             // wait for data
             log_cache_semaphore.wait();
             auto log = log_cache.front();
             log_cache.pop();
 
+            /* watch the log cache size */
+            auto log_cache_size = log_cache.size();
+            if (!log_thres_warned && log_cache_size > log_cache_warn_threshold) {
+                VP_WARN(vp_utils::string_format("[logger] log cache size is exceeding threshold! cache size is: [%d], threshold is: [%d]", log_cache_size, log_cache_warn_threshold));
+                log_thres_warned = true;  // warn 1 time
+            }
+            if (log_cache_size <= log_cache_warn_threshold) {
+                log_thres_warned = false;
+            }
+            
             /* write to devices */
-
             if (log_to_console) {
                 write_to_console(log);
             }

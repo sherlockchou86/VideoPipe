@@ -114,7 +114,10 @@ namespace vp_utils {
     }
 
     // split time point to 7 parts, include year, month, day ... in order
-    inline void time_split(system_clock::time_point tp, std::vector<int>& time_parts) {
+    inline void time_split(system_clock::time_point tp, std::vector<int>& time_parts, int time_zone = 8) {
+        // right time zone
+        tp = tp + std::chrono::hours{time_zone};
+
         auto dp = date::floor<date::days>(tp);
 
         auto ymd = date::year_month_day{dp};
@@ -162,7 +165,7 @@ namespace vp_utils {
 
         // 7 parts
         std::vector<int> time_parts;
-        time_split(tp, time_parts);
+        time_split(tp, time_parts, 0);
 
         auto time_str = std::regex_replace(template_str, std::regex("<year>"), std::to_string(time_parts[0]));
         time_str = std::regex_replace(time_str, std::regex("<mon>"), set_width_and_fill(std::to_string(time_parts[1]), 2));
