@@ -35,24 +35,15 @@ namespace vp_nodes {
     }
 
     void vp_src_node::start() {
-        this->active = true;
-        std::shared_ptr<vp_objects::vp_meta> start_control_meta = std::make_shared<vp_objects::vp_control_meta>(vp_objects::vp_control_type::START, this->channel_index);
-        this->push_meta(start_control_meta);
+        gate.open();
     }
 
     void vp_src_node::stop() {
-        this->active = false;
-        std::shared_ptr<vp_objects::vp_meta> stop_control_meta = std::make_shared<vp_objects::vp_control_meta>(vp_objects::vp_control_type::STOP, this->channel_index);
-        this->push_meta(stop_control_meta);
-    }
-
-    void vp_src_node::refresh() {
-        std::shared_ptr<vp_objects::vp_meta> refresh_control_meta = std::make_shared<vp_objects::vp_control_meta>(vp_objects::vp_control_type::REFRESH, this->channel_index);
-        this->push_meta(refresh_control_meta);
+        gate.close();
     }
 
     void vp_src_node::speak() {
-        std::shared_ptr<vp_objects::vp_meta> speak_control_meta = std::make_shared<vp_objects::vp_control_meta>(vp_objects::vp_control_type::SPEAK, this->channel_index);
+        auto speak_control_meta = std::make_shared<vp_objects::vp_control_meta>(vp_objects::vp_control_type::SPEAK, this->channel_index);
         this->push_meta(speak_control_meta);
     }
 

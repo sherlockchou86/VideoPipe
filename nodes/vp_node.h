@@ -39,8 +39,6 @@ namespace vp_nodes {
         // dispatch thread
         std::thread dispatch_thread;
     protected:
-        // status of the node
-        bool active = false;
 
         // by default we handle frame meta one by one, in some situations we need handle them batch by batch(such as vp_infer_node).
         // setting this member greater than 1 means the node will handle frame meta with batch, and vp_node::handle_frame_meta_by_batch(...) will be called other than vp_node::handle_frame_meta(...).

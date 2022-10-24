@@ -6,9 +6,6 @@
 namespace vp_objects {
     // type of control meta
     enum vp_control_type {
-        START,
-        STOP,
-        REFRESH,
         SPEAK,
         VIDEO_RECORD,
         IMAGE_RECORD

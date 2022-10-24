@@ -5,8 +5,8 @@
 #include <mutex>
 
 namespace vp_utils {
-    // semaphore for queue menbers in vp_node.
-    // used to block the consumer thread until queue has data.
+    // semaphore for queue/deque data structures in VideoPipe, used for producer-consumer pattern.
+    // it blocks the consumer thread until data has come.
     class vp_semaphore
     {
     public:
