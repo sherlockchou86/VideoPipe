@@ -75,7 +75,7 @@ Optional, if you need implement(or use built-in) infer nodes based on other infe
 [environment for reference](./doc/env.md)
 
 ## How to build and debug
-
+### option1: shell & vscode
 - Build VideoPipe (via shell)
     - run `cd build/`
     - run `sh build.sh`
@@ -90,8 +90,8 @@ Optional, if you need implement(or use built-in) infer nodes based on other infe
 
 > All sub projects in `./third_party/` are independent projects and can be built and debug like above, please refer to readme.md in sub folder.
 
-## Building with CMake
-### enviroments
+### option2: cmake & CLion
+#### prepare enviroments
 
 Place `heads` to `/usr/local/include`,  `libraries` to `/usr/lib/x86_64-linux-gnu`, or use soft link.
 
@@ -99,16 +99,16 @@ For example, `cuda` include directories is `/usr/local/include/cuda`.
 
 You can also organize the header files and the libraries to your liking. 
 
-### build samples
-```asm
-mkdir build
+#### build samples
+```shell
+mkdir build # if not exist
 cd build
 cmake ..
 make
 ```
 You will get dynamic libraries and executable samples in `build`.
 
-### debug
+#### debug
 Use IDEs such as *CLion* which will read the `CMakeLists.txt` and generate debug configurations.
 
 
