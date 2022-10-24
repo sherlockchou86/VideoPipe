@@ -79,11 +79,11 @@ namespace vp_nodes {
     }
 
     std::string vp_file_des_node::get_new_file_name() {
-        auto stamp = std::chrono::system_clock::now().time_since_epoch().count(); 
+        auto stamp = vp_utils::time_format(NOW, "<year>-<mon>-<day>_<hour>-<min>-<sec>-<mili>");
         // compile tips:
         // remove experimental:: if gcc >= 8.0
         std::experimental::filesystem::path p1(save_dir);
-        std::experimental::filesystem::path p2(name_prefix + "_" + std::to_string(stamp) + ".mp4");
+        std::experimental::filesystem::path p2(name_prefix + "_" + stamp + ".mp4");
 
         // save_dir/name_prefix_stamp.mp4
         std::experimental::filesystem::path p = p1 / p2;
