@@ -33,64 +33,65 @@ namespace vp_nodes {
         int fps = 0;
         
         while(true) {
-            if (this->active) {
-                // open capture
-                if (!rtsp_capture.isOpened()) {
-                    assert(rtsp_capture.open(this->gst_template, cv::CAP_GSTREAMER));
-                }
-
-                // video properties
-                if (video_width == 0 || video_height == 0 || fps == 0) {
-                    video_width = rtsp_capture.get(cv::CAP_PROP_FRAME_WIDTH);
-                    video_height = rtsp_capture.get(cv::CAP_PROP_FRAME_HEIGHT);
-                    fps = rtsp_capture.get(cv::CAP_PROP_FPS);
-                    
-                    original_fps = fps;
-                    original_width = video_width;
-                    original_height = video_height;
-
-                    // stream_info_hooker activated if need
-                    if (stream_info_hooker) {
-                        vp_stream_info stream_info {channel_index, fps, video_width, video_height, rtsp_url};
-                        stream_info_hooker(node_name, stream_info);
-                    }
-                }
-
-                rtsp_capture >> frame;
-                if(frame.empty()) {
-                    VP_WARN(vp_utils::string_format("[%s] reading frame empty, total frame==>%d", node_name.c_str(), frame_index));
+            // check if need work
+            gate.knock();
+            
+            // try to open capture
+            if (!rtsp_capture.isOpened()) {
+                if (!rtsp_capture.open(this->gst_template, cv::CAP_GSTREAMER)) {
+                    VP_WARN(vp_utils::string_format("[%s] open rtsp failed, try again...", node_name.c_str()));
                     continue;
                 }
+            }
 
-                cv::Mat resize_frame;
-                if (this->resize_ratio != 1.0f) {                 
-                    cv::resize(frame, resize_frame, cv::Size(), resize_ratio, resize_ratio);
-                }
-                else {
-                    resize_frame = frame.clone(); // clone!;
-                }
+            // video properties
+            if (video_width == 0 || video_height == 0 || fps == 0) {
+                video_width = rtsp_capture.get(cv::CAP_PROP_FRAME_WIDTH);
+                video_height = rtsp_capture.get(cv::CAP_PROP_FRAME_HEIGHT);
+                fps = rtsp_capture.get(cv::CAP_PROP_FPS);
+                
+                original_fps = fps;
+                original_width = video_width;
+                original_height = video_height;
 
-                this->frame_index++;
-                // create frame meta
-                auto out_meta = 
-                    std::make_shared<vp_objects::vp_frame_meta>(resize_frame, this->frame_index, this->channel_index, video_width, video_height, fps);
-
-                if (out_meta != nullptr) {
-                    this->out_queue.push(out_meta);
-                    
-                    // handled hooker activated if need
-                    if (this->meta_handled_hooker) {
-                        meta_handled_hooker(node_name, out_queue.size(), out_meta);
-                    }
-
-                    // important! notify consumer of out_queue in case it is waiting.
-                    this->out_queue_semaphore.signal();
-                    VP_DEBUG(vp_utils::string_format("[%s] after handling meta, out_queue.size()==>%d", node_name.c_str(), out_queue.size()));
+                // stream_info_hooker activated if need
+                if (stream_info_hooker) {
+                    vp_stream_info stream_info {channel_index, fps, video_width, video_height, rtsp_url};
+                    stream_info_hooker(node_name, stream_info);
                 }
             }
+
+            rtsp_capture >> frame;
+            if(frame.empty()) {
+                VP_WARN(vp_utils::string_format("[%s] reading frame empty, total frame==>%d", node_name.c_str(), frame_index));
+                continue;
+            }
+
+            cv::Mat resize_frame;
+            if (this->resize_ratio != 1.0f) {                 
+                cv::resize(frame, resize_frame, cv::Size(), resize_ratio, resize_ratio);
+            }
             else {
-                std::this_thread::sleep_for(std::chrono::microseconds{1000});
-            }        
+                resize_frame = frame.clone(); // clone!;
+            }
+
+            this->frame_index++;
+            // create frame meta
+            auto out_meta = 
+                std::make_shared<vp_objects::vp_frame_meta>(resize_frame, this->frame_index, this->channel_index, video_width, video_height, fps);
+
+            if (out_meta != nullptr) {
+                this->out_queue.push(out_meta);
+                
+                // handled hooker activated if need
+                if (this->meta_handled_hooker) {
+                    meta_handled_hooker(node_name, out_queue.size(), out_meta);
+                }
+
+                // important! notify consumer of out_queue in case it is waiting.
+                this->out_queue_semaphore.signal();
+                VP_DEBUG(vp_utils::string_format("[%s] after handling meta, out_queue.size()==>%d", node_name.c_str(), out_queue.size()));
+            }  
         }
     }
 

@@ -4,6 +4,7 @@
 #include "vp_stream_info_hookable.h"
 #include "../excepts/vp_not_implemented_error.h"
 #include "../excepts/vp_invalid_calling_error.h"
+#include "../utils/vp_gate.h"
 
 namespace vp_nodes {
     // base class for src nodes, start point of meta/pipeline
@@ -33,6 +34,10 @@ namespace vp_nodes {
         int frame_index;
         int channel_index;
         float resize_ratio;
+
+        // control to work or not
+        // all derived class need depend on the value to check if work or not (start/stop)
+        vp_utils::vp_gate gate;
     public:
         ~vp_src_node();
 
@@ -42,8 +47,6 @@ namespace vp_nodes {
         void start();
         // stop signal to pipeline
         void stop();
-        // refresh signal to the pipeline
-        void refresh();
         // speak signal to the pipeline (each node print some message such as current status)
         void speak();
 
