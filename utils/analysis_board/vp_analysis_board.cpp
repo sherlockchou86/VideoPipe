@@ -29,6 +29,9 @@ namespace vp_utils {
 
         // render static parts starting with 1st layer
         render_layer(src_nodes_on_screen, bg_canvas);
+
+        // save to local by default
+        save("./vp_analysis_board.png");
     }
     
     vp_analysis_board::~vp_analysis_board()
@@ -123,7 +126,22 @@ namespace vp_utils {
             render_layer(nodes_in_next_layer, canvas, static_parts);
         }
         else { // recursion end
+            
+            /* global drawing */
 
+            // draw layer index at the bottom of canvas
+            if (static_parts) {
+                for (int i = 0; i < pipe_width; i++) {
+                    /* code */
+                    cv::putText(canvas, "layer_" + std::to_string(i + 1), cv::Point(canvas_gap_horizontal + (node_width + node_gap_horizontal) * i, canvas_height - int(canvas_gap_vertical / 3)), 1, 1, cv::Scalar(255, 0, 0));
+                }    
+            }
+
+            // refresh time at the top left of canvas
+            if (!static_parts) {
+                auto time = vp_utils::time_format(NOW, "<hour>:<min>:<sec>");
+                cv::putText(canvas, time, cv::Point(20, 20), 1, 1, cv::Scalar(255, 0, 0));
+            }   
         }   
     }
 
