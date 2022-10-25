@@ -1,4 +1,7 @@
 #pragma once
+
+#include <sstream>
+
 #include "../nodes/vp_node.h"
 #include "../excepts/vp_invalid_pipeline_error.h"
 
@@ -133,6 +136,7 @@ namespace vp_utils {
             check_layer(pipe_src_nodes);
             
             if (summary) {
+                /*
                 std::cout << "############# pipe check summary ##############" << std::endl;
                 std::cout << " total layers: " << num_layers_in_pipe << std::endl;
                 std::cout << " layer index,       node names" << std::endl;
@@ -143,7 +147,24 @@ namespace vp_utils {
                     }
                     std::cout << std::endl;
                 }
-                std::cout << "############# pipe check summary ##############" << std::endl;
+                std::cout << ############# pipe check summary ############## << std::endl;
+                */
+
+                std::ostringstream s_stream;
+                s_stream << "\n############# pipe check summary ##############\n";
+                s_stream << " total layers: " << num_layers_in_pipe << "\n";
+                s_stream << " layer index,       node names" << "\n";
+                for(auto & i : node_names_in_pipe) {
+                    s_stream << " " << i.first << "                    ";
+                    for(auto & j : i.second) {
+                        s_stream << j << ",";
+                    }
+                    s_stream << "\n";
+                }
+                s_stream << "############# pipe check summary ##############" << "\n";
+                
+                // to log
+                VP_INFO(s_stream.str());
             }
         }        
     };

@@ -50,6 +50,15 @@ namespace vp_nodes {
         // speak signal to the pipeline (each node print some message such as current status)
         void speak();
 
+        /* Debug API */
+        // record video signal to pipeline, start recording video when vp_record_node(if exists) receive the signal.
+        // it is a debug api since record signal is usually generated automatically inside pipe(not by users outside pipe).
+        void record_video_manually(bool osd = false, int video_duration = 10);
+        /* Debug API */
+        // record image signal to pipeline, start recording image when vp_record_node(if exists) receive the signal.
+        // it is a debug api since record signal is usually generated automatically inside pipe(not by userd outside pipe).
+        void record_image_manually(bool osd = false);
+
         int get_original_fps() const;
         int get_original_width() const;
         int get_original_height() const;

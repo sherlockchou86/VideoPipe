@@ -120,7 +120,6 @@ namespace vp_nodes {
         }
     }
 
-    
     std::shared_ptr<vp_objects::vp_meta> vp_node::handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) {
         return meta;
     }
@@ -202,5 +201,12 @@ namespace vp_nodes {
     std::string vp_node::to_string() {
         // return node_name by default
         return node_name;
+    }
+
+    void vp_node::pendding_meta(std::shared_ptr<vp_objects::vp_meta> meta) {
+        this->out_queue.push(meta);
+        
+        // notify consumer of out_queue
+        this->out_queue_semaphore.signal();
     }
 }

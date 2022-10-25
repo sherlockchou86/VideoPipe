@@ -2,6 +2,8 @@
 #include <memory>
 #include "vp_src_node.h"
 #include "../objects/vp_control_meta.h"
+#include "../objects/vp_image_record_control_meta.h"
+#include "../objects/vp_video_record_control_meta.h"
 
 namespace vp_nodes {
     
@@ -61,5 +63,32 @@ namespace vp_nodes {
 
     int vp_src_node::get_original_height() const {
         return original_height;
+    }
+
+    void vp_src_node::record_video_manually(bool osd, int video_duration) {
+        // make sure file is not too long
+        assert(video_duration <= 60 && video_duration >= 5);
+
+        // generate file_name_without_ext
+        // MUST be unique
+        auto file_name_without_ext = vp_utils::time_format(NOW, "manually_record_video_<year><mon><day><hour><min><sec><mili>");
+
+        // create control meta
+        auto video_record_control_meta = std::make_shared<vp_objects::vp_video_record_control_meta>(channel_index, file_name_without_ext, video_duration, osd);
+
+        // push meta to pipe
+        push_meta(video_record_control_meta);
+    }
+
+    void vp_src_node::record_image_manually(bool osd) {
+        // generate file_name_without_ext
+        // MUST be unique
+        auto file_name_without_ext = vp_utils::time_format(NOW, "manually_record_image_<year><mon><day><hour><min><sec><mili>");
+
+        // create control meta
+        auto image_record_control_meta = std::make_shared<vp_objects::vp_image_record_control_meta>(channel_index, file_name_without_ext, osd);
+
+        // push meta to pipe
+        push_meta(image_record_control_meta);
     }
 } 
