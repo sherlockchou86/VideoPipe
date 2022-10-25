@@ -7,6 +7,7 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/videoio.hpp>
 
+#include "../vp_utils.h"
 #include "../../nodes/vp_node.h"
 #include "../../nodes/vp_src_node.h"
 #include "../../objects/vp_meta.h"
