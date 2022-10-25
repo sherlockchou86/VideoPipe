@@ -77,6 +77,11 @@ namespace vp_nodes {
         // called by child class after all resources have been initialized.
         void initialized();
 
+        // push meta to the back of out_queue, then it will be pushed to next nodes in order.
+        // take care it's different from vp_node::push_meta(meta) which will push meta to next nodes directly.
+        // the method can be called ONLY in handle thread inside node.
+        void pendding_meta(std::shared_ptr<vp_objects::vp_meta> meta);
+
         // protected as it can't be instanstiated directly.
         vp_node(std::string node_name);
     public:

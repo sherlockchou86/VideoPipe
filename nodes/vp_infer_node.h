@@ -1,7 +1,7 @@
 
 
 #pragma once
-
+#include <sstream>
 #include <opencv2/dnn.hpp>
 #include "vp_node.h"
 

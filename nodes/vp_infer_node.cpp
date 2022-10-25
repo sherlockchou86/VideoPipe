@@ -144,6 +144,7 @@ namespace vp_nodes {
 
     // print all by default
     void vp_infer_node::infer_combinations_time_cost(int data_size, int prepare_time, int preprocess_time, int infer_time, int postprocess_time) {
+        /*
         std::cout << "########## infer combinations summary ##########" << std::endl;
         std::cout << " node_name:" << node_name << std::endl;
         std::cout << " data_size:" << data_size << std::endl;
@@ -152,6 +153,20 @@ namespace vp_nodes {
         std::cout << " infer_time:" << infer_time << "ms" << std::endl;
         std::cout << " postprocess_time:" << postprocess_time << "ms" << std::endl;
         std::cout << "########## infer combinations summary ##########" << std::endl;
+        */
+
+        std::ostringstream s_stream;
+        s_stream << "\n########## infer combinations summary ##########\n";
+        s_stream << " node_name:" << node_name << "\n";
+        s_stream << " data_size:" << data_size << "\n";
+        s_stream << " prepare_time:" << prepare_time << "ms\n";
+        s_stream << " preprocess_time:" << preprocess_time << "ms\n";
+        s_stream << " infer_time:" << infer_time << "ms\n";
+        s_stream << " postprocess_time:" << postprocess_time << "ms\n";
+        s_stream << "########## infer combinations summary ##########\n";     
+
+        // to log
+        VP_DEBUG(s_stream.str());
     }
 
     void vp_infer_node::load_labels() {

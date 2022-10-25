@@ -3,6 +3,7 @@
 NODES=../nodes/*.cpp
 INFERS_NODES=../nodes/infers/*.cpp
 OSD_NODES=../nodes/osd/*.cpp
+RECORD_NODES=../nodes/record/*.cpp
 OBJECTS=../objects/*.cpp
 ELEMENTS_OBJECTS=../objects/elements/*.cpp
 SHAPES_OBJECTS=../objects/shapes/*.cpp
@@ -12,7 +13,7 @@ LOGGER=../utils/logger/*cpp
 
 # compile
 g++ -c -g -fPIC \
-$NODES $INFERS_NODES $OSD_NODES $OBJECTS $ELEMENTS_OBJECTS $SHAPES_OBJECTS $BA $UTILS_ANALYSIS_BOARD $LOGGER
+$NODES $INFERS_NODES $OSD_NODES $OBJECTS $ELEMENTS_OBJECTS $SHAPES_OBJECTS $BA $UTILS_ANALYSIS_BOARD $LOGGER $RECORD_NODES
 
 
 # create shared library
