@@ -96,7 +96,7 @@ We offer 2 option:
 ### Option 2: cmake & CLion
 #### Prepare environments
 
-Place `heads` to `/usr/local/include`,  `libraries` to `/usr/lib/x86_64-linux-gnu`, or use soft link.
+Add soft link for libraries:
 
 ```shell
 cd /usr/local/include
@@ -104,10 +104,6 @@ ln -s /path/to/opencv2 opencv2 # opencv
 ln -s /usr/local/cuda/include cuda # cuda
 ln -s /path/to/TensorRT-xxx/include tensorrt # TensorRT
 ```
-
-For example, `cuda` include directories is `/usr/local/include/cuda`. 
-
-You can also organize the header files and the libraries to your liking. 
 
 #### Build samples
 
