@@ -1,4 +1,5 @@
-
+# For shell & vscode
+# Build VideoPipe (via shell)
 
 NODES=../nodes/*.cpp
 INFERS_NODES=../nodes/infers/*.cpp

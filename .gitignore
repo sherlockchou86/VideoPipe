@@ -150,8 +150,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-
 .DS_Store
 .idea/
 cmake-build-debug-remote/
 cmake-build-debug/
+./build/*
+!build/build.sh

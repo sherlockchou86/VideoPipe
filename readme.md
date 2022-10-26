@@ -49,9 +49,9 @@ The framework can be used in such situations:
 ![](./doc/p4.png)
 
 ## Help doc
-- [sample code](./sample/readme.md)
-- [node table](./nodes/readme.md)
-- [how record works](./nodes/record/readme.md)
+- [sample code](./sample/README.md)
+- [node table](./nodes/README.md)
+- [how record works](./nodes/record/README.md)
 - [environment for reference](./doc/env.md)
 - wait for update...
 
@@ -88,24 +88,30 @@ Optional, if you need implement(or use built-in) infer nodes based on other infe
     - select a launch item at the top of window (something like `C/C++: g++ vp project`)
 
 
-> All sub projects in `./third_party/` are independent projects and can be built and debug like above, please refer to readme.md in sub folder.
+> All sub projects in `./third_party/` are independent projects and can be built and debug like above, please refer to README.md in sub folder.
 
 ### option2: cmake & CLion
-#### prepare enviroments
+#### prepare environments
 
 Place `heads` to `/usr/local/include`,  `libraries` to `/usr/lib/x86_64-linux-gnu`, or use soft link.
+
+```shell
+ln -s 
+```
 
 For example, `cuda` include directories is `/usr/local/include/cuda`. 
 
 You can also organize the header files and the libraries to your liking. 
 
 #### build samples
+
 ```shell
 mkdir build # if not exist
 cd build
 cmake ..
 make
 ```
+
 You will get dynamic libraries and executable samples in `build`.
 
 #### debug
