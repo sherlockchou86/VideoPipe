@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 2.6)
 
-project(videopipe)
+project(video_pipe)
 
 add_definitions(-DAPI_EXPORTS)
 add_definitions(-O2 -pthread)
 
-#cuda & opencv
+# CUDA & OpenCV
 find_package(CUDA REQUIRED)
 find_package(OpenCV REQUIRED)
 
@@ -42,28 +42,28 @@ target_link_libraries(video_pipe  ${OpenCV_LIBS} paddle_ocr trt_vehicle -lstdc++
 
 
 add_executable(1-1-1_sample sample/1-1-1_sample.cpp)
-target_link_libraries(1-1-1_sample video_pipe  ${OpenCV_LIBS})
+target_link_libraries(1-1-1_sample video_pipe ${OpenCV_LIBS})
 
 add_executable(1-1-N_sample sample/1-1-N_sample.cpp)
-target_link_libraries(1-1-N_sample video_pipe  ${OpenCV_LIBS})
+target_link_libraries(1-1-N_sample video_pipe ${OpenCV_LIBS})
 
 add_executable(1-N-N_sample sample/1-N-N_sample.cpp)
-target_link_libraries(1-N-N_sample video_pipe  ${OpenCV_LIBS})
+target_link_libraries(1-N-N_sample video_pipe ${OpenCV_LIBS})
 
 add_executable(N-1-N_sample sample/N-1-N_sample.cpp)
-target_link_libraries(N-1-N_sample video_pipe  ${OpenCV_LIBS})
+target_link_libraries(N-1-N_sample video_pipe ${OpenCV_LIBS})
 
 add_executable(N-N_sample sample/N-N_sample.cpp)
-target_link_libraries(N-N_sample video_pipe  ${OpenCV_LIBS})
+target_link_libraries(N-N_sample video_pipe ${OpenCV_LIBS})
 
 add_executable(paddle_infer_sample sample/paddle_infer_sample.cpp)
 target_link_libraries(paddle_infer_sample video_pipe  ${OpenCV_LIBS})
 
 add_executable(src_des_sample sample/src_des_sample.cpp)
-target_link_libraries(src_des_sample video_pipe  ${OpenCV_LIBS})
+target_link_libraries(src_des_sample video_pipe ${OpenCV_LIBS})
 
 add_executable(trt_infer_sample sample/trt_infer_sample.cpp)
-target_link_libraries(trt_infer_sample video_pipe  ${OpenCV_LIBS})
+target_link_libraries(trt_infer_sample video_pipe ${OpenCV_LIBS})
 
 add_executable(vp_logger_sample sample/vp_logger_sample.cpp)
-target_link_libraries(vp_logger_sample video_pipe  ${OpenCV_LIBS})
+target_link_libraries(vp_logger_sample video_pipe ${OpenCV_LIBS})
