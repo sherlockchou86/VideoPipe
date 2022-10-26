@@ -67,8 +67,9 @@ Basics
 - gcc 7.5
 
 Optional, if you need implement(or use built-in) infer nodes based on other inference backends other than `opencv::dnn`.
-- cuda, tensorrt
-- paddle inference
+- CUDA
+- TensorRT
+- ![paddle inference](https://paddleinference.paddlepaddle.org.cn/v2.2/product_introduction/inference_intro.html)
 - onnx runtime
 - anything you like
 
