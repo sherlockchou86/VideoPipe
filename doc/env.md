@@ -7,7 +7,7 @@ VS Code + Ubuntu 18.04 C++17  gcc 7.5
 ---------
 apt-get install ffmpeg/gstreamer/other dependency.
 
-install opencv 4 from github, with ffmpeg/gstreamer ON (cuda optional).
+install opencv 4 from GitHub, with ffmpeg/gstreamer ON (cuda optional).
 
 opencv 4.6.0 cmake command:
 
@@ -43,9 +43,9 @@ export DISPLAY=local_ip:0.0 (or add to ~/.bashrc)
 ---------
 maybe you need install a nginx as rtmp server for debug purpose. 
 
-also maybe you need rtsp server to receive its stream for debug purpose.
+Also, maybe you need rtsp server to receive its stream for debug purpose.
 
 ## tips ##
 use shared_ptr/make_shared in whole project, do not use new/delete.
 
-the pipe is driven by stream data, if your app is not responsing, maybe no stream input.
+the pipe is driven by stream data, if your app is not responding, maybe no stream input.

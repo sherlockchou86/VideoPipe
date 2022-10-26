@@ -1,6 +1,6 @@
 # kafka server
 # usage
-```asm
+```shell
 cd services/kafka
 docker-compose up
 ```
