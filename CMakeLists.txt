@@ -29,6 +29,7 @@ target_link_libraries(paddle_ocr paddle_inference paddle2onnx)
 file(GLOB NODES "nodes/*.cpp")
 file(GLOB INFERS_NODES "nodes/infers/*.cpp")
 file(GLOB OSD_NODES "nodes/osd/*.cpp")
+file(GLOB SORT_NODES "nodes/sort/*.cpp")
 file(GLOB OBJECTS "objects/*.cpp")
 file(GLOB ELEMENTS_OBJECTS "objects/elements/*.cpp")
 file(GLOB SHAPES_OBJECTS "objects/shapes/*.cpp")
@@ -37,7 +38,7 @@ file(GLOB UTILS_ANALYSIS_BOARD "utils/analysis_board/*.cpp")
 file(GLOB LOGGER "utils/logger/*.cpp")
 
 
-add_library(video_pipe SHARED ${NODES} ${INFERS_NODES} ${OSD_NODES} ${OBJECTS} ${ELEMENTS_OBJECTS} ${SHAPES_OBJECTS} ${BA} ${UTILS_ANALYSIS_BOARD} ${LOGGER})
+add_library(video_pipe SHARED ${NODES} ${INFERS_NODES} ${OSD_NODES} ${SORT_NODES} ${OBJECTS} ${ELEMENTS_OBJECTS} ${SHAPES_OBJECTS} ${BA} ${UTILS_ANALYSIS_BOARD} ${LOGGER})
 target_link_libraries(video_pipe  ${OpenCV_LIBS} paddle_ocr trt_vehicle -lstdc++fs)
 
 

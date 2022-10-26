@@ -24,6 +24,14 @@ namespace vp_nodes {
         }
         auto& canvas = meta->osd_frame;
 
+        for (int idx = 0; idx < meta->ba_flags_map.size(); idx++)
+        {
+            /* code */
+            auto& track = meta->ba_flags_map[idx];
+            auto id = std::to_string(std::get<1>(track)->track_id);
+            cv::rectangle(canvas, cv::Rect(std::get<1>(track)->x, std::get<1>(track)->y, std::get<1>(track)->width, std::get<1>(track)->height), cv::Scalar(0, 0, 255), 2);
+            cv::putText(canvas, id, cv::Point(std::get<1>(track)->x, std::get<1>(track)->y), 1, 2, cv::Scalar(0, 0, 255));
+        }
         // scan face targets in current frame
         for(auto& i : meta->face_targets) {
             // draw face rect first
