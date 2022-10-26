@@ -1,5 +1,4 @@
-
-### summary ###
+# Summary
 
 Two situations to create a new osd node:
 1. Need a new osd style for the same type of target
