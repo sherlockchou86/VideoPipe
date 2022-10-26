@@ -154,5 +154,5 @@ dmypy.json
 .idea/
 cmake-build-debug-remote/
 cmake-build-debug/
-./build/*
+build/*
 !build/build.sh
