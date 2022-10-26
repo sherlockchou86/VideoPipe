@@ -99,6 +99,7 @@ Place `heads` to `/usr/local/include`,  `libraries` to `/usr/lib/x86_64-linux-gn
 
 ```shell
 cd /usr/local/include
+ln -s /path/to/opencv2 opencv2 # opencv
 ln -s /usr/local/cuda/include cuda # cuda
 ln -s /path/to/TensorRT-xxx/include tensorrt # TensorRT
 ```
