@@ -98,7 +98,9 @@ We offer 2 option:
 Place `heads` to `/usr/local/include`,  `libraries` to `/usr/lib/x86_64-linux-gnu`, or use soft link.
 
 ```shell
-ln -s 
+cd /usr/local/include
+ln -s /usr/local/cuda/include cuda # cuda
+ln -s /path/to/TensorRT-xxx/include tensorrt # TensorRT
 ```
 
 For example, `cuda` include directories is `/usr/local/include/cuda`. 
