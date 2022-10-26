@@ -2,9 +2,9 @@
 
 ## VideoPipe [under development yet]
 
-![Demo](https://user-images.githubusercontent.com/13251045/192935445-d39a41af-4619-4ae1-a975-19de44014fa2.mp4]
+![](https://user-images.githubusercontent.com/13251045/192935445-d39a41af-4619-4ae1-a975-19de44014fa2.mp4)
 
-![Demo](https://user-images.githubusercontent.com/13251045/192935363-70fe8a81-d84f-4ef6-91b0-08e1b5d94eac.mp4)
+![](https://user-images.githubusercontent.com/13251045/192935363-70fe8a81-d84f-4ef6-91b0-08e1b5d94eac.mp4)
 
 A framework for video structured. It could handle complex tasks such as stream reading (from local or network), video decoding, inference based on deep learning models, OSD(on screen display), message broker via middleware (like kafka), video encoding and stream pushing(rtmp or local file). It's Plugin-Oriented coding style, we can construct different types of pipeline using independent plugins namely `Node` in framework. 
 
