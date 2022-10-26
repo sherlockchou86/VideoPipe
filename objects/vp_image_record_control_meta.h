@@ -5,7 +5,7 @@
 namespace vp_objects {
     // control meta for image recording, it is a specific type of vp_control_meta.
     // when vp_record_node handle this control meta, the node will save the Latest Next frame in pipeline to disk.
-    // refer to ./nodes/record/readme.md for more details
+    // refer to ./nodes/record/README.md for more details
     class vp_image_record_control_meta: public vp_control_meta
     {
     private:

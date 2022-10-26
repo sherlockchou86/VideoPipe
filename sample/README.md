@@ -40,4 +40,4 @@ vehicle and plate detector based on tensorrt (install tensorrt first!), 1 video 
 
 
 ## vp_logger_sample ##
-show how vp_logger works.
+show how `vp_logger` works.

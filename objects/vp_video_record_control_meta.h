@@ -6,7 +6,7 @@
 namespace vp_objects {
     // control meta for video recording, it is a specific type of vp_control_meta.
     // when vp_record_node handle this control meta, the node will start recording video asynchronously, begin with the Latest Next frame in pipeline (pre-record frames excluded).
-    // refer to ./nodes/record/readme.md for more details
+    // refer to ./nodes/record/README.md for more details
     class vp_video_record_control_meta: public vp_control_meta {
     private:
         /* data */
