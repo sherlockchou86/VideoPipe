@@ -76,11 +76,12 @@ Optional, if you need implement(or use built-in) infer nodes based on other infe
 [environment for reference](./doc/env.md)
 
 ## How to build and debug
-We offer 2 option:
-- Option 1: shell & vscode
-- Option 2: CMake & CLion
 
-### Option 1: shell & vscode
+We are offering 2 options:
+1. Shell & VSCode
+2. CMake & CLion
+
+### Option 1: Shell & VSCode
 - Build VideoPipe (via shell)
     - run `cd build/`
     - run `sh build.sh`
@@ -93,7 +94,7 @@ We offer 2 option:
 
 > All subprojects in `./third_party/` are independent projects and can be built and debug like above, please refer to README.md in sub folder.
 
-### Option 2: cmake & CLion
+### Option 2: CMake & CLion
 #### Prepare environments
 
 Add soft link for libraries:
