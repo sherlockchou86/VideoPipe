@@ -69,18 +69,19 @@ Basics
 Optional, if you need implement(or use built-in) infer nodes based on other inference backends other than `opencv::dnn`.
 - CUDA
 - TensorRT
-- ![paddle inference](https://paddleinference.paddlepaddle.org.cn/v2.2/product_introduction/inference_intro.html)
+- [paddle inference](https://paddleinference.paddlepaddle.org.cn/v2.2/product_introduction/inference_intro.html)
 - onnx runtime
 - anything you like
 
 [environment for reference](./doc/env.md)
 
 ## How to build and debug
-We offer 2 option:
-- Option 1: shell & vscode
-- Option 2: CMake & CLion
 
-### Option 1: shell & vscode
+We are offering 2 options:
+1. Shell & VSCode
+2. CMake & CLion
+
+### Option 1: Shell & VSCode
 - Build VideoPipe (via shell)
     - run `cd build/`
     - run `sh build.sh`
@@ -93,10 +94,10 @@ We offer 2 option:
 
 > All subprojects in `./third_party/` are independent projects and can be built and debug like above, please refer to README.md in sub folder.
 
-### Option 2: cmake & CLion
+### Option 2: CMake & CLion
 #### Prepare environments
 
-Place `heads` to `/usr/local/include`,  `libraries` to `/usr/lib/x86_64-linux-gnu`, or use soft link.
+Add soft link for libraries:
 
 ```shell
 cd /usr/local/include
@@ -104,10 +105,6 @@ ln -s /path/to/opencv2 opencv2 # opencv
 ln -s /usr/local/cuda/include cuda # cuda
 ln -s /path/to/TensorRT-xxx/include tensorrt # TensorRT
 ```
-
-For example, `cuda` include directories is `/usr/local/include/cuda`. 
-
-You can also organize the header files and the libraries to your liking. 
 
 #### Build samples
 
