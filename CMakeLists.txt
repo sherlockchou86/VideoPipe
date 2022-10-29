@@ -9,6 +9,16 @@ add_definitions(-O2 -pthread)
 find_package(CUDA REQUIRED)
 find_package(OpenCV REQUIRED)
 
+message(STATUS "OpenCV library status:")
+message(STATUS "    version: ${OpenCV_VERSION}")
+message(STATUS "    libraries: ${OpenCV_LIBS}")
+message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+
+message(STATUS "CUDA library status:")
+message(STATUS "    version: ${CUDA_VERSION}")
+message(STATUS "    libraries: ${CUDA_LIBS}")
+message(STATUS "    include path: ${CUDA_INCLUDE_DIRS}")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_BUILD_TYPE Debug)
@@ -18,7 +28,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall -Ofast -Wfatal-errors -
 # trt_vehicle
 file(GLOB TRT_VEHICLE_SOURCES "third_party/trt_vehicle/**/*.cpp")
 cuda_add_library(trt_vehicle SHARED ${TRT_VEHICLE_SOURCES})
-target_link_libraries(trt_vehicle nvinfer cudart)
+target_link_libraries(trt_vehicle nvinfer cudart ${OpenCV_LIBS})
 
 # paddle_ocr
 file(GLOB PADDLE_OCR_SOURCES "third_party/paddle_ocr/**/*.cpp")
@@ -38,8 +48,7 @@ file(GLOB LOGGER "utils/logger/*.cpp")
 
 
 add_library(video_pipe SHARED ${NODES} ${INFERS_NODES} ${OSD_NODES} ${OBJECTS} ${ELEMENTS_OBJECTS} ${SHAPES_OBJECTS} ${BA} ${UTILS_ANALYSIS_BOARD} ${LOGGER})
-target_link_libraries(video_pipe  ${OpenCV_LIBS} paddle_ocr trt_vehicle -lstdc++fs)
-
+target_link_libraries(video_pipe ${OpenCV_LIBS} paddle_ocr trt_vehicle -lstdc++fs)
 
 add_executable(1-1-1_sample sample/1-1-1_sample.cpp)
 target_link_libraries(1-1-1_sample video_pipe ${OpenCV_LIBS})
@@ -57,7 +66,7 @@ add_executable(N-N_sample sample/N-N_sample.cpp)
 target_link_libraries(N-N_sample video_pipe ${OpenCV_LIBS})
 
 add_executable(paddle_infer_sample sample/paddle_infer_sample.cpp)
-target_link_libraries(paddle_infer_sample video_pipe  ${OpenCV_LIBS})
+target_link_libraries(paddle_infer_sample video_pipe ${OpenCV_LIBS})
 
 add_executable(src_des_sample sample/src_des_sample.cpp)
 target_link_libraries(src_des_sample video_pipe ${OpenCV_LIBS})
