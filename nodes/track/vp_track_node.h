@@ -37,7 +37,7 @@ namespace vp_nodes {
         // it is a pure virtual function which should be implemented by derived class.
         // In:  rects & embeddings whose size() can be zero
         // Out: track ids
-        virtual void track(std::vector<vp_objects::vp_rect>& target_rects, 
+        virtual void track(const std::vector<vp_objects::vp_rect>& target_rects, 
                         const std::vector<std::vector<float>>& target_embeddings, 
                         std::vector<int>& track_ids) = 0;
 

@@ -13,18 +13,23 @@ namespace vp_nodes {
     {
     }
 
-    void vp_sort_track_node::track(std::vector<vp_objects::vp_rect>& target_rects, 
+    void vp_sort_track_node::track(const std::vector<vp_objects::vp_rect>& target_rects, 
                     const std::vector<std::vector<float>>& target_embeddings, 
                     std::vector<int>& track_ids) {
         // fill track_ids according to target_rects (target_embeddings ignored)
-        auto target_rect_dects = target_rects;
-        target_rects.clear();
+		track_ids.resize(target_rects.size());
+		for (auto&  item : track_ids)
+		{
+			item = -1;
+		}
+		
+
         if (trackers.empty())
         {
             /* first frame*/
-            for (unsigned int i = 0; i < target_rect_dects.size(); i++)
+            for (unsigned int i = 0; i < target_rects.size(); i++)
 			{
-				KalmanTracker trk = KalmanTracker(cv::Rect_<float>(target_rect_dects[i].x, target_rect_dects[i].y, target_rect_dects[i].width, target_rect_dects[i].height));
+				KalmanTracker trk = KalmanTracker(cv::Rect_<float>(target_rects[i].x, target_rects[i].y, target_rects[i].width, target_rects[i].height));
 				trackers.push_back(trk);
 			}
             return;
@@ -49,7 +54,7 @@ namespace vp_nodes {
         // 3.2. associate detections to tracked object (both represented as bounding boxes)
 		// dets : detFrameData[fi]
 		auto trkNum = predictedBoxes.size();
-		auto detNum = target_rect_dects.size();
+		auto detNum = target_rects.size();
 
 		iouMatrix.clear();
 		iouMatrix.resize(trkNum, vector<double>(detNum, 0));
@@ -59,7 +64,7 @@ namespace vp_nodes {
 			for (unsigned int j = 0; j < detNum; j++)
 			{
 				// use 1-iou because the hungarian algorithm computes a minimum-cost assignment.
-				iouMatrix[i][j] = 1 - GetIOU(predictedBoxes[i], cv::Rect_<float>(target_rect_dects[j].x, target_rect_dects[j].y, target_rect_dects[j].width, target_rect_dects[j].height));
+				iouMatrix[i][j] = 1 - GetIOU(predictedBoxes[i], cv::Rect_<float>(target_rects[j].x, target_rects[j].y, target_rects[j].width, target_rects[j].height));
 			}
 		}
 
@@ -122,19 +127,19 @@ namespace vp_nodes {
 		{
 			trkIdx = matchedPairs[i].x;
 			detIdx = matchedPairs[i].y;
-			trackers[trkIdx].update(cv::Rect_<float>(target_rect_dects[detIdx].x, 
-                                                    target_rect_dects[detIdx].y, 
-                                                    target_rect_dects[detIdx].width, 
-                                                    target_rect_dects[detIdx].height));
+			trackers[trkIdx].update(cv::Rect_<float>(target_rects[detIdx].x, 
+                                                    target_rects[detIdx].y, 
+                                                    target_rects[detIdx].width, 
+                                                    target_rects[detIdx].height));
 		}
 
 		// create and initialise new trackers for unmatched detections
 		for (auto& umd : unmatchedDetections)
 		{
-			KalmanTracker tracker = KalmanTracker(cv::Rect_<float>(target_rect_dects[umd].x, 
-                                                                   target_rect_dects[umd].y,
-                                                                   target_rect_dects[umd].width, 
-                                                                   target_rect_dects[umd].height));
+			KalmanTracker tracker = KalmanTracker(cv::Rect_<float>(target_rects[umd].x, 
+                                                                   target_rects[umd].y,
+                                                                   target_rects[umd].width, 
+                                                                   target_rects[umd].height));
 			trackers.push_back(tracker);
 		}
 
@@ -163,8 +168,20 @@ namespace vp_nodes {
         for (const auto& tb : frameTrackingResult)
         {
 			// id and box need to correspond
-            track_ids.push_back(tb.id);
-            target_rects.push_back(vp_objects::vp_rect(tb.box.x, tb.box.y, tb.box.width, tb.box.height));
+			for (int i = 0; i < target_rects.size(); ++i)
+			{
+				/* code */
+				if(GetIOU(cv::Rect_<float>(target_rects[i].x, 
+											target_rects[i].y, 
+											target_rects[i].width, 
+											target_rects[i].height),
+						   cv::Rect_<float>(tb.box.x, 
+											tb.box.y, 
+											tb.box.width, 
+											tb.box.height)) > 0.8){
+				track_ids[i] = tb.id;
+				}
+			}
         }
         return;
 

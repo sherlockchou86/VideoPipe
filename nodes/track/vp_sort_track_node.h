@@ -37,7 +37,7 @@ namespace vp_nodes {
         double GetIOU(cv::Rect_<float> bb_test, cv::Rect_<float> bb_gt);
     protected:
         // fill track_ids using sort algo
-        virtual void track(std::vector<vp_objects::vp_rect>& target_rects, 
+        virtual void track(const std::vector<vp_objects::vp_rect>& target_rects, 
                         const std::vector<std::vector<float>>& target_embeddings, 
                         std::vector<int>& track_ids) override;
     public:

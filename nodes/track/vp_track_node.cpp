@@ -81,11 +81,7 @@ namespace vp_nodes {
             for(int i = 0; i < frame_meta->targets.size(); i++) {
                 auto& target = frame_meta->targets[i];
                 auto& rect = target_rects[i];
-                auto& track_id = track_ids[i];
-                target->x = rect.x;
-                target->y = rect.y;
-                target->width = rect.width;
-                target->height = rect.height;
+                auto& track_id = track_ids[i]; 
                 tracks_by_id[track_id].push_back(rect);    // cache
                 target->track_id = track_id;               // write track_id back to target
                 target->tracks = tracks_by_id[track_id];   // write tracks back to target
@@ -102,10 +98,6 @@ namespace vp_nodes {
                 auto& face = frame_meta->face_targets[i];
                 auto& rect = target_rects[i];
                 auto& track_id = track_ids[i];
-                face->x = rect.x;
-                face->y = rect.y;
-                face->width = rect.width;
-                face->height = rect.height;
                 // no cache needed since no tracks field for vp_frame_face_target
                 face->track_id = track_id;  // write track_id back to face target
             }
