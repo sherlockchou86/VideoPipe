@@ -18,7 +18,7 @@ namespace vp_nodes {
     {
     private:
         // cache channel index
-        int channnel_index = -1;
+        int channel_index = -1;
         
         // track for
         vp_track_for track_for = vp_track_for::NORMAL;
@@ -37,7 +37,7 @@ namespace vp_nodes {
         // it is a pure virtual function which should be implemented by derived class.
         // In:  rects & embeddings whose size() can be zero
         // Out: track ids
-        virtual void track(const std::vector<vp_objects::vp_rect>& target_rects, 
+        virtual void track(std::vector<vp_objects::vp_rect>& target_rects, 
                         const std::vector<std::vector<float>>& target_embeddings, 
                         std::vector<int>& track_ids) = 0;
 
