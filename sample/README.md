@@ -41,3 +41,17 @@ vehicle and plate detector based on tensorrt (install tensorrt first!), 1 video 
 
 ## vp_logger_sample ##
 show how `vp_logger` works.
+
+## face_tracking_sample ##
+tracking for multi faces.
+![](../doc/p18.png)
+
+## vehicle_tracking_sample ##
+tracking for multi vehicles.
+![](../doc/p19.png)
+
+## interaction_with_pipe_sample ##
+show how to interact with pipe, such as start/stop channel by calling api.
+
+## record_sample ##
+show how `vp_record_node` works.

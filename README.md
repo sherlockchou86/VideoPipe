@@ -28,9 +28,9 @@ The framework can be used in such situations:
 - `Inference based on dl`. Support multi-level inference based on deep learning models, such as Object-Detection, Image-Classification, Feature-Extraction. What you need is preparing models and know how to parse its outputs. Inference can be implemented based on different backends such as opencv::dnn(default), tensorrt, paddle_inference, onnx runtime.
 - `On Screen Display(OSD)`. Support visualization, like drawing outputs from model onto frame.
 - `Message Broker[not implemented yet]`. Support push structured data(via json) to cloud or other platforms.
-- `Object Tracking[not implemented yet]`. Support object tracking such as iou, sort etc.
+- `Object Tracking`. Support object tracking such as iou, sort etc.
 - `Behaviour Analyse[not implemented yet]`. Support behaviour analyse based on tracking.
-- `Recording[not implemented yet]`. Support video recording for specific period, screenshots for specific frame.
+- `Recording`. Support video recording for specific period, screenshots for specific frame.
 - `Video Encoding`. Support video encoding which is based on opencv/ffmpeg.
 - `Stream Pushing`. Support stream pushing via rtmp, rtsp, file.
 
@@ -41,12 +41,7 @@ The framework can be used in such situations:
 3. We can construct different types of pipeline, only 1 channel in a pipeline or multi channels in a pipeline are both supported, channels in pipeline are independent. 
 4. The pipeline support hooks, we can register callbacks to the pipeline to get the status notification(see the 1st item), such as fps.
 5. Many node classes are already built-in in VideoPipe, but all nodes in framework can be re-implemented by yourself, and also you can implement more based on your requirements.
-6. The whole framework is written mainly by native C++ which is portable to all platforms. 
-
-Tow modes to transfer data:
-
-![](./doc/p3.png)
-![](./doc/p4.png)
+6. The whole framework is written mainly by native C++ which is portable to all platforms.
 
 ## Help doc
 - [sample code](./sample/README.md)

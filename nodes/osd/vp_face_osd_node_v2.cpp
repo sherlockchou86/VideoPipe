@@ -28,9 +28,9 @@ namespace vp_nodes {
             // draw face rect first
             cv::rectangle(canvas, cv::Rect(i->x, i->y, i->width, i->height), cv::Scalar(0, 255, 0), 2);
             
-            //track_id
+            // track_id
             auto id = std::to_string(i->track_id);
-            cv::putText(canvas, id, cv::Point(i->x, i->y), 1, 2, cv::Scalar(0, 0, 255));
+            cv::putText(canvas, id, cv::Point(i->x, i->y), 1, 1.5, cv::Scalar(0, 0, 255));
 
             // just handle 5 keypoints
             if (i->key_points.size() >= 5) {
@@ -82,15 +82,18 @@ namespace vp_nodes {
             }
         }
 
-        // too many faces, delete the first one in list
+        // too many faces, delete the first ones in list
         auto width_need = faces_list.size() * (gap_height + padding) + padding;
-        if (width_need > canvas.cols) {
+        while (width_need >= canvas.cols) {
             faces_list.erase(faces_list.begin());
             face_features.erase(face_features.begin());
             cosine_distances.erase(cosine_distances.begin());
             l2_distances.erase(l2_distances.begin());
+
+            // check again
+            width_need = faces_list.size() * (gap_height + padding) + padding;
         }
-        
+
         // make sure the size for each vector
         assert(faces_list.size() == face_features.size());
         assert(faces_list.size() == cosine_distances.size());

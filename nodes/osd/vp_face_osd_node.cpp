@@ -23,6 +23,10 @@ namespace vp_nodes {
         for(auto& i : meta->face_targets) {
             cv::rectangle(canvas, cv::Rect(i->x, i->y, i->width, i->height), cv::Scalar(0, 255, 0), 2);
 
+            // track_id
+            auto id = std::to_string(i->track_id);
+            cv::putText(canvas, id, cv::Point(i->x, i->y), 1, 1.5, cv::Scalar(0, 0, 255));
+
             // just handle 5 keypoints
             if (i->key_points.size() >= 5) {
                 cv::circle(canvas, cv::Point(i->key_points[0].first, i->key_points[0].second), 2, cv::Scalar(255, 0, 0), 2);

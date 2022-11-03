@@ -3,7 +3,7 @@
 
 #include <map>
 #include <assert.h>
-#include "vp_node.h"
+#include "../vp_node.h"
 
 namespace vp_nodes {
     // track node applied to which type of target (vp_frame_target, vp_frame_face_target or others)
