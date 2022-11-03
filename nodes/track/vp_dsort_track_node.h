@@ -1,5 +1,4 @@
 #pragma once
-
 #include "vp_track_node.h"
 
 namespace vp_nodes {

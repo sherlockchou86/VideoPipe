@@ -18,7 +18,7 @@ namespace vp_nodes {
     {
     private:
         // cache channel index
-        int channnel_index = -1;
+        int channel_index = -1;
         
         // track for
         vp_track_for track_for = vp_track_for::NORMAL;

@@ -1,9 +1,9 @@
 
-
 #pragma once
-
 #include <vector>
 #include <memory>
+#include "shapes/vp_rect.h"
+
 
 namespace vp_objects {
     // target in frame detected by face detectors such as yunet.
@@ -46,6 +46,9 @@ namespace vp_objects {
 
         // clone myself
         std::shared_ptr<vp_frame_face_target> clone();
+
+        // rect area of target
+        vp_rect get_rect() const;
     };
 
 }

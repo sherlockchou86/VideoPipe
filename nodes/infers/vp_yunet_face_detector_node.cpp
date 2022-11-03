@@ -133,12 +133,12 @@ namespace vp_nodes {
                 w = std::min(w, frame_meta->frame.cols - x);
                 h = std::min(h, frame_meta->frame.rows - y);
 
-                auto kp1 = std::pair<int, int>(int(nms_faces.at<float>(0, 4)), int(nms_faces.at<float>(0, 5)));
-                auto kp2 = std::pair<int, int>(int(nms_faces.at<float>(0, 6)), int(nms_faces.at<float>(0, 7)));
-                auto kp3 = std::pair<int, int>(int(nms_faces.at<float>(0, 8)), int(nms_faces.at<float>(0, 9)));
-                auto kp4 = std::pair<int, int>(int(nms_faces.at<float>(0, 10)), int(nms_faces.at<float>(0, 11)));
-                auto kp5 = std::pair<int, int>(int(nms_faces.at<float>(0, 12)), int(nms_faces.at<float>(0, 13)));
-                auto score = nms_faces.at<float>(0, 14);
+                auto kp1 = std::pair<int, int>(int(nms_faces.at<float>(i, 4)), int(nms_faces.at<float>(i, 5)));
+                auto kp2 = std::pair<int, int>(int(nms_faces.at<float>(i, 6)), int(nms_faces.at<float>(i, 7)));
+                auto kp3 = std::pair<int, int>(int(nms_faces.at<float>(i, 8)), int(nms_faces.at<float>(i, 9)));
+                auto kp4 = std::pair<int, int>(int(nms_faces.at<float>(i, 10)), int(nms_faces.at<float>(i, 11)));
+                auto kp5 = std::pair<int, int>(int(nms_faces.at<float>(i, 12)), int(nms_faces.at<float>(i, 13)));
+                auto score = nms_faces.at<float>(i, 14);
 
                 auto face_target = std::make_shared<vp_objects::vp_frame_face_target>(x, y, w, h, score, std::vector<std::pair<int, int>>{kp1, kp2, kp3, kp4, kp5});
 
