@@ -1,8 +1,4 @@
-
-
-
 #include "vp_frame_face_target.h"
-
 
 namespace vp_objects {
         
@@ -24,10 +20,13 @@ namespace vp_objects {
     }
     
     vp_frame_face_target::~vp_frame_face_target() {
-
     }
 
     std::shared_ptr<vp_frame_face_target> vp_frame_face_target::clone() {
         return std::make_shared<vp_frame_face_target>(*this);
+    }
+
+    vp_rect vp_frame_face_target::get_rect() const{
+        return vp_rect(x, y, width, height);
     }
 }

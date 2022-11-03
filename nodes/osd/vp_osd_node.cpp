@@ -32,7 +32,13 @@ namespace vp_nodes {
         auto& canvas = meta->osd_frame;
         // scan targets
         for (auto& i : meta->targets) {
+            // track_id
+            auto id = std::to_string(i->track_id);
             auto labels_to_display = i->primary_label;
+            if (!id.empty()) {
+                labels_to_display = "#" + id + " " + labels_to_display;
+            }
+            
             for (auto& label : i->secondary_labels) {
                 labels_to_display += "/" + label;
             }

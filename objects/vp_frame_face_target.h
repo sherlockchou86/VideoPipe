@@ -1,9 +1,9 @@
 
-
 #pragma once
-
 #include <vector>
 #include <memory>
+#include "shapes/vp_rect.h"
+
 
 namespace vp_objects {
     // target in frame detected by face detectors such as yunet.
@@ -41,8 +41,14 @@ namespace vp_objects {
         // key points (5 points or more)
         std::vector<std::pair<int, int>> key_points;
 
+        // track id filled by vp_track_node (child class) if it exists.
+        int track_id;
+
         // clone myself
         std::shared_ptr<vp_frame_face_target> clone();
+
+        // rect area of target
+        vp_rect get_rect() const;
     };
 
 }
