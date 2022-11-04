@@ -19,11 +19,17 @@ namespace vp_nodes {
     private:
         // cache channel index
         int channel_index = -1;
-        
+
         // track for
         vp_track_for track_for = vp_track_for::NORMAL;
+        
         // cache tracks at previous frames
         std::map<int, std::vector<vp_objects::vp_rect>> tracks_by_id;
+        // stamp
+        std::map<int, int> last_tracked_frame_indexes;
+
+        // remove cache tracks if it has been long time since last tracked.
+        const int max_allowed_disappear_frames = 25;
     protected:
         virtual std::shared_ptr<vp_objects::vp_meta> handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) override final;
         virtual std::shared_ptr<vp_objects::vp_meta> handle_control_meta(std::shared_ptr<vp_objects::vp_control_meta> meta) override final;
