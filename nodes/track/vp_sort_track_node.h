@@ -22,7 +22,7 @@ namespace vp_nodes {
 
         int max_age = 1;
         int min_hits = 3;
-        double iouThreshold = 0.3;
+        double iouThreshold = 0.5;
         vector<KalmanTracker> trackers;
         std::vector<cv::Rect_<float>> predictedBoxes;
         std::vector<vector<double>> iouMatrix;

@@ -35,6 +35,7 @@ namespace vp_objects {
     }
 
     vp_point vp_rect::track_point() {
-        return {0, 0};
+        // by default the center point of bottom is tracking point.
+        return {x + width / 2, y + height};
     }
 }
