@@ -122,7 +122,7 @@ Use IDEs such as *CLion* which will read the `CMakeLists.txt` and generate debug
 
 [download models and test files from Google Drive](https://drive.google.com/file/d/14J8RFK_vJFXBp_ER4sb5Oh8uJTyLyyK_/view?usp=sharing)
 
-[download models and test files from Baidu Pan(wait for update)]()
+[download models and test files from Baidu Pan](https://pan.baidu.com/s/11W7seUXWwYofaYNVGChIEw?pwd=gs4w)
 
 Demo below shows how to construct pipeline and run it (first change file path in code):
 ```c++
