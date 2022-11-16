@@ -14,5 +14,8 @@
 #define vp_logger_sample 0
 #define record_sample 0
 #define interaction_with_pipe_sample 0
-#define face_tracking_sample 1
+#define face_tracking_sample 0
 #define vehicle_tracking_sample 0
+#define message_broker_sample 1
+
+#define cereal_test 0

@@ -8,6 +8,7 @@ RECORD_NODES=../nodes/record/*.cpp
 TRACK_NODES=../nodes/track/*.cpp
 TRACK_SORT=../nodes/track/sort/*.cpp
 TRACK_DSORT=../nodes/track/deep_sort/*.cpp
+BROKER_NODES=../nodes/broker/*.cpp
 OBJECTS=../objects/*.cpp
 ELEMENTS_OBJECTS=../objects/elements/*.cpp
 SHAPES_OBJECTS=../objects/shapes/*.cpp
@@ -27,11 +28,12 @@ $UTILS_ANALYSIS_BOARD \
 $LOGGER \
 $RECORD_NODES \
 $TRACK_NODES \
-$TRACK_SORT
+$TRACK_SORT \
+$BROKER_NODES
 
 
 # create shared library
-# build paddle ocr first
+# build paddle_ocr & trt_vehilce first
 g++ -shared ./*.o \
 -fdiagnostics-color=always \
 -g \

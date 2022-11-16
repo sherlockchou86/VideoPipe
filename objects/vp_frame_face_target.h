@@ -42,7 +42,7 @@ namespace vp_objects {
         std::vector<std::pair<int, int>> key_points;
 
         // track id filled by vp_track_node (child class) if it exists.
-        int track_id;
+        int track_id = -1;
 
         // clone myself
         std::shared_ptr<vp_frame_face_target> clone();
