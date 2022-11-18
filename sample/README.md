@@ -48,10 +48,15 @@ tracking for multi faces.
 
 ## vehicle_tracking_sample ##
 tracking for multi vehicles.
-![](../doc/p19.png)
+![](../doc/p22.png)
 
 ## interaction_with_pipe_sample ##
 show how to interact with pipe, such as start/stop channel by calling api.
 
 ## record_sample ##
 show how `vp_record_node` works.
+
+## message_broker_sample & message_broker_sample2 ##
+show how message broker nodes work.
+![](../doc/p20.png)
+![](../doc/p21.png)

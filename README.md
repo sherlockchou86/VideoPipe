@@ -27,7 +27,7 @@ https://user-images.githubusercontent.com/13251045/199926565-4f1018be-fdee-4d0d-
 - `Video Decoding`. Support video decoding which is based on opencv/ffmpeg.
 - `Inference based on dl`. Support multi-level inference based on deep learning models, such as Object-Detection, Image-Classification, Feature-Extraction. What you need is preparing models and know how to parse its outputs. Inference can be implemented based on different backends such as opencv::dnn(default), tensorrt, paddle_inference, onnx runtime.
 - `On Screen Display(OSD)`. Support visualization, like drawing outputs from model onto frame.
-- `Message Broker[not implemented yet]`. Support push structured data(via json) to cloud or other platforms.
+- `Message Broker`. Support push structured data(via json/xml) to cloud, file or other platforms.
 - `Object Tracking`. Support object tracking such as iou, sort etc.
 - `Behaviour Analyse[not implemented yet]`. Support behaviour analyse based on tracking.
 - `Recording`. Support video recording for specific period, screenshots for specific frame.
