@@ -18,6 +18,7 @@ LOGGER=../utils/logger/*cpp
 
 # compile
 g++ -c -g -fPIC \
+-std=c++17 \
 $NODES \
 $INFERS_NODES \
 $OSD_NODES $OBJECTS \

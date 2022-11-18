@@ -5,6 +5,7 @@
 #include "../nodes/infers/vp_yunet_face_detector_node.h"
 #include "../nodes/infers/vp_sface_feature_encoder_node.h"
 #include "../nodes/broker/vp_json_console_broker_node.h"
+#include "../nodes/broker/vp_xml_file_broker_node.h"
 #include "../nodes/osd/vp_face_osd_node_v2.h"
 #include "../nodes/vp_screen_des_node.h"
 
@@ -13,7 +14,7 @@
 /*
 * ## message broker sample ##
 * show how message broker node works.
-* serialize objects to json and broke to console.
+* serialize vp_frame_face_target objects to json and broke to console.
 */
 
 #if message_broker_sample

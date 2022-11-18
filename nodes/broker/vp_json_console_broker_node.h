@@ -6,7 +6,7 @@
 #include "cereal_archive/vp_objects_cereal_archive.h"
 
 namespace vp_nodes {
-    // sample message broker node, broke json data to console.
+    // message broker node (for debug purpose), broke json data to console.
     class vp_json_console_broker_node: public vp_msg_broker_node
     {
     private:

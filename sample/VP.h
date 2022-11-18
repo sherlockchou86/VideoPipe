@@ -16,6 +16,9 @@
 #define interaction_with_pipe_sample 0
 #define face_tracking_sample 0
 #define vehicle_tracking_sample 0
-#define message_broker_sample 1
+#define message_broker_sample 0
+#define message_broker_sample2 1
 
+// for test
 #define cereal_test 0
+#define kissnet_test 0

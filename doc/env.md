@@ -49,3 +49,7 @@ Also, maybe you need rtsp server to receive its stream for debug purpose.
 use shared_ptr/make_shared in whole project, do not use new/delete.
 
 the pipe is driven by stream data, if your app is not responding, maybe no stream input.
+
+## git tips ##
+if `git push --set-upstream origin new_branch` fails when pushing new local branch to remote, 
+try run `git remote add origin https://github.com/sherlockchou86/video_pipe_c.git` first.

@@ -33,7 +33,7 @@ namespace vp_nodes {
         auto size = frames_to_broke.size();
         if (size > broking_cache_warn_threshold && !broking_cache_warned) {
             broking_cache_warned = true;
-            VP_WARN(vp_utils::string_format("[%s] [message broke] cache size is exceeding threshold! cache size is [%d], threshold is [%d]", node_name.c_str(), size, broking_cache_warn_threshold));
+            VP_WARN(vp_utils::string_format("[%s] [message broker] cache size is exceeding threshold! cache size is [%d], threshold is [%d]", node_name.c_str(), size, broking_cache_warn_threshold));
         }
 
         if (size <= broking_cache_warn_threshold) {

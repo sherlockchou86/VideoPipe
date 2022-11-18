@@ -11,7 +11,7 @@
 #include "../../../objects/vp_frame_text_target.h"
 #include "../../../objects/vp_frame_pose_target.h"
 #include "../../../objects/vp_sub_target.h"
-/* extend for more targets in VideoPipe. */
+/* extend for more types of objects in VideoPipe. */
 
 // headers from cereal
 #include "../../../third_party/cereal/cereal.hpp"
