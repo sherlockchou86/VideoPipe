@@ -16,8 +16,6 @@ The framework can be used in such situations:
 > NOTE: <br/>
 > VideoPipe is a framework aimed to make model-integration more simple in CV field, it is not a deep learning related frameworks such as tensorflow, tensorrt.
 
-[中文说明(知乎)](https://zhuanlan.zhihu.com/p/544978583) | [中文说明(CSDN)](https://blog.csdn.net/xiaozhi_5638/article/details/126352185) | [中文说明(博客园)](https://www.cnblogs.com/xiaozhi_5638/p/16520710.html)
-
 https://user-images.githubusercontent.com/13251045/192935445-d39a41af-4619-4ae1-a975-19de44014fa2.mp4
 
 https://user-images.githubusercontent.com/13251045/199926565-4f1018be-fdee-4d0d-8d4a-8da0a1a15c83.mp4
