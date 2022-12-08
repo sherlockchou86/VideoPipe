@@ -50,8 +50,12 @@ https://user-images.githubusercontent.com/13251045/199926565-4f1018be-fdee-4d0d-
 
 ## Dependency
 
+Platforms
+- ubuntu 18.04 x86_64 NVIDIA rtx/tesla GPUs
+- ubuntu 18.04 aarch64 NVIDIA jetson serials device ([tx2 tested](https://github.com/sherlockchou86/video_pipe_c/tree/jetson_tx2))
+- other platforms wait for tested
+
 Basics
-- ubuntu 18.04 x64 (other platforms waiting for test)
 - vscode (remote development on windows)
 - c++ 17
 - opencv 4.6
