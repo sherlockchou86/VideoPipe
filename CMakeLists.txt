@@ -76,3 +76,21 @@ target_link_libraries(trt_infer_sample video_pipe ${OpenCV_LIBS})
 
 add_executable(vp_logger_sample sample/vp_logger_sample.cpp)
 target_link_libraries(vp_logger_sample video_pipe ${OpenCV_LIBS})
+
+add_executable(face_tracking_sample sample/face_tracking_sample.cpp)
+target_link_libraries(face_tracking_sample video_pipe ${OpenCV_LIBS})
+
+add_executable(interaction_with_pipe_sample sample/interaction_with_pipe_sample.cpp)
+target_link_libraries(interaction_with_pipe_sample video_pipe ${OpenCV_LIBS})
+
+add_executable(message_broker_sample sample/message_broker_sample.cpp)
+target_link_libraries(message_broker_sample video_pipe ${OpenCV_LIBS})
+
+add_executable(message_broker_sample2 sample/message_broker_sample2.cpp)
+target_link_libraries(message_broker_sample2 video_pipe ${OpenCV_LIBS})
+
+add_executable(vehicle_tracking_sample sample/vehicle_tracking_sample.cpp)
+target_link_libraries(vehicle_tracking_sample video_pipe ${OpenCV_LIBS})
+
+add_executable(record_sample sample/record_sample.cpp)
+target_link_libraries(record_sample video_pipe ${OpenCV_LIBS})
