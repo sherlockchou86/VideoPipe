@@ -1,10 +1,10 @@
 
-<p algin='center'>
-<img src='https://github.com/sherlockchou86/video_pipe_c/blob/master/doc/vp_logo.png'/>
+<p align="center">
+<img src="doc/vp_logo.png">
 </p>
-<center>
+<p align="center">
 <span style="color:gray;font-weight:400;font-size:20px">Make model-integration more simple in CV field.</span>
-</center>
+</p>
 
 ## VideoPipe
 
