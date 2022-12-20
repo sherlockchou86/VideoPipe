@@ -1,6 +1,12 @@
 
+<p algin='center'>
+<img src='https://github.com/sherlockchou86/video_pipe_c/blob/master/doc/vp_logo.png'/>
+</p>
+<center>
+<span style="color:gray;font-weight:400;font-size:20px">Make model-integration more simple in CV field.</span>
+</center>
 
-## VideoPipe [under development yet]
+## VideoPipe
 
 A framework for video structured. It could handle complex tasks such as stream reading (from local or network), video decoding, inference based on deep learning models, OSD(on screen display), message broker via middleware (like kafka), video encoding and stream pushing(rtmp or local file). It's Plugin-Oriented coding style, we can construct different types of pipeline using independent plugins namely `Node` in framework. 
 
