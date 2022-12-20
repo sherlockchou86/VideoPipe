@@ -53,3 +53,14 @@ the pipe is driven by stream data, if your app is not responding, maybe no strea
 ## git tips ##
 if `git push --set-upstream origin new_branch` fails when pushing new local branch to remote, 
 try run `git remote add origin https://github.com/sherlockchou86/video_pipe_c.git` first.
+
+## about Hardware Acceleration ##
+since decode & encode in VideoPipe depend on gstreamer (encapsulated inside opencv), if you want to use your GPUs/NPUs to accelerate decoding and encoding performace, you need get/install HARD decode or HARD encode gstreamer plugins correctly first and modify gst launch string (take `vp_file_des_node` for example):
+```cpp
+appsrc ! videoconvert ! x264enc bitrate=%d ! mp4mux ! filesink location=%s
+```
+to
+```
+appsrc ! videoconvert ! nvh264enc bitrate=%d ! mp4mux ! filesink location=%s
+```
+the plugin `x264enc` use CPUs to encode video stream, but `nvh264enc` use GPUs instread. if you use other platforms other than NVIDIA, you need Corresponding Hardware Acceleration plugins.
