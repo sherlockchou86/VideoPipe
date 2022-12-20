@@ -1,4 +1,4 @@
-
+<br>
 <p align="center">
 <img src="doc/vp_logo.png">
 </p>
