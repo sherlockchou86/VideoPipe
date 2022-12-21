@@ -64,3 +64,16 @@ to
 appsrc ! videoconvert ! nvh264enc bitrate=%d ! mp4mux ! filesink location=%s
 ```
 the plugin `x264enc` use CPUs to encode video stream, but `nvh264enc` use GPUs instread. if you use other platforms other than NVIDIA, you need Corresponding Hardware Acceleration plugins.
+
+**soft/hard decode example**
+```
+gst-launch-1.0 filesrc location=./face.mp4 ! qtdemux ! h264parse ! avdec_h264 ! videoconvert ! autovideosink    // decode by avdec_h264 use CPUs
+gst-launch-1.0 filesrc location=./face.mp4 ! qtdemux ! h264parse ! nvv4l2decoder ! videoconvert ! autovideosink // decode by nvv4l2decoder use NVIDIA GPUs
+```
+
+**soft/hard encode example**
+```
+gst-launch-1.0 filesrc location=./face.mp4 ! qtdemux ! h264parse ! avdec_h264 ! x264enc ! h264parse ! flvmux ! filesink location=./new_face.flv    // encode by x264enc use CPUs
+gst-launch-1.0 filesrc location=./face.mp4 ! qtdemux ! h264parse ! avdec_h264 ! nvh264enc ! h264parse ! flvmux ! filesink location=./new_face.flv  // encode by nvh264enc use NVIDIA GPUs
+```
+[source code of hard decode/encode gstreamer plugins for NVIDIA](https://gitlab.freedesktop.org/gstreamer/gstreamer/-/tree/main/subprojects/gst-plugins-bad/sys/nvcodec).
