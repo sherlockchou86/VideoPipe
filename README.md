@@ -50,6 +50,7 @@ https://user-images.githubusercontent.com/13251045/199926565-4f1018be-fdee-4d0d-
 ## Help doc
 - [sample code](./sample/README.md)
 - [node table](./nodes/README.md)
+- [how VideoPipe works](./doc/about.md)
 - [how record works](./nodes/record/README.md)
 - [environment for reference](./doc/env.md)
 - wait for update...
