@@ -74,4 +74,4 @@ some operations in `video structured` applications can benefit from hardware suc
 - inference. no doubt about it.
 - osd. need implement based on hardware acceleration SDKs by yourself.
 
-it is important to note that, although VideoPipe support hardware acceleration for above logic, they could NOT share memory between each others. it means that data will be copyed from GPU to CPU over and over again, which is the biggest disadvantage compared to other similar SDKs such as DeepStream.
+it is important to note that, although VideoPipe support hardware acceleration for above logic, `they could NOT share memory between each others`. it means that data will be copyed from GPU to CPU or CPU to GPU over and over again, which is the biggest disadvantage compared to other similar SDKs such as DeepStream.
