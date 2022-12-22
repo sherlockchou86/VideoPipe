@@ -23,8 +23,8 @@ Specifically in terms of video, the process of structured mainly involves these 
 
 <p align="center">
 <img src="./p23.png">
-<span>figure 1. core parts in video structured application. </span>
 </p>
+<div align="center">figure 1. core parts in video structured application. </div>
 
 each core part in `video structured` corresponding to one type of plugin in `VideoPipe`, namely **`Node`** in code.
 
@@ -34,15 +34,15 @@ one `Node` in VideoPipe responsible for single task such as decoding or inferenc
 
 <p align="center">
 <img src="./p24.png">
-<span>figure 2. what Node looks like? </span>
 </p>
+<div align="center">figure 2. what Node looks like? </div>
 
 by default, producer and consumer work with single thread inside node, we need write async code when deal with complex tasks (for example, pushing data is a time-consuming operation in `vp_message_broker_node`) to avoid blocking the pipeline.
 
 <p align="center">
 <img src="./p25.png">
-<span>figure 3. async task inside Node. </span>
 </p>
+<div align="center">figure 3. async task inside Node. </div>
 
 there are 3 types of `Node` in VideoPipe, namely:
 - `SRC Node`. source node where data was created (only 1 queue inside used for caching data being pushed to downstream nodes).
@@ -52,16 +52,16 @@ there are 3 types of `Node` in VideoPipe, namely:
 each `Node` `itself` has the ability to merge multi upstream nodes, and split into multi downstream nodes as well. note that `Node` use shallow-copy and copy Equally when data transfered from one node to other nodes by default, if you need deep-copy or want to transfer data by channel index (just hope data unconfused), add a `vp_split_node` at the point of spliting which would get different behaviour.
 <p align="center">
 <img src="./p28.png">
-<span>figure 4. merge & split in VideoPipe. </span>
 </p>
+<div align="center">figure 4. merge & split in VideoPipe. </div>
 
 ## Data flow in VideoPipe ##
 video (frame here) is a type of heavyweight data, so deep copying frequently would decrease the performance of pipeline. actually data transfered between 2 nodes in VideoPipe use `smart pointers` by default, once data was created by source nodes, the data content would NOT be copyed later at most time in the whole pipeline (but we can specify deep-copy if we need, using `vp_split_node` for instance).
 
 <p align="center">
 <img src="./p26.png">
-<span>figure 5. how data flows in VideoPipe. </span>
 </p>
+<div align="center">figure 5. how data flows in VideoPipe. </div>
 
 video consist of continuous frames, VideoPipe handle these frames One by One, so the `frame index` in frame meta would increase continuously as well.
 
@@ -71,8 +71,8 @@ hook is a mechanism which let host notify listeners when something happens, Vide
 
 <p align="center">
 <img src="./p27.png">
-<span>figure 6. hooks in VideoPipe. </span>
 </p>
+<div align="center">figure 6. hooks in VideoPipe. </div>
 
 hooks help to debug with our application and quickly find the bottleneck in whole pipe, visualization tool `vp_analysis_board` works depend on hooks.
 
@@ -84,8 +84,8 @@ hooks help to debug with our application and quickly find the bottleneck in whol
 
 <p align="center">
 <img src="./p29.png">
-<span>figure 7. override virtual functions in custom Node. </span>
 </p>
+<div align="center">figure 7. override virtual functions in custom Node. </div>
 
 frame data means `vp_frame_meta` in VideoPipe, contains data related to frame such as `frame index`, `data buffer`, `original width`. control data means `vp_control_meta` in VideoPipe, contains data related command such as `record video`, `record image`.
 
