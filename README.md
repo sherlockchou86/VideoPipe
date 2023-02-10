@@ -60,6 +60,7 @@ https://user-images.githubusercontent.com/13251045/199926565-4f1018be-fdee-4d0d-
 Platforms
 - ubuntu 18.04 x86_64 NVIDIA rtx/tesla GPUs
 - ubuntu 18.04 aarch64 NVIDIA jetson serials device ([tx2 tested](https://github.com/sherlockchou86/video_pipe_c/tree/jetson_tx2))
+- ubuntu 18.04 x86_64([PURE CPU](https://github.com/sherlockchou86/video_pipe_c/tree/pure_cpu))
 - other platforms wait for tested
 
 Basics
