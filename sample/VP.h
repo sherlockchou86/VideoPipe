@@ -17,8 +17,5 @@
 #define face_tracking_sample 0
 #define vehicle_tracking_sample 0
 #define message_broker_sample 0
-#define message_broker_sample2 1
-
-// for test
-#define cereal_test 0
-#define kissnet_test 0
+#define message_broker_sample2 0
+#define mask_rcnn_sample 1

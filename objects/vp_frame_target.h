@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <opencv2/core.hpp>
 
 #include "shapes/vp_rect.h"
 #include "vp_sub_target.h"
@@ -54,6 +55,9 @@ namespace vp_objects {
         // cache of track rects in the previous frames, filled by track node if it exists. 
         // we can draw / analyse depend on these track rects later.
         std::vector<vp_objects::vp_rect> tracks;
+
+        // mask of the target, used for Image Segmentation like mask rcnn network (ignore for other situations).
+        cv::Mat mask;
 
         // class ids filled/appended by multi secondary infer nodes.
         std::vector<int> secondary_class_ids;
