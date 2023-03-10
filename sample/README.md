@@ -60,3 +60,7 @@ show how `vp_record_node` works.
 show how message broker nodes work.
 ![](../doc/p20.png)
 ![](../doc/p21.png)
+
+## mask_rcnn_sample ##
+show image segmentation by mask-rcnn.
+![](../doc/p30.png)
