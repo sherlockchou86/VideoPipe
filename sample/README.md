@@ -64,3 +64,7 @@ show how message broker nodes work.
 ## mask_rcnn_sample ##
 show image segmentation by mask-rcnn.
 ![](../doc/p30.png)
+
+## openpose_sample ##
+show pose estimation by openpose network.
+![](../doc/p31.png)

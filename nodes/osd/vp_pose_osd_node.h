@@ -37,7 +37,7 @@ namespace vp_nodes {
                 colors.push_back(cv::Scalar(dis1(gen),dis2(gen),dis3(gen)));
             }
         }
-
+        std::vector<cv::Scalar> colors;
     protected:
         virtual std::shared_ptr<vp_objects::vp_meta> handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) override;
         virtual std::shared_ptr<vp_objects::vp_meta> handle_control_meta(std::shared_ptr<vp_objects::vp_control_meta> meta) override;

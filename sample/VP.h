@@ -18,4 +18,5 @@
 #define vehicle_tracking_sample 0
 #define message_broker_sample 0
 #define message_broker_sample2 0
-#define mask_rcnn_sample 1
+#define mask_rcnn_sample 0
+#define openpose_sample 1

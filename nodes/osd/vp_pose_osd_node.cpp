@@ -4,6 +4,7 @@
 namespace vp_nodes {
     
     vp_pose_osd_node::vp_pose_osd_node(std::string node_name): vp_node(node_name) {
+        populateColorPalette(colors, 100);  // generate colors
         this->initialized();
     }
     
@@ -22,8 +23,6 @@ namespace vp_nodes {
             auto& pose_target = meta->pose_targets[i];
 
             auto nPairs = posePairs_map.at(pose_target->type).size() - 2;
-            std::vector<cv::Scalar> colors;
-            populateColorPalette(colors, nPairs);
 
             for (int j = 0; j < nPairs; j++) {
                 auto& a = pose_target->key_points[posePairs_map.at(pose_target->type)[j].first];
