@@ -61,6 +61,10 @@ namespace vp_objects {
         // deep copy needed here for this member.
         cv::Mat osd_frame;
 
+        // mask for the WHOLE frame, filled by Semantic Segmentation nodes if exists.
+        // deep copy needed here for this member.
+        cv::Mat mask;
+
         // targets created/appended by primary infer nodes, and then updated by secondary infer nodes if exist.
         // it is shared_ptr<...> type just to keep same as elements.
         // deep copy needed here for this member.

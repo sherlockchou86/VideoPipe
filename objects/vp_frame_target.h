@@ -56,7 +56,7 @@ namespace vp_objects {
         // we can draw / analyse depend on these track rects later.
         std::vector<vp_objects::vp_rect> tracks;
 
-        // mask of the target, used for Image Segmentation like mask rcnn network (ignore for other situations).
+        // mask of the target, used for Instance Segmentation like mask rcnn network (ignore for other situations).
         cv::Mat mask;
 
         // class ids filled/appended by multi secondary infer nodes.

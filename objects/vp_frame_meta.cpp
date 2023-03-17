@@ -26,6 +26,7 @@ namespace vp_objects {
             // deep copy frame data
             this->frame = meta.frame.clone();
             this->osd_frame = meta.osd_frame.clone();
+            this->mask = meta.mask.clone();
             // deep copy elements
             for(auto& i : meta.elements) {
                 this->elements.push_back(i->clone());
