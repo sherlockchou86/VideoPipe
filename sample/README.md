@@ -68,3 +68,7 @@ show image segmentation by mask-rcnn.
 ## openpose_sample ##
 show pose estimation by openpose network.
 ![](../doc/p31.png)
+
+## enet_seg_sample ##
+show semantic segmentation by enet network.
+![](../doc/p32.png)
