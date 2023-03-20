@@ -7,6 +7,12 @@
 
 #include "../utils/analysis_board/vp_analysis_board.h"
 
+/*
+* ## enet seg sample ##
+* semantic segmentation based on ENet.
+* 1 input, 2 outputs including orignal frame and mask frame.
+*/
+
 #if enet_seg_sample
 
 int main() {
