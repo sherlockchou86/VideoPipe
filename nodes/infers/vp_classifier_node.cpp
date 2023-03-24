@@ -17,7 +17,8 @@ namespace vp_nodes {
                                             float scale,
                                             cv::Scalar mean,
                                             cv::Scalar std,
-                                            bool swap_rb):
+                                            bool swap_rb,
+                                            bool swap_chn):
                                             vp_secondary_infer_node(node_name,
                                                                     model_path,
                                                                     model_config_path,
@@ -30,7 +31,8 @@ namespace vp_nodes {
                                                                     scale,
                                                                     mean,
                                                                     std,
-                                                                    swap_rb), need_softmax(need_softmax){
+                                                                    swap_rb,
+                                                                    swap_chn), need_softmax(need_softmax){
         this->initialized();
     }
     

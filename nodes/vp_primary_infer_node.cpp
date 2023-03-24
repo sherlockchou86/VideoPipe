@@ -14,7 +14,8 @@ namespace vp_nodes {
                                                 float scale,
                                                 cv::Scalar mean,
                                                 cv::Scalar std,
-                                                bool swap_rb):
+                                                bool swap_rb,
+                                                bool swap_chn):
                                                 vp_infer_node(node_name, 
                                                             vp_infer_type::PRIMARY, 
                                                             model_path, 
@@ -26,7 +27,8 @@ namespace vp_nodes {
                                                             scale,
                                                             mean,
                                                             std,
-                                                            swap_rb),
+                                                            swap_rb,
+                                                            swap_chn),
                                                 class_id_offset(class_id_offset) {
     }
     

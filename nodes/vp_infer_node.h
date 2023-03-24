@@ -35,6 +35,9 @@ namespace vp_nodes {
         float scale;
         bool swap_rb;
 
+        // transpose channel or not, NCHW -> NHWC
+        bool swap_chn;
+
         // protected as it can't be instanstiated directly.
         vp_infer_node(std::string node_name, 
                     vp_infer_type infer_type, 
@@ -47,7 +50,8 @@ namespace vp_nodes {
                     float scale = 1.0,
                     cv::Scalar mean = cv::Scalar(123.675, 116.28, 103.53),  // imagenet dataset
                     cv::Scalar std = cv::Scalar(1),
-                    bool swap_rb = true);
+                    bool swap_rb = true,
+                    bool swap_chn = false);
         
         // the 1st step, MUST implement in specific derived class.
         // prepare data for infer, fetch frames from frame meta.

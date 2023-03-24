@@ -72,3 +72,7 @@ show pose estimation by openpose network.
 ## enet_seg_sample ##
 show semantic segmentation by enet network.
 ![](../doc/p32.png)
+
+## multi_detectors_and_classifiers_sample ##
+show multi infer node work together.
+![](../doc/p33.png)

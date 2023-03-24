@@ -26,7 +26,8 @@ namespace vp_nodes {
                             float scale = 1.0,
                             cv::Scalar mean = cv::Scalar(123.675, 116.28, 103.53),  // imagenet dataset
                             cv::Scalar std = cv::Scalar(1),
-                            bool swap_rb = true);
+                            bool swap_rb = true,
+                            bool swap_chn = false);
         ~vp_secondary_infer_node();
 
         // we do secondary infer logic only if the primary class-id of target is in this vector.

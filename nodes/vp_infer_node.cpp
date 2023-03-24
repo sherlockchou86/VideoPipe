@@ -15,7 +15,8 @@ namespace vp_nodes {
                             float scale,
                             cv::Scalar mean,
                             cv::Scalar std,
-                            bool swap_rb):
+                            bool swap_rb,
+                            bool swap_chn):
                             vp_node(node_name),
                             infer_type(infer_type),
                             model_path(model_path),
@@ -27,7 +28,8 @@ namespace vp_nodes {
                             scale(scale),
                             mean(mean),
                             std(std),
-                            swap_rb(swap_rb) {
+                            swap_rb(swap_rb),
+                            swap_chn(swap_chn) {
         // try to load network from file,
         // failing means maybe it has a custom implementation for model loading in derived class such as using other backends other than opencv::dnn.
         try {
@@ -77,18 +79,79 @@ namespace vp_nodes {
         // the first dim is number of batch
         assert(blob_to_infer.dims == 4);
         assert(!net.empty());
-
-        net.setInput(blob_to_infer);
         
         auto number_of_batch = blob_to_infer.size[0];
         if (number_of_batch <= batch_size) {
             // infer one time directly
-            net.forward(raw_outputs, net.getUnconnectedOutLayersNames());
+            net.setInput(blob_to_infer);
+            net.forward(raw_outputs/*, net.getUnconnectedOutLayersNames()*/);
         }
         else {
             // infer more times
-            // TO-DO
-            net.forward(raw_outputs, net.getUnconnectedOutLayersNames());
+            int b_size[] = {batch_size, blob_to_infer.size[1], blob_to_infer.size[2], blob_to_infer.size[3]};
+            auto times = (number_of_batch % batch_size) == 0 ? (number_of_batch / batch_size) : (number_of_batch / batch_size + 1);
+            for (int i = 0; i < times; i++) {
+                // split to small piece
+                int i_hwc[] = {i * batch_size, 0, 0, 0};  // 4D
+                auto ptr = blob_to_infer.ptr(i_hwc);
+                cv::Mat b_blob(4, b_size, CV_32F, (void*)ptr);
+                std::vector<cv::Mat> b_outputs;
+
+                net.setInput(b_blob);
+                net.forward(b_outputs/*, net.getUnconnectedOutLayersNames()*/);
+
+                // first time, initialize it
+                if (raw_outputs.size() == 0) {
+                    // scan multi heads of output
+                    for (int j = 0; j < b_outputs.size(); j++) {
+                        if (batch_size == 1) {
+                            // keep dims as usual, but change size[0] == number_of_batch
+                            if (b_outputs[j].dims <= 2 && b_outputs[j].rows == 1) {
+                                raw_outputs.push_back(cv::Mat(2, std::vector<int>{number_of_batch, b_outputs[j].cols}.data(), CV_32F));
+                            }
+                            else {
+                                // dims add 1, and set size[0] == number_of_batch
+                                std::vector<int> t_size;
+                                t_size.push_back(number_of_batch);
+                                for (int s = 0; s < b_outputs[j].dims; s++) {
+                                    t_size.push_back(b_outputs[j].size[s]);
+                                }
+                                raw_outputs.push_back(cv::Mat(b_outputs[j].dims + 1, t_size.data(), CV_32F));
+                            }
+                        }
+                        else {
+                            // kepp dims as usual, but change size[0] == number_of_batch
+                            std::vector<int> t_size;
+                            t_size.push_back(number_of_batch);
+
+                            // start from 1
+                            for (int s = 1; s < b_outputs[j].dims; s++) {
+                                /* code */
+                                t_size.push_back(b_outputs[j].size[s]);
+                            }
+                            raw_outputs.push_back(cv::Mat(b_outputs[j].dims, t_size.data(), CV_32F));
+                        }
+                    }
+                }
+
+                assert(raw_outputs.size() == b_outputs.size());
+                // merge data directly
+                for (int j = 0; j < b_outputs.size(); j++) {
+                    auto& des = raw_outputs[j];
+                    auto& src = b_outputs[j];
+
+                    std::vector<int> t_size;
+                    auto s_dims_n = src.dims <= 2 ? 2 : src.dims;
+                    for (int s = 0; s < s_dims_n; s++) {
+                        t_size.push_back(src.size[s]);
+                    }
+
+                    auto ptr = des.ptr(i * batch_size);
+                    cv::Mat tmp(s_dims_n, t_size.data(), CV_32F, (void*)ptr);
+
+                    src.copyTo(tmp);
+                }
+            }
         }
     }
 
@@ -98,6 +161,13 @@ namespace vp_nodes {
         cv::dnn::blobFromImages(mats_to_infer, blob_to_infer, scale, cv::Size(input_width, input_height), mean, swap_rb);
         if (std != cv::Scalar(1)) {
             // divide by std
+        }
+
+        // NCHW -> NHWC
+        if (swap_chn) {
+            cv::Mat blob_to_infer_tmp;
+            cv::transposeND(blob_to_infer, {0, 2, 3, 1}, blob_to_infer_tmp);
+            blob_to_infer_tmp.copyTo(blob_to_infer);
         }
     }
 

@@ -15,7 +15,8 @@ namespace vp_nodes {
                             float scale,
                             cv::Scalar mean,
                             cv::Scalar std,
-                            bool swap_rb):
+                            bool swap_rb,
+                            bool swap_chn):
                             vp_infer_node(node_name, 
                                         vp_nodes::vp_infer_type::SECONDARY, 
                                         model_path, 
@@ -27,7 +28,8 @@ namespace vp_nodes {
                                         scale, 
                                         mean, 
                                         std, 
-                                        swap_rb),
+                                        swap_rb,
+                                        swap_chn),
                             p_class_ids_applied_to(p_class_ids_applied_to),
                             crop_padding(crop_padding) {
     }

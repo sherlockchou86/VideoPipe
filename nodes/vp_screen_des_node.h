@@ -13,7 +13,7 @@ namespace vp_nodes {
     {
     private:
         /* data */
-        std::string gst_template = "appsrc ! videoconvert ! textoverlay text=%s halignment=left valignment=top font-desc='Sans,16' shaded-background=true ! timeoverlay halignment=right valignment=top font-desc='Sans,16' shaded-background=true ! queue ! fpsdisplaysink video-sink=ximagesink sync=false";
+        std::string gst_template = "appsrc ! videoconvert ! videoscale ! textoverlay text=%s halignment=left valignment=top font-desc='Sans,16' shaded-background=true ! timeoverlay halignment=right valignment=top font-desc='Sans,16' shaded-background=true ! queue ! fpsdisplaysink video-sink=ximagesink sync=false";
         cv::VideoWriter screen_writer;
     protected:
         // re-implementation, return nullptr.

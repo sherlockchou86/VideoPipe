@@ -20,4 +20,7 @@
 #define message_broker_sample2 0
 #define mask_rcnn_sample 0
 #define openpose_sample 0
-#define enet_seg_sample 1
+#define enet_seg_sample 0
+#define multi_detectors_and_classifiers_sample 1
+
+#define multi_infer_test 0

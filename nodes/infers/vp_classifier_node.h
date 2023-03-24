@@ -28,7 +28,8 @@ namespace vp_nodes {
                             float scale = 1 / 255.0,
                             cv::Scalar mean = cv::Scalar(123.675, 116.28, 103.53),  // imagenet dataset
                             cv::Scalar std = cv::Scalar(0.229, 0.224, 0.225),
-                            bool swap_rb = true);
+                            bool swap_rb = true,
+                            bool swap_chn = false);
         ~vp_classifier_node();
     };
 
