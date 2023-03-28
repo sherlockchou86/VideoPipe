@@ -177,4 +177,10 @@ namespace vp_utils {
 
         return time_str;
     }
+
+    // use std::string::end_with(...) in standard library directly for C++20
+    inline bool ends_with(std::string const & value, std::string const & ending) {
+        if (ending.size() > value.size()) return false;
+        return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
+    }
 }
