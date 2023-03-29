@@ -76,3 +76,8 @@ show semantic segmentation by enet network.
 ## multi_detectors_and_classifiers_sample ##
 show multi infer node work together.
 ![](../doc/p33.png)
+
+
+## image_des_sample ##
+show save/push image to local file or remote via udp.
+![](../doc/p34.png)

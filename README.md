@@ -27,7 +27,7 @@ https://user-images.githubusercontent.com/13251045/192935445-d39a41af-4619-4ae1-
 https://user-images.githubusercontent.com/13251045/199926565-4f1018be-fdee-4d0d-8d4a-8da0a1a15c83.mp4
 
 ## Key Features
-- `Stream Reading`. Support popular protocols such as udp, rtsp, rtmp, file.
+- `Stream Reading`. Support popular protocols such as udp(video or image), rtsp, rtmp, file(video or image).
 - `Video Decoding`. Support video decoding which is based on opencv/gstreamer([support Hardware Acceleration](https://github.com/sherlockchou86/video_pipe_c/blob/master/doc/env.md#about-hardware-acceleration)).
 - `Inference based on dl`. Support multi-level inference based on deep learning models, such as Object-Detection, Image-Classification, Feature-Extraction. What you need is preparing models and know how to parse its outputs. Inference can be implemented based on different backends such as opencv::dnn(default), tensorrt, paddle_inference, onnx runtime.
 - `On Screen Display(OSD)`. Support visualization, like drawing outputs from model onto frame.
@@ -36,7 +36,7 @@ https://user-images.githubusercontent.com/13251045/199926565-4f1018be-fdee-4d0d-
 - `Behaviour Analyse[not implemented yet]`. Support behaviour analyse based on tracking.
 - `Recording`. Support video recording for specific period, screenshots for specific frame.
 - `Video Encoding`. Support video encoding which is based on opencv/gstreamer([support Hardware Acceleration](https://github.com/sherlockchou86/video_pipe_c/blob/master/doc/env.md#about-hardware-acceleration)).
-- `Stream Pushing`. Support stream pushing via rtmp, rtsp, file.
+- `Stream Pushing`. Support stream pushing via rtmp, rtsp, file(video or image), udp(image only), screen display(gui).
 
 ## Highlights
 
@@ -48,10 +48,10 @@ https://user-images.githubusercontent.com/13251045/199926565-4f1018be-fdee-4d0d-
 6. The whole framework is written mainly by native C++ which is portable to all platforms.
 
 ## Help doc
-- [sample code](./sample/README.md)
-- [node table](./nodes/README.md)
-- [how VideoPipe works](./doc/about.md)
-- [how record works](./nodes/record/README.md)
+- :fire: [sample code](./sample/README.md)
+- :heartpulse: [node table](./nodes/README.md)
+- :collision: [how VideoPipe works](./doc/about.md)
+- :hear_no_evil: [how record works](./nodes/record/README.md)
 - [environment for reference](./doc/env.md)
 - wait for update...
 
