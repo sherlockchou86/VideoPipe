@@ -180,7 +180,7 @@ namespace vp_utils {
             auto delta_sec = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - epoch_start);
             if (delta_sec.count() > fps_timeout * 1000 || (delta_sec.count() > fps_epoch && called_count > 0)) {
                 //int fps = round(called_count * 1000.0 / delta_sec.count());
-                auto fps = vp_utils::round_any(called_count * 1000.0 / delta_sec.count(), 2);
+                auto fps = vp_utils::round_any(called_count * 1000.0 / delta_sec.count(), 1);
                 storage.called_count_since_epoch_start = 0;
                 storage.time_epoch_start = std::chrono::system_clock::now();
                 storage.pre_fps = fps;  // cache for next show
