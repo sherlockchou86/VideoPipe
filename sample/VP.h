@@ -22,7 +22,8 @@
 #define openpose_sample 0
 #define enet_seg_sample 0
 #define multi_detectors_and_classifiers_sample 0
-#define image_des_sample 1
+#define image_des_sample 0
+#define image_src_sample 1
 
 #define multi_infer_test 0
 #define image_des_test 0

@@ -58,7 +58,7 @@ namespace vp_utils {
 
         // render configure
         const int node_title_h = 24;
-        const int node_queue_width = 34;
+        const int node_queue_width = 30;
 
         const int node_queue_port_w_h = 6;
         const int node_queue_port_padding = 8;

@@ -92,6 +92,13 @@ namespace vp_utils {
             font_face, font_scale, color);
     }
 
+    // use std::string::end_with(...) in standard library directly for C++20
+    inline bool ends_with(std::string const & value, std::string const & ending) {
+        if (ending.size() > value.size()) return false;
+        return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
+    }
+
+    // round double data using specific precision, return string.
     inline std::string round_any(double input, int precision) {
         input = input * std::pow(10, precision) + 0.5;
         auto output = std::to_string(std::floor(input) / std::pow(10, precision));
@@ -100,6 +107,11 @@ namespace vp_utils {
             return ch != '0';
         }).base(), output.end());
 
+        // remove the last point `.` if possible
+        if (ends_with(output, ".")) {
+            output.pop_back();
+        }
+        
         return output;
     }
 
@@ -178,9 +190,4 @@ namespace vp_utils {
         return time_str;
     }
 
-    // use std::string::end_with(...) in standard library directly for C++20
-    inline bool ends_with(std::string const & value, std::string const & ending) {
-        if (ending.size() > value.size()) return false;
-        return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
-    }
 }
