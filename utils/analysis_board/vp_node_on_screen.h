@@ -19,6 +19,7 @@ namespace vp_utils {
         int called_count_since_epoch_start = -1;  // used for calculating fps at current port 
         std::chrono::system_clock::time_point time_epoch_start;      // used for calculating fps at current port
         std::shared_ptr<vp_objects::vp_meta> meta = nullptr;         // the latest meta (ptr) flowing through current port inside node (total 4 ports) 
+        std::string pre_fps;  // cache
     };
 
     // a class corresponding to vp_node, used to display node on screen and map the whole pipe from memery to screen.
@@ -37,6 +38,9 @@ namespace vp_utils {
         // period to calculate fps, milliseconds
         int fps_epoch = 500;
 
+        // reset fps if it has been long time no update, seconds
+        int fps_timeout = 5;
+
         // font for display
         int font_face = cv::FONT_HERSHEY_SIMPLEX;
 
@@ -54,7 +58,7 @@ namespace vp_utils {
 
         // render configure
         const int node_title_h = 24;
-        const int node_queue_width = 30;
+        const int node_queue_width = 34;
 
         const int node_queue_port_w_h = 6;
         const int node_queue_port_padding = 8;

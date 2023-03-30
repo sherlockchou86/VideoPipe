@@ -37,6 +37,7 @@ namespace vp_nodes {
                         vp_objects::vp_size resolution_w_h = {},
                         bool osd = true);
         ~vp_image_des_node();
+        virtual std::string to_string() override;
     };
 
 }

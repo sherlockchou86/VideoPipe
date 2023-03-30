@@ -11,7 +11,7 @@ namespace vp_nodes {
         int frame_index = -1;    // latest frame index
         int latency = 0;         // latency(ms) relative to src node
 
-        int fps = 0;             // output fps of stream, maybe it is not equal to original_fps
+        float fps = 0;           // output fps of stream, maybe it is not equal to original_fps
         int width = 0;           // output width of stream, maybe it is not equal to original_width
         int height = 0;          // output height of stream, maybe it is not equal to original_height
         std::string direction;   // where the stream goes to

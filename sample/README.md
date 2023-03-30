@@ -77,7 +77,10 @@ show semantic segmentation by enet network.
 show multi infer node work together.
 ![](../doc/p33.png)
 
-
 ## image_des_sample ##
 show save/push image to local file or remote via udp.
 ![](../doc/p34.png)
+
+## image_src_sample ##
+show read/receive image from local file or remote via udp.
+![](../doc/p35.png)

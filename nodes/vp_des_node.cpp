@@ -36,7 +36,7 @@ namespace vp_nodes {
         fps_counter++;
         delta_time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - fps_last_time);
         if (delta_time.count() >= fps_epoch) {        
-            stream_status.fps = round(fps_counter * 1000.0 / delta_time.count());
+            stream_status.fps = fps_counter * 1000.0 / delta_time.count();
             fps_counter = 0;
             fps_last_time = std::chrono::system_clock::now();
         }

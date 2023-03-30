@@ -178,13 +178,21 @@ namespace vp_utils {
             auto called_count = storage.called_count_since_epoch_start;
             auto epoch_start = storage.time_epoch_start;
             auto delta_sec = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - epoch_start);
-            if (delta_sec.count() > fps_epoch)
-            {
-                int fps = round(called_count * 1000.0 / delta_sec.count());
+            if (delta_sec.count() > fps_timeout * 1000 || (delta_sec.count() > fps_epoch && called_count > 0)) {
+                //int fps = round(called_count * 1000.0 / delta_sec.count());
+                auto fps = vp_utils::round_any(called_count * 1000.0 / delta_sec.count(), 2);
                 storage.called_count_since_epoch_start = 0;
                 storage.time_epoch_start = std::chrono::system_clock::now();
+                storage.pre_fps = fps;  // cache for next show
                 vp_utils::put_text_at_center_of_rect(canvas, 
-                    std::to_string(fps), 
+                    fps, 
+                    rect, true,
+                    font_face, 1, cv::Scalar(26, 26, 139));
+            }
+            else {
+                // use previous fps
+                vp_utils::put_text_at_center_of_rect(canvas, 
+                    storage.pre_fps, 
                     rect, true,
                     font_face, 1, cv::Scalar(26, 26, 139));
             }
@@ -198,14 +206,14 @@ namespace vp_utils {
                                     cv::Rect(node_rect.x + 3, 
                                     node_rect.y + node_title_h / 2 + (node_rect.height - node_title_h) / 2, node_queue_width  - 8, node_title_h - 10), true, font_face, 1, cv::Scalar(255, 0, 255));
             // fps at 1st port
-            fps_func(meta_arriving_hooker_storage, cv::Rect(node_rect.x - node_queue_width / 3, 
+            fps_func(meta_arriving_hooker_storage, cv::Rect(node_rect.x - node_queue_width / 2, 
                         node_rect.y + node_rect.height - node_queue_port_padding * 3 - node_queue_port_w_h * 3 / 2, 
-                        node_queue_width * 2 / 3, 
+                        node_queue_width, 
                         node_queue_port_padding + node_queue_port_w_h));
             // fps at 2nd port
-            fps_func(meta_handling_hooker_storage, cv::Rect(node_rect.x + node_queue_width - node_queue_width / 3, 
+            fps_func(meta_handling_hooker_storage, cv::Rect(node_rect.x + node_queue_width - node_queue_width / 2, 
                         node_rect.y + node_title_h + node_queue_port_padding * 3 / 2 + node_queue_port_w_h, 
-                        node_queue_width * 2 / 3, 
+                        node_queue_width, 
                         node_queue_port_padding + node_queue_port_w_h));
         }   
         
@@ -217,14 +225,14 @@ namespace vp_utils {
                                     cv::Rect(node_rect.x + node_rect.width - node_queue_width + 3, 
                                     node_rect.y + node_title_h / 2 + (node_rect.height - node_title_h) / 2, node_queue_width - 8, node_title_h - 10), true, font_face, 1, cv::Scalar(255, 0, 255));
             // fps at 3rd port
-            fps_func(meta_handled_hooker_storage, cv::Rect(node_rect.x + node_rect.width - node_queue_width - node_queue_width / 3, 
+            fps_func(meta_handled_hooker_storage, cv::Rect(node_rect.x + node_rect.width - node_queue_width - node_queue_width / 2, 
                         node_rect.y + node_rect.height - node_queue_port_padding * 3 - node_queue_port_w_h * 3 / 2, 
-                        node_queue_width * 2 / 3, 
+                        node_queue_width, 
                         node_queue_port_padding + node_queue_port_w_h));
             // fps at 4th port
-            fps_func(meta_leaving_hooker_storage, cv::Rect(node_rect.x + node_rect.width - node_queue_width / 3, 
+            fps_func(meta_leaving_hooker_storage, cv::Rect(node_rect.x + node_rect.width - node_queue_width / 2, 
                         node_rect.y + node_title_h + node_queue_port_padding * 3 / 2 + node_queue_port_w_h, 
-                        node_queue_width * 2 / 3, 
+                        node_queue_width, 
                         node_queue_port_padding  + node_queue_port_w_h));
         }  
 
@@ -248,13 +256,13 @@ namespace vp_utils {
         // stream status at des nodes
         if (original_node->node_type() == vp_nodes::vp_node_type::DES) {
             vp_utils::put_text_at_center_of_rect(canvas, stream_status_hooker_storage.direction,
-                                                cv::Rect(node_left + node_rect.width / 2, node_top + node_title_h * 5 / 3 + node_queue_port_padding * 2, node_rect.width * 4 / 3, node_title_h * 2 / 3),
+                                                cv::Rect(node_left + node_rect.width / 2 - 10, node_top + node_title_h * 5 / 3 + node_queue_port_padding * 2, node_rect.width * 4 / 3 + 10, node_title_h * 2 / 3),
                                                 true,font_face,1,cv::Scalar(),cv::Scalar(),cv::Scalar(255, 255, 255));    
-            vp_utils::put_text_at_center_of_rect(canvas, "output_fps: " + std::to_string(stream_status_hooker_storage.fps),
-                                                cv::Rect(node_left + node_rect.width / 2, node_top + node_title_h * 7 / 3 + node_queue_port_padding * 3, node_rect.width * 4 / 3, node_title_h * 2 / 3),
+            vp_utils::put_text_at_center_of_rect(canvas, "output_fps: " + vp_utils::round_any(stream_status_hooker_storage.fps, 2),
+                                                cv::Rect(node_left + node_rect.width / 2 - 10, node_top + node_title_h * 7 / 3 + node_queue_port_padding * 3, node_rect.width * 4 / 3 + 10, node_title_h * 2 / 3),
                                                 true,font_face,1,cv::Scalar(),cv::Scalar(),cv::Scalar(255, 255, 255));   
             vp_utils::put_text_at_center_of_rect(canvas, "latency: " + std::to_string(stream_status_hooker_storage.latency) + "ms",
-                                                cv::Rect(node_left + node_rect.width / 2, node_top + node_title_h * 9 / 3 + node_queue_port_padding * 4, node_rect.width * 4 / 3, node_title_h * 2 / 3),
+                                                cv::Rect(node_left + node_rect.width / 2 - 10, node_top + node_title_h * 9 / 3 + node_queue_port_padding * 4, node_rect.width * 4 / 3 + 10, node_title_h * 2 / 3),
                                                 true,font_face,1,cv::Scalar(),cv::Scalar(),cv::Scalar(255, 255, 255));
         }
     }

@@ -16,7 +16,7 @@ namespace vp_nodes {
                                     interval(interval),
                                     resolution_w_h(resolution_w_h),
                                     osd(osd) {
-        // not greater than 1 minutes
+        // make sure not greater than 1 minute (too long) and not lower than 1 second (since it's too quick, use video stream instead directly)
         assert(interval >= 1 && interval <= 60);
         if (vp_utils::ends_with(location, ".jpeg") || vp_utils::ends_with(location, ".jpg")) {
             // save to file
@@ -36,9 +36,11 @@ namespace vp_nodes {
         }
         else {
             // error
-            throw "invalid location!";
+            throw "invalid input parameter for `location`!";
         }
 
+        auto s = to_file ? gst_template_file : gst_template_udp;
+        VP_INFO(vp_utils::string_format("[%s] [%s]", node_name.c_str(), s.c_str()));
         this->initialized();
     }
     
@@ -70,5 +72,9 @@ namespace vp_nodes {
 
         // for general works defined in base class
         return vp_des_node::handle_frame_meta(meta);
+    }
+
+    std::string vp_image_des_node::to_string() {
+        return to_file ? location : "udp://" + location + "/jpg";
     }
 }

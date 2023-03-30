@@ -52,8 +52,8 @@ https://user-images.githubusercontent.com/13251045/199926565-4f1018be-fdee-4d0d-
 - :heartpulse: [node table](./nodes/README.md)
 - :collision: [how VideoPipe works](./doc/about.md)
 - :hear_no_evil: [how record works](./nodes/record/README.md)
-- [environment for reference](./doc/env.md)
-- wait for update...
+- :star_struck: [environment for reference](./doc/env.md)
+- :blush: wait for update...
 
 ## Dependency
 
@@ -67,7 +67,6 @@ Basics
 - vscode (remote development on windows)
 - c++ 17
 - opencv 4.6
-- ffmpeg 3.4 (required by opencv)
 - gstreamer 1.20 (required by opencv)
 - gcc 7.5
 

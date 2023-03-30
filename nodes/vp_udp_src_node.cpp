@@ -52,7 +52,7 @@ namespace vp_nodes {
 
                 // stream_info_hooker activated if need
                 if (stream_info_hooker) {
-                    vp_stream_info stream_info {channel_index, fps, video_width, video_height, "udp://127.0.0.1:" + std::to_string(port)};
+                    vp_stream_info stream_info {channel_index, fps, video_width, video_height, to_string()};
                     stream_info_hooker(node_name, stream_info);
                 }
             }
