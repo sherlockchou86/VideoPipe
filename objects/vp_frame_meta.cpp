@@ -27,10 +27,7 @@ namespace vp_objects {
             this->frame = meta.frame.clone();
             this->osd_frame = meta.osd_frame.clone();
             this->mask = meta.mask.clone();
-            // deep copy elements
-            for(auto& i : meta.elements) {
-                this->elements.push_back(i->clone());
-            }
+
             // deep copy targets
             for(auto& i: meta.targets) {
                 this->targets.push_back(i->clone());
@@ -47,18 +44,9 @@ namespace vp_objects {
             for(auto& i: meta.text_targets) {
                 this->text_targets.push_back(i->clone());
             }
-            // deep copy ba_flag_map
-            // we need re-find map relationship of pointers between elements and targets since they are deep copyed above.
-            for(auto& i: meta.ba_flags_map) {
-                auto e = std::find_if(std::begin(this->elements), 
-                                        std::end(this->elements), 
-                                        [&](std::shared_ptr<vp_objects::vp_frame_element> element) {return element->element_id == std::get<0>(i)->element_id;});
-                auto t = std::find_if(std::begin(this->targets), 
-                                        std::end(this->targets), 
-                                        [&](std::shared_ptr<vp_objects::vp_frame_target> target) {return target->track_id == std::get<1>(i)->track_id;});
-                if (e != std::end(this->elements) && t != std::end(this->targets)) {
-                    this->ba_flags_map.push_back(std::make_tuple(*e, *t, std::get<2>(i)));
-                }
+            // deep copy ba results
+            for(auto& i: meta.ba_results) {
+                this->ba_results.push_back(i->clone());
             }
     }
     

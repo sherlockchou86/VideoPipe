@@ -99,7 +99,6 @@ namespace vp_objects {
 
         // virtual clone method since we do not know what specific meta we need copy in some situations, return a new pointer pointting to new memory allocation in heap.
         // note: every child class need implement its own clone() method.
-        // see vp_frame_element also.
         virtual std::shared_ptr<vp_meta> clone() = 0;
 
         // attach a new trace record for specific node (initialize key-value for current node)
