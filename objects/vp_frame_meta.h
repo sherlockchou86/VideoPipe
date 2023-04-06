@@ -10,9 +10,7 @@
 #include "vp_frame_pose_target.h"
 #include "vp_frame_face_target.h"
 #include "vp_frame_text_target.h"
-#include "elements/vp_frame_element.h"
-#include "../ba/vp_ba_analyser.h"
-
+#include "ba/vp_ba_result.h"
 /*
 * ##########################################
 * how does frame meta work?
@@ -70,10 +68,6 @@ namespace vp_objects {
         // deep copy needed here for this member.
         std::vector<std::shared_ptr<vp_objects::vp_frame_target>> targets;
 
-        // frame elements created by vp_ba_node if exists, it is shared_ptr<...> type since we do not know what specific elements are here.
-        // deep copy needed here for this member.
-        std::vector<std::shared_ptr<vp_objects::vp_frame_element>> elements;
-
         // pose targets created/appened by primary infer nodes.
         std::vector<std::shared_ptr<vp_objects::vp_frame_pose_target>> pose_targets;
 
@@ -83,14 +77,9 @@ namespace vp_objects {
         // text targets created/appened by primary infer nodes.
         std::vector<std::shared_ptr<vp_objects::vp_frame_text_target>> text_targets;
 
-        // ba results filled by vp_ba_node if exists, it is a map relationship of element, target and ba_flag.
-        // 1. element   : where
-        // 2. target    : who
-        // 3. ba_flag   : what
-        // it is a cache for ba results(n*n) of current frame, we can check if state-switch has happened latter based on this value. 
-        // deep copy needed here for this member.
-        std::vector<std::tuple<std::shared_ptr<vp_frame_element>, std::shared_ptr<vp_frame_target>, vp_ba::vp_ba_flag>> ba_flags_map;
-
+        // ba results created/appened by ba nodes.
+        std::vector<std::shared_ptr<vp_objects::vp_ba_result>> ba_results;
+        
         // copy myself
         virtual std::shared_ptr<vp_meta> clone() override;
     };

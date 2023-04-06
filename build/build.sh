@@ -9,10 +9,10 @@ TRACK_NODES=../nodes/track/*.cpp
 TRACK_SORT=../nodes/track/sort/*.cpp
 TRACK_DSORT=../nodes/track/deep_sort/*.cpp
 BROKER_NODES=../nodes/broker/*.cpp
+BA_NODES=../nodes/ba/*.cpp
 OBJECTS=../objects/*.cpp
-ELEMENTS_OBJECTS=../objects/elements/*.cpp
 SHAPES_OBJECTS=../objects/shapes/*.cpp
-BA=../ba/*.cpp
+BA_OBJECTS=../objects/ba/*.cpp
 UTILS_ANALYSIS_BOARD=../utils/analysis_board/*.cpp
 LOGGER=../utils/logger/*cpp
 
@@ -22,9 +22,9 @@ g++ -c -g -fPIC \
 $NODES \
 $INFERS_NODES \
 $OSD_NODES $OBJECTS \
-$ELEMENTS_OBJECTS \
+$BA_OBJECTS \
 $SHAPES_OBJECTS \
-$BA \
+$BA_NODES \
 $UTILS_ANALYSIS_BOARD \
 $LOGGER \
 $RECORD_NODES \
