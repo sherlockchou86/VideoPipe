@@ -29,14 +29,14 @@ https://user-images.githubusercontent.com/13251045/199926565-4f1018be-fdee-4d0d-
 ## Key Features
 - `Stream Reading`. Support popular protocols such as udp(video or image), rtsp, rtmp, file(video or image).
 - `Video Decoding`. Support video decoding which is based on opencv/gstreamer([support Hardware Acceleration](https://github.com/sherlockchou86/video_pipe_c/blob/master/doc/env.md#about-hardware-acceleration)).
-- `Inference based on dl`. Support multi-level inference based on deep learning models, such as Object-Detection, Image-Classification, Feature-Extraction. What you need is preparing models and know how to parse its outputs. Inference can be implemented based on different backends such as opencv::dnn(default), tensorrt, paddle_inference, onnx runtime.
+- `Inference based on dl`. Support multi-level inference based on deep learning models, such as `Object-Detection`, `Image-Classification`, `Feature-Extraction`. What you need is preparing models and know how to parse its outputs. Inference can be implemented based on different backends such as opencv::dnn(default), tensorrt, paddle_inference, onnx runtime and anything you like.
 - `On Screen Display(OSD)`. Support visualization, like drawing outputs from model onto frame.
 - `Message Broker`. Support push structured data(via json/xml) to cloud, file or other platforms.
 - `Object Tracking`. Support object tracking such as iou, sort etc.
-- `Behaviour Analyse[not implemented yet]`. Support behaviour analyse based on tracking.
+- `Behaviour Analyse(BA)`. Support behaviour analyse based on tracking, such as `crossline`,`stop`.
 - `Recording`. Support video recording for specific period, screenshots for specific frame.
 - `Video Encoding`. Support video encoding which is based on opencv/gstreamer([support Hardware Acceleration](https://github.com/sherlockchou86/video_pipe_c/blob/master/doc/env.md#about-hardware-acceleration)).
-- `Stream Pushing`. Support stream pushing via rtmp, rtsp, file(video or image), udp(image only), screen display(gui).
+- `Stream Pushing`. Support stream pushing via rtmp, rtsp(no specialized rtsp server needed), file(video or image), udp(image only), screen display(GUI).
 
 ## Highlights
 
@@ -85,7 +85,7 @@ We are offering 2 options:
 1. Shell & VSCode
 2. CMake & CLion
 
-### Option 1: Shell & VSCode
+### Option 1: Shell & VSCode [recommended since it's fullly tested]
 - Build VideoPipe (via shell)
     - run `cd build/`
     - run `sh build.sh`
@@ -127,7 +127,7 @@ Use IDEs such as *CLion* which will read the `CMakeLists.txt` and generate debug
 ## How to use 
 
 - Build VideoPipe first and use shared library.
-- Referencing source code directly and build your whole application.
+- Or referencing source code directly and build your whole application.
 
 [download models and test files from Google Drive](https://drive.google.com/drive/folders/1u49ai5VeGh6-eCBPNDnOIELt4jPnTw__?usp=sharing)
 
