@@ -4,7 +4,8 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/usr/local/include/**"
+                "/usr/local/include/**",
+                "/usr/include/**"
             ],
             "defines": [
                 "_DEBUG",

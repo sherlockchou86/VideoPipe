@@ -84,3 +84,7 @@ show save/push image to local file or remote via udp.
 ## image_src_sample ##
 show read/receive image from local file or remote via udp.
 ![](../doc/p35.png)
+
+## rtsp_des_sample ##
+show push video stream via rtsp, no rtsp server needed, you can visit it directly.
+![](../doc/p36.png)

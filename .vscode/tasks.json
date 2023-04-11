@@ -18,6 +18,8 @@
                 "-lpthread",
                 "-lvp",  // generated already by build.sh
                 "-std=c++17",
+                "`pkg-config --cflags --libs glib-2.0`",
+                "-lgstrtspserver-1.0",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
