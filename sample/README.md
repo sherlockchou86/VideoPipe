@@ -88,3 +88,7 @@ show read/receive image from local file or remote via udp.
 ## rtsp_des_sample ##
 show push video stream via rtsp, no rtsp server needed, you can visit it directly.
 ![](../doc/p36.png)
+
+## ba_crossline_sample ##
+count for vehicle based on tracking, the simplest one of behaviour analysis.
+![](../doc/p37.png)
