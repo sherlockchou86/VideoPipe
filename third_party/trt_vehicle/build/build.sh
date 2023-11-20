@@ -15,7 +15,7 @@ g++ -shared ./*.o \
 -lcuda \
 -lcublas \
 -L/usr/local/cuda/lib64 \
--L/usr/local/TensorRT/lib \
+-L/usr/local/tensorRT/lib \
 -o libtrt_vehicle.so
 
 # copy to system path

@@ -17,13 +17,13 @@ using namespace PaddleOCR;
 
 int main(int argc, char **argv) {
 
-  auto det_model_dir = "/windows2/zhzhi/video_pipe_c/main/models/text/ppocr/ch_PP-OCRv3_det_infer";
-  auto rec_model_dir = "/windows2/zhzhi/video_pipe_c/main/models/text/ppocr/ch_PP-OCRv3_rec_infer";
-  auto cls_model_dir = "/windows2/zhzhi/video_pipe_c/main/models/text/ppocr/ch_ppocr_mobile_v2.0_cls_infer";
+  auto det_model_dir = "/windows2/zhzhi/video_pipe_c/sample/models/text/ppocr/ch_PP-OCRv3_det_infer";
+  auto rec_model_dir = "/windows2/zhzhi/video_pipe_c/sample/models/text/ppocr/ch_PP-OCRv3_rec_infer";
+  auto cls_model_dir = "/windows2/zhzhi/video_pipe_c/sample/models/text/ppocr/ch_ppocr_mobile_v2.0_cls_infer";
   auto rec_char_dict_path = "/windows2/zhzhi/video_pipe_c/third_party/paddle_ocr/ppocr_keys_v1.txt";
   auto ppocr = PPOCR(det_model_dir, cls_model_dir, rec_model_dir, rec_char_dict_path);
 
-  auto video_path = "/windows2/zhzhi/video_pipe_c/main/test_video/4.mp4";
+  auto video_path = "/windows2/zhzhi/video_pipe_c/sample/test_video/4.mp4";
   auto capture = cv::VideoCapture(video_path);
   auto ft2 = cv::freetype::createFreeType2();
   ft2->loadFontData("../font/NotoSansCJKsc-Medium.otf", 0);

@@ -1,5 +1,5 @@
 
 
-#define VEHICLE 0
-#define VEHICLE_PLATE 1
+#define VEHICLE 1
+#define VEHICLE_PLATE 0
 

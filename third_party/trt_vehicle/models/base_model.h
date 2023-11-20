@@ -7,15 +7,15 @@
 #include <chrono>
 #include <iostream>
 #include <fstream>
-#include <cuda/cuda_runtime.h>
-#include <cuda/cuda_runtime_api.h>
-#include <tensorrt/NvInfer.h>
-#include <tensorrt/NvOnnxConfig.h>
-#include <tensorrt/NvInferPlugin.h>
+#include <cuda_runtime.h>
+#include <cuda_runtime_api.h>
+#include <NvInfer.h>
+#include <NvOnnxConfig.h>
+#include <NvInferPlugin.h>
 #include <opencv2/core/core.hpp>
 #include <opencv2/opencv.hpp>
 #include <sys/time.h>
-#include <cuda/device_launch_parameters.h>
+#include <device_launch_parameters.h>
 
 #include "../util/algorithm_util.h"
 #include "logging.h"
