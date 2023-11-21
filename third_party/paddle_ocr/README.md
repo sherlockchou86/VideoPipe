@@ -1,16 +1,16 @@
 
 This code is derived from(modified some codes) `paddle_ocr` project: https://github.com/PaddlePaddle/PaddleOCR/tree/release/2.6/deploy/cpp_infer 
 
-## how to install paddle_inference sdk (downloaded from official web or compiled from source code)?
+## how to install paddle_inference sdk (by downloading tar package from [official web](https://paddleinference.paddlepaddle.org.cn/user_guides/download_lib.html#linux))?
 
-1. Copy all `*.h` header files from `paddle_inference` directory to `/usr/local/include` (keep package name as the name of subdirectory)
-2. Copy all `*.so/*.a` library files from `paddle_inference` directory to `/usr/local/lib` directly.
+1. Choose the right tar file according to your version of CUDA and GPUs
+2. Put the tar file at anywhere and unzip it
+3. Run `build/install_paddle_inference.sh`, it will help you to install it automatically, **please modify the root path of paddle_inference at the first line in script**.
 
 ## how to build paddle_ocr?
 
 1. `cd ./build`, and run `sh ./build.sh`.
 2. It will generate a `*.so` library named `libpaddle_ocr.so`.
-3. Or include source code directly, no `.so` library needed.
 
 ## How to debug `paddle_ocr`?
 
