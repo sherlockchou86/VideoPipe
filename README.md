@@ -73,11 +73,13 @@ Basics
 Optional, if you need implement(or use built-in) infer nodes based on other inference backends other than `opencv::dnn`.
 - CUDA
 - TensorRT
-- [paddle inference](https://paddleinference.paddlepaddle.org.cn/v2.2/product_introduction/inference_intro.html)
+- paddle inference
 - onnx runtime
 - anything you like
 
-[environment for reference](./doc/env.md)
+[how to install cuda and tensorrt](./third_party/trt_vehicle/README.md)
+
+[how to install paddle_inference](./third_party/paddle_ocr/README.md)
 
 ## How to build and debug
 
