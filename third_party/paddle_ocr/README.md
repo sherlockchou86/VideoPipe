@@ -7,6 +7,8 @@ This code is derived from(modified some codes) `paddle_ocr` project: https://git
 2. Put the tar file at anywhere and unzip it
 3. Run `build/install_paddle_inference.sh`, it will help you to install it automatically, **please modify the root path of paddle_inference at the first line in script**.
 
+> CUDA 11.1  CUDNN 8.0.5 tensorrt7.2.1 for this repo.
+
 ## how to build paddle_ocr?
 
 1. `cd ./build`, and run `sh ./build.sh`.
