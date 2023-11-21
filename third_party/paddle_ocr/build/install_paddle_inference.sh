@@ -37,3 +37,6 @@ cp -r $PADDLE_INFERENCE_PATH/third_party/install/xxhash/lib/* /usr/local/lib
 cp -r $PADDLE_INFERENCE_PATH/third_party/install/xxhash/include/* /usr/local/include
 
 cp -r $PADDLE_INFERENCE_PATH/third_party/threadpool/* /usr/local/include
+
+cd /usr/local/lib
+ln -s libmkldnn.so.0 libdnnl.so
