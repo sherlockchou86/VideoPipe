@@ -4,6 +4,7 @@
 #define trt_infer_sample 0
 #define paddle_infer_sample 0
 #define src_des_sample 0
+#define plate_recognize_sample 1
 
 #define _1_N_N_sample 0
 #define _N_1_N_sample 0
@@ -24,8 +25,8 @@
 #define multi_detectors_and_classifiers_sample 0
 #define image_des_sample 0
 #define image_src_sample 0
-#define rtsp_des_sample 1
-
+#define rtsp_des_sample 0
+#define stitch_sample 0
 #define ba_crossline_sample 0
 
 #define multi_infer_test 0
