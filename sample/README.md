@@ -92,3 +92,7 @@ show push video stream via rtsp, no rtsp server needed, you can visit it directl
 ## ba_crossline_sample ##
 count for vehicle based on tracking, the simplest one of behaviour analysis.
 ![](../doc/p37.png)
+
+## plate_recognize_sample ##
+vehicle plate detect and recognize on the whole frame (no need to detect vechile first)
+![](../doc/p38.png)
