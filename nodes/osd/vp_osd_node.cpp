@@ -61,7 +61,7 @@ namespace vp_nodes {
             else {               
                 //cv::putText(canvas, labels_to_display, cv::Point(i->x, i->y), 1, 1, cv::Scalar(255, 0, 255));
                 int baseline = 0;
-                auto size = cv::getTextSize(labels_to_display, 1, 1, 1, &baseline);
+                auto size = cv::getTextSize(labels_to_display, 1, 1.3, 1, &baseline);
                 vp_utils::put_text_at_center_of_rect(canvas, labels_to_display, cv::Rect(i->x, i->y - size.height, size.width, size.height), true);
             }
 
