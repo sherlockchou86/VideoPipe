@@ -197,11 +197,9 @@ VideoPipe is opensource totally and more portable for different soft/hard-ware p
 The products below borrow some experience/ideas from VideoPipe:
 > Note: they are not developed by VideoPipe totally.
 
-### behaviour analysis
+### behaviour analysis & image/video search
 ![](./doc/p6.png)
-### image/video search
 ![](./doc/p7.png)
-
 
 ## Samples
 |id|sample|screenshot|
@@ -229,3 +227,5 @@ The products below borrow some experience/ideas from VideoPipe:
 |21|rtsp_des_sample|![](./doc//p36.png)|
 |22|ba_crossline_sample|![](./doc//p37.png)|
 |23|plate_recognize_sample|![](./doc//p38.png)|
+|24|vehicle_body_scan_sample|![](./doc/p40.png)|
+|25|body_scan_and_plate_detect_sample|![](./doc/p39.png)|
