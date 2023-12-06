@@ -30,7 +30,7 @@ namespace vp_nodes {
         int original_width = 0;
         int original_height = 0;
 
-        // basic channnel info
+        // basic channel info
         int frame_index;
         int channel_index;
         float resize_ratio;

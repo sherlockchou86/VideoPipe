@@ -11,7 +11,7 @@ namespace vp_nodes {
     class vp_rtsp_src_node: public vp_src_node {
     private:
         /* data */
-        std::string gst_template = "rtspsrc location=%s ! application/x-rtp,mdeia=video ! rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! appsink";
+        std::string gst_template = "rtspsrc location=%s ! application/x-rtp,media=video ! rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! appsink";
         cv::VideoCapture rtsp_capture;
     protected:
         // re-implemetation
