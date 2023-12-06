@@ -30,6 +30,9 @@ namespace vp_utils {
             opened_ = false;
         }
 
+        bool is_open() {
+            return opened_;
+        }
     private:
         std::mutex mutex_;
         std::condition_variable cv_;

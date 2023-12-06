@@ -6,7 +6,8 @@
 #define src_des_sample 0
 #define plate_recognize_sample 0
 #define vehicle_body_scan_sample 0
-#define body_scan_and_plate_detect_sample 1
+#define body_scan_and_plate_detect_sample 0
+#define app_src_sample 1
 
 #define _1_N_N_sample 0
 #define _N_1_N_sample 0

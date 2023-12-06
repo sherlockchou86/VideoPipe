@@ -16,9 +16,9 @@ namespace vp_nodes {
         // force re-implemetation in child class
         virtual void handle_run() override;
         // force ignored in child class
-        virtual std::shared_ptr<vp_objects::vp_meta> handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) override final; 
+        virtual std::shared_ptr<vp_objects::vp_meta> handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) override; 
         // force ignored in child class
-        virtual std::shared_ptr<vp_objects::vp_meta> handle_control_meta(std::shared_ptr<vp_objects::vp_control_meta> meta) override final;
+        virtual std::shared_ptr<vp_objects::vp_meta> handle_control_meta(std::shared_ptr<vp_objects::vp_control_meta> meta) override;
 
         // protected as it can't be instanstiated directly.
         vp_src_node(std::string node_name, 
