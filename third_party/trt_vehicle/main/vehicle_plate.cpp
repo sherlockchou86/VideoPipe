@@ -20,11 +20,11 @@ std::map<std::string, cv::Scalar> colors {{"blue", cv::Scalar(255, 0, 0)},
                                         {"white", cv::Scalar(255, 255, 255)}};
 
 int main(){
-    std::string plateModelPath = "../data/model/plate/det_2.trt";
-    std::string charModelPath = "../data/model/plate/rec.trt";
-    auto image = cv::imread("../data/test/plate/truck3.png");
-    auto image2 = cv::imread("../data/test/plate/3in1.png");
-    auto image3 = cv::imread("../data/test/plate/truck2.png");
+    std::string plateModelPath = "../data/model/plate/det_v8.5.trt";
+    std::string charModelPath = "../data/model/plate/rec_v8.5.trt";
+    auto image = cv::imread("../data/test/plate/plate11.jpg");
+    auto image2 = cv::imread("../data/test/plate/plate0.jpg");
+    auto image3 = cv::imread("../data/test/plate/truck4.png");
     auto plateDetector = new trt_vehicle::VehiclePlateDetector(plateModelPath, charModelPath);
 
     auto ft2 = cv::freetype::createFreeType2();
@@ -32,7 +32,7 @@ int main(){
 
     std::vector<std::vector<trt_vehicle::Plate>> results;
     std::vector<cv::Mat> img_datas = {image, image2, image3};
-    plateDetector->detect(img_datas, results);
+    plateDetector->detect(img_datas, results, true);
 
     for (int i = 0; i < results.size(); i++) {
         /* code */

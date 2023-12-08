@@ -4,7 +4,7 @@
 namespace trt_vehicle {
         
     VehicleTypeClassifier::VehicleTypeClassifier(const std::string& vehicleTypeModelPath) {
-        vehicleTypeModel = new ClassModel(vehicleTypeModelPath);
+        vehicleTypeModel = new ClassModel(vehicleTypeModelPath, false);
     }
     
     VehicleTypeClassifier::~VehicleTypeClassifier()

@@ -20,7 +20,7 @@ std::map<std::string, cv::Scalar> colors {{"car", cv::Scalar(255, 0, 0)},
                                         {"truck", cv::Scalar(0, 255, 0)}};
 
 int main() {
-    std::string vehicle_model_path = "../data/model/vehicle/vehicle.trt";
+    std::string vehicle_model_path = "../data/model/vehicle/vehicle_v8.5.trt";
     auto image = cv::imread("../data/test/vehicle/4.png");
     auto image2 = cv::imread("../data/test/vehicle/3.jpg");
 

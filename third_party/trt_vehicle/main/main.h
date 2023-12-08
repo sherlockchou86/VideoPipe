@@ -1,6 +1,7 @@
 
 
-#define VEHICLE 0
+#define VEHICLE 1
 #define VEHICLE_PLATE 0
-#define VEHICLE_SCAN 1
+#define VEHICLE_SCAN 0
+#define VEHICLE_COLOR_TYPE_CLASSIFY 0
 

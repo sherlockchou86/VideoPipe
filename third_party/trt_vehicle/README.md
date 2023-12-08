@@ -2,6 +2,8 @@
 ## What `trt_vehicle` can do:
 1. Vehicle detector
 2. Vehicle plate detector and recognizer
+3. Vehicle scanner based on side view of body
+4. Vehicle color and type classifier
 
 
 ## How to install tensorrt and cuda ?
@@ -14,11 +16,13 @@ Refer to NVIDIA official web
 6. run `source ~/.bashrc`
 
 
-`CUDA 11.1 + TensorRT 7.2.1 for this repository (tested)`
+>> CUDA 11.1 + TensorRT 7.2.1 for this repository (tested)
+>>
+>> CUDA 11.1 + TensorRT 8.5 for this repository (tested)
 
 ## How to generate trt model from onnx ?
 ```shell
-trtexec --onnx=./vehicle.onnx --saveEngine=vehicle.trt --buildOnly=true
+trtexec --onnx=./vehicle.onnx --saveEngine=vehicleXXX.trt --buildOnly=true
 ```
 
 ## How to build trt_vehicle ?
@@ -33,3 +37,14 @@ trtexec --onnx=./vehicle.onnx --saveEngine=vehicle.trt --buildOnly=true
 Make sure you have build `trt_vehicle` correctly
 1. Change model paths to your specific values in `./main/*.cpp`.
 2. Select one of `./main/*.cpp` files and click `Run` button in vscode, choose one launch item at the top of window(`trt_vehicle`).
+
+## Sample screenshot ##
+### vehicle detect
+![](./data/screenshot/4.png)
+## vehicle plate detect
+![](./data/screenshot/2.png)
+## vehicle scan
+![](./data/screenshot/3.png)
+## vehicle color and type classify
+![](./data/screenshot/1.png)
+

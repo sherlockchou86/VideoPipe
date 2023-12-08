@@ -4,7 +4,7 @@
 namespace trt_vehicle {
     
     VehicleColorClassifier::VehicleColorClassifier(const std::string& vehicleColorModelPath) {
-        vehicleColorModel = new ClassModel(vehicleColorModelPath);
+        vehicleColorModel = new ClassModel(vehicleColorModelPath, false);
     }
     
     VehicleColorClassifier::~VehicleColorClassifier() {

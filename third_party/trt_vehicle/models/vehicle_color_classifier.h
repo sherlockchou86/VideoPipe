@@ -7,7 +7,7 @@ namespace trt_vehicle {
     class VehicleColorClassifier
     {
     private:
-        std::vector<std::string> colors_ = {"black", "blue", "grey", "other", "red", "silver", "white", "yellow"};
+        std::vector<std::string> colors_ = {"black", "blue", "grey", "other", "red", "white", "yellow"};
         ClassModel* vehicleColorModel = nullptr;
     public:
         VehicleColorClassifier(const std::string& vehicleColorModelPath);
