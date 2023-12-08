@@ -229,3 +229,4 @@ The products below borrow some experience/ideas from VideoPipe:
 |23|plate_recognize_sample|![](./doc//p38.png)|
 |24|vehicle_body_scan_sample|![](./doc/p40.png)|
 |25|body_scan_and_plate_detect_sample|![](./doc/p39.png)|
+|25|app_src_sample|![](./doc/p41.png)|
