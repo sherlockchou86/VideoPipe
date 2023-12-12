@@ -9,7 +9,7 @@
 using namespace std;
 
 /*
-*  vehicle search and comparision demo, feature encoding
+*  vehicle comparision demo, 1:1
 */
 
 #if VEHICLE_COMPARISION
@@ -34,7 +34,7 @@ double match(std::vector<float>& feature1, std::vector<float>& feature2, int dis
     }
 }
 
-int main(){
+int main() {
     std::string featureModelPath = "../data/model/vehicle/vehicle_embedding_v8.5.trt";
     auto image = cv::imread("../data/test/vehicle_feature/2_001.jpg");  // first vehicle
     auto image2 = cv::imread("../data/test/vehicle_feature/2_003.jpg");  // second vehicle to compare(the same vehicle with different angle)

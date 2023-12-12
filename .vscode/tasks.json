@@ -79,6 +79,7 @@
                 "-lopencv_imgcodecs",
                 "-lopencv_highgui",
                 "-lopencv_freetype",
+                "-lstdc++fs",
                 "-ltrt_vehicle",  // generated already by build.sh
                 "-std=c++17",
                 "-o",
