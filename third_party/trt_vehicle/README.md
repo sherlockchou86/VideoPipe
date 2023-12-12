@@ -4,6 +4,7 @@
 2. Vehicle plate detector and recognizer
 3. Vehicle scanner based on side view of body
 4. Vehicle color and type classifier
+5. Vehicle feature encoder used for search(1:N) or comparison(1:1) 
 
 
 ## How to install tensorrt and cuda ?
@@ -47,4 +48,5 @@ Make sure you have build `trt_vehicle` correctly
 ![](./data/screenshot/3.png)
 ## vehicle color and type classify
 ![](./data/screenshot/1.png)
-
+## vehicle compare
+![](./data/screenshot/5.png)

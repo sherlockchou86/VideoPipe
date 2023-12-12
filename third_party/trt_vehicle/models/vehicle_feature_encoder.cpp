@@ -18,6 +18,11 @@ namespace trt_vehicle {
     }
     
     void VehicleFeatureEncoder::encode(std::vector<cv::Mat>& img_datas, std::vector<std::vector<float>>& features) {
-
+        features.clear();
+        for (int i = 0; i < img_datas.size(); i++) {
+            /* code */
+            auto out = vehicleFeatureModel->predictNoPadding({img_datas[i]}).front();
+            features.push_back(out);
+        }
     }
 }
