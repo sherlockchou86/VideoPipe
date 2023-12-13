@@ -52,3 +52,5 @@ Make sure you have build `trt_vehicle` correctly
 ![](./data/screenshot/5.png)
 ### vehicle search
 ![](./data/screenshot/6.png)
+### vehicle cluster
+![](./data/screenshot/7.png)
