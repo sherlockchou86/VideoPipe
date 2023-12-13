@@ -96,3 +96,15 @@ count for vehicle based on tracking, the simplest one of behaviour analysis.
 ## plate_recognize_sample ##
 vehicle plate detect and recognize on the whole frame (no need to detect vechile first)
 ![](../doc/p38.png)
+
+## vehicle_body_scan_sample ##
+detect parts of vehicle based on side view of body
+![](../doc/p40.png)
+
+## body_scan_and_plate_detect_sample ##
+2 channels to detect parts of vehicle and detect vehicle plate, you can do something like data fusion later
+![](../doc/p39.png)
+
+## app_src_sample ##
+send data to pipeline from host coda using app_src_node
+![](../doc/p41.png)
