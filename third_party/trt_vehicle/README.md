@@ -42,11 +42,13 @@ Make sure you have build `trt_vehicle` correctly
 ## Sample screenshot ##
 ### vehicle detect
 ![](./data/screenshot/4.png)
-## vehicle plate detect
+### vehicle plate detect
 ![](./data/screenshot/2.png)
-## vehicle scan
+### vehicle scan
 ![](./data/screenshot/3.png)
-## vehicle color and type classify
+### vehicle color and type classify
 ![](./data/screenshot/1.png)
-## vehicle compare
+### vehicle compare
 ![](./data/screenshot/5.png)
+### vehicle search
+![](./data/screenshot/6.png)
