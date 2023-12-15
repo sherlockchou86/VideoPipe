@@ -7,7 +7,8 @@
 #define plate_recognize_sample 0
 #define vehicle_body_scan_sample 0
 #define body_scan_and_plate_detect_sample 0
-#define app_src_sample 1
+#define app_src_sample 0
+#define multi_trt_infer_nodes_sample 1
 
 #define _1_N_N_sample 0
 #define _N_1_N_sample 0

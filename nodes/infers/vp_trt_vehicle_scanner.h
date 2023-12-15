@@ -4,7 +4,7 @@
 #include "../../third_party/trt_vehicle/models/vehicle_scanner.h"
 
 namespace vp_nodes {
-    // vehicle scanner based on tenssorrt
+    // vehicle scanner based on tensorrt using trt_vehicle library
     class vp_trt_vehicle_scanner: public vp_primary_infer_node
     {
     private:

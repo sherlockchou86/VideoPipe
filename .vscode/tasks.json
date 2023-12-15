@@ -7,6 +7,7 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
+                "-w",
                 "${workspaceFolder}/sample/*.cpp",   // demo source code for vp framework
                 "-lopencv_core",
                 "-lopencv_videoio",
@@ -42,6 +43,7 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
+                "-w",
                 "${workspaceFolder}/third_party/paddle_ocr/main/main.cpp",  // demo source code for paddle_ocr
                 "-lopencv_core",
                 "-lopencv_imgproc",
@@ -73,6 +75,7 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
+                "-w",
                 "${workspaceFolder}/third_party/trt_vehicle/main/*.cpp",  // demo source code for trt_vehicle
                 "-lopencv_core",
                 "-lopencv_imgproc",

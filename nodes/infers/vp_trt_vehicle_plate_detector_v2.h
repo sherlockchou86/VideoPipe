@@ -4,7 +4,7 @@
 #include "../../third_party/trt_vehicle/models/vehicle_plate_detector.h"
 
 namespace vp_nodes {
-    // vehicle plate detector based on tensorrt
+    // vehicle plate detector based on tensorrt using trt_vehicle library
     // source code: ../../third_party/trt_vehicle
     // note: derived from vp_primary_infer_node since it detects plates on the whole big frame, which is different from vp_trt_vehicle_plate_detector class
     // this class is not based on opencv::dnn module but tensorrt, a few data members declared in base class are not usable any more(just ignore), such as vp_infer_node::net.

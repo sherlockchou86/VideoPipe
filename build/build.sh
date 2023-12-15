@@ -17,7 +17,7 @@ UTILS_ANALYSIS_BOARD=../utils/analysis_board/*.cpp
 LOGGER=../utils/logger/*cpp
 
 # compile
-g++ -c -g -fPIC \
+g++ -c -g -fPIC -w \
 -std=c++17 \
 `pkg-config --cflags --libs glib-2.0` \
 $NODES \
