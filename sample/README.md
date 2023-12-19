@@ -108,3 +108,7 @@ detect parts of vehicle based on side view of body
 ## app_src_sample ##
 send data to pipeline from host coda using app_src_node
 ![](../doc/p41.png)
+
+## vehicle_cluster_based_on_classify_encoding_sample ##
+vehicle cluster based on labels(classify) and encoding(feature extract), pipeline would display 3 windows (cluster by t-SNE, cluster by labels, detect result)
+![](../doc/p42.png)

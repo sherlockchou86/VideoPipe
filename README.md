@@ -230,3 +230,4 @@ The products below borrow some experience/ideas from VideoPipe:
 |24|vehicle_body_scan_sample|![](./doc/p40.png)|
 |25|body_scan_and_plate_detect_sample|![](./doc/p39.png)|
 |26|app_src_sample|![](./doc/p41.png)|
+|27|vehicle_cluster_based_on_classify_encoding_sample|![](./doc/p42.png)|
