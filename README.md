@@ -133,7 +133,7 @@ Use IDEs such as *CLion* which will read the `CMakeLists.txt` and generate debug
 
 [download models and test files from Google Drive](https://drive.google.com/drive/folders/1u49ai5VeGh6-eCBPNDnOIELt4jPnTw__?usp=sharing)
 
-[download models and test files from Baidu Pan](https://pan.baidu.com/s/11W7seUXWwYofaYNVGChIEw?pwd=gs4w) wechat:zhzhi78 for onnx models file
+[download models and test files from Baidu Pan](https://pan.baidu.com/s/1rGciHPM_rjxPmtlDquYQEw?pwd=75va)
 
 Demo below shows how to construct pipeline and run it (first change file path in code):
 ```c++
