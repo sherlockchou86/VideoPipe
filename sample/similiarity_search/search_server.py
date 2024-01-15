@@ -65,7 +65,8 @@ app = Flask(__name__)
 # home page
 @app.route("/")
 def home():
-    return render_template("home.html", total_images = search_index.ntotal)
+    search_for = 'vehicles' if search_for_vehicle else 'faces'
+    return render_template("home.html", total_images = search_index.ntotal, search_for = search_for)
 
 # search action
 @app.route("/search", methods=["POST"])

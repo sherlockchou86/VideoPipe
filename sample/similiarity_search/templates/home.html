@@ -61,7 +61,7 @@
 <body>
     <div class="container">
         <h2>Similiarity Search Sample Based VideoPipe</h2>
-        <p class="centered-text">There are <span style="color:red">{{total_images}}</span> images to be Searched.</p>
+        <p class="centered-text">There are <span style="color:red">{{total_images}} {{search_for}}</span> to be Searched.</p>
         <form enctype="multipart/form-data" method="post" action="/search">
             <label for="query_image">Select Image:</label>
             <input type="file" id="query_image" name="query_image" accept=".jpg, .jpeg, .png" required>
