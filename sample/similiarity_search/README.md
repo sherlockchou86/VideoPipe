@@ -26,3 +26,10 @@ A library for similiarity search created by Facebook, the fullname is `Facebook 
 pip3 install faiss-cpu 
 # pip3 install faiss-gpu
 ```
+
+# screenshot #
+## select query image
+![](../../doc/p44.png)
+
+## search results
+![](../../doc/p43.png)
