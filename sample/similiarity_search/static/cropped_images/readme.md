@@ -1,0 +1,1 @@
+cropped images which would be searched later.
