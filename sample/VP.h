@@ -10,7 +10,8 @@
 #define app_src_sample 0
 #define multi_trt_infer_nodes_sample 0
 #define vehicle_cluster_based_on_classify_encoding_sample 0
-#define similiarity_search_sample 1
+#define vehicle_similiarity_search_sample 1
+#define face_similiarity_search_sample 0
 
 #define _1_N_N_sample 0
 #define _N_1_N_sample 0

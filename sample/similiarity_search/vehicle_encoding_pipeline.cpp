@@ -10,11 +10,11 @@
 #include "../../utils/analysis_board/vp_analysis_board.h"
 
 /*
-* ## similiarity_search_sample ##
+* ## vehicle_similiarity_search_sample ##
 * generate embedding data for vehicles using VideoPipe, then send them via socket.
 */
 
-#if similiarity_search_sample
+#if vehicle_similiarity_search_sample
 
 int main() {
     VP_SET_LOG_LEVEL(vp_utils::vp_log_level::INFO);
