@@ -71,6 +71,7 @@ namespace vp_nodes {
                 // !!!
                 // for plate sub target (color_text)
                 if (sub_label.size() == 2) {
+                    assert(ft2 != nullptr);
                     ft2->putText(canvas, sub_label[1], cv::Point(base_left + 10, meta->osd_frame.rows - padding - 5), 36, cv::Scalar(0), cv::FILLED, cv::LINE_AA, true);
                 }
                 base_left += gap_height + padding;                

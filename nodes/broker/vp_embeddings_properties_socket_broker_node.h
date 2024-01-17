@@ -7,16 +7,16 @@
 #include "../../third_party/kissnet/kissnet.hpp"
 
 namespace vp_nodes {
-    // message broker node, broke ONLY embeddings (for vp_frame_target or vp_frame_face_target) to socket via udp.
-    // embeddings could be used for similiarity search later.
-    class vp_embeddings_socket_broker_node: public vp_msg_broker_node
+    // message broker node, broke embeddings, AND properties (ONLY for vp_frame_target) to socket via udp.
+    // embeddings and properties could be used for similiarity search and property search later.
+    class vp_embeddings_properties_socket_broker_node: public vp_msg_broker_node
     {
     private:
-        // save dir for cropped images, which would be used for embeddings similiarity search later
+        // save dir for cropped images, which would be used for embeddings similiarity search or property search later
         std::string cropped_dir = "cropped_images";
-        // min width to crop (embedding will be ignored if target's width is smaller than this value)
+        // min width to crop (embedding/property will be ignored if target's width is smaller than this value)
         int min_crop_width = 50;
-        // min height to crop (embedding will be ignored if target's height is smaller than this value)
+        // min height to crop (embedding/property will be ignored if target's height is smaller than this value)
         int min_crop_height = 50;
         // host the data sent to via udp
         std::string des_ip = "";
@@ -31,7 +31,7 @@ namespace vp_nodes {
         // to socket via udp
         virtual void broke_msg(const std::string& msg) override;
     public:
-        vp_embeddings_socket_broker_node(std::string node_name, 
+        vp_embeddings_properties_socket_broker_node(std::string node_name, 
                                 std::string des_ip = "",
                                 int des_port = 0,
                                 std::string cropped_dir = "cropped_images",
@@ -40,6 +40,6 @@ namespace vp_nodes {
                                 vp_broke_for broke_for = vp_broke_for::NORMAL, 
                                 int broking_cache_warn_threshold = 50, 
                                 int broking_cache_ignore_threshold = 200);
-        ~vp_embeddings_socket_broker_node();
+        ~vp_embeddings_properties_socket_broker_node();
     };
 }

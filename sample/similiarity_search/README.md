@@ -3,10 +3,10 @@
 Demonstrate similiarity search using VideoPipe.
 
 1. `vehicle_encoding_pipeline.cpp` run a pipeline to generate embedding data for vehicles and send them via socket (using message broker node in VideoPipe)
-1. `face_encoding_pipeline.cpp` run a pipeline to generate embedding data for faces and send them via socket (using message broker node in VideoPipe)
-2. `encoding_receiver.py` receive embedding data via socket, and save them into csv file using `pandas` library (note, it over writes to disk every about 100 new embeddings received).
-3. `search_server.py` load csv file and create Index Object of `faiss`. the script will start a web server powered by `flask` to demonstrate how to search images using embedding similiarity. this script would also generate embedding for the query image uploaded by user.
-4. `clean.sh` help to clean all cache data in current sample directory, you can regenerate embedding data again.
+2. `face_encoding_pipeline.cpp` run a pipeline to generate embedding data for faces and send them via socket (using message broker node in VideoPipe)
+3. `encoding_receiver.py` receive embedding data via socket, and save them into csv file using `pandas` library (note, it over writes to disk every about 100 new embeddings received).
+4. `search_server.py` load csv file and create Index Object of `faiss`. the script will start a web server powered by `flask` to demonstrate how to search images using embedding similiarity. this script would also generate embedding for the query image uploaded by user.
+5. `clean.sh` help to clean all cache data in current sample directory, you can regenerate embedding data again.
 
 ```
 ### how to use ###

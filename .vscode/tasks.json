@@ -10,6 +10,7 @@
                 "-w",
                 "${workspaceFolder}/sample/*.cpp",   // demo source code for vp framework
                 "${workspaceFolder}/sample/similiarity_search/*.cpp",  // similiarity search demo source code
+                "${workspaceFolder}/sample/vehicle_property_and_similiarity_search/*.cpp",  // vehicle property and similiarity search demo source code
                 "-lopencv_core",
                 "-lopencv_videoio",
                 "-lopencv_highgui",
