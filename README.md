@@ -16,9 +16,11 @@
 > 注意：<br>
 > VideoPipe是一个让计算机视觉领域中模型集成更加简单的框架，它并不是像TensorFlow、TensorRT类似的深度学习框架。
 
-https://user-images.githubusercontent.com/13251045/192935445-d39a41af-4619-4ae1-a975-19de44014fa2.mp4
+https://github.com/sherlockchou86/video_pipe_c/assets/13251045/2cac8020-a4c4-4a7c-926b-a139a3b29161
 
-https://user-images.githubusercontent.com/13251045/199926565-4f1018be-fdee-4d0d-8d4a-8da0a1a15c83.mp4
+https://github.com/sherlockchou86/video_pipe_c/assets/13251045/b1289faa-e2c7-4d38-871e-879ae36f6d50
+
+https://github.com/sherlockchou86/video_pipe_c/assets/13251045/c0be8f6f-949a-4ab3-b0eb-9ac1496bee1d
 
 ## 主要功能
 - 流读取。支持流行的协议，如udp（视频或图像）、rtsp、rtmp、文件（视频或图像）。
