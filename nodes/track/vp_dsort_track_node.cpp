@@ -12,7 +12,7 @@ namespace vp_nodes {
     {
     }
 
-    void vp_dsort_track_node::track(const std::vector<vp_objects::vp_rect>& target_rects, 
+    void vp_dsort_track_node::track(int channel_index, const std::vector<vp_objects::vp_rect>& target_rects, 
                 const std::vector<std::vector<float>>& target_embeddings, 
                 std::vector<int>& track_ids) {
         // fill track_ids according to target_rects & target_embeddings

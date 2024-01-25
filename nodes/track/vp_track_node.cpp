@@ -19,12 +19,9 @@ namespace vp_nodes {
     }
 
     std::shared_ptr<vp_objects::vp_meta> vp_track_node::handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) {
-        // track for only 1 channel at the same time
-        if (channel_index == -1) {
-            channel_index = meta->channel_index;
-        }
-        assert(channel_index == meta->channel_index);
-        
+        // channel_index can be different each call
+        auto channel_index = meta->channel_index;
+
         // data used for tracking
         std::vector<vp_objects::vp_rect> rects;      // rects of targets
         std::vector<std::vector<float>> embeddings;  // embeddings of targets
@@ -33,8 +30,8 @@ namespace vp_nodes {
         // step 1, collect data
         preprocess(meta, rects, embeddings);
 
-        // step 2, track
-        track(rects, embeddings, track_ids);
+        // step 2, track by channel
+        track(channel_index, rects, embeddings, track_ids);
 
         // step 3, postprocess
         postprocess(meta, rects, embeddings, track_ids);

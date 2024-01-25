@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <set>
+#include <map>
 #include "vp_track_node.h"
 #include "sort/Hungarian.h"
 #include "sort/KalmanTracker.h"
@@ -23,7 +24,8 @@ namespace vp_nodes {
         int max_age = 1;
         int min_hits = 3;
         double iouThreshold = 0.5;
-        vector<KalmanTracker> trackers;
+        // vector<KalmanTracker> trackers;
+        std::map<int, std::vector<KalmanTracker>> all_trackers;
         std::vector<cv::Rect_<float>> predictedBoxes;
         std::vector<vector<double>> iouMatrix;
         std::vector<int> assignment;
@@ -37,7 +39,7 @@ namespace vp_nodes {
         double GetIOU(cv::Rect_<float> bb_test, cv::Rect_<float> bb_gt);
     protected:
         // fill track_ids using sort algo
-        virtual void track(const std::vector<vp_objects::vp_rect>& target_rects, 
+        virtual void track(int channel_index, const std::vector<vp_objects::vp_rect>& target_rects, 
                         const std::vector<std::vector<float>>& target_embeddings, 
                         std::vector<int>& track_ids) override;
     public:
