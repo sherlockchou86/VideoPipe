@@ -97,7 +97,7 @@ https://github.com/sherlockchou86/video_pipe_c/assets/13251045/c0be8f6f-949a-4ab
     - press `run` button at debug menu in vscode
     - select a launch item at the top of window (something like `C/C++: g++ vp project`)
 
-> `./third_party/` 下面都是独立的项目，可以独立编译或运行（VideoPipe依赖这些项目）。具体运行方式可参见对应子目录下的README文件.
+> 注意： `./third_party/` 下面都是独立的项目，有的是header-only库，被VideoPipe直接引用；有的包含有cpp文件，可以独立编译或运行，VideoPipe依赖这些库，因此需要提前编译好这些库。具体编译或使用方法可参见对应子目录下的README文件.
 
 ### Option 2: CMake & CLion
 #### Prepare environments
