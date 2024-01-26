@@ -1,4 +1,33 @@
 
+## important tips when using node ##
+Most nodes support multi-channel, which means that multiple channels of data can be used as its input. In addition, some nodes do not support multi-channel by default, that is, there can only be one channel of data as its input (the input channel index cannot be changed once it is determined), otherwise an error will occur. The following are common examples:
+
+*support multi-channel*
+- all infer nodes, broker nodes, because they work independently of the channel index.
+- split node, it works independently of channel index too. it could be used to split pipeline into multi branches accordding to different channel index.
+- some nodes which has been designed to support multi-channel, such as record nodes, track nodes, ba nodes, which are able to distinguish different channels inside logic code (`such as using std::map<int, ...> to maintain different data of channels`).
+
+*do NOT support multi-channel*
+- all src node and all des node, you MUST specify channel index when initializing instances of them.
+- part of osd nodes, because they work dependently of channel index, you can do some work to let them support multi-channel, for example just use some data structure like `std::map<int, ...>` to maintain different data of channels inside code of nodes.
+
+
+Note, although some nodes support multi-channel, you'd better be careful because using single instance of node to deal with multiple channels of data would have lower performance(process data serially
+). On the contrary, one instance dealing with only one channel of data (multiple channels use multiple instances of the SAME node) have higher performance(process data in parallel). below is an example of 2 methods to create pipeline:
+```
+single instance of track/ba node works on 2 channels：
+file_src_0                                                                                             --> osd_0 --> screen_des_0
+           --> detector --> multi-classifiers --> tracker --> ba_crossline --> split(by channel index)
+file_src_1                                                                                             --> osd_1 --> screen_des_1 
+
+2 instances of track/ba node work on 2 channels:
+file_src_0                                                                --> tracker_0 --> ba_crossline_0 --> osd_0 --> screen_des_0
+           --> detector --> multi-classifiers --> split(by channel index) 
+file_src_1                                                                --> tracker_0 --> ba_crossline_0 --> osd_1 --> screen_des_1 
+```
+
+
+
 ## common node list [`ctrl+f` to search] ##
 -------
 
