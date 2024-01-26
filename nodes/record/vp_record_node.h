@@ -2,6 +2,7 @@
 
 #include <list>
 #include <deque>
+#include <map>
 
 #include "../vp_node.h"
 #include "../../objects/vp_image_record_control_meta.h"
@@ -14,6 +15,7 @@
 namespace vp_nodes {
     // video/image recording node, save it to local disk.
     // it is a middle node but works asynchronously, so recording would not block the pipeline.
+    // note record node could work on multi channels at the same time.
     class vp_record_node: public vp_node, public vp_record_status_hookable
     {
     private:
@@ -36,13 +38,16 @@ namespace vp_nodes {
         bool osd = false;
 
         // fps for current video
-        int fps = 0;
+        // int fps = 0;
+        std::map<int, int> all_fps;
         
         /* record task list */
-        std::list<std::shared_ptr<vp_nodes::vp_record_task>> record_tasks;
+        // std::list<std::shared_ptr<vp_nodes::vp_record_task>> record_tasks;
+        std::map<int, std::list<std::shared_ptr<vp_nodes::vp_record_task>>> all_record_tasks;
 
         /* pre-record for video */
-        std::deque<std::shared_ptr<vp_objects::vp_frame_meta>> pre_records;
+        // std::deque<std::shared_ptr<vp_objects::vp_frame_meta>> pre_records;
+        std::map<int, std::deque<std::shared_ptr<vp_objects::vp_frame_meta>>> all_pre_records;
 
         // new record task
         void auto_new_record_task(std::shared_ptr<vp_objects::vp_control_meta>& meta);

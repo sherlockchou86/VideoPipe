@@ -29,20 +29,33 @@ namespace vp_nodes {
     }
 
     std::shared_ptr<vp_objects::vp_meta> vp_record_node::handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) {
-        // cache fps
-        if (fps == 0) {
-            fps = meta->fps;
+        // cache fps for current channel
+        if (all_fps.count(meta->channel_index) == 0) {
+            all_fps[meta->channel_index] = meta->fps;
         }
+        auto& fps = all_fps[meta->channel_index];
+
+        // first time for current channel
+        if (all_pre_records.count(meta->channel_index) == 0) {
+            all_pre_records[meta->channel_index] = std::deque<std::shared_ptr<vp_objects::vp_frame_meta>>();
+        }
+        auto& pre_records = all_pre_records[meta->channel_index];
         
-        // first update pre_records
+        // update pre_records for current channel
         pre_records.push_back(meta);
-        auto frames_need_pre_record = meta->fps * pre_record_video_duration;
+        auto frames_need_pre_record = fps * pre_record_video_duration;
         // keep max frames
         if (pre_records.size() > frames_need_pre_record) {
             pre_records.pop_front();
         }
         
-        // then append data to all tasks
+        // first time for current channel
+        if (all_record_tasks.count(meta->channel_index) == 0) {
+            all_record_tasks[meta->channel_index] = std::list<std::shared_ptr<vp_nodes::vp_record_task>>();
+        }
+        auto& record_tasks = all_record_tasks[meta->channel_index];
+
+        // then append data to all tasks of current channel
         for (auto i = record_tasks.begin(); i != record_tasks.end();) {
             if ((*i)->status == vp_nodes::vp_record_task_status::COMPLETE) {
                 i = record_tasks.erase(i); // remove task which is complete already
@@ -74,6 +87,10 @@ namespace vp_nodes {
     }
 
     void vp_record_node::auto_new_record_task(std::shared_ptr<vp_objects::vp_control_meta>& meta) {
+        auto& record_tasks = all_record_tasks[meta->channel_index];
+        auto& pre_records = all_pre_records[meta->channel_index];
+        auto& fps = all_fps[meta->channel_index];
+
         // image record
         if (meta->control_type == vp_objects::vp_control_type::IMAGE_RECORD) {
             auto image_record_control_meta = std::dynamic_pointer_cast<vp_objects::vp_image_record_control_meta>(meta);
