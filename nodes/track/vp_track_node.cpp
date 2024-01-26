@@ -72,6 +72,10 @@ namespace vp_nodes {
         // assert(target_rects.size() == target_embeddings.size());
         assert(target_rects.size() == track_ids.size());
 
+        // support multi channels
+        auto& tracks_by_id = all_tracks_by_id[frame_meta->channel_index];
+        auto& last_tracked_frame_indexes = all_last_tracked_frame_indexes[frame_meta->channel_index];
+
         if (track_for == vp_track_for::NORMAL) {
             //assert(target_rects.size() == frame_meta->targets.size());
             for (int i = 0; i < frame_meta->targets.size(); i++) {
