@@ -61,6 +61,11 @@ namespace vp_nodes {
             // step 1, format message
             format_msg(frame_meta, message);  // MUST be implemented in child class
 
+            // ignore if message is empty, because no broking occurs is allowed for some frames if some conditions not satisfied
+            if (message.empty()) {
+                continue;
+            }
+            
             // step 2, broke message
             broke_msg(message);               // MUST be implemented in child class
         }

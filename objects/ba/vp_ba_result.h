@@ -9,14 +9,15 @@
 namespace vp_objects {
     // type of behaviour analysis
     enum class vp_ba_type {
-        NONE = 0b00000000,
-        CROSSLINE = 0b00000001,
-        STOP = 0b00000010
+        NONE = 0b00000000,       // none
+        CROSSLINE = 0b00000001,  // cross line
+        STOP = 0b00000010,       // enter stop status
+        UNSTOP = 0b00000100      // leave stop status
         /* more */
     };
 
-
     // result of behaviour analysis
+    // BA logic can ONLY works on vp_frame_target
     class vp_ba_result
     {
     private:
@@ -25,7 +26,6 @@ namespace vp_objects {
         // type
         vp_ba_type type;
         // target ids which involved for this ba result, empty allowed.
-        /* ids can be from any targets inside vp_frame_meta, such as vp_frame_target/vp_face_target/... */
         std::vector<int> involve_target_ids_in_frame;
         // region (or single line) involved for this ba result, empty allowed.
         std::vector<vp_objects::vp_point> involve_region_in_frame;
@@ -35,11 +35,22 @@ namespace vp_objects {
         // frame index of this ba result
         int frame_index;
 
+        // name of ba
+        std::string ba_label = "not specified";
+
+        // record image name if exist
+        std::string record_image_name = "";
+        // record video name if exist
+        std::string record_video_name = "";
+
         vp_ba_result(vp_ba_type type, 
                     int channel_index,
                     int frame_index,
                     std::vector<int> involve_target_ids_in_frame, 
-                    std::vector<vp_objects::vp_point> involve_region_in_frame);
+                    std::vector<vp_objects::vp_point> involve_region_in_frame,
+                    std::string ba_label = "not specified",
+                    std::string record_image_name = "",
+                    std::string record_video_name = "");
         ~vp_ba_result();
 
         // get description for ba result

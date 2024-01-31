@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            position:absolute;
+            top: 0;
+            text-align: left;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            max-width: 1280px;
+            width: 100%;
+        }
+        .dplayer-container {
+            display: flex;
+        }
+
+        .box {
+            width: 50%;
+            padding: 5px;
+            padding-bottom: 20px;
+            border: 1px solid #ccc;
+            width: 640px;
+            height: 360px;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        .box_title {
+            color: blue;
+        }
+
+        img {
+            width: 200px;
+            height: 100px;
+            margin: 2px;
+        }
+
+        table {
+            font-family: Arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <title>Behaviour Analysis(short as BA) Sample</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Behaviour Analysis(short as BA) Sample Based On VideoPipe</h2>
+        <div class="dplayer-container">
+            <div class="box">
+                <div id="dplayer-container-0"></div>
+                <div class="box_title">【Channel 0】{{live_stream_0}}</div>
+            </div>
+            <div class="box">
+                <div id="dplayer-container-1"></div>
+                <div class="box_title">【Channel 1】{{live_stream_1}}</div>
+            </div>
+        </div>
+        <p class="centered-text">There are <span style="color:red">{{total_records}} BA records</span>. You can filter them by properties:</p>
+        <p>
+            <form action="/" method="post">
+                <label for="channel">Select Channels:</label>
+                <select id="channel" name="select_channel" required>
+                    <option value="all" {% if select_channel == 'all' %} selected {% endif %}>All Channels</option>
+                    <option value="0" {% if select_channel == '0' %} selected {% endif %}>Channel 0</option>
+                    <option value="1" {% if select_channel == '1' %} selected {% endif %}>Channel 1</option>
+                </select>
+                
+                <label for="ba_type">Select Ba Types:</label>
+                <select id="ba_type" name="select_ba_type" required>
+                    <option value="all" {% if select_ba_type == 'all' %} selected {% endif %}>All Types</option>
+                    <option value="cross line" {% if select_ba_type == 'cross line' %} selected {% endif %}>Cross Line</option>
+                    <option value="stop" {% if select_ba_type == 'stop' %} selected {% endif %}>Stop</option>
+                </select>
+
+                <label for="ba_type">Select Time Period:</label>
+                <input type="datetime-local" id="start_time" name="select_start_time" value="{{select_start_time}}">
+                <input type="datetime-local" id="end_time" name="select_end_time"  value="{{select_end_time}}">
+                
+                <button type="submit">Search</button>
+            </form>
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>uid</th>
+                    <th>time</th>
+                    <th>channel</th>
+                    <th>ba_label</th>
+                    <th>target_ids</th>
+                    <th>target_properties</th>
+                    <th>vertexs_of_region</th>
+                    <th>ba_image</th>
+                    <th>ba_video</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in ba_results: %}
+                    <tr>
+                        <td>{{result['uid']}}</td>
+                        <td>{{result['time']}}</td>
+                        <td>{{result['channel']}}</td>
+                        <td>{{result['ba_label']}}</td>
+                        <td>{{result['involve_targets']}}</td>
+                        <td>{{result['properties_of_involve_targets']}}</td>
+                        <td>{{result['involve_region']}}</td>
+                        {% if result['ba_image'] != '' %}
+                            <td><a href="{{result['ba_image']}}"><img src="{{result['ba_image']}}" title="click to load image"></a></td>
+                        {% endif %}
+                        {% if result['ba_image'] == '' %}
+                            <td>no image recorded</td>
+                        {% endif %}   
+
+                        {% if result['ba_video'] != '' %}
+                            <td><a href="{{result['ba_video']}}">click to load video</a></td>
+                        {% endif %}   
+                        {% if result['ba_video'] == '' %}
+                            <td>no video recorded</td>
+                        {% endif %}
+                    </tr>
+                {% endfor%}
+            </tbody>
+        </table>
+    </div>
+    <script src="../static/dist/flv.min.js"></script>
+    <script src="../static/dist/DPlayer.min.js"></script>
+    <script>
+        // live stream of channel 0
+        const dp_0= new DPlayer({
+            container: document.getElementById('dplayer-container-0'),
+            live: true,
+            autoplay: true,
+            mutex: false,
+            volume:0,
+            video: {
+                url: '{{live_stream_0 | safe}}',
+                type: 'auto',
+            },
+        });
+        // live stream of channel 1
+        const dp_1 = new DPlayer({
+            container: document.getElementById('dplayer-container-1'),
+            live: true,
+            autoplay: true,
+            mutex: false,
+            volume:0,
+            video: {
+                url: '{{live_stream_1 | safe}}',
+                type: 'auto',
+            },
+        });
+    </script>
+</body>
+</html>

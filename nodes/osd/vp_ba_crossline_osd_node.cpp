@@ -1,9 +1,9 @@
 
-#include "vp_ba_osd_node.h"
+#include "vp_ba_crossline_osd_node.h"
 
 namespace vp_nodes {
     
-    vp_ba_osd_node::vp_ba_osd_node(std::string node_name, std::string font): vp_node(node_name) {
+    vp_ba_crossline_osd_node::vp_ba_crossline_osd_node(std::string node_name, std::string font): vp_node(node_name) {
         if (!font.empty()) {
             ft2 = cv::freetype::createFreeType2();
             ft2->loadFontData(font, 0);   
@@ -11,11 +11,11 @@ namespace vp_nodes {
         this->initialized();
     }
     
-    vp_ba_osd_node::~vp_ba_osd_node()
+    vp_ba_crossline_osd_node::~vp_ba_crossline_osd_node()
     {
     }
 
-    std::shared_ptr<vp_objects::vp_meta> vp_ba_osd_node::handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) {
+    std::shared_ptr<vp_objects::vp_meta> vp_ba_crossline_osd_node::handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) {
         // operations on osd_frame
         if (meta->osd_frame.empty()) {
             meta->osd_frame = meta->frame.clone();
@@ -54,7 +54,7 @@ namespace vp_nodes {
                 //cv::putText(canvas, labels_to_display, cv::Point(i->x, i->y), 1, 1, cv::Scalar(255, 0, 255));
                 int baseline = 0;
                 auto size = cv::getTextSize(labels_to_display, 1, 1, 1, &baseline);
-                vp_utils::put_text_at_center_of_rect(canvas, labels_to_display, cv::Rect(i->x, i->y - size.height, size.width, size.height), true);
+                vp_utils::put_text_at_center_of_rect(canvas, labels_to_display, cv::Rect(i->x, i->y - size.height, size.width, size.height), true, 1, 1, cv::Scalar(), cv::Scalar(179, 52, 255), cv::Scalar(179, 52, 255));
             }
 
             // scan sub targets
@@ -69,41 +69,23 @@ namespace vp_nodes {
             }
         }
         
-        /**************************************
-        * static variables for ba drawing
-        **************************************/
-        static int total_crossline = 0;
-        static int current_crossline = 0;
-        static vp_objects::vp_point p1;
-        static vp_objects::vp_point p2;
-
-        // scan ba results
+        /* crossline draw for current channel */
+        auto& total_crossline = all_total_crossline[meta->channel_index];      
+        auto& line = all_lines[meta->channel_index];
+        
+        // scan ba results and ONLY deal with crossline
         for (auto& i : meta->ba_results) {
-            switch (i->type) {
-                case vp_objects::vp_ba_type::CROSSLINE: {
-                    // line has 2 points
-                    assert(i->involve_region_in_frame.size() == 2);
-                    p1 = i->involve_region_in_frame[0];
-                    p2 = i->involve_region_in_frame[1];
-                    
-                    // draw data
-                    current_crossline = i->involve_target_ids_in_frame.size();
-                    total_crossline += current_crossline;
-
-                    break;
-                }
-                case vp_objects::vp_ba_type::STOP: {
-                    break;
-                }
-                default: {
-                    break;
-                }
+            if (i->type == vp_objects::vp_ba_type::CROSSLINE) {
+                // line has 2 points
+                assert(i->involve_region_in_frame.size() == 2);
+                line = vp_objects::vp_line(i->involve_region_in_frame[0], i->involve_region_in_frame[1]);
+                total_crossline += 1;
             }
         }
 
-        // crossline data
-        cv::line(canvas, cv::Point(p1.x, p1.y), cv::Point(p2.x, p2.y), cv::Scalar(0, 204, 0), 3, cv::LINE_AA);
-        cv::putText(canvas, vp_utils::string_format("crossline data [current/total]: [%d/%d]", current_crossline, total_crossline), cv::Point(20, 20), 1, 2, cv::Scalar(0, 204, 0), 2);
+        // draw crossline data
+        cv::line(canvas, cv::Point(line.start.x, line.start.y), cv::Point(line.end.x, line.end.y), cv::Scalar(0, 255, 0), 2, cv::LINE_AA);
+        cv::putText(canvas, vp_utils::string_format("total crossline targets: [%d]", total_crossline), cv::Point(20, 20), 1, 2, cv::Scalar(0, 0, 255), 2);
         return meta;
     }
 }

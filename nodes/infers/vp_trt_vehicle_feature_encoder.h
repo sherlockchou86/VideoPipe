@@ -18,7 +18,7 @@ namespace vp_nodes {
         // override pure virtual method, for compile pass
         virtual void postprocess(const std::vector<cv::Mat>& raw_outputs, const std::vector<std::shared_ptr<vp_objects::vp_frame_meta>>& frame_meta_with_batch) override;
     public:
-        vp_trt_vehicle_feature_encoder(std::string node_name, std::string vehicle_feature_model_path = "", std::vector<int> p_class_ids_applied_to = std::vector<int>());
+        vp_trt_vehicle_feature_encoder(std::string node_name, std::string vehicle_feature_model_path = "", std::vector<int> p_class_ids_applied_to = std::vector<int>(), int min_width_applied_to = 0, int min_height_applied_to = 0);
         ~vp_trt_vehicle_feature_encoder();
     };
 }

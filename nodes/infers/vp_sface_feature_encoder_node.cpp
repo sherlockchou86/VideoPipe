@@ -9,7 +9,7 @@ namespace vp_nodes {
                                                                 vp_secondary_infer_node(node_name, model_path, 
                                                                 "", "", 
                                                                 112, 112, 
-                                                                1, std::vector<int>(), 
+                                                                1, std::vector<int>(), 0, 0, 
                                                                 0, 1, cv::Scalar()) {
         this->initialized();
     }

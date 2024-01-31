@@ -80,6 +80,9 @@ namespace vp_objects {
         // ba results created/appened by ba nodes.
         std::vector<std::shared_ptr<vp_objects::vp_ba_result>> ba_results;
         
+        // get target ptrs by target ids in current frame, ONLY supports vp_frame_target
+        std::vector<std::shared_ptr<vp_frame_target>> get_targets_by_ids(const std::vector<int>& ids);
+
         // copy myself
         virtual std::shared_ptr<vp_meta> clone() override;
     };

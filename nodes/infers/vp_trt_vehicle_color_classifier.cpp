@@ -3,8 +3,9 @@
 namespace vp_nodes {
     vp_trt_vehicle_color_classifier::vp_trt_vehicle_color_classifier(std::string node_name, 
                                                                     std::string vehicle_color_cls_model_path, 
-                                                                    std::vector<int> p_class_ids_applied_to):
-                                                                    vp_secondary_infer_node(node_name, "", "", "", 1, 1, 1, p_class_ids_applied_to) {
+                                                                    std::vector<int> p_class_ids_applied_to,
+                                                                    int min_width_applied_to, int min_height_applied_to):
+                                                                    vp_secondary_infer_node(node_name, "", "", "", 1, 1, 1, p_class_ids_applied_to, min_width_applied_to, min_height_applied_to) {
         vehicle_color_classifier = std::make_shared<trt_vehicle::VehicleColorClassifier>(vehicle_color_cls_model_path);
         this->initialized();
     }
@@ -34,7 +35,7 @@ namespace vp_nodes {
         for (int i = 0; i < vehicles_color.size(); i++) {
             for (int j = index; j < frame_meta->targets.size(); j++) {
                 // need apply or not?
-                if (!need_apply(frame_meta->targets[j]->primary_class_id)) {
+                if (!need_apply(frame_meta->targets[j]->primary_class_id, frame_meta->targets[j]->width, frame_meta->targets[j]->height)) {
                     // continue as its primary_class_id is not in p_class_ids_applied_to
                     continue;
                 }

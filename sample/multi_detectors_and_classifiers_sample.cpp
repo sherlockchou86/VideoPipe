@@ -20,7 +20,7 @@ int main() {
     VP_LOGGER_INIT();
 
     // create nodes
-    auto file_src_0 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_0", 0, "test_video/20.mp4", 0.6);
+    auto file_src_0 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_0", 0, "test_video/22.mp4", 0.6);
     /* primary detector */
     // labels for detector model
     // 0 - person
@@ -30,9 +30,9 @@ int main() {
     // 4 - 2wheel
     auto primary_detector = std::make_shared<vp_nodes::vp_yolo_detector_node>("primary_detector", "models/det_cls/yolov3-tiny-2022-0721_best.weights", "models/det_cls/yolov3-tiny-2022-0721.cfg", "models/det_cls/yolov3_tiny_5classes.txt", 416, 416, 1);
     /* secondary classifier 1, applied to car(1)/bus(2)/truck(3) only */
-    auto _1st_classifier = std::make_shared<vp_nodes::vp_classifier_node>("1st_classifier", "models/det_cls/vehicle/resnet18-batch=N-type_view_0322_nhwc.onnx", "", "models/det_cls/vehicle/vehicle_types.txt", 224, 224, 1, std::vector<int>{1, 2, 3}, 10, false, 1, cv::Scalar(), cv::Scalar(), true, true);
+    auto _1st_classifier = std::make_shared<vp_nodes::vp_classifier_node>("1st_classifier", "models/det_cls/vehicle/resnet18-batch=N-type_view_0322_nhwc.onnx", "", "models/det_cls/vehicle/vehicle_types.txt", 224, 224, 1, std::vector<int>{1, 2, 3}, 20, 20, 10, false, 1, cv::Scalar(), cv::Scalar(), true, true);
     /* secondary classifier 2, applied to car(1)/bus(2)/truck(3) only */
-    auto _2nd_classifier = std::make_shared<vp_nodes::vp_classifier_node>("2nd_classifier", "models/det_cls/vehicle/resnet18-batch=N-color_view_0322_nhwc.onnx", "", "models/det_cls/vehicle/vehicle_colors.txt", 224, 224, 1, std::vector<int>{1, 2, 3}, 10, false, 1, cv::Scalar(), cv::Scalar(), true, true);
+    auto _2nd_classifier = std::make_shared<vp_nodes::vp_classifier_node>("2nd_classifier", "models/det_cls/vehicle/resnet18-batch=N-color_view_0322_nhwc.onnx", "", "models/det_cls/vehicle/vehicle_colors.txt", 224, 224, 1, std::vector<int>{1, 2, 3}, 20, 20, 10, false, 1, cv::Scalar(), cv::Scalar(), true, true);
     auto osd_0 = std::make_shared<vp_nodes::vp_osd_node>("osd_0");
     auto screen_des_0 = std::make_shared<vp_nodes::vp_screen_des_node>("screen_des_o", 0);
 

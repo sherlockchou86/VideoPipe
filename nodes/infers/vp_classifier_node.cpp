@@ -12,6 +12,8 @@ namespace vp_nodes {
                                             int input_height, 
                                             int batch_size,
                                             std::vector<int> p_class_ids_applied_to,
+                                            int min_width_applied_to,
+                                            int min_height_applied_to,
                                             int crop_padding,
                                             bool need_softmax,
                                             float scale,
@@ -27,6 +29,8 @@ namespace vp_nodes {
                                                                     input_height,
                                                                     batch_size,
                                                                     p_class_ids_applied_to,
+                                                                    min_width_applied_to,
+                                                                    min_height_applied_to,
                                                                     crop_padding,
                                                                     scale,
                                                                     mean,
@@ -60,7 +64,7 @@ namespace vp_nodes {
         for (int i = 0; i < count; i++) {
             for (int j = index; j < frame_meta->targets.size(); j++)
             {
-                if (!need_apply(frame_meta->targets[j]->primary_class_id)) {
+                if (!need_apply(frame_meta->targets[j]->primary_class_id, frame_meta->targets[j]->width, frame_meta->targets[j]->height)) {
                     // continue as its primary_class_id is not in p_class_ids_applied_to
                     continue;
                 }

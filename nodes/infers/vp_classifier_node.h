@@ -23,6 +23,8 @@ namespace vp_nodes {
                             int input_height = 128, 
                             int batch_size = 1,
                             std::vector<int> p_class_ids_applied_to = std::vector<int>(),
+                            int min_width_applied_to = 0,
+                            int min_height_applied_to = 0,
                             int crop_padding = 10,
                             bool need_softmax = true,  // imagenet dataset
                             float scale = 1 / 255.0,

@@ -58,4 +58,14 @@ namespace vp_objects {
         // just call copy constructor and return new pointer
         return std::make_shared<vp_frame_meta>(*this);
     }
+
+    std::vector<std::shared_ptr<vp_frame_target>> vp_frame_meta::get_targets_by_ids(const std::vector<int>& ids) {
+        std::vector<std::shared_ptr<vp_objects::vp_frame_target>> results;
+        for(auto& t: targets) {
+            if (std::find(ids.begin(), ids.end(), t->track_id) != ids.end()) {
+                results.push_back(t);
+            }
+        }
+        return results;
+    }
 }
