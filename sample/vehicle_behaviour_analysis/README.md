@@ -22,10 +22,6 @@ please run `sh clean.sh` if you want to restart sample from scratch.
 ```
 
 # screenshot #
-**cross line**
-
-![](../../doc/p48.png)
-
-**stop**
+**cross line && stop**
 
 ![](../../doc/p48.png)

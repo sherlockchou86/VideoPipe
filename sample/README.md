@@ -112,3 +112,19 @@ send data to pipeline from host coda using app_src_node
 ## vehicle_cluster_based_on_classify_encoding_sample ##
 vehicle cluster based on labels(classify) and encoding(feature extract), pipeline would display 3 windows (cluster by t-SNE, cluster by labels, detect result)
 ![](../doc/p42.png)
+
+## ba_stop_sample ##
+vehicle stop behaviour analysis
+![](../doc/p49.png)
+
+## similiarity search ##
+flask demo for vehicle and face similiarity search <br/>
+![](../doc/p44.png)![](../doc/p43.png)![](../doc/p45.png)
+
+## behaviour analysis ##
+flask demo for crossline and stop<br/>
+![](../doc/p48.png)
+
+## property and similiarity search ##
+flask demo for vehicle search by similiarity and properties<br/>
+![](../doc/p46.png)![](../doc/p47.png)
