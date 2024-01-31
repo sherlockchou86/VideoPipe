@@ -227,6 +227,6 @@ int main() {
 |26|app_src_sample|![](./doc/p41.png)|
 |27|vehicle_cluster_based_on_classify_encoding_sample|![](./doc/p42.png)|
 |28|ba_stop_sample|![](./doc/p49.png)|
-|29|similiarity search|![](./doc/p44.png)![](./doc/p43.png)![](./doc/p45.png)|
-|30|behaviour analysis|![](./doc/p48.png)|
+|29|behaviour analysis|![](./doc/p48.png)|
+|30|similiarity search|![](./doc/p44.png)![](./doc/p43.png)![](./doc/p45.png)|
 |31|property and similiarity search|![](./doc/p46.png)![](./doc/p47.png)|
