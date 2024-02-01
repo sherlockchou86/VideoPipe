@@ -1,1 +1,0 @@
-query images uploaded by user.
