@@ -12,7 +12,9 @@ namespace vp_objects {
         NONE = 0b00000000,       // none
         CROSSLINE = 0b00000001,  // cross line
         STOP = 0b00000010,       // enter stop status
-        UNSTOP = 0b00000100      // leave stop status
+        UNSTOP = 0b00000100,     // leave stop status
+        JAM = 0b00001000,        // enter jam status
+        UNJAM = 0b00010000       // leave jam status
         /* more */
     };
 

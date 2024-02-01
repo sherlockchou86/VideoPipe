@@ -20,11 +20,11 @@ namespace vp_nodes {
     std::string vp_ba_crossline_node::to_string() {
         /*
         * return 2 points of all lines
-        * [channel 0: x1,y1 x2,y2][channel 1: x1,y1 x2,y2]
+        * [channel 0: x1,y1 x2,y2][channel 1: x1,y1 x2,y2]...
         */
         std::stringstream ss;
         for(auto& p: all_lines) {
-            ss << "[" << p.first << ": " << p.second.start.x << "," << p.second.start.y << " " << p.second.end.x << "," << p.second.end.y << "]"; 
+            ss << "[channel" << p.first << ": " << p.second.start.x << "," << p.second.start.y << " " << p.second.end.x << "," << p.second.end.y << "]"; 
         }
         return ss.str();
     }

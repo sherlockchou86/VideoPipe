@@ -20,11 +20,11 @@ namespace vp_nodes {
     std::string vp_ba_stop_node::to_string() {
         /*
         * return vertexs of all stop regions
-        * [channel 0: x1,y1 x2,y2 ...][channel 1: x1,y1 x2,y2 ...]
+        * [channel0: x1,y1 x2,y2 ...][channel1: x1,y1 x2,y2 ...]...
         */
         std::stringstream ss;
         for(auto& r: all_stop_regions) {
-            ss << "[" << r.first << ":";
+            ss << "[channel" << r.first << ":";
             for(auto& p: r.second) {
                 ss << " " << p.x << "," << p.y;
             }
