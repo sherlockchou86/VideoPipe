@@ -128,3 +128,7 @@ flask demo for crossline and stop<br/>
 ## property and similiarity search ##
 flask demo for vehicle search by similiarity and properties<br/>
 ![](../doc/p46.png)![](../doc/p47.png)
+
+## ba_jam_sample ##
+traffic jam behaviour analysis<br/>
+![](../doc/p50.png)

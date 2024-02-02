@@ -230,3 +230,4 @@ int main() {
 |29|behaviour analysis|![](./doc/p48.png)|
 |30|similiarity search|![](./doc/p44.png)![](./doc/p43.png)![](./doc/p45.png)|
 |31|property and similiarity search|![](./doc/p46.png)![](./doc/p47.png)|
+|32|ba_jam_sample|![](./doc/p50.png)|
