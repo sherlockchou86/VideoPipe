@@ -210,22 +210,22 @@ int main() {
 |9|vp_logger_sample|-|
 |10|face_tracking_sample|![](./doc//p18.png)|
 |11|vehicle_tracking_sample|![](./doc//p22.png)|
-|12|interaction_with_pipe_sample|--|
+|12|interaction with pipe sample|--|
 |13|record_sample|--|
 |14|message_broker_sample & message_broker_sample2|![](./doc//p21.png)|
 |15|mask_rcnn_sample|![](./doc//p30.png)|
 |16|openpose_sample|![](./doc//p31.png)|
 |17|enet_seg_sample|![](./doc//p32.png)|
-|18|multi_detectors_and_classifiers_sample|![](./doc//p33.png)|
+|18|multi detectors and classifiers sample|![](./doc//p33.png)|
 |19|image_des_sample|![](./doc//p34.png)|
 |20|image_src_sample|![](./doc//p35.png)|
 |21|rtsp_des_sample|![](./doc//p36.png)|
 |22|ba_crossline_sample|![](./doc//p37.png)|
 |23|plate_recognize_sample|![](./doc//p38.png)|
-|24|vehicle_body_scan_sample|![](./doc/p40.png)|
-|25|body_scan_and_plate_detect_sample|![](./doc/p39.png)|
+|24|vehicle body scan sample|![](./doc/p40.png)|
+|25|body scan and plate detect sample|![](./doc/p39.png)|
 |26|app_src_sample|![](./doc/p41.png)|
-|27|vehicle_cluster_based_on_classify_encoding_sample|![](./doc/p42.png)|
+|27|vehicle cluster based on classify encoding sample|![](./doc/p42.png)|
 |28|ba_stop_sample|![](./doc/p49.png)|
 |29|behaviour analysis|![](./doc/p48.png)|
 |30|similiarity search|![](./doc/p44.png)![](./doc/p43.png)![](./doc/p45.png)|
