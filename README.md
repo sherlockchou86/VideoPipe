@@ -1,4 +1,8 @@
 
+- [B站视频演示](https://space.bilibili.com/3537123997125411)
+- [B站视频教程](https://www.bilibili.com/cheese/play/ss10426)
+- [C站视频教程](https://edu.csdn.net/course/detail/39283)
+
 ## VideoPipe
 
 一个用于视频结构化的框架。它可以处理复杂任务，如流读取（从本地或网络）、视频解码、基于深度学习模型的推理（分类/检测/特征提取/...）、跟踪及行为分析、屏幕上显示（OSD）、通过中间件进行数据代理（如Kafka/Socket）、视频编码和流推送（RTMP或本地文件）。框架采用面向插件的编码风格，我们可以使用独立的插件，即框架中的Node类型，来构建不同类型的视频分析管道。
@@ -44,11 +48,11 @@ https://github.com/sherlockchou86/video_pipe_c/assets/13251045/c0be8f6f-949a-4ab
 6. 整个框架主要由原生C++编写，可在所有平台上移植。
 
 ## 帮助资料
-- :fire: [sample code](./sample/README.md)
-- :heartpulse: [node table](./nodes/README.md)
-- :collision: [how VideoPipe works](./doc/about.md)
-- :hear_no_evil: [how record works](./nodes/record/README.md)
-- :star_struck: [environment for reference](./doc/env.md)
+- [sample code](./sample/README.md)
+- [node table](./nodes/README.md)
+- [how VideoPipe works](./doc/about.md)
+- [how record works](./nodes/record/README.md)
+- [environment for reference](./doc/env.md)
 - :blush: wait for update...
 
 ## 扫码入群交流
