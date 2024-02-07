@@ -132,3 +132,7 @@ flask demo for vehicle search by similiarity and properties<br/>
 ## ba_jam_sample ##
 traffic jam behaviour analysis<br/>
 ![](../doc/p50.png)
+
+## face recognize ##
+flask demo for face recognize<br/>
+![](../doc/p51.png)
