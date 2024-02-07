@@ -103,8 +103,11 @@ namespace vp_nodes {
 
                 // -1 means no track result returned yet
                 if (track_id != -1) {
-                    // no cache needed since no tracks field for vp_frame_face_target
-                    face->track_id = track_id;  // write track_id back to face target
+                    tracks_by_id[track_id].push_back(rect);                           // cache
+                    last_tracked_frame_indexes[track_id] = frame_meta->frame_index;   // update stamp
+
+                    face->track_id = track_id;                // write track_id back to face target
+                    face->tracks = tracks_by_id[track_id];    // write tracks back to face target
                 }
             }
         }

@@ -43,7 +43,10 @@ namespace vp_objects {
 
         // track id filled by vp_track_node (child class) if it exists.
         int track_id = -1;
-
+        // cache of track rects in the previous frames, filled by track node if it exists. 
+        // we can draw / analyse depend on these track rects later.
+        std::vector<vp_objects::vp_rect> tracks;
+        
         // clone myself
         std::shared_ptr<vp_frame_face_target> clone();
 
