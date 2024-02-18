@@ -1,8 +1,4 @@
 
-- [B站视频演示](https://space.bilibili.com/3537123997125411)
-- [B站视频教程](https://www.bilibili.com/cheese/play/ss10426)
-- [C站视频教程](https://edu.csdn.net/course/detail/39283)
-
 ## VideoPipe
 
 一个用于视频结构化的框架。它可以处理复杂任务，如流读取（从本地或网络）、视频解码、基于深度学习模型的推理（分类/检测/特征提取/...）、跟踪及行为分析、屏幕上显示（OSD）、通过中间件进行数据代理（如Kafka/Socket）、视频编码和流推送（RTMP或本地文件）。框架采用面向插件的编码风格，我们可以使用独立的插件，即框架中的Node类型，来构建不同类型的视频分析管道。
