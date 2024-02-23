@@ -7,8 +7,18 @@ namespace vp_utils {
     {
     }
     
-    vp_logger::~vp_logger()
-    {
+    vp_logger::~vp_logger() {
+        die();
+        if (log_writer_th.joinable()) {
+            log_writer_th.join();
+        }
+    }
+
+    void vp_logger::die() {
+        alive = false;
+        std::lock_guard<std::mutex> guard(log_cache_mutex);
+        log_cache.push("die");
+        log_cache_semaphore.signal();
     }
 
     void vp_logger::init() {
@@ -72,12 +82,16 @@ namespace vp_utils {
     void vp_logger::log_write_run() {
         bool log_thres_warned = false;
         /* below code runs in single thread */
-        while (inited) {
+        while (inited && alive) {
             // wait for data
             log_cache_semaphore.wait();
             auto log = log_cache.front();
             log_cache.pop();
 
+            if (log == "die") {
+                continue;
+            }
+            
             /* watch the log cache size */
             auto log_cache_size = log_cache.size();
             if (!log_thres_warned && log_cache_size > log_cache_warn_threshold) {

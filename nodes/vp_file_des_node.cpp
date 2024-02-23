@@ -28,7 +28,7 @@ namespace vp_nodes {
     }
     
     vp_file_des_node::~vp_file_des_node() {
-
+        deinitialized();
     }
     
     // re-implementation, return nullptr.

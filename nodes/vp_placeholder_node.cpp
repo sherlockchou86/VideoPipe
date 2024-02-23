@@ -8,6 +8,6 @@ namespace vp_nodes {
     }
     
     vp_placeholder_node::~vp_placeholder_node() {
-
+        deinitialized();
     }
 }

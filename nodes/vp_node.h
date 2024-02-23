@@ -38,7 +38,10 @@ namespace vp_nodes {
         std::thread handle_thread;
         // dispatch thread
         std::thread dispatch_thread;
+
     protected:
+        // alive or not for node
+        bool alive = true;
 
         // by default we handle frame meta one by one, in some situations we need handle them batch by batch(such as vp_infer_node).
         // setting this member greater than 1 means the node will handle frame meta with batch, and vp_node::handle_frame_meta_by_batch(...) will be called other than vp_node::handle_frame_meta(...).
@@ -74,8 +77,10 @@ namespace vp_nodes {
         // define how to handle frame meta [batch by batch], ignored in src nodes.
         virtual void handle_frame_meta(const std::vector<std::shared_ptr<vp_objects::vp_frame_meta>>& meta_with_batch);
 
-        // called by child class after all resources have been initialized.
+        // called by child classes after all resources have been initialized (in the last constructor of chain).
         void initialized();
+        // called by child classes before all resources going to be destroyed (in the last destructor of chain)。
+        virtual void deinitialized();
 
         // push meta to the back of out_queue, then it will be pushed to next nodes in order.
         // take care it's different from vp_node::push_meta(meta) which will push meta to next nodes directly.
@@ -85,7 +90,7 @@ namespace vp_nodes {
         // protected as it can't be instanstiated directly.
         vp_node(std::string node_name);
     public:
-        ~vp_node();
+        virtual ~vp_node();
         // clear meaningful string, such as 'file_src_0' stands for file source node at channel 0.
         std::string node_name;
 
@@ -98,6 +103,10 @@ namespace vp_nodes {
         
         // detach myself from all previous nodes
         void detach();
+        // detach myself from specific previous nodes
+        void detach_from(std::vector<std::string> pre_node_names);
+        // detach myself from all previous nodes AND the same action on all next nodes(recursively), can be used to split the whole pipeline into single nodes before process exits.
+        void detach_recursively();
         // attach myself to previous nodes(can be a list)
         void attach_to(std::vector<std::shared_ptr<vp_node>> pre_nodes);
 

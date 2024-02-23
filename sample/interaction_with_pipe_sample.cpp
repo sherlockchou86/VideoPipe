@@ -22,8 +22,8 @@ int main() {
     VP_SET_LOG_LEVEL(vp_utils::vp_log_level::INFO);
 
     // create nodes
-    auto file_src_0 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_0", 0, "./test_video/10.mp4", 0.6);
-    auto file_src_1 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_1", 1, "./test_video/9.mp4", 0.6);
+    auto file_src_0 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_0", 0, "./test_video/face.mp4", 0.6);
+    auto file_src_1 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_1", 1, "./test_video/face2.mp4", 0.6);
     auto yunet_face_detector = std::make_shared<vp_nodes::vp_yunet_face_detector_node>("yunet_face_detector_0", "./models/face/face_detection_yunet_2022mar.onnx");
     auto sface_face_encoder = std::make_shared<vp_nodes::vp_sface_feature_encoder_node>("sface_face_encoder_0", "./models/face/face_recognition_sface_2021dec.onnx");
     
@@ -31,11 +31,11 @@ int main() {
     
     auto osd_0 = std::make_shared<vp_nodes::vp_face_osd_node_v2>("osd_0");
     auto screen_des_0 = std::make_shared<vp_nodes::vp_screen_des_node>("screen_des_0", 0);
-    auto rtmp_des_0 = std::make_shared<vp_nodes::vp_rtmp_des_node>("rtmp_des_0", 0, "rtmp://192.168.77.105/live/10000");
+    auto rtmp_des_0 = std::make_shared<vp_nodes::vp_rtmp_des_node>("rtmp_des_0", 0, "rtmp://192.168.77.60/live/10000");
 
     auto osd_1 = std::make_shared<vp_nodes::vp_face_osd_node_v2>("osd_1");
     auto screen_des_1 = std::make_shared<vp_nodes::vp_screen_des_node>("screen_des_1", 1);
-    auto rtmp_des_1 = std::make_shared<vp_nodes::vp_rtmp_des_node>("rtmp_des_1", 1, "rtmp://192.168.77.105/live/10000");
+    auto rtmp_des_1 = std::make_shared<vp_nodes::vp_rtmp_des_node>("rtmp_des_1", 1, "rtmp://192.168.77.60/live/10000");
 
     // construct pipeline
     yunet_face_detector->attach_to({file_src_0, file_src_1});
@@ -90,10 +90,11 @@ int main() {
              std::cout << "invalid input!" << std::endl;
              break;
         }
-        
     }
 
     std::cout << "interaction_with_pipe sample exits..." << std::endl;
+    file_src_0->detach_recursively();
+    file_src_1->detach_recursively();
 }
 
 #endif

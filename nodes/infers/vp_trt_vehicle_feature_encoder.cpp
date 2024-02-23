@@ -11,7 +11,7 @@ namespace vp_nodes {
     }
     
     vp_trt_vehicle_feature_encoder::~vp_trt_vehicle_feature_encoder() {
-
+        deinitialized();
     }
 
     void vp_trt_vehicle_feature_encoder::run_infer_combinations(const std::vector<std::shared_ptr<vp_objects::vp_frame_meta>>& frame_meta_with_batch) {

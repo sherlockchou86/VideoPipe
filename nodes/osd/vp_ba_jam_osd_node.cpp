@@ -11,8 +11,8 @@ namespace vp_nodes {
         this->initialized();
     }
     
-    vp_ba_jam_osd_node::~vp_ba_jam_osd_node()
-    {
+    vp_ba_jam_osd_node::~vp_ba_jam_osd_node() {
+        deinitialized();
     }
 
     std::shared_ptr<vp_objects::vp_meta> vp_ba_jam_osd_node::handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) {

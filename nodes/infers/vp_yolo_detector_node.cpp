@@ -26,7 +26,7 @@ namespace vp_nodes {
     }
     
     vp_yolo_detector_node::~vp_yolo_detector_node() {
-
+        deinitialized();
     }
     
     void vp_yolo_detector_node::postprocess(const std::vector<cv::Mat>& raw_outputs, const std::vector<std::shared_ptr<vp_objects::vp_frame_meta>>& frame_meta_with_batch) {

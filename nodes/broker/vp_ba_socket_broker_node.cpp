@@ -22,7 +22,8 @@ namespace vp_nodes {
     }
     
     vp_ba_socket_broker_node::~vp_ba_socket_broker_node() {
-
+        deinitialized();
+        stop_broking();
     }
 
     void vp_ba_socket_broker_node::format_msg(const std::shared_ptr<vp_objects::vp_frame_meta>& meta, std::string& msg) {

@@ -14,7 +14,7 @@ namespace vp_nodes {
     }
     
     vp_ba_jam_node::~vp_ba_jam_node() {
-
+        deinitialized();
     }
 
     std::string vp_ba_jam_node::to_string() {

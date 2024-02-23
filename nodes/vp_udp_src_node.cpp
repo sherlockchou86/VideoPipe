@@ -17,7 +17,7 @@ namespace vp_nodes {
     }
     
     vp_udp_src_node::~vp_udp_src_node() {
-
+        deinitialized();
     }
 
     // define how to receive video stream via udp, create frame meta etc.
@@ -28,7 +28,7 @@ namespace vp_nodes {
         int video_height = 0;
         int fps = 0;
 
-        while(true) {
+        while(alive) {
             // check if need work
             gate.knock();
 
@@ -49,13 +49,10 @@ namespace vp_nodes {
                 original_fps = fps;
                 original_width = video_width;
                 original_height = video_height;
-
-                // stream_info_hooker activated if need
-                if (stream_info_hooker) {
-                    vp_stream_info stream_info {channel_index, fps, video_width, video_height, to_string()};
-                    stream_info_hooker(node_name, stream_info);
-                }
             }
+            // stream_info_hooker activated if need
+            vp_stream_info stream_info {channel_index, fps, video_width, video_height, to_string()};
+            invoke_stream_info_hooker(node_name, stream_info);
 
             udp_capture >> frame;
             if(frame.empty()) {
@@ -90,6 +87,10 @@ namespace vp_nodes {
                 VP_DEBUG(vp_utils::string_format("[%s] after handling meta, out_queue.size()==>%d", node_name.c_str(), out_queue.size()));
             }       
         }
+
+        // send dead flag for dispatch_thread
+        this->out_queue.push(nullptr);
+        this->out_queue_semaphore.signal();    
     }
 
     // return stream uri

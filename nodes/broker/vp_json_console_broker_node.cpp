@@ -12,7 +12,8 @@ namespace vp_nodes {
     }
     
     vp_json_console_broker_node::~vp_json_console_broker_node() {
-
+        deinitialized();
+        stop_broking();
     }
     
     void vp_json_console_broker_node::format_msg(const std::shared_ptr<vp_objects::vp_frame_meta>& meta, std::string& msg) {

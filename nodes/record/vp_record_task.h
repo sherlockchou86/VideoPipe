@@ -67,7 +67,8 @@ namespace vp_nodes {
         std::thread record_task_th;
         // record thread func, implemented by child class
         virtual void record_task_run() = 0;
-
+        // wait thread exit in vp_record_task
+        void stop_task();
         // preprocess, choose frame type (osd or not) and resize
         void preprocess(std::shared_ptr<vp_objects::vp_frame_meta>& frame_to_record, cv::Mat& data);
         // get file extension override by specific class (for example, .mp4 for video and .jpg for image)

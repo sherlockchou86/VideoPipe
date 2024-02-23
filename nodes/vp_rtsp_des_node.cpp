@@ -32,6 +32,7 @@ namespace vp_nodes {
     }
     
     vp_rtsp_des_node::~vp_rtsp_des_node() { 
+        deinitialized();
     }
     GstRTSPServer* vp_rtsp_des_node::rtsp_server = NULL;
     std::shared_ptr<vp_objects::vp_meta> vp_rtsp_des_node::handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) {

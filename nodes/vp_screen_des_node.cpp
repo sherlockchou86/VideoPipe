@@ -16,7 +16,7 @@ namespace vp_nodes {
     }
     
     vp_screen_des_node::~vp_screen_des_node() {
-
+        deinitialized();
     }
 
     // re-implementation, return nullptr.

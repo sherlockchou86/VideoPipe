@@ -33,7 +33,7 @@ namespace vp_nodes {
     }
     
     vp_seg_osd_node::~vp_seg_osd_node() {
-
+        deinitialized();
     }
 
     std::shared_ptr<vp_objects::vp_meta> vp_seg_osd_node::handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) {

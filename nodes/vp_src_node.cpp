@@ -21,6 +21,11 @@ namespace vp_nodes {
 
     }
     
+    void vp_src_node::deinitialized() {
+        alive = false;
+        gate.open();
+        vp_node::deinitialized();
+    }
 
     void vp_src_node::handle_run() {
         throw vp_excepts::vp_not_implemented_error("must have re-implementaion for 'handle_run' method in src nodes!");

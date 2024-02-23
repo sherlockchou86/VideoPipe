@@ -23,12 +23,12 @@ int main() {
     VP_LOGGER_INIT();
 
     // create nodes
-    auto file_src_0 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_0", 0, "./test_video/10.mp4", 0.6);
+    auto file_src_0 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_0", 0, "./test_video/face.mp4", 0.8);
     auto yunet_face_detector_0 = std::make_shared<vp_nodes::vp_yunet_face_detector_node>("yunet_face_detector_0", "./models/face/face_detection_yunet_2022mar.onnx");
     auto sface_face_encoder_0 = std::make_shared<vp_nodes::vp_sface_feature_encoder_node>("sface_face_encoder_0", "./models/face/face_recognition_sface_2021dec.onnx");
     auto osd_0 = std::make_shared<vp_nodes::vp_face_osd_node_v2>("osd_0");
     auto screen_des_0 = std::make_shared<vp_nodes::vp_screen_des_node>("screen_des_0", 0);
-    auto rtmp_des_0 = std::make_shared<vp_nodes::vp_rtmp_des_node>("rtmp_des_0", 0, "rtmp://192.168.77.105/live/10000");
+    auto rtmp_des_0 = std::make_shared<vp_nodes::vp_rtmp_des_node>("rtmp_des_0", 0, "rtmp://192.168.77.60/live/10000");
 
     // construct pipeline
     yunet_face_detector_0->attach_to({file_src_0});
@@ -43,7 +43,11 @@ int main() {
 
     // for debug purpose
     vp_utils::vp_analysis_board board({file_src_0});
-    board.display();
+    board.display(1, false);
+
+    std::string wait;
+    std::getline(std::cin, wait);
+    file_src_0->detach_recursively();
 }
 
 #endif

@@ -38,6 +38,9 @@ namespace vp_nodes {
         // control to work or not
         // all derived class need depend on the value to check if work or not (start/stop)
         vp_utils::vp_gate gate;
+
+        // new logic for sending dead flag
+        virtual void deinitialized() override;
     public:
         ~vp_src_node();
 

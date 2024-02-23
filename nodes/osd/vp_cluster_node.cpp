@@ -22,7 +22,7 @@ namespace vp_nodes {
     }
     
     vp_cluster_node::~vp_cluster_node() {
-        
+        deinitialized();        
     }
 
     // please refer to ../../third_party/trt_vehicle/main/vehicle_cluster.cpp

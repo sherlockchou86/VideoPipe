@@ -31,8 +31,8 @@ int main() {
     VP_LOGGER_INIT();
 
     // create nodes
-    auto file_src_0 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_0", 0, "./test_video/10.mp4", 0.6);
-    auto file_src_1 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_1", 1, "./test_video/9.mp4", 0.6);
+    auto file_src_0 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_0", 0, "./test_video/face.mp4", 0.6);
+    auto file_src_1 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_1", 1, "./test_video/face2.mp4", 0.6);
     auto yunet_face_detector = std::make_shared<vp_nodes::vp_yunet_face_detector_node>("yunet_face_detector_0", "./models/face/face_detection_yunet_2022mar.onnx");
     auto sface_face_encoder = std::make_shared<vp_nodes::vp_sface_feature_encoder_node>("sface_face_encoder_0", "./models/face/face_recognition_sface_2021dec.onnx");
     auto track = std::make_shared<vp_nodes::vp_sort_track_node>("track", vp_nodes::vp_track_for::FACE);
@@ -110,6 +110,8 @@ int main() {
     }
 
     std::cout << "record sample exits..." << std::endl;
+    file_src_0->detach_recursively();
+    file_src_1->detach_recursively();
 }
 
 #endif

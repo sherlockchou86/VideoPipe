@@ -8,12 +8,15 @@
 #define vehicle_body_scan_sample 0
 #define body_scan_and_plate_detect_sample 0
 #define app_src_sample 0
+#define dynamic_pipeline_sample 1
+#define dynamic_pipeline_sample2 0
 #define multi_trt_infer_nodes_sample 0
 #define vehicle_cluster_based_on_classify_encoding_sample 0
 #define vehicle_similiarity_search_sample 0
 #define face_similiarity_search_sample 0
 #define vehicle_property_and_similiarity_search_sample 0
 #define vehicle_ba_sample 0
+#define face_recognize_sample 0
 
 #define _1_N_N_sample 0
 #define _N_1_N_sample 0
@@ -38,7 +41,7 @@
 #define stitch_sample 0
 #define ba_crossline_sample 0
 #define ba_stop_sample 0
-#define ba_jam_sample 1
+#define ba_jam_sample 0
 
 #define multi_infer_test 0
 #define image_des_test 0

@@ -15,7 +15,7 @@ namespace vp_nodes {
     }
     
     vp_osd_node_v2::~vp_osd_node_v2() {
-
+        deinitialized();
     }
 
     std::shared_ptr<vp_objects::vp_meta> vp_osd_node_v2::handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) {

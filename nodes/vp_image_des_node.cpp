@@ -45,7 +45,7 @@ namespace vp_nodes {
     }
     
     vp_image_des_node::~vp_image_des_node() {
-
+        deinitialized();
     }
 
     std::shared_ptr<vp_objects::vp_meta> vp_image_des_node::handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) {

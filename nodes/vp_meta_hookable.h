@@ -1,5 +1,6 @@
 #pragma once
 #include <functional>
+#include <mutex>
 #include <string>
 #include <memory>
 
@@ -14,6 +15,10 @@ namespace vp_nodes {
     // this class is inherited by vp_node only.
     class vp_meta_hookable {
     protected:
+        std::mutex meta_arriving_hooker_lock;
+        std::mutex meta_handling_hooker_lock;
+        std::mutex meta_handled_hooker_lock;
+        std::mutex meta_leaving_hooker_lock;
         // hooker activated when meta is arriving at node (pushed to in_queue of vp_node, the 1st port in node).
         vp_meta_hooker meta_arriving_hooker;
         // hooker activated when meta is to be handled inside node (poped from in_queue of vp_node, the 2nd port in node).
@@ -27,19 +32,51 @@ namespace vp_nodes {
         ~vp_meta_hookable() {}
 
         void set_meta_arriving_hooker(vp_meta_hooker meta_arriving_hooker) {
+            std::lock_guard<std::mutex> guard(meta_arriving_hooker_lock);
             this->meta_arriving_hooker = meta_arriving_hooker;
         }
 
         void set_meta_handling_hooker(vp_meta_hooker meta_handling_hooker) {
+            std::lock_guard<std::mutex> guard(meta_handling_hooker_lock);
             this->meta_handling_hooker = meta_handling_hooker;
         }
 
         void set_meta_handled_hooker(vp_meta_hooker meta_handled_hooker) {
+            std::lock_guard<std::mutex> guard(meta_handled_hooker_lock);
             this->meta_handled_hooker = meta_handled_hooker;
         }
 
         void set_meta_leaving_hooker(vp_meta_hooker meta_leaving_hooker) {
+            std::lock_guard<std::mutex> guard(meta_leaving_hooker_lock);
             this->meta_leaving_hooker = meta_leaving_hooker;
+        }
+
+        void invoke_meta_arriving_hooker(std::string node_name, int queue_size, std::shared_ptr<vp_objects::vp_meta> meta) {
+            std::lock_guard<std::mutex> guard(meta_arriving_hooker_lock);
+            if (this->meta_arriving_hooker) {
+                this->meta_arriving_hooker(node_name, queue_size, meta);
+            }
+        }
+
+        void invoke_meta_handling_hooker(std::string node_name, int queue_size, std::shared_ptr<vp_objects::vp_meta> meta) {
+            std::lock_guard<std::mutex> guard(meta_handling_hooker_lock);
+            if (this->meta_handling_hooker) {
+                this->meta_handling_hooker(node_name, queue_size, meta);
+            }
+        }
+
+        void invoke_meta_handled_hooker(std::string node_name, int queue_size, std::shared_ptr<vp_objects::vp_meta> meta) {
+            std::lock_guard<std::mutex> guard(meta_handled_hooker_lock);
+            if (this->meta_handled_hooker) {
+                this->meta_handled_hooker(node_name, queue_size, meta);
+            }
+        }
+
+        void invoke_meta_leaving_hooker(std::string node_name, int queue_size, std::shared_ptr<vp_objects::vp_meta> meta) {
+            std::lock_guard<std::mutex> guard(meta_leaving_hooker_lock);
+            if (this->meta_leaving_hooker) {
+                this->meta_leaving_hooker(node_name, queue_size, meta);
+            }
         }
     };
 }

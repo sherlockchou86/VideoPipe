@@ -20,7 +20,7 @@ namespace vp_nodes {
     }
 
     vp_enet_seg_node::~vp_enet_seg_node() {
-
+        deinitialized();
     }
 
     void vp_enet_seg_node::postprocess(const std::vector<cv::Mat>& raw_outputs, const std::vector<std::shared_ptr<vp_objects::vp_frame_meta>>& frame_meta_with_batch) {

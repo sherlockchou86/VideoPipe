@@ -14,7 +14,7 @@ namespace vp_nodes {
     }
     
     vp_ba_crossline_node::~vp_ba_crossline_node() {
-
+        deinitialized();
     }
     
     std::string vp_ba_crossline_node::to_string() {

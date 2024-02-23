@@ -4,10 +4,26 @@
 #include "../vp_pipe_checker.h"
 
 namespace vp_utils {
-        
     vp_analysis_board::vp_analysis_board(std::vector<std::shared_ptr<vp_nodes::vp_node>> src_nodes_in_pipe):
-        src_nodes_in_pipe(src_nodes_in_pipe) {
-        
+        src_nodes_in_pipe(src_nodes_in_pipe) {   
+        init();
+    }
+    
+    vp_analysis_board::~vp_analysis_board() {
+        // set alive to false and wait threads exits
+        alive = false;
+        if (display_th.joinable()) {
+            display_th.join();
+        }
+        if (rtmp_th.joinable()) {
+            rtmp_th.join();
+        }
+    }
+
+    void vp_analysis_board::init() {
+        src_nodes_on_screen.clear();
+        des_nodes_on_screen.clear();
+
         // check pipe
         vp_pipe_checker pipe_checker;
         pipe_checker(src_nodes_in_pipe);
@@ -31,11 +47,14 @@ namespace vp_utils {
         render_layer(src_nodes_on_screen, bg_canvas);
 
         // save to local by default
-        save("./vp_analysis_board.png");
+        save(board_title + ".png");
     }
-    
-    vp_analysis_board::~vp_analysis_board()
-    {
+    void vp_analysis_board::reload(std::vector<std::shared_ptr<vp_nodes::vp_node>> new_src_nodes_in_pipe) {
+        std::lock_guard<std::mutex> guard(reload_lock);
+        if (new_src_nodes_in_pipe.size() != 0) {
+            this->src_nodes_in_pipe = new_src_nodes_in_pipe;
+        }
+        init();
     }
 
     void vp_analysis_board::save(std::string path) {
@@ -44,17 +63,21 @@ namespace vp_utils {
 
     void vp_analysis_board::display(int interval, bool block) {
         assert(interval > 0);
-        assert(!displaying);
-
+        if (displaying) {
+            return;
+        }
+        
         auto display_func = [&, interval](){
-            while (true) {
+            while (alive) {
                 auto loop_start = std::chrono::system_clock::now();
-
-                // deep copy the static background
-                cv::Mat mat_to_display = bg_canvas.clone();
-                // render dynamic parts starting with 1 st layer
-                render_layer(src_nodes_on_screen, mat_to_display, false);
-                cv::imshow("vp_statistics_board", mat_to_display);
+                {
+                    std::lock_guard<std::mutex> guard(reload_lock);  // in case it reloading
+                    // deep copy the static background
+                    cv::Mat mat_to_display = bg_canvas.clone();
+                    // render dynamic parts starting with 1 st layer
+                    render_layer(src_nodes_on_screen, mat_to_display, false);
+                    cv::imshow(board_title, mat_to_display);
+                }
 
                 // calculate the time need wait for
                 auto loop_cost = std::chrono::system_clock::now() - loop_start;
@@ -70,22 +93,25 @@ namespace vp_utils {
     }
 
     void vp_analysis_board::push_rtmp(std::string rtmp, int bitrate) {
-        assert(!displaying);
+        if (displaying) {
+            return;
+        }
         auto fps = 1;
         auto rtmp_url = vp_utils::string_format(gst_template, bitrate, rtmp.c_str());
         // 1 fps by default
         assert(rtmp_writer.open(rtmp_url, cv::CAP_GSTREAMER, fps, {bg_canvas.cols, bg_canvas.rows}));
 
         auto display_func = [&, fps](){
-            while (true) {
+            while (alive) {
                 auto loop_start = std::chrono::system_clock::now();
-
-                // deep copy the static background
-                cv::Mat mat_to_display = bg_canvas.clone();
-                // render dynamic parts starting with 1 st layer
-                render_layer(src_nodes_on_screen, mat_to_display, false);
-
-                rtmp_writer.write(mat_to_display);
+                {
+                    std::lock_guard<std::mutex> guard(reload_lock); // in case it reloading
+                    // deep copy the static background
+                    cv::Mat mat_to_display = bg_canvas.clone();
+                    // render dynamic parts starting with 1 st layer
+                    render_layer(src_nodes_on_screen, mat_to_display, false);
+                    rtmp_writer.write(mat_to_display);
+                }
 
                 // calculate the time need wait for
                 auto loop_cost = std::chrono::system_clock::now() - loop_start;

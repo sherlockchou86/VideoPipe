@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <map>
+#include <mutex>
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/imgcodecs.hpp>
@@ -26,6 +27,9 @@ namespace vp_utils {
         const int canvas_gap_vertical = 60;
         const int node_gap_horizontal = 40;
         const int node_gap_vertical = 10;
+
+        std::string board_title = "vp_analysis_board";
+        bool alive = true;
 
         int canvas_width = 0;
         int canvas_height = 0;
@@ -62,7 +66,13 @@ namespace vp_utils {
 
         // map nodes in memory to screen, one layer by layer.
         void map_nodes(std::vector<std::shared_ptr<vp_node_on_screen>> nodes_on_screen, int layer);
-        
+
+        // initialize resource
+        void init();
+
+        // sync for reload operation
+        std::mutex reload_lock;
+
         // tool methods
         std::function<int(int)> layer_base_left_cal = [=](int layer_index) {return canvas_gap_horizontal + layer_index * ( node_width + node_gap_horizontal);};
         std::function<int(int)> layer_base_top_cal = [=](int num_nodes_in_layer) {return (canvas_height - (num_nodes_in_layer * node_height + (num_nodes_in_layer - 1) * node_gap_vertical)) / 2; };
@@ -78,5 +88,8 @@ namespace vp_utils {
 
         // display pipe by rtmp and refresh it automatically
         void push_rtmp(std::string rtmp, int bitrate = 1024);
+
+        // reload pipeline with new src nodes
+        void reload(std::vector<std::shared_ptr<vp_nodes::vp_node>> new_src_nodes_in_pipe = std::vector<std::shared_ptr<vp_nodes::vp_node>>());
     };
 }

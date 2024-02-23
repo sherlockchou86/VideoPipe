@@ -62,7 +62,12 @@ int main() {
 
     // for debug purpose
     vp_utils::vp_analysis_board board({file_src_0, file_src_1});
-    board.display();
+    board.display(1, false);
+
+    std::string wait;
+    std::getline(std::cin, wait);
+    file_src_0->detach_recursively();
+    file_src_1->detach_recursively();
 }
 
 #endif

@@ -10,8 +10,7 @@ namespace vp_nodes {
                                 track_for(track_for) {
     }
     
-    vp_track_node::~vp_track_node()
-    {
+    vp_track_node::~vp_track_node() {
     }
 
     std::shared_ptr<vp_objects::vp_meta> vp_track_node::handle_control_meta(std::shared_ptr<vp_objects::vp_control_meta> meta) {

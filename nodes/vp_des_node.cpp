@@ -42,9 +42,7 @@ namespace vp_nodes {
         }
 
         // activate the stream status hooker if need
-        if (stream_status_hooker) {
-            stream_status_hooker(node_name, stream_status);
-        }
+        invoke_stream_status_hooker(node_name, stream_status);
         
         return nullptr;
     }

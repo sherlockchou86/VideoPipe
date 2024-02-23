@@ -41,7 +41,7 @@ namespace vp_nodes {
     }
     
     vp_classifier_node::~vp_classifier_node() {
-
+        deinitialized();
     }
 
     void vp_classifier_node::postprocess(const std::vector<cv::Mat>& raw_outputs, const std::vector<std::shared_ptr<vp_objects::vp_frame_meta>>& frame_meta_with_batch) {

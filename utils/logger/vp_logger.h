@@ -36,6 +36,9 @@ namespace vp_utils {
         // initialized or not
         bool inited = false;
 
+        bool alive = true;
+        void die();
+
         vp_logger(/* args */);
 
         // write to devices

@@ -14,7 +14,7 @@ namespace vp_nodes {
     }
     
     vp_split_node::~vp_split_node() {
-
+        deinitialized();
     }
 
     // override vp_meta_publisher::push_meta

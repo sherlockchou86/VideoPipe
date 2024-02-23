@@ -42,11 +42,12 @@ int main() {
     board.display(1, false); // no block since we need interactions from console later
 
     // simulate push frame to pipeline regularly in a separate thread
-    auto simulate_run = [app_src_0]() {
+    bool exit = false;
+    auto simulate_run = [&]() {
         auto index = 0;
         auto count = 0;
         auto path = "images/text/";
-        while (true) {
+        while (!exit) {
             auto frame = cv::imread(path + std::to_string(index) + ".jpg");
             assert(!frame.empty());
             
@@ -79,6 +80,9 @@ int main() {
     }
 
     std::cout << "app_src_sample sample exits..." << std::endl;
+    exit = true;
+    simulate_thread.join();
+    app_src_0->detach_recursively();
 }
 
 #endif

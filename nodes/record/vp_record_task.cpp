@@ -20,11 +20,17 @@ namespace vp_nodes {
     }
 
     vp_record_task::~vp_record_task() {
-        if (record_task_th.joinable()) {
-            record_task_th.join();
-        }
+
     }
 
+    void vp_record_task::stop_task() {
+        status = vp_record_task_status::NOSTRAT;
+        frames_to_record.push_back(nullptr);
+        cache_semaphore.signal();
+        if (record_task_th.joinable()) {
+            record_task_th.join();
+        }        
+    }
     std::string vp_record_task::get_full_record_path() {
         // full_record_path already generated
         if (!full_record_path.empty()) {

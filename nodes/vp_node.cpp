@@ -15,17 +15,20 @@ namespace vp_nodes {
     void vp_node::handle_run() {
         // cache for batch handling if need
         std::vector<std::shared_ptr<vp_objects::vp_frame_meta>> frame_meta_batch_cache;
-        while (true) {
+        while (alive) {
             // wait for producer, make sure in_queue is not empty.
             this->in_queue_semaphore.wait();
 
             VP_DEBUG(vp_utils::string_format("[%s] before handling meta, in_queue.size()==>%d", node_name.c_str(), in_queue.size()));
             auto in_meta = this->in_queue.front();
             
-            // handling hooker activated if need
-            if (this->meta_handling_hooker) {
-                meta_handling_hooker(node_name, in_queue.size(), in_meta);
+            // dead flag
+            if (in_meta == nullptr) {
+                continue;
             }
+            
+            // handling hooker activated if need
+            invoke_meta_handling_hooker(node_name, in_queue.size(), in_meta);
 
             std::shared_ptr<vp_objects::vp_meta> out_meta;
             auto batch_complete = false;
@@ -68,9 +71,7 @@ namespace vp_nodes {
                 this->out_queue.push(out_meta);
 
                 // handled hooker activated if need
-                if (this->meta_handled_hooker) {
-                    meta_handled_hooker(node_name, out_queue.size(), out_meta);
-                }
+                invoke_meta_handled_hooker(node_name, out_queue.size(), out_meta);
 
                 // notify consumer of out_queue
                 this->out_queue_semaphore.signal();
@@ -85,9 +86,7 @@ namespace vp_nodes {
                     this->out_queue.push(i);
 
                     // handled hooker activated if need
-                    if (this->meta_handled_hooker) {
-                        meta_handled_hooker(node_name, out_queue.size(), i);
-                    }
+                    invoke_meta_handled_hooker(node_name, out_queue.size(), i);
 
                     // notify consumer of out_queue
                     this->out_queue_semaphore.signal();
@@ -97,21 +96,26 @@ namespace vp_nodes {
                 frame_meta_batch_cache.clear();
             }
         }
+        // send dead flag for dispatch_thread
+        this->out_queue.push(nullptr);
+        this->out_queue_semaphore.signal();
     }
 
     // there is only one thread poping from the out_queue, we don't use lock here when poping.
     void vp_node::dispatch_run() {
-        while (true) {
+        while (alive) {
             // wait for producer, make sure out_queue is not empty.
             this->out_queue_semaphore.wait();
 
             VP_DEBUG(vp_utils::string_format("[%s] before dispatching meta, out_queue.size()==>%d", node_name.c_str(), out_queue.size()));
             auto out_meta = this->out_queue.front();
+            // dead flag
+            if (out_meta == nullptr) {
+                continue;
+            }
 
             // leaving hooker activated if need
-            if (this->meta_leaving_hooker) {
-                meta_leaving_hooker(node_name, out_queue.size(), out_meta);
-            }
+            invoke_meta_leaving_hooker(node_name, out_queue.size(), out_meta);
 
             // do something..
             this->push_meta(out_meta);
@@ -142,9 +146,7 @@ namespace vp_nodes {
         this->in_queue.push(meta);
 
         // arriving hooker activated if need
-        if (this->meta_arriving_hooker) {
-            meta_arriving_hooker(node_name, in_queue.size(), meta);
-        }
+        invoke_meta_arriving_hooker(node_name, in_queue.size(), meta);
         
         // notify consumer of in_queue
         this->in_queue_semaphore.signal();
@@ -156,6 +158,26 @@ namespace vp_nodes {
             i->remove_subscriber(shared_from_this());
         }
         this->pre_nodes.clear();
+    }
+
+    void vp_node::detach_from(std::vector<std::string> pre_node_names) {
+        for (auto i = this->pre_nodes.begin(); i != this->pre_nodes.end();) {
+            if (std::find(pre_node_names.begin(), pre_node_names.end(), (*i)->node_name) != pre_node_names.end()) {
+                (*i)->remove_subscriber(shared_from_this());
+                i = this->pre_nodes.erase(i);
+            }
+            else {
+                i++;
+            }
+        }
+    }
+
+    void vp_node::detach_recursively() {
+        detach();
+        auto nodes = next_nodes();
+        for (auto& n: nodes) {
+            n->detach_recursively();
+        }
     }
 
     void vp_node::attach_to(std::vector<std::shared_ptr<vp_node>> pre_nodes) {
@@ -175,13 +197,25 @@ namespace vp_nodes {
 
     void vp_node::initialized() {
         // start threads since all resources have been initialized
-        if (1)
-        {
-            // TO-DO, check if started already
-        }
-        
         this->handle_thread = std::thread(&vp_node::handle_run, this);
         this->dispatch_thread = std::thread(&vp_node::dispatch_run, this);
+    }
+
+    void vp_node::deinitialized() {
+        // send dead flag
+        alive = false;
+        {
+            std::lock_guard<std::mutex> guard(this->in_queue_lock);
+            this->in_queue.push(nullptr);
+            this->in_queue_semaphore.signal();
+        }
+        // wait for threads exits in vp_node
+        if (handle_thread.joinable()) {
+            handle_thread.join();
+        }
+        if (dispatch_thread.joinable()) {
+            dispatch_thread.join();
+        }
     }
 
     vp_node_type vp_node::node_type() {
@@ -192,6 +226,7 @@ namespace vp_nodes {
 
     std::vector<std::shared_ptr<vp_node>> vp_node::next_nodes() {
         std::vector<std::shared_ptr<vp_node>> next_nodes;
+        std::lock_guard<std::mutex> guard(this->subscribers_lock);
         for(auto & i: this->subscribers) {
             next_nodes.push_back(std::dynamic_pointer_cast<vp_node>(i));
         }

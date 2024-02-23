@@ -22,7 +22,7 @@ namespace vp_nodes {
     }
     
     vp_mask_rcnn_detector_node::~vp_mask_rcnn_detector_node() {
-
+        deinitialized();
     }
 
 

@@ -9,6 +9,6 @@ namespace vp_nodes {
     }
     
     vp_fake_des_node::~vp_fake_des_node() {
-
+        deinitialized();
     }
 }

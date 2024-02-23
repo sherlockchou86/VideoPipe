@@ -18,7 +18,7 @@ namespace vp_nodes {
     }
     
     vp_file_src_node::~vp_file_src_node() {
-
+        deinitialized();
     }
     
     // define how to read video from local file, create frame meta etc.
@@ -30,7 +30,7 @@ namespace vp_nodes {
         int fps = 0;
         std::chrono::milliseconds delta;
 
-        while(true) {
+        while(alive) {
             // check if need work
             gate.knock();
 
@@ -53,13 +53,10 @@ namespace vp_nodes {
                 original_fps = fps;
                 original_width = video_width;
                 original_height = video_height;
-
-                // stream_info_hooker activated if need
-                if (stream_info_hooker) {
-                    vp_stream_info stream_info {channel_index, fps, video_width, video_height, file_path};
-                    stream_info_hooker(node_name, stream_info);
-                }
             }
+            // stream_info_hooker activated if need
+            vp_stream_info stream_info {channel_index, fps, video_width, video_height, file_path};
+            invoke_stream_info_hooker(node_name, stream_info);
             
             file_capture >> frame;
             if(frame.empty()) {
@@ -105,6 +102,10 @@ namespace vp_nodes {
                 std::this_thread::sleep_for(delta - snap);
             }
         }
+
+        // send dead flag for dispatch_thread
+        this->out_queue.push(nullptr);
+        this->out_queue_semaphore.signal();        
     }
 
     // return stream path

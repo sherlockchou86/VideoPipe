@@ -18,7 +18,7 @@ namespace vp_nodes {
     }
 
     vp_image_record_task::~vp_image_record_task() {
-
+        stop_task();
     }
 
     void vp_image_record_task::record_task_run() {
@@ -31,6 +31,11 @@ namespace vp_nodes {
             cache_semaphore.wait();
 
             auto frame_to_record = frames_to_record.front();
+            if (frame_to_record == nullptr) {
+                //dead flag
+                continue;
+            }
+
             cv::Mat frame_data;
             // preprocess, vp_frame_meta -> cv::Mat
             preprocess(frame_to_record, frame_data);

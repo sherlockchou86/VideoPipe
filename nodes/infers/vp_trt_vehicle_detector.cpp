@@ -11,7 +11,7 @@ namespace vp_nodes {
     }
     
     vp_trt_vehicle_detector::~vp_trt_vehicle_detector() {
-
+        deinitialized();
     }
 
     // please refer to vp_infer_node::run_infer_combinations

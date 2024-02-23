@@ -37,7 +37,7 @@ namespace vp_nodes {
     }
     
     vp_image_src_node::~vp_image_src_node() {
-
+        deinitialized();
     }
 
     void vp_image_src_node::handle_run() {
@@ -47,7 +47,7 @@ namespace vp_nodes {
         int fps = 0;
         std::chrono::milliseconds delta;
 
-        while(true) {
+        while(alive) {
             // check if need work
             gate.knock();
 
@@ -73,13 +73,10 @@ namespace vp_nodes {
                 original_fps = fps;
                 original_width = video_width;
                 original_height = video_height;
-
-                // stream_info_hooker activated if need
-                if (stream_info_hooker) {
-                    vp_stream_info stream_info {channel_index, fps, video_width, video_height, to_string()};
-                    stream_info_hooker(node_name, stream_info);
-                }
             }
+            // stream_info_hooker activated if need
+            vp_stream_info stream_info {channel_index, fps, video_width, video_height, to_string()};
+            invoke_stream_info_hooker(node_name, stream_info);
             
             image_capture >> frame;
             if(frame.empty()) {
@@ -121,6 +118,10 @@ namespace vp_nodes {
                 std::this_thread::sleep_for(delta - snap);
             }
         }
+
+        // send dead flag for dispatch_thread
+        this->out_queue.push(nullptr);
+        this->out_queue_semaphore.signal();    
     }
 
     std::string vp_image_src_node::to_string() {

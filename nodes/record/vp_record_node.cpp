@@ -25,7 +25,7 @@ namespace vp_nodes {
     }
     
     vp_record_node::~vp_record_node() {
-
+        deinitialized();
     }
 
     std::shared_ptr<vp_objects::vp_meta> vp_record_node::handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) {

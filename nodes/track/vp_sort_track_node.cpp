@@ -10,7 +10,7 @@ namespace vp_nodes {
     }
     
     vp_sort_track_node::~vp_sort_track_node() {
-
+        deinitialized();
     }
 
     void vp_sort_track_node::track(int channel_index, const std::vector<vp_objects::vp_rect>& target_rects, 

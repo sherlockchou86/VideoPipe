@@ -36,6 +36,7 @@ namespace vp_nodes {
         std::thread broking_th;
         // broking function
         void broking_run();
+        bool broking = true;
     protected:
         virtual std::shared_ptr<vp_objects::vp_meta> handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) override final;
         virtual std::shared_ptr<vp_objects::vp_meta> handle_control_meta(std::shared_ptr<vp_objects::vp_control_meta> meta) override final;
@@ -44,7 +45,8 @@ namespace vp_nodes {
         virtual void format_msg(const std::shared_ptr<vp_objects::vp_frame_meta>& meta, std::string& msg) = 0;
         // broke message to external modules which SHOULD be implemented in child class.
         virtual void broke_msg(const std::string& msg) = 0;
-
+        // wait thread exits in vp_msg_broker_node
+        void stop_broking();
         // node applied for what type of target
         vp_broke_for broke_for = vp_broke_for::NORMAL;
 
@@ -58,6 +60,6 @@ namespace vp_nodes {
                         vp_broke_for broke_for = vp_broke_for::NORMAL, 
                         int broking_cache_warn_threshold = 50, 
                         int broking_cache_ignore_threshold = 200);
-        virtual ~vp_msg_broker_node();
+        ~vp_msg_broker_node();
     };
 }

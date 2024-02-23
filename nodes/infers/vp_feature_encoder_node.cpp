@@ -10,6 +10,6 @@ namespace vp_nodes {
     }
     
     vp_feature_encoder_node::~vp_feature_encoder_node() {
-        
+        deinitialized();        
     } 
 }

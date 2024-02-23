@@ -12,7 +12,7 @@ namespace vp_nodes {
     }
     
     vp_trt_vehicle_plate_detector_v2::~vp_trt_vehicle_plate_detector_v2() {
-
+        deinitialized();
     }
 
     void vp_trt_vehicle_plate_detector_v2::postprocess(const std::vector<cv::Mat>& raw_outputs, const std::vector<std::shared_ptr<vp_objects::vp_frame_meta>>& frame_meta_with_batch) {

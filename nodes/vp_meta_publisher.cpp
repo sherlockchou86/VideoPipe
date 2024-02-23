@@ -20,7 +20,7 @@ namespace vp_nodes {
         std::lock_guard<std::mutex> guard(this->subscribers_lock);
         for (auto i = this->subscribers.begin(); i != this->subscribers.end();) {
             if(*i == subscriber) {
-                this->subscribers.erase(i);
+                i = this->subscribers.erase(i);
             }
             else {
                 i++;

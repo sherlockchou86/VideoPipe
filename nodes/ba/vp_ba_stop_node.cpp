@@ -14,7 +14,7 @@ namespace vp_nodes {
     }
     
     vp_ba_stop_node::~vp_ba_stop_node() {
-
+        deinitialized();
     }
 
     std::string vp_ba_stop_node::to_string() {

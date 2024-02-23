@@ -23,7 +23,7 @@ int main() {
     VP_LOGGER_INIT();
 
     // create nodes
-    auto file_src_0 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_0", 0, "./test_video/10.mp4", 0.6);
+    auto file_src_0 = std::make_shared<vp_nodes::vp_file_src_node>("file_src_0", 0, "./test_video/face.mp4", 0.6);
     auto split = std::make_shared<vp_nodes::vp_split_node>("split", false, true);  // split by deep-copy not by channel!
 
     // branch a
@@ -57,7 +57,11 @@ int main() {
 
     // for debug purpose
     vp_utils::vp_analysis_board board({file_src_0});
-    board.display();
+    board.display(1, false);
+
+    std::string wait;
+    std::getline(std::cin, wait);
+    file_src_0->detach_recursively();
 }
 
 #endif
