@@ -86,7 +86,7 @@ https://github.com/sherlockchou86/video_pipe_c/assets/13251045/c0be8f6f-949a-4ab
 3. 运行 `cmake ..`
 4. 运行 `make -j8`
 
-编译完整后，所有的库文件存放在`build/libs`中，所有的Sample运行文件存放在`build/samples`中。在执行第3步的时候，可以添加一些编译选项：
+编译完成后，所有的库文件存放在`build/libs`中，所有的Sample运行文件存放在`build/samples`中。在执行第3步的时候，可以添加一些编译选项：
 - -DVP_WITH_CUDA=ON （编译CUDA相关功能，默认为OFF）
 - -DVP_WITH_TRT=ON （编译TensorRT相关功能和Samples，默认为OFF）
 - -DVP_WITH_PADDLE=ON （编译PaddlePaddle相关功能和Samples，默认为OFF）
