@@ -39,16 +39,16 @@ all lib files saved to `build/libs`, all samples saved to `build/samples`. pleas
 
 ## Sample screenshot ##
 ### vehicle detect
-![](./data/screenshot/4.png)
+![](../../doc/3rdparty/4.png)
 ### vehicle plate detect
-![](./data/screenshot/2.png)
+![](../../doc/3rdparty/2.png)
 ### vehicle scan
-![](./data/screenshot/3.png)
+![](../../doc/3rdparty/3.png)
 ### vehicle color and type classify
-![](./data/screenshot/1.png)
+![](../../doc/3rdparty/1.png)
 ### vehicle compare
-![](./data/screenshot/5.png)
+![](../../doc/3rdparty/5.png)
 ### vehicle search
-![](./data/screenshot/6.png)
+![](../../doc/3rdparty/6.png)
 ### vehicle cluster
-![](./data/screenshot/7.png)
+![](../../doc/3rdparty/7.png)

@@ -19,3 +19,7 @@ we can build paddle_ocr separately.
 3. `make -j8`
 
 all lib files saved to `build/libs`, all samples saved to `build/samples`. please refer to videopipe about how to run samples for paddle_ocr.
+
+## Sample screenshot ##
+### text recognize
+![](../../doc/3rdparty/8.png)
