@@ -1,5 +1,6 @@
 #pragma once
 
+#ifdef VP_WITH_PADDLE
 #include "../vp_primary_infer_node.h"
 #include "../../third_party/paddle_ocr/include/paddleocr.h"
 
@@ -28,5 +29,5 @@ namespace vp_nodes {
                                     std::string rec_char_dict_path = "");
         ~vp_ppocr_text_detector_node();
     };
-
 }
+#endif

@@ -57,24 +57,23 @@ https://github.com/sherlockchou86/video_pipe_c/assets/13251045/c0be8f6f-949a-4ab
 ## 依赖
 
 平台
-- ubuntu 18.04 x86_64 NVIDIA rtx/tesla GPUs
-- ubuntu 18.04 aarch64 NVIDIA jetson serials device ([tx2 tested](https://github.com/sherlockchou86/video_pipe_c/tree/jetson_tx2))
-- ubuntu 18.04 x86_64([PURE CPU](https://github.com/sherlockchou86/video_pipe_c/tree/pure_cpu))
-- other platforms wait for tested
+- Ubuntu 18.04 x86_64 NVIDIA rtx/tesla GPUs
+- Ubuntu 18.04 aarch64 NVIDIA jetson serials device，tx2 tested
+- Ubuntu 18.04 x86_64 Cambrian MLU serials device, MLU 370 tested (code not provided)
+- Wait for your test
 
 基础
-- vscode (remote development on windows)
-- c++ 17
-- opencv 4.6
-- gstreamer 1.20 (required by opencv)
-- gcc 7.5
+- C++ 17
+- OpenCV >= 4.6
+- GStreamer 1.20 (Required by OpenCV)
+- GCC >= 7.5
 
 可选, 如果你需要实现自己的推理后端，或者使用除`opencv::dnn`之外的其他推理后端.
 - CUDA
 - TensorRT
-- paddle inference
-- onnx runtime
-- anything you like
+- Paddle Inference
+- ONNX Runtime
+- Anything you like
 
 [如何安装CUDA和TensorRT](./third_party/trt_vehicle/README.md)
 
@@ -82,61 +81,41 @@ https://github.com/sherlockchou86/video_pipe_c/assets/13251045/c0be8f6f-949a-4ab
 
 ## 如何编译和调试
 
-有2种方式:
-1. Shell & VSCode
-2. CMake & CLion
+1. 运行 `cd video_pipe_c`
+2. 运行 `mkdir build && cd build`
+3. 运行 `cmake ..`
+4. 运行 `make -j8`
 
-### Option 1: Shell & VSCode [recommended since it's fullly tested]
-- Build VideoPipe (via shell)
-    - run `cd build/`
-    - run `sh build.sh`
-    - it will generate a library called `libvp.so` and copy it to `/usr/local/lib` automatically.
-    
-- Debug VideoPipe (via vscode)
-    - select the cpp file you want to debug (keep it activated), like `./sample/1-1-1_sample.cpp`
-    - press `run` button at debug menu in vscode
-    - select a launch item at the top of window (something like `C/C++: g++ vp project`)
+编译完整后，所有的库文件存放在`build/libs`中，所有的Sample运行文件存放在`build/samples`中。在执行第3步的时候，可以添加一些编译选项：
+- -DVP_WITH_CUDA=ON （编译CUDA相关功能，默认为OFF）
+- -DVP_WITH_TRT=ON （编译TensorRT相关功能和Samples，默认为OFF）
+- -DVP_WITH_PADDLE=ON （编译PaddlePaddle相关功能和Samples，默认为OFF）
+- -DVP_BUILD_COMPLEX_SAMPLES=ON （编译高级Samples，默认为OFF）
 
-> 注意： `./third_party/` 下面都是独立的项目，有的是header-only库，被VideoPipe直接引用；有的包含有cpp文件，可以独立编译或运行，VideoPipe依赖这些库，因此需要提前编译好这些库。具体编译或使用方法可参见对应子目录下的README文件.
-
-### Option 2: CMake & CLion
-#### Prepare environments
-
-Add soft link for libraries:
-
-```shell
-cd /usr/local/include
-ln -s /path/to/opencv2 opencv2 # opencv
-ln -s /usr/local/cuda/include cuda # cuda
-ln -s /path/to/TensorRT-xxx/include tensorrt # TensorRT
+比如需要开启CUDA和TensorRT相关的模块，可以运行 `cmake -DVP_WITH_CUDA=ON -DVP_WITH_TRT=ON ..`。如果只运行`cmake ..`，那么所有代码运行在CPU上。
 ```
-
-#### Build samples
-
-```shell
-mkdir build # if not exist
-cd build
+# 开启全部
+cmake -DVP_WITH_CUDA=ON -DVP_WITH_TRT=ON -DVP_WITH_PADDLE=ON -DVP_BUILD_COMPLEX_SAMPLES=ON ..
+# 关闭全部（默认）
 cmake ..
-make
 ```
 
-You will get dynamic libraries and executable samples in `build`.
+如果要运行编译生成的Samples，先下载模型文件和测试数据：
 
-#### Debug
-Use IDEs such as *CLion* which will read the `CMakeLists.txt` and generate debug configurations.
+1. [谷歌网盘下载测试文件和模型](https://drive.google.com/drive/folders/1u49ai5VeGh6-eCBPNDnOIELt4jPnTw__?usp=sharing)
+2. [百度网盘下载测试文件和模型](https://pan.baidu.com/s/1rGciHPM_rjxPmtlDquYQEw?pwd=75va)
+
+将下载好的目录（名称为vp_data）放在任何位置（比如放在`/root/abc`下面），然后在`同一目录`下运行Sample，比如在`/root/abc`下面执行：`path to video_pipe_c/build/samples/1-1-1_sample`。
+
+> 注意： `./third_party/` 下面都是独立的项目，有的是header-only库，被VideoPipe直接引用；有的包含有cpp文件，可以独立编译或运行，VideoPipe依赖这些库，在编译VideoPipe的过程中会自动编译这些库。这些库也包含自己的Samples，具体使用方法可参见对应子目录下的README文件.
 
 ## 如何使用 
 
-- 先将VideoPipe编译成库，然后引用它.
-- 直接引用源代码，然后编译整个application.
-
-[谷歌网盘下载测试文件和模型](https://drive.google.com/drive/folders/1u49ai5VeGh6-eCBPNDnOIELt4jPnTw__?usp=sharing)
-
-[百度网盘下载测试文件和模型](https://pan.baidu.com/s/1rGciHPM_rjxPmtlDquYQEw?pwd=75va)
+1. 先将VideoPipe编译成库，然后引用它.
+2. 或者直接引用源代码，然后编译整个application.
 
 下面是一个如何构建Pipeline然后运行的Sample(请先修改代码中的相关文件路径):
 ```c++
-#include "VP.h"
 #include "../nodes/vp_file_src_node.h"
 #include "../nodes/infers/vp_yunet_face_detector_node.h"
 #include "../nodes/infers/vp_sface_feature_encoder_node.h"
@@ -149,8 +128,6 @@ Use IDEs such as *CLion* which will read the `CMakeLists.txt` and generate debug
 * ## 1-1-N sample ##
 * 1 video input, 1 infer task, and 2 outputs.
 */
-
-#if _1_1_N_sample
 
 int main() {
     VP_SET_LOG_INCLUDE_CODE_LOCATION(false);
@@ -180,8 +157,6 @@ int main() {
     vp_utils::vp_analysis_board board({file_src_0});
     board.display();
 }
-
-#endif
 ```
 上面代码运行后，会出现3个画面:
 1. 管道的运行状态图，状态自动刷新

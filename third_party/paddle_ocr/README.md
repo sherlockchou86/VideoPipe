@@ -5,18 +5,17 @@ This code is derived from(modified some codes) `paddle_ocr` project: https://git
 
 1. Choose the right tar file according to your version of CUDA and GPUs
 2. Put the tar file at anywhere and unzip it
-3. Run `build/install_paddle_inference.sh`, it will help you to install it automatically, **please modify the root path of paddle_inference at the first line in script**.
+3. Run `tools/install_paddle_inference.sh`, it will help you to install it automatically, **please modify the root path of paddle_inference at the first line in script**.
 
-> CUDA 11.1  CUDNN 8.0.5 tensorrt7.2.1 for this repo.
+> CUDA 11.1 TensorRT8.5 for this repo (tested).
 
 ## how to build paddle_ocr?
 
-1. `cd ./build`, and run `sh ./build.sh`.
-2. It will generate a `*.so` library named `libpaddle_ocr.so`.
+we can build paddle_ocr separately.
 
-## How to debug `paddle_ocr`?
+0. set the right library path and include path for PaddlePaddle in `CMakeLists.txt`
+1. `mkdir build && cd build`
+2. `cmake ..`
+3. `make -j8`
 
-Make sure you have build paddle_ocr correctly
-
-1. Change model paths to your specific values in `./main/main.cpp`.
-2. Select ./main/main.cpp file and click `Run` button in vscode, choose one launch item at the top of window(`paddle_ocr`).
+all lib files saved to `build/libs`, all samples saved to `build/samples`. please refer to videopipe about how to run samples for paddle_ocr.

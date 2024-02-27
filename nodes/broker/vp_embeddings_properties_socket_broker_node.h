@@ -18,6 +18,12 @@ namespace vp_nodes {
         int min_crop_width = 50;
         // min height to crop (embedding/property will be ignored if target's height is smaller than this value)
         int min_crop_height = 50;
+        // only broke for tracked targets (track_id is not -1)
+        bool only_for_tracked = false;
+        
+        // min tracked frames if only_for_tracked is true
+        int min_tracked_frames = 25;
+
         // host the data sent to via udp
         std::string des_ip = "";
         // port the data sent to via udp
@@ -25,6 +31,9 @@ namespace vp_nodes {
 
         // udp socket writer
         kissnet::udp_socket udp_writer;
+
+        // support multi-channel
+        std::map<int, std::vector<int>> all_broked;  // channel -> target ids which have been broked
     protected:
         // to xml
         virtual void format_msg(const std::shared_ptr<vp_objects::vp_frame_meta>& meta, std::string& msg) override;
@@ -38,6 +47,7 @@ namespace vp_nodes {
                                 int min_crop_width = 50,
                                 int min_crop_height = 50,
                                 vp_broke_for broke_for = vp_broke_for::NORMAL, 
+                                bool only_for_tracked = false, 
                                 int broking_cache_warn_threshold = 50, 
                                 int broking_cache_ignore_threshold = 200);
         ~vp_embeddings_properties_socket_broker_node();

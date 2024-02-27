@@ -1,5 +1,6 @@
 #pragma once
 
+#ifdef VP_WITH_TRT
 #include "../vp_primary_infer_node.h"
 #include "../../third_party/trt_vehicle/models/vehicle_scanner.h"
 
@@ -19,5 +20,5 @@ namespace vp_nodes {
         vp_trt_vehicle_scanner(std::string node_name, std::string vehicle_scan_model_path = "");
         ~vp_trt_vehicle_scanner();
     };
-
 }
+#endif

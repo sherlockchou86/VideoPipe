@@ -1,4 +1,4 @@
-
+#ifdef VP_WITH_TRT
 #include "vp_trt_vehicle_detector.h"
 
 namespace vp_nodes {
@@ -61,3 +61,4 @@ namespace vp_nodes {
 
     }
 }
+#endif

@@ -1,3 +1,4 @@
+#ifdef VP_WITH_TRT
 #include "vp_trt_vehicle_feature_encoder.h"
 
 namespace vp_nodes {
@@ -61,3 +62,4 @@ namespace vp_nodes {
 
     }
 }
+#endif

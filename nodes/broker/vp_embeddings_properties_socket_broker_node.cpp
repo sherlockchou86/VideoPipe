@@ -12,6 +12,7 @@ namespace vp_nodes {
                                                         int min_crop_width,
                                                         int min_crop_height,
                                                         vp_broke_for broke_for, 
+                                                        bool only_for_tracked,
                                                         int broking_cache_warn_threshold, 
                                                         int broking_cache_ignore_threshold):
                                                         vp_msg_broker_node(node_name, broke_for, broking_cache_warn_threshold, broking_cache_ignore_threshold),
@@ -19,7 +20,8 @@ namespace vp_nodes {
                                                         des_port(des_port),
                                                         cropped_dir(cropped_dir),
                                                         min_crop_width(min_crop_width),
-                                                        min_crop_height(min_crop_height) {
+                                                        min_crop_height(min_crop_height),
+                                                        only_for_tracked(only_for_tracked) {
         // only for vp_frame_target                                                    
         assert(broke_for == vp_broke_for::NORMAL);
         udp_writer = kissnet::udp_socket(kissnet::endpoint(des_ip, des_port));
@@ -28,7 +30,8 @@ namespace vp_nodes {
     }
     
     vp_embeddings_properties_socket_broker_node::~vp_embeddings_properties_socket_broker_node() {
-
+        deinitialized();
+        stop_broking();
     }
 
     void vp_embeddings_properties_socket_broker_node::format_msg(const std::shared_ptr<vp_objects::vp_frame_meta>& meta, std::string& msg) {
@@ -47,6 +50,11 @@ namespace vp_nodes {
         line 11, -->
         line 12, ...
         */
+        auto& broked = all_broked[meta->channel_index];
+        // remove 50 elements every 100 ids
+        if (broked.size() > 100) {
+            broked.erase(broked.begin(), broked.begin() + 50);
+        }
 
         std::stringstream msg_stream;
         auto format_embeddings = [&](const std::vector<float>& embeddings) {
@@ -78,12 +86,26 @@ namespace vp_nodes {
         if (broke_for == vp_broke_for::NORMAL) {
             for (int i = 0; i < meta->targets.size(); i++) {
                 auto& t = meta->targets[i];
+                // only broke for tracked targets and have enough frames
+                if ((only_for_tracked && t->track_id < 0) || (only_for_tracked && t->tracks.size() < min_tracked_frames)) {
+                    continue;
+                }
+                
+                // only broke 1 time for specific track id if it has been tracked, or broke many times
+                if (t->track_id >= 0 && 
+                    std::find(broked.begin(), broked.end(), t->track_id) != broked.end()) {
+                    continue;
+                }
+
                 // size filter
                 if (t->width < min_crop_width || t->height < min_crop_height) {
                     continue;
                 }
-                
-                auto name = cropped_dir + "/" + std::to_string(t->channel_index) + "_" + std::to_string(t->frame_index) + "_" + std::to_string(i) + ".jpg";
+
+                if (t->track_id >= 0) {
+                    broked.push_back(t->track_id);
+                }
+                auto name = cropped_dir + "/" + std::to_string(t->channel_index) + "_" + std::to_string(t->frame_index) + "_" + std::to_string(t->track_id >= 0 ? t->track_id : i) + ".jpg";
                 // start flag
                 msg_stream << "<--" << std::endl;
                 // save small cropped image

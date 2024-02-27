@@ -1,5 +1,6 @@
 #pragma once
 
+#ifdef VP_WITH_TRT
 #include "../vp_secondary_infer_node.h"
 #include "../../third_party/trt_vehicle/models/vehicle_feature_encoder.h"
 
@@ -22,3 +23,4 @@ namespace vp_nodes {
         ~vp_trt_vehicle_feature_encoder();
     };
 }
+#endif

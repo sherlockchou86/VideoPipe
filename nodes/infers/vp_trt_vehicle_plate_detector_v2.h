@@ -1,5 +1,6 @@
 #pragma once
 
+#ifdef VP_WITH_TRT
 #include "../vp_primary_infer_node.h"
 #include "../../third_party/trt_vehicle/models/vehicle_plate_detector.h"
 
@@ -23,5 +24,5 @@ namespace vp_nodes {
         vp_trt_vehicle_plate_detector_v2(std::string node_name, std::string plate_det_model_path = "", std::string char_rec_model_path = "");
         ~vp_trt_vehicle_plate_detector_v2();
     };
-
 }
+#endif

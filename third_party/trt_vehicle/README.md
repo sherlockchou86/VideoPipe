@@ -28,16 +28,14 @@ trtexec --onnx=./vehicle.onnx --saveEngine=vehicleXXX.trt --buildOnly=true
 
 ## How to build trt_vehicle ?
 
-1. `cd ./build`, and run `sh ./build.sh`.
-2. It will generate a `.so` library named `libtrt_vehicle.so`.
-3. Or include source code directly, no `.so` library needed.
+we can build paddle_ocr separately.
 
+0. set the right library path and include path for TensorRT in `CMakeLists.txt`
+1. `mkdir build && cd build`
+2. `cmake ..`
+3. `make -j8`
 
-## How to debug for trt_vehicle ?
-
-Make sure you have build `trt_vehicle` correctly
-1. Change model paths to your specific values in `./main/*.cpp`.
-2. Select one of `./main/*.cpp` files and click `Run` button in vscode, choose one launch item at the top of window(`trt_vehicle`).
+all lib files saved to `build/libs`, all samples saved to `build/samples`. please refer to videopipe about how to run samples for trt_vehicle.
 
 ## Sample screenshot ##
 ### vehicle detect
