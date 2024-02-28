@@ -41,7 +41,8 @@ https://github.com/sherlockchou86/video_pipe_c/assets/13251045/c0be8f6f-949a-4ab
 3. 你可以构建不同类型的管道，支持单通道或多通道的管道，管道中的通道是独立的。
 4. 管道支持钩子（回调），你可以向管道注册回调以获取状态通知（参见第1项），例如实时获取某个连接点的fps。
 5. VideoPipe中已经内置了许多节点类型，但是框架中的所有节点都可以由用户重新实现，也可以根据你的实际需求实现更多节点类型。
-6. 整个框架主要由原生C++编写，可在所有平台上移植。
+6. 支持动态操作管道，支持多线程并行操作，支持`热插拔`操作模式（管道无需先暂停，即插即用）。
+7. 整个框架主要由原生C++编写，可在所有平台上移植。
 
 ## 帮助资料
 - [sample code](./sample/README.md)
@@ -105,7 +106,7 @@ cmake ..
 1. [谷歌网盘下载测试文件和模型](https://drive.google.com/drive/folders/1v9dVcR6xttUTB-WPsH3mZ_ZZMzD4wG-v?usp=sharing)
 2. [百度网盘下载测试文件和模型](https://pan.baidu.com/s/1jr2nBnEDmuNaM5DiMjbC0g?pwd=nf53)
 
-将下载好的目录（名称为vp_data）放在任何位置（比如放在`/root/abc`下面），然后在`同一目录`下运行Sample，比如在`/root/abc`下面执行：`path to video_pipe_c/build/samples/1-1-1_sample`。
+将下载好的目录（名称为vp_data）放在任何位置（比如放在`/root/abc`下面），然后在`同一目录`下运行Sample，比如在`/root/abc`下面执行命名：`[path to video_pipe_c]/build/samples/1-1-1_sample`即可运行1-1-1_sample。
 
 > 注意： `./third_party/` 下面都是独立的项目，有的是header-only库，被VideoPipe直接引用；有的包含有cpp文件，可以独立编译或运行，VideoPipe依赖这些库，在编译VideoPipe的过程中会自动编译这些库。这些库也包含自己的Samples，具体使用方法可参见对应子目录下的README文件.
 
