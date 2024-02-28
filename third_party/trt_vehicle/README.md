@@ -28,7 +28,7 @@ trtexec --onnx=./vehicle.onnx --saveEngine=vehicleXXX.trt --buildOnly=true
 
 ## How to build trt_vehicle ?
 
-we can build paddle_ocr separately.
+we can build trt_vehicle separately.
 
 0. set the right library path and include path for TensorRT in `CMakeLists.txt`
 1. `mkdir build && cd build`
