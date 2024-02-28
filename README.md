@@ -102,8 +102,8 @@ cmake ..
 
 如果要运行编译生成的Samples，先下载模型文件和测试数据：
 
-1. [谷歌网盘下载测试文件和模型](https://drive.google.com/drive/folders/1u49ai5VeGh6-eCBPNDnOIELt4jPnTw__?usp=sharing)
-2. [百度网盘下载测试文件和模型](https://pan.baidu.com/s/1rGciHPM_rjxPmtlDquYQEw?pwd=75va)
+1. [谷歌网盘下载测试文件和模型](https://drive.google.com/drive/folders/1v9dVcR6xttUTB-WPsH3mZ_ZZMzD4wG-v?usp=sharing)
+2. [百度网盘下载测试文件和模型](https://pan.baidu.com/s/1jr2nBnEDmuNaM5DiMjbC0g?pwd=nf53)
 
 将下载好的目录（名称为vp_data）放在任何位置（比如放在`/root/abc`下面），然后在`同一目录`下运行Sample，比如在`/root/abc`下面执行：`path to video_pipe_c/build/samples/1-1-1_sample`。
 
