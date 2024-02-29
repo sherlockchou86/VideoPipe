@@ -88,7 +88,7 @@ https://github.com/sherlockchou86/video_pipe_c/assets/13251045/c0be8f6f-949a-4ab
 4. 运行 `cmake ..`
 5. 运行 `make -j8`
 
-编译完成后，所有的库文件存放在`build/libs`中，所有的Sample运行文件存放在`build/samples`中。在执行第4步的时候，可以添加一些编译选项：
+编译完成后，所有的库文件存放在`build/libs`中，所有的Sample运行文件存放在`build/bin`中。在执行第4步的时候，可以添加一些编译选项：
 - -DVP_WITH_CUDA=ON （编译CUDA相关功能，默认为OFF）
 - -DVP_WITH_TRT=ON （编译TensorRT相关功能和Samples，默认为OFF）
 - -DVP_WITH_PADDLE=ON （编译PaddlePaddle相关功能和Samples，默认为OFF）
@@ -107,7 +107,7 @@ cmake ..
 1. [谷歌网盘下载测试文件和模型](https://drive.google.com/drive/folders/1v9dVcR6xttUTB-WPsH3mZ_ZZMzD4wG-v?usp=sharing)
 2. [百度网盘下载测试文件和模型](https://pan.baidu.com/s/1jr2nBnEDmuNaM5DiMjbC0g?pwd=nf53)
 
-将下载好的目录（名称为vp_data）放在任何位置（比如放在`/root/abc`下面），然后在`同一目录`下运行Sample，比如在`/root/abc`下面执行命名：`[path to video_pipe_c]/build/samples/1-1-1_sample`即可运行1-1-1_sample。
+将下载好的目录（名称为vp_data）放在任何位置（比如放在`/root/abc`下面），然后在`同一目录`下运行Sample，比如在`/root/abc`下面执行命名：`[path to video_pipe_c]/build/bin/1-1-1_sample`即可运行1-1-1_sample。
 
 > 注意： `./third_party/` 下面都是独立的项目，有的是header-only库，被VideoPipe直接引用；有的包含有cpp文件，可以独立编译或运行，VideoPipe依赖这些库，在编译VideoPipe的过程中会自动编译这些库。这些库也包含自己的Samples，具体使用方法可参见对应子目录下的README文件.
 
