@@ -22,6 +22,8 @@ https://github.com/sherlockchou86/video_pipe_c/assets/13251045/b1289faa-e2c7-4d3
 
 https://github.com/sherlockchou86/video_pipe_c/assets/13251045/c0be8f6f-949a-4ab3-b0eb-9ac1496bee1d
 
+[更多视频演示](./SAMPLES.md)
+
 ## 主要功能
 - 流读取。支持流行的协议，如udp（视频或图像）、rtsp、rtmp、文件（视频或图像）。
 - 视频解码。支持基于opencv/gstreamer的视频解码（支持硬件加速）。
