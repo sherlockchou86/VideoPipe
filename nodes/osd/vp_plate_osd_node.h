@@ -31,11 +31,12 @@ namespace vp_nodes {
         std::vector<cv::Mat> plates_his;
         int height_his = 100;
         int gap_his = 10;
+        bool display_his = true;
 
     protected:
         virtual std::shared_ptr<vp_objects::vp_meta> handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) override;
     public:
-        vp_plate_osd_node(std::string node_name, std::string font = "");
+        vp_plate_osd_node(std::string node_name, std::string font = "", bool display_his = true);
         ~vp_plate_osd_node();
     };
 }

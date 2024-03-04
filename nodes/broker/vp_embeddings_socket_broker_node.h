@@ -35,7 +35,7 @@ namespace vp_nodes {
         // support multi-channel
         std::map<int, std::vector<int>> all_broked;  // channel -> target ids which have been broked
     protected:
-        // to xml
+        // to custom format
         virtual void format_msg(const std::shared_ptr<vp_objects::vp_frame_meta>& meta, std::string& msg) override;
         // to socket via udp
         virtual void broke_msg(const std::string& msg) override;
