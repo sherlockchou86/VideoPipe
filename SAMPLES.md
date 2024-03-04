@@ -20,3 +20,7 @@ https://github.com/sherlockchou86/video_pipe_c/assets/13251045/7958c5e3-4e6e-453
 ### 动态管道 ###
 https://github.com/sherlockchou86/video_pipe_c/assets/13251045/7fe3e45d-e528-4315-ba4f-21c3f11163e3
 
+### 车牌识别相机 ###
+
+https://github.com/sherlockchou86/video_pipe_c/assets/13251045/f680dccf-92c3-41eb-a472-7f0e27c28257
+
