@@ -136,3 +136,7 @@ traffic jam behaviour analysis<br/>
 ## face recognize ##
 flask demo for face recognize<br/>
 ![](../doc/p51.png)
+
+## license plate recognize ##
+flask demo for license plate recognize<br/>
+![](../doc/p52.png)

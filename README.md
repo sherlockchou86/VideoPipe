@@ -211,3 +211,4 @@ int main() {
 |31|property and similiarity search|![](./doc/p46.png)![](./doc/p47.png)|
 |32|ba_jam_sample|![](./doc/p50.png)|
 |33|face recognize|![](./doc/p51.png)|
+|34|license plate recognize(LPR) camera|![](./doc/p52.png)|
