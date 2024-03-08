@@ -96,9 +96,9 @@ namespace vp_utils {
         if (displaying) {
             return;
         }
-        auto fps = 1;
+        auto fps = 10;
         auto rtmp_url = vp_utils::string_format(gst_template, bitrate, rtmp.c_str());
-        // 1 fps by default
+        // 10 fps by default
         assert(rtmp_writer.open(rtmp_url, cv::CAP_GSTREAMER, fps, {bg_canvas.cols, bg_canvas.rows}));
 
         auto display_func = [&, fps](){
@@ -115,7 +115,7 @@ namespace vp_utils {
 
                 // calculate the time need wait for
                 auto loop_cost = std::chrono::system_clock::now() - loop_start;
-                auto wait_time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::seconds(fps) - loop_cost);
+                auto wait_time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::milliseconds(1000 / fps) - loop_cost);
 
                 std::this_thread::sleep_for(wait_time);
             }};
