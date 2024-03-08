@@ -8,10 +8,10 @@
             "name": "debug samples for videopipe",  // debug for samples in videopipe
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": ["../../.."],  // path of vp_data
+            "program": "${workspaceFolder}/build/bin/${fileBasenameNoExtension}",
+            "args": [""],
             "stopAtEntry": false,
-            "cwd": "${fileDirname}",
+            "cwd": "${workspaceFolder}/..",  // change this value to the path of your vp_data
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
@@ -24,6 +24,27 @@
               }
             ],
             "preLaunchTask": ""
+        },
+        {
+          "name": "debug complex samples for videopipe",  // debug for complex samples in videopipe
+          "type": "cppdbg",
+          "request": "launch",
+          "program": "${fileDirname}/${fileBasenameNoExtension}",
+          "args": ["../../.."],  // change this value to the path of your vp_data
+          "stopAtEntry": false,
+          "cwd": "${fileDirname}",
+          "environment": [],
+          "externalConsole": false,
+          "MIMode": "gdb",
+          "miDebuggerPath": "/usr/bin/gdb",
+          "setupCommands": [
+            {
+              "description": "Enable pretty-printing for gdb",
+              "text": "-enable-pretty-printing",
+              "ignoreFailures": true
+            }
+          ],
+          "preLaunchTask": ""
         }
     ]
 }
