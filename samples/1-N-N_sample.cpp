@@ -10,7 +10,7 @@
 
 /*
 * ## 1-N-N sample ##
-* 1 video input and then split into 2 branches for different infer tasks, then 2 total outputs.
+* 1 video input and then split into 2 branches for different infer tasks, then 2 total outputs(no need to sync in such situations).
 */
 
 int main() {
