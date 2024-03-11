@@ -38,9 +38,23 @@ namespace vp_utils {
             throw "vp_logger is not initialized yet!";
         }
         
-        // filter
+        // level filter
         if (level > log_level) {
             return;
+        }
+        
+        // keywords filter for debug level
+        if (level == vp_log_level::DEBUG && keywords_for_debug_log.size() != 0) {
+            bool filterd = true;
+            for(auto& keywords: keywords_for_debug_log) {
+                if (message.find(keywords) != std::string::npos) {
+                    filterd = false;
+                    break;
+                }
+            }
+            if (filterd) {
+                return;
+            }
         }
         
         /* create log */
