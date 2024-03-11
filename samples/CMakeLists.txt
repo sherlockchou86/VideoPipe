@@ -48,15 +48,6 @@ target_link_libraries(N-1-N_sample ${PROJECT_NAME})
 add_executable(N-N_sample "N-N_sample.cpp")
 target_link_libraries(N-N_sample ${PROJECT_NAME})
 
-add_executable(1-N-1_sample "1-N-1_sample.cpp")
-target_link_libraries(1-N-1_sample ${PROJECT_NAME})
-
-add_executable(1-N-1_sample2 "1-N-1_sample2.cpp")
-target_link_libraries(1-N-1_sample2 ${PROJECT_NAME})
-
-add_executable(1-N-1_sample3 "1-N-1_sample3.cpp")
-target_link_libraries(1-N-1_sample3 ${PROJECT_NAME})
-
 add_executable(openpose_sample "openpose_sample.cpp")
 target_link_libraries(openpose_sample ${PROJECT_NAME})
 
@@ -118,6 +109,15 @@ if(VP_WITH_TRT)
 
     add_executable(vehicle_tracking_sample "vehicle_tracking_sample.cpp")
     target_link_libraries(vehicle_tracking_sample ${PROJECT_NAME})
+
+    add_executable(1-N-1_sample "1-N-1_sample.cpp")
+    target_link_libraries(1-N-1_sample ${PROJECT_NAME})
+
+    add_executable(1-N-1_sample2 "1-N-1_sample2.cpp")
+    target_link_libraries(1-N-1_sample2 ${PROJECT_NAME})
+
+    add_executable(1-N-1_sample3 "1-N-1_sample3.cpp")
+    target_link_libraries(1-N-1_sample3 ${PROJECT_NAME})
 endif()
 
 if(VP_BUILD_COMPLEX_SAMPLES)
