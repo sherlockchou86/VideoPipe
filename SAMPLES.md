@@ -23,3 +23,6 @@ https://github.com/sherlockchou86/video_pipe_c/assets/13251045/7fe3e45d-e528-431
 ### 车牌识别相机 ###
 https://github.com/sherlockchou86/video_pipe_c/assets/13251045/f680dccf-92c3-41eb-a472-7f0e27c28257
 
+### 并行任务、数据同步 ###
+https://github.com/sherlockchou86/video_pipe_c/assets/13251045/28a71383-8864-4a25-8da3-27922f0b5baf
+
