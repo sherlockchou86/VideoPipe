@@ -240,7 +240,8 @@ namespace vp_nodes {
 
     void vp_node::pendding_meta(std::shared_ptr<vp_objects::vp_meta> meta) {
         this->out_queue.push(meta);
-        
+        // handled hooker activated if need
+        invoke_meta_handled_hooker(node_name, out_queue.size(), meta);        
         // notify consumer of out_queue
         this->out_queue_semaphore.signal();
     }
