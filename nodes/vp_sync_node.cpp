@@ -26,7 +26,7 @@ namespace vp_nodes {
         // discard because it has been already synced or timeout before
         if (meta->frame_index <= index_last_synced) {
             // warn log for discard
-            VP_WARN(vp_utils::string_format("[%s][channel%d] dsicard for frame_index:[%d], because it has been synced or timeout before...", node_name.c_str(), meta->channel_index, meta->frame_index));
+            VP_WARN(vp_utils::string_format("[%s][channel%d] discard for frame_index:[%d], because it has been synced or timeout before...", node_name.c_str(), meta->channel_index, meta->frame_index));
             return nullptr;
         }
         

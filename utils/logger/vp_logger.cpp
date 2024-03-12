@@ -107,7 +107,12 @@ namespace vp_utils {
             }
             
             /* watch the log cache size */
-            auto log_cache_size = log_cache.size();
+            auto log_cache_size = 0;
+            {
+                // min lock range
+                std::lock_guard<std::mutex> guard(log_cache_mutex);
+                log_cache_size = log_cache.size();
+            }
             if (!log_thres_warned && log_cache_size > log_cache_warn_threshold) {
                 VP_WARN(vp_utils::string_format("[logger] log cache size is exceeding threshold! cache size is: [%d], threshold is: [%d]", log_cache_size, log_cache_warn_threshold));
                 log_thres_warned = true;  // warn 1 time
