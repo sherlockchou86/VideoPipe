@@ -26,3 +26,5 @@ https://github.com/sherlockchou86/video_pipe_c/assets/13251045/f680dccf-92c3-41e
 ### 并行任务、数据同步 ###
 https://github.com/sherlockchou86/video_pipe_c/assets/13251045/28a71383-8864-4a25-8da3-27922f0b5baf
 
+### 口算检查 ###
+https://github.com/sherlockchou86/video_pipe_c/assets/13251045/c1154206-0b59-4c56-b898-87d15416ccbb
