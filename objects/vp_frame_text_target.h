@@ -18,6 +18,8 @@ namespace vp_objects {
         std::string text;
         float score;
 
+        // flags for text
+        std::string flags = "";
         // clone myself
         std::shared_ptr<vp_frame_text_target> clone();
     };

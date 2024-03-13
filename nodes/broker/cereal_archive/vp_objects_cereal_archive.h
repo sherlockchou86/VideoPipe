@@ -84,7 +84,8 @@ namespace vp_objects {
         // define the form of structured data for vp_frame_text_target
         archive(cereal::make_nvp("text", target.text),
                 cereal::make_nvp("score", target.score),
-                cereal::make_nvp("region", target.region_vertexes));
+                cereal::make_nvp("region", target.region_vertexes),
+                cereal::make_nvp("flags", target.flags));
     }
     /* END OF vp_frame_text_target */
 

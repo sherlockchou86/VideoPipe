@@ -1,7 +1,7 @@
 #[[
     prepare in advance：
     1. OpenCV >= 4.6
-    2. Gstreamer >= 1.4
+    2. Gstreamer >= 1.14
     3. CUDA, TensorRT, PADDLE for optional
 
     build command:
@@ -14,7 +14,7 @@
 
     results:
     1. all libs saved to build/libs
-    2. all samples saved to build/samples
+    2. all samples saved to build/bin
 ]]
 
 cmake_minimum_required(VERSION 3.10)
@@ -91,6 +91,12 @@ if(VP_WITH_PADDLE)  # PaddlePaddle enabled
     message(STATUS "    library path: ${VP_PADDLE_LIB_PATH}")
     message("--------------end build paddle_ocr---------------")
 endif()
+
+# tinyexpr
+message("-------------start build tinyexpr--------------")
+add_subdirectory(third_party/tinyexpr)
+list(APPEND VP_DEPEND_LIBS tinyexpr)
+message("--------------end build tinyexpr---------------")
 
 # collect source files for videopipe
 file(GLOB_RECURSE NODES "nodes/*.cpp")

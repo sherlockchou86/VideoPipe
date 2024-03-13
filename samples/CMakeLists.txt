@@ -150,4 +150,12 @@ if(VP_BUILD_COMPLEX_SAMPLES)
         add_executable(plate_recognize_pipeline "lpr_camera/plate_recognize_pipeline.cpp")
         target_link_libraries(plate_recognize_pipeline ${PROJECT_NAME})
     endif()
+
+    if(VP_WITH_PADDLE)
+        # save exe to 'math_review'
+        set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/math_review)
+        add_executable(math_expression_check_pipeline "math_review/math_expression_check_pipeline.cpp")
+        target_link_libraries(math_expression_check_pipeline ${PROJECT_NAME}) 
+    endif()
+    
 endif()
