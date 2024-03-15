@@ -11,6 +11,8 @@
 * ## nv_hard_codec_sample ##
 * use hardware-based `nvv4l2decoder`/`nvv4l2h264enc` gstreamer plugins (come from DeepStream 4.0+) to decode/encode video stream, which would occupy NVIDIA GPUs.
 * run `nvidia-smi -a` command to watch the Utilization of GPU/Decode/Encode .
+*
+* for more information: https://github.com/sherlockchou86/video_pipe_c/blob/master/doc/env.md#about-hardware-acceleration
 */
 
 int main() {
