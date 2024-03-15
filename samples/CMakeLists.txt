@@ -60,6 +60,9 @@ target_link_libraries(rtsp_des_sample ${PROJECT_NAME})
 add_executable(vp_logger_sample "vp_logger_sample.cpp")
 target_link_libraries(vp_logger_sample ${PROJECT_NAME})
 
+add_executable(skip_sample "skip_sample.cpp")
+target_link_libraries(skip_sample ${PROJECT_NAME})
+
 # samples depend on PaddlePaddle
 if(VP_WITH_PADDLE)
     add_executable(app_src_sample "app_src_sample.cpp")
