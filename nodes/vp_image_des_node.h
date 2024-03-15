@@ -8,9 +8,9 @@ namespace vp_nodes {
     {
     private:
         // gstreamer template for saving image to file (jpeg encoding only, filename MUST end with 'jpg/jpeg')
-        std::string gst_template_file = "appsrc ! videoconvert ! videoscale ! videorate ! video/x-raw,framerate=1/%d ! jpegenc ! multifilesink location=%s";
+        std::string gst_template_file = "appsrc ! videoconvert ! videoscale ! videorate ! video/x-raw,framerate=1/%d ! %s ! multifilesink location=%s";
         // gstreamer template for pushing image to remote via udp （jpeg encoding only)
-        std::string gst_template_udp = "appsrc ! videoconvert ! videoscale ! videorate ! video/x-raw,format=I420,framerate=1/%d ! jpegenc ! rtpjpegpay ! udpsink host=%s port=%d";
+        std::string gst_template_udp = "appsrc ! videoconvert ! videoscale ! videorate ! video/x-raw,format=I420,framerate=1/%d ! %s ! rtpjpegpay ! udpsink host=%s port=%d";
         
         // gstreamer wrapper by opencv
         cv::VideoWriter image_writer;
@@ -25,6 +25,8 @@ namespace vp_nodes {
         vp_objects::vp_size resolution_w_h;
 
         bool to_file = true;
+        // set jpegenc as the default encoder, we can use hardware encoder instead.
+        std::string gst_encoder_name = "jpegenc";
     protected:
         // re-implementation, return nullptr.
         virtual std::shared_ptr<vp_objects::vp_meta> handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) override; 
@@ -35,7 +37,8 @@ namespace vp_nodes {
                         std::string location = "./%d.jpg", 
                         int interval = 5,
                         vp_objects::vp_size resolution_w_h = {},
-                        bool osd = true);
+                        bool osd = true,
+                        std::string gst_encoder_name = "jpegenc");
         ~vp_image_des_node();
         virtual std::string to_string() override;
     };

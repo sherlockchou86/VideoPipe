@@ -13,7 +13,7 @@ namespace vp_nodes {
     {
     private:
         /* data */
-        std::string gst_template = "appsrc ! videoconvert ! x264enc bitrate=%d ! h264parse ! flvmux ! rtmpsink location=%s";
+        std::string gst_template = "appsrc ! videoconvert ! %s bitrate=%d ! h264parse ! flvmux ! rtmpsink location=%s";
         cv::VideoWriter rtmp_writer;
     protected:
         // re-implementation, return nullptr.
@@ -26,7 +26,8 @@ namespace vp_nodes {
                         std::string rtmp_url, 
                         vp_objects::vp_size resolution_w_h = {}, 
                         int bitrate = 1024,
-                        bool osd = true);
+                        bool osd = true,
+                        std::string gst_encoder_name = "x264enc");
         ~vp_rtmp_des_node();
 
         virtual std::string to_string() override;
@@ -38,5 +39,7 @@ namespace vp_nodes {
 
         // for osd frame 
         bool osd;
+        // set x264enc as the default encoder, we can use hardware encoder instead.
+        std::string gst_encoder_name = "x264enc";
     };
 }

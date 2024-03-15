@@ -55,15 +55,15 @@ if `git push --set-upstream origin new_branch` fails when pushing new local bran
 try run `git remote add origin https://github.com/sherlockchou86/video_pipe_c.git` first.
 
 ## about Hardware Acceleration ##
-since decode & encode in VideoPipe depend on gstreamer (encapsulated inside opencv), if you want to use your GPUs/NPUs to accelerate decoding and encoding performace, you need get/install HARD decode or HARD encode gstreamer plugins correctly first and modify gst launch string (take `vp_file_des_node` for example):
+since decode & encode in VideoPipe depend on gstreamer (encapsulated inside opencv), if you want to use your GPUs/NPUs to accelerate decoding and encoding performace, you need get/install HARD decode or HARD encode `gstreamer plugins` correctly first and modify gst launch string (take `vp_file_des_node` for example):
 ```cpp
 appsrc ! videoconvert ! x264enc bitrate=%d ! mp4mux ! filesink location=%s
 ```
 to
 ```
-appsrc ! videoconvert ! nvh264enc bitrate=%d ! mp4mux ! filesink location=%s
+appsrc ! videoconvert ! nvv4l2h264enc bitrate=%d ! mp4mux ! filesink location=%s
 ```
-the plugin `x264enc` use CPUs to encode video stream, but `nvh264enc` use GPUs instread. if you use other platforms other than NVIDIA, you need Corresponding Hardware Acceleration plugins.
+the plugin `x264enc` use CPUs to encode video stream, but `nvv4l2h264enc`(comes from DeepStream SDK) use GPUs instread. if you use other platforms other than NVIDIA, you need Corresponding Hardware Acceleration plugins.
 
 **soft/hard decode example**
 ```
@@ -74,6 +74,7 @@ gst-launch-1.0 filesrc location=./face.mp4 ! qtdemux ! h264parse ! nvv4l2decoder
 **soft/hard encode example**
 ```
 gst-launch-1.0 filesrc location=./face.mp4 ! qtdemux ! h264parse ! avdec_h264 ! x264enc ! h264parse ! flvmux ! filesink location=./new_face.flv    // encode by x264enc use CPUs
-gst-launch-1.0 filesrc location=./face.mp4 ! qtdemux ! h264parse ! avdec_h264 ! nvh264enc ! h264parse ! flvmux ! filesink location=./new_face.flv  // encode by nvh264enc use NVIDIA GPUs
+gst-launch-1.0 filesrc location=./face.mp4 ! qtdemux ! h264parse ! avdec_h264 ! nvv4l2h264enc ! h264parse ! flvmux ! filesink location=./new_face.flv  // encode by nvv4l2h264enc use NVIDIA GPUs
 ```
-[source code of hard decode/encode gstreamer plugins for NVIDIA](https://gitlab.freedesktop.org/gstreamer/gstreamer/-/tree/main/subprojects/gst-plugins-bad/sys/nvcodec).
+[source code of hard decode/encode gstreamer plugins for NVIDIA](https://gitlab.freedesktop.org/gstreamer/gstreamer/-/tree/main/subprojects/gst-plugins-bad/sys/nvcodec).(developed by community, open source), we could also use decode/encode plugins from [DeepStream SDK](https://docs.nvidia.com/metropolis/deepstream/6.0/dev-guide/text/DS_Quickstart.html) which maintained by NVIDIA but closed source.
+

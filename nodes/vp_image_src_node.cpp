@@ -7,24 +7,23 @@ namespace vp_nodes {
                                         std::string port_or_location,
                                         int interval,
                                         float resize_ratio, 
-                                        bool cycle):
+                                        bool cycle,
+                                        std::string gst_decoder_name):
                                         vp_src_node(node_name, channel_index, resize_ratio),
                                         port_or_location(port_or_location),
                                         interval(interval),
-                                        cycle(cycle) {
+                                        cycle(cycle), gst_decoder_name(gst_decoder_name) {
         // make sure not greater than 1 minute (too long) and not lower than 1 second (since it's too quick, use video stream instead directly)
         assert(interval >= 1 && interval <= 60);
         if (vp_utils::ends_with(port_or_location, "jpeg") || vp_utils::ends_with(port_or_location, "jpg")) {
             // read from file
-
-            gst_template_file = vp_utils::string_format(gst_template_file, port_or_location.c_str(), cycle ? std::string("true").c_str() : std::string("false").c_str(), interval);
+            gst_template_file = vp_utils::string_format(gst_template_file, port_or_location.c_str(), cycle ? std::string("true").c_str() : std::string("false").c_str(), gst_decoder_name.c_str(), interval);
             from_file = true;
         }
         else if (port_or_location.find_first_not_of("0123456789") == std::string::npos) {
             // receive from remote via udp
             auto port = std::stoi(port_or_location); // try to get port
-
-            gst_template_udp = vp_utils::string_format(gst_template_udp, port, interval);
+            gst_template_udp = vp_utils::string_format(gst_template_udp, port, gst_decoder_name.c_str(), interval);
             from_file = false;
         }
         else {
@@ -75,7 +74,7 @@ namespace vp_nodes {
                 original_height = video_height;
             }
             // stream_info_hooker activated if need
-            vp_stream_info stream_info {channel_index, fps, video_width, video_height, to_string()};
+            vp_stream_info stream_info {channel_index, original_fps, original_width, original_height, to_string()};
             invoke_stream_info_hooker(node_name, stream_info);
             
             image_capture >> frame;
@@ -92,7 +91,10 @@ namespace vp_nodes {
             else {
                 resize_frame = frame.clone();  // clone!
             }
-
+            // set true size because resize
+            video_width = resize_frame.cols;
+            video_height = resize_frame.rows;
+            
             this->frame_index++;
             // create frame meta
             auto out_meta = 

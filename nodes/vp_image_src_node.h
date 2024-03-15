@@ -9,9 +9,9 @@ namespace vp_nodes {
     {
     private:
         // gstreamer template for reading image from file (jpeg encoding only, filename MUST end with 'jpg/jpeg')
-        std::string gst_template_file = "multifilesrc location=%s loop=%s ! jpegparse ! jpegdec ! videorate ! video/x-raw,framerate=1/%d ! videoconvert ! appsink";
+        std::string gst_template_file = "multifilesrc location=%s loop=%s ! jpegparse ! %s ! videorate ! video/x-raw,framerate=1/%d ! videoconvert ! appsink";
         // gstreamer template for receiving image from remote via udp （jpeg encoding only)
-        std::string gst_template_udp = "udpsrc port=%d ! application/x-rtp,encoding-name=jpeg ! rtpjpegdepay ! jpegparse ! jpegdec ! videorate ! video/x-raw,framerate=1/%d ! videoconvert ! appsink";
+        std::string gst_template_udp = "udpsrc port=%d ! application/x-rtp,encoding-name=jpeg ! rtpjpegdepay ! jpegparse ! %s ! videorate ! video/x-raw,framerate=1/%d ! videoconvert ! appsink";
 
         cv::VideoCapture image_capture;
 
@@ -34,9 +34,13 @@ namespace vp_nodes {
                         std::string port_or_location,
                         int interval = 1,
                         float resize_ratio = 1.0, 
-                        bool cycle = true);
+                        bool cycle = true,
+                        std::string gst_decoder_name = "jpegdec");
         ~vp_image_src_node();
         virtual std::string to_string() override;
+
+        // set jpegdec as the default decoder, we can use hardware decoder instead.
+        std::string gst_decoder_name = "jpegdec";
     };
     
 }

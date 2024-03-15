@@ -10,17 +10,19 @@ namespace vp_nodes {
                                     std::string location, 
                                     int interval,
                                     vp_objects::vp_size resolution_w_h,
-                                    bool osd):
+                                    bool osd,
+                                    std::string gst_encoder_name):
                                     vp_des_node(node_name, channel_index),
                                     location(location),
                                     interval(interval),
                                     resolution_w_h(resolution_w_h),
-                                    osd(osd) {
+                                    osd(osd),
+                                    gst_encoder_name(gst_encoder_name) {
         // make sure not greater than 1 minute (too long) and not lower than 1 second (since it's too quick, use video stream instead directly)
         assert(interval >= 1 && interval <= 60);
         if (vp_utils::ends_with(location, ".jpeg") || vp_utils::ends_with(location, ".jpg")) {
             // save to file
-            gst_template_file = vp_utils::string_format(gst_template_file, interval, location.c_str());
+            gst_template_file = vp_utils::string_format(gst_template_file, interval, gst_encoder_name.c_str(), location.c_str());
             to_file = true;
         }
         else if (location.find(":") != std::string::npos) {
@@ -30,7 +32,7 @@ namespace vp_nodes {
             auto host = parts[0];  // ip
             auto port = std::stoi(parts[1]);  // try to get port
 
-            gst_template_udp = vp_utils::string_format(gst_template_udp, interval, host.c_str(), port);
+            gst_template_udp = vp_utils::string_format(gst_template_udp, interval, gst_encoder_name.c_str(), host.c_str(), port);
             
             to_file = false;
         }

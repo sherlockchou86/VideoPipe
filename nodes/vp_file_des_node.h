@@ -21,7 +21,7 @@ namespace vp_nodes {
     class vp_file_des_node: public vp_des_node {
     private:
         /* data */
-        std::string gst_template = "appsrc ! videoconvert ! x264enc bitrate=%d ! mp4mux ! filesink location=%s";
+        std::string gst_template = "appsrc ! videoconvert ! %s bitrate=%d ! mp4mux ! filesink location=%s";
         cv::VideoWriter file_writer;
 
         int frames_already_record = -1;
@@ -43,7 +43,8 @@ namespace vp_nodes {
                         int max_duration_for_single_file = 2,
                         vp_objects::vp_size resolution_w_h = {},
                         int bitrate = 1024,
-                        bool osd = true);
+                        bool osd = true,
+                        std::string gst_encoder_name = "x264enc");
         ~vp_file_des_node();
 
         // save directory
@@ -56,6 +57,8 @@ namespace vp_nodes {
         vp_objects::vp_size resolution_w_h;
         int bitrate;
         bool osd;
+        // set x264enc as the default encoder, we can use hardware encoder instead.
+        std::string gst_encoder_name = "x264enc";
     };
 
 }

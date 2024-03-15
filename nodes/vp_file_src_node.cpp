@@ -10,11 +10,16 @@ namespace vp_nodes {
                                         int channel_index, 
                                         std::string file_path, 
                                         float resize_ratio, 
-                                        bool cycle): 
+                                        bool cycle,
+                                        std::string gst_decoder_name,
+                                        int skip_interval): 
                                         vp_src_node(node_name, channel_index, resize_ratio), 
                                         file_path(file_path), 
-                                        cycle(cycle) {
-        initialized();
+                                        cycle(cycle), gst_decoder_name(gst_decoder_name), skip_interval(skip_interval) {
+        assert(skip_interval >= 0 && skip_interval <= 9);
+        this->gst_template = vp_utils::string_format(this->gst_template, file_path.c_str(), gst_decoder_name.c_str());
+        VP_INFO(vp_utils::string_format("[%s] [%s]", node_name.c_str(), gst_template.c_str()));
+        this->initialized();
     }
     
     vp_file_src_node::~vp_file_src_node() {
@@ -29,6 +34,7 @@ namespace vp_nodes {
         int video_height = 0;
         int fps = 0;
         std::chrono::milliseconds delta;
+        int skip = 0;
 
         while(alive) {
             // check if need work
@@ -37,7 +43,7 @@ namespace vp_nodes {
             auto last_time = std::chrono::system_clock::now();
             // try to open capture
             if (!file_capture.isOpened()) {
-                if(!file_capture.open(this->file_path)) {
+                if(!file_capture.open(this->gst_template, cv::CAP_GSTREAMER)) {
                     VP_WARN(vp_utils::string_format("[%s] open file failed, try again...", node_name.c_str()));
                     continue;
                 }
@@ -48,14 +54,17 @@ namespace vp_nodes {
                 video_width = file_capture.get(cv::CAP_PROP_FRAME_WIDTH);
                 video_height = file_capture.get(cv::CAP_PROP_FRAME_HEIGHT);
                 fps = file_capture.get(cv::CAP_PROP_FPS);
-                delta = std::chrono::milliseconds(1000 / fps);
+                delta = std::chrono::milliseconds(1000 / fps) * (skip_interval + 1);
     
                 original_fps = fps;
                 original_width = video_width;
                 original_height = video_height;
+
+                // set true fps because skip some frames
+                fps = fps / (skip_interval + 1);
             }
             // stream_info_hooker activated if need
-            vp_stream_info stream_info {channel_index, fps, video_width, video_height, file_path};
+            vp_stream_info stream_info {channel_index, original_fps, original_width, original_height, to_string()};
             invoke_stream_info_hooker(node_name, stream_info);
             
             file_capture >> frame;
@@ -68,6 +77,13 @@ namespace vp_nodes {
                 continue;
             }
 
+            // need skip
+            if (skip < skip_interval) {
+                skip++;
+                continue;
+            }
+            skip = 0;
+
             // need resize
             cv::Mat resize_frame;
             if (this->resize_ratio != 1.0f) {                 
@@ -76,6 +92,9 @@ namespace vp_nodes {
             else {
                 resize_frame = frame.clone();  // clone!
             }
+            // set true size because resize
+            video_width = resize_frame.cols;
+            video_height = resize_frame.rows;
 
             this->frame_index++;
             // create frame meta

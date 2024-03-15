@@ -10,14 +10,16 @@ namespace vp_nodes {
                                         int max_duration_for_single_file,
                                         vp_objects::vp_size resolution_w_h,
                                         int bite_rate,
-                                        bool osd): 
+                                        bool osd,
+                                        std::string gst_encoder_name): 
                                         vp_des_node(node_name, channel_index), 
                                         save_dir(save_dir),
                                         name_prefix(name_prefix),
                                         max_duration_for_single_file(max_duration_for_single_file),
                                         resolution_w_h(resolution_w_h),
                                         bitrate(bitrate),
-                                        osd(osd) {
+                                        osd(osd),
+                                        gst_encoder_name(gst_encoder_name) {
         // compile tips:
         // remove experimental:: if gcc >= 8.0
         assert(std::experimental::filesystem::exists(save_dir));
@@ -61,7 +63,7 @@ namespace vp_nodes {
                         file_writer.release();
                     }
                     
-                    auto gst_str = vp_utils::string_format(this->gst_template, bitrate, get_new_file_name().c_str());
+                    auto gst_str = vp_utils::string_format(this->gst_template, gst_encoder_name.c_str(), bitrate, get_new_file_name().c_str());
                     assert(file_writer.open(gst_str, cv::CAP_GSTREAMER, 0, meta->fps, {resize_frame.cols, resize_frame.rows}));
             }
             

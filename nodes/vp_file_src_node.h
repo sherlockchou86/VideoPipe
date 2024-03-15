@@ -14,6 +14,7 @@ namespace vp_nodes {
     class vp_file_src_node: public vp_src_node {
     private:
         /* data */
+        std::string gst_template = "filesrc location=%s ! qtdemux ! h264parse ! %s ! videoconvert ! appsink";
         cv::VideoCapture file_capture;
     protected:
         // re-implemetation
@@ -23,12 +24,19 @@ namespace vp_nodes {
                         int channel_index, 
                         std::string file_path, 
                         float resize_ratio = 1.0, 
-                        bool cycle = true);
+                        bool cycle = true,
+                        std::string gst_decoder_name = "avdec_h264",
+                        int skip_interval = 0);
         ~vp_file_src_node();
 
         virtual std::string to_string() override;
         std::string file_path;
         bool cycle;
+    
+        // set avdec_h264 as the default decoder, we can use hardware decoder instead.
+        std::string gst_decoder_name = "avdec_h264";
+        // 0 means no skip
+        int skip_interval = 0;
     };
 
 }

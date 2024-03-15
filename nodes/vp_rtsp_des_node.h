@@ -18,7 +18,7 @@ namespace vp_nodes {
     class vp_rtsp_des_node: public vp_des_node {
     private:
         /* data */
-        std::string gst_template = "appsrc ! videoconvert ! x264enc bitrate=%d ! h264parse ! rtph264pay ! udpsink host=localhost port=%d";
+        std::string gst_template = "appsrc ! videoconvert ! %s bitrate=%d ! h264parse ! rtph264pay ! udpsink host=localhost port=%d";
         cv::VideoWriter rtsp_writer;
 
         // start rtsp server
@@ -39,6 +39,9 @@ namespace vp_nodes {
 
         /* gst-rtsp-server variables shared between instances for different channels */
         static GstRTSPServer* rtsp_server;
+
+        // set x264enc as the default encoder, we can use hardware encoder instead.
+        std::string gst_encoder_name = "x264enc";
     protected:
         // re-implementation, return nullptr.
         virtual std::shared_ptr<vp_objects::vp_meta> handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) override; 
@@ -49,7 +52,8 @@ namespace vp_nodes {
                         std::string rtsp_name = "", 
                         vp_objects::vp_size resolution_w_h = {}, 
                         int bitrate = 512,
-                        bool osd = true);
+                        bool osd = true,
+                        std::string gst_encoder_name = "x264enc");
         ~vp_rtsp_des_node();
 
          virtual std::string to_string() override;

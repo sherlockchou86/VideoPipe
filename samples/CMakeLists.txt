@@ -69,6 +69,13 @@ if(VP_WITH_PADDLE)
     target_link_libraries(paddle_infer_sample ${PROJECT_NAME})
 endif()
 
+# samples depend on CUDA(maybe other dependency required too)
+if(VP_WITH_CUDA)
+    # nvdec & nvenc plugins required from DeepStream
+    add_executable(nv_hard_codec_sample "nv_hard_codec_sample.cpp")
+    target_link_libraries(nv_hard_codec_sample ${PROJECT_NAME})    
+endif()
+
 # samples depend on TensorRT
 if(VP_WITH_TRT)
     add_executable(ba_jam_sample "ba_jam_sample.cpp")

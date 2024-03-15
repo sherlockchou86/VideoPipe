@@ -10,17 +10,19 @@ namespace vp_nodes {
                                         std::string rtmp_url, 
                                         vp_objects::vp_size resolution_w_h, 
                                         int bitrate,
-                                        bool osd):
+                                        bool osd,
+                                        std::string gst_encoder_name):
                                         vp_des_node(node_name, channel_index),
                                         rtmp_url(rtmp_url),
                                         resolution_w_h(resolution_w_h),
                                         bitrate(bitrate),
-                                        osd(osd) {
+                                        osd(osd),
+                                        gst_encoder_name(gst_encoder_name) {
         // append channel_index to the end of rtmp_url.
         // if original rtmp_url is rtmp://192.168.77.105/live/10000 and channel_index is 10
         // then the modified rtmp_url is rtmp://192.168.77.105/live/10000_10
         this->rtmp_url = this->rtmp_url + "_" + std::to_string(channel_index);
-        this->gst_template = vp_utils::string_format(this->gst_template, bitrate, this->rtmp_url.c_str());
+        this->gst_template = vp_utils::string_format(this->gst_template, gst_encoder_name.c_str(), bitrate, this->rtmp_url.c_str());
         VP_INFO(vp_utils::string_format("[%s] [%s]", node_name.c_str(), gst_template.c_str()));
         this->initialized();
     }
