@@ -213,3 +213,4 @@ int main() {
 |33|face recognize|![](./doc/p51.png)|
 |34|license plate recognize(LPR) camera|![](./doc/p52.png)|
 |35|math expression check|![](./doc/p53.png)|
+|36|skip_sample|![](./doc/p54.png)|
