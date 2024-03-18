@@ -27,4 +27,4 @@ https://github.com/sherlockchou86/video_pipe_c/assets/13251045/f680dccf-92c3-41e
 https://github.com/sherlockchou86/video_pipe_c/assets/13251045/28a71383-8864-4a25-8da3-27922f0b5baf
 
 ### 口算检查 ###
-https://github.com/sherlockchou86/video_pipe_c/assets/13251045/c1154206-0b59-4c56-b898-87d15416ccbb
+https://github.com/sherlockchou86/video_pipe_c/assets/13251045/9c3c1a87-d9f7-4630-a541-96610d564f13
