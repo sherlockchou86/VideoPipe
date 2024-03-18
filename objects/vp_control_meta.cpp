@@ -19,7 +19,7 @@ namespace vp_objects {
         return std::make_shared<vp_control_meta>(*this);
     }
 
-    std::string vp_control_meta::generate_uid() {
+    void vp_control_meta::generate_uid() {
         auto now = std::chrono::system_clock::now();
         auto period = now.time_since_epoch();
 

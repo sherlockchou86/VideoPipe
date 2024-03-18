@@ -16,7 +16,7 @@ namespace vp_objects {
     class vp_control_meta: public vp_meta {
     private:
         // help to generate control uid if need
-        std::string generate_uid();
+        void generate_uid();
     public:
         vp_control_meta(vp_control_type control_type, int channel_index, std::string control_uid = "");
         ~vp_control_meta();
