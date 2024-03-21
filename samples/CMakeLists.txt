@@ -63,6 +63,12 @@ target_link_libraries(vp_logger_sample ${PROJECT_NAME})
 add_executable(skip_sample "skip_sample.cpp")
 target_link_libraries(skip_sample ${PROJECT_NAME})
 
+add_executable(obstacle_detect_sample "obstacle_detect_sample.cpp")
+target_link_libraries(obstacle_detect_sample ${PROJECT_NAME})
+
+add_executable(multi_detectors_sample "multi_detectors_sample.cpp")
+target_link_libraries(multi_detectors_sample ${PROJECT_NAME})
+
 # samples depend on PaddlePaddle
 if(VP_WITH_PADDLE)
     add_executable(app_src_sample "app_src_sample.cpp")

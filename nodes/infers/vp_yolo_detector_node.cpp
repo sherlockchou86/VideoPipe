@@ -63,10 +63,12 @@ namespace vp_nodes {
 
                     // check score threshold
                     if (max_score >= score_threshold) {
-                        int centerX = (int)(data[0] * frame_meta->frame.cols);
-                        int centerY = (int)(data[1] * frame_meta->frame.rows);
-                        int width = (int)(data[2] * frame_meta->frame.cols);
-                        int height = (int)(data[3] * frame_meta->frame.rows);
+                        // smaller than 1.0 means relative value 
+                        // greater than 1.0 means absolute value which need to be converted to relative value
+                        int centerX = (int)((data[0] <= 1 ? data[0] : data[0] / input_width) * frame_meta->frame.cols);
+                        int centerY = (int)((data[1] <= 1 ? data[1] : data[1] / input_height) * frame_meta->frame.rows);
+                        int width = (int)((data[2] <= 1 ? data[2] : data[2] / input_width) * frame_meta->frame.cols);
+                        int height = (int)((data[3] <= 1 ? data[3] : data[3] / input_height) * frame_meta->frame.rows);
                         int left = centerX - width / 2;
                         int top = centerY - height / 2;
 

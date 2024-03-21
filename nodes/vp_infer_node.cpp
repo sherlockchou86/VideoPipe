@@ -86,7 +86,7 @@ namespace vp_nodes {
         if (number_of_batch <= batch_size) {
             // infer one time directly
             net.setInput(blob_to_infer);
-            net.forward(raw_outputs/*, net.getUnconnectedOutLayersNames()*/);
+            net.forward(raw_outputs, net.getUnconnectedOutLayersNames());
         }
         else {
             // infer more times
@@ -100,7 +100,7 @@ namespace vp_nodes {
                 std::vector<cv::Mat> b_outputs;
 
                 net.setInput(b_blob);
-                net.forward(b_outputs/*, net.getUnconnectedOutLayersNames()*/);
+                net.forward(b_outputs, net.getUnconnectedOutLayersNames());
 
                 // first time, initialize it
                 if (raw_outputs.size() == 0) {
