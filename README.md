@@ -215,3 +215,4 @@ int main() {
 |35|math expression check|![](./doc/p53.png)|
 |36|skip_sample|![](./doc/p54.png)|
 |37|obstacle_detect_sample|![](./doc/p55.png)|
+|38|firesmoke_detect_sample|![](./doc/p56.png)|
