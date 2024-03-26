@@ -5,12 +5,14 @@
 VS Code + Ubuntu 18.04 C++17  gcc 7.5
 
 ---------
-apt-get install ffmpeg/gstreamer/other dependency.
 
-install opencv 4 from GitHub, with ffmpeg/gstreamer ON (cuda optional).
+install gstreamer(>=1.14.5):
+```
+apt-get install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgstreamer-plugins-bad1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav gstreamer1.0-tools gstreamer1.0-x gstreamer1.0-alsa gstreamer1.0-gl gstreamer1.0-gtk3 gstreamer1.0-qt5 gstreamer1.0-pulseaudio libgstrtspserver-1.0-dev gstreamer1.0-rtsp
+```
 
-opencv 4.6.0 cmake command:
-
+install opencv 4 from GitHub with `gstreamer` ON (cuda optional), opencv 4.6.0 cmake command:
+```
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -D CMAKE_INSTALL_PREFIX=/usr/local \
 -D WITH_TBB=ON \
@@ -33,6 +35,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -D INSTALL_PYTHON_EXAMPLES=OFF \
 -D INSTALL_C_EXAMPLES=OFF \
 -D BUILD_EXAMPLES=OFF ..
+```
 
 ---------
 VcXsrv for screen display from WSL1 to local pc (or from remote machine to local desktop)
