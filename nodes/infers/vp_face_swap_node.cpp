@@ -10,11 +10,13 @@ namespace vp_nodes {
                                         std::string insightface_swap_model,
                                         std::string swap_source_image,
                                         int swap_source_face_index,
+                                        int min_face_w_h,
                                         bool swap_on_osd,
                                         bool act_as_primary_detector):
                                         vp_primary_infer_node(node_name, ""),
                                         act_as_primary_detector(act_as_primary_detector),
-                                        swap_on_osd(swap_on_osd) {
+                                        swap_on_osd(swap_on_osd),
+                                        min_face_w_h(min_face_w_h) {
         /* init net*/
         face_extract_net = cv::dnn::readNetFromONNX(yunet_face_detect_model);
         face_encoding_net = cv::dnn::readNetFromONNX(buffalo_l_face_encoding_model);
@@ -51,6 +53,10 @@ namespace vp_nodes {
         auto start_time = std::chrono::system_clock::now();
         // iterate each face target
         for (int i = 0; i < frame_meta->face_targets.size(); i++) {
+            if (frame_meta->face_targets[i]->width < min_face_w_h || frame_meta->face_targets[i]->height < min_face_w_h) {
+                continue;
+            }
+            
             cv::Mat aligned_face, swapped_face;
 
             //auto t = std::chrono::system_clock::now();

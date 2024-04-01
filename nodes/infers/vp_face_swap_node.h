@@ -38,6 +38,8 @@ namespace vp_nodes {
         bool act_as_primary_detector = false;
         bool swap_on_osd = true;
 
+        int min_face_w_h = 50;
+
         /* used for extract faces */
         std::vector<cv::Rect2f> priors;
         void generatePriors(int inputW, int inputH);
@@ -55,6 +57,7 @@ namespace vp_nodes {
                             std::string insightface_swap_model,
                             std::string swap_source_image,
                             int swap_source_face_index = 0,
+                            int min_face_w_h = 50,
                             bool swap_on_osd = true,
                             bool act_as_primary_detector = false);
         ~vp_face_swap_node();
