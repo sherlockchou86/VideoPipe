@@ -72,6 +72,9 @@ target_link_libraries(multi_detectors_sample ${PROJECT_NAME})
 add_executable(firesmoke_detect_sample "firesmoke_detect_sample.cpp")
 target_link_libraries(firesmoke_detect_sample ${PROJECT_NAME})
 
+add_executable(face_swap_sample "face_swap_sample.cpp")
+target_link_libraries(face_swap_sample ${PROJECT_NAME})
+
 # samples depend on PaddlePaddle
 if(VP_WITH_PADDLE)
     add_executable(app_src_sample "app_src_sample.cpp")
