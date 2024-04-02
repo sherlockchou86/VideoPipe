@@ -216,3 +216,4 @@ int main() {
 |36|skip_sample|![](./doc/p54.png)|
 |37|obstacle_detect_sample|![](./doc/p55.png)|
 |38|firesmoke_detect_sample|![](./doc/p56.png)|
+|39|face_swap_sample|![](./doc/p57.png)|
