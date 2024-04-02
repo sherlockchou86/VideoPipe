@@ -1,3 +1,5 @@
+### AI换脸 ###
+https://github.com/sherlockchou86/video_pipe_c/assets/13251045/aa1162f3-2f61-4ac7-8add-12d9f8b7ab23
 
 ### 车辆分类聚合 ###
 https://github.com/sherlockchou86/video_pipe_c/assets/13251045/867b981b-5d8c-4ee3-9831-9c755b520ad6
