@@ -75,6 +75,9 @@ target_link_libraries(firesmoke_detect_sample ${PROJECT_NAME})
 add_executable(face_swap_sample "face_swap_sample.cpp")
 target_link_libraries(face_swap_sample ${PROJECT_NAME})
 
+add_executable(video_restoration_sample "video_restoration_sample.cpp")
+target_link_libraries(video_restoration_sample ${PROJECT_NAME})
+
 # samples depend on PaddlePaddle
 if(VP_WITH_PADDLE)
     add_executable(app_src_sample "app_src_sample.cpp")
