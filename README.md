@@ -22,7 +22,7 @@ https://github.com/sherlockchou86/video_pipe_c/assets/13251045/b1289faa-e2c7-4d3
 
 https://github.com/sherlockchou86/video_pipe_c/assets/13251045/c0be8f6f-949a-4ab3-b0eb-9ac1496bee1d
 
-[更多视频演示](./SAMPLES.md)
+播放器右下角全屏观看，[更多视频演示](./SAMPLES.md)
 
 ## 主要功能
 - 流读取。支持流行的协议，如udp（视频或图像）、rtsp、rtmp、文件（视频或图像）。
@@ -217,4 +217,4 @@ int main() {
 |37|obstacle_detect_sample|![](./doc/p55.png)|
 |38|firesmoke_detect_sample|![](./doc/p56.png)|
 |39|face_swap_sample|![](./doc/p57.png)|
-|40|face_swap_sample|![](./doc/p58.png)|
+|40|video_restoration_sample|![](./doc/p58.png)|
