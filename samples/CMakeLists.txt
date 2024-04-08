@@ -78,6 +78,12 @@ target_link_libraries(face_swap_sample ${PROJECT_NAME})
 add_executable(video_restoration_sample "video_restoration_sample.cpp")
 target_link_libraries(video_restoration_sample ${PROJECT_NAME})
 
+add_executable(app_des_sample "app_des_sample.cpp")
+target_link_libraries(app_des_sample ${PROJECT_NAME})
+
+add_executable(app_src_des_sample "app_src_des_sample.cpp")
+target_link_libraries(app_src_des_sample ${PROJECT_NAME})
+
 # samples depend on PaddlePaddle
 if(VP_WITH_PADDLE)
     add_executable(app_src_sample "app_src_sample.cpp")
