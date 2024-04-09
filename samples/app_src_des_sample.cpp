@@ -7,10 +7,10 @@
 
 /*
 * ## app_src_des_sample ##
-* 1. receive images from host code， using vp_app_src_node
+* 1. receive images from host code， based on vp_app_src_node
 * 2. detect faces and draw results
-* 3. display on screen in host code again using cv::imshow(...), using vp_app_des_node
-* treat pipeline as a tool
+* 3. display on screen in host code again using cv::imshow(...) and print rectangles and keypoints of face, based on vp_app_des_node
+* we treat VideoPipe(pipeline) as a simple face detector tool in this sample.
 */
 
 int main() {
@@ -39,7 +39,16 @@ int main() {
                 cv::imshow(osd_win_title, frame_meta->osd_frame);
             }
 
-            cv::waitKey(0);
+            // print rectangle and keypoints of face
+            std::cout << "detected " << frame_meta->face_targets.size() << " faces:(print from host code)" << std::endl;
+            for (int i = 0; i < frame_meta->face_targets.size(); ++i) {
+                auto f = frame_meta->face_targets[i];
+                std::cout << i << ": [" << f->x << "," << f->y << "," << f->width << "," << f->height << "] [";
+                for (auto k: f->key_points) {
+                    std::cout << "(" << k.first << "," << k.second << ")";
+                }
+                std::cout << "]" << std::endl;
+            }
         }
     });
 
@@ -56,7 +65,7 @@ int main() {
     board.display(1, false);  // no block
 
     // read image in host code manually
-    auto img = cv::imread("./vp_data/test_images/faces/0.jpg");
+    auto img = cv::imread("./vp_data/test_images/faces/swap/2mans.jpg");
     // push image to pipeline in host code manually
     app_src_0->push_frames({img});
 

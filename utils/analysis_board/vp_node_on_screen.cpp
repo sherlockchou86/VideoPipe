@@ -216,7 +216,7 @@ namespace vp_utils {
         if (original_node->node_type() != vp_nodes::vp_node_type::SRC) { 
             // size of in queue
             vp_utils::put_text_at_center_of_rect(canvas, 
-                                    std::to_string(meta_handling_hooker_storage.queue_size), 
+                                    std::to_string(std::max(meta_handling_hooker_storage.queue_size, 0)), 
                                     cv::Rect(node_rect.x + 3, 
                                     node_rect.y + node_title_h / 2 + (node_rect.height - node_title_h) / 2, node_queue_width  - 8, node_title_h - 10), true, font_face, 1, cv::Scalar(255, 0, 255));
             // fps at 1st port
@@ -235,7 +235,7 @@ namespace vp_utils {
         if (original_node->node_type() != vp_nodes::vp_node_type::DES) { 
             // size of out queue
             vp_utils::put_text_at_center_of_rect(canvas, 
-                                    std::to_string(meta_leaving_hooker_storage.queue_size), 
+                                    std::to_string(std::max(meta_leaving_hooker_storage.queue_size, 0)), 
                                     cv::Rect(node_rect.x + node_rect.width - node_queue_width + 3, 
                                     node_rect.y + node_title_h / 2 + (node_rect.height - node_title_h) / 2, node_queue_width - 8, node_title_h - 10), true, font_face, 1, cv::Scalar(255, 0, 255));
             // fps at 3rd port
