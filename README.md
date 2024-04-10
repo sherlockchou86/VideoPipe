@@ -219,4 +219,5 @@ int main() {
 |39|face_swap_sample|![](./doc/p57.png)|
 |40|video_restoration_sample|![](./doc/p58.png)|
 |41|app_des_sample|![](./doc/p59.png)|
-|41|app_src_des_sample|![](./doc/p60.png)|
+|42|app_src_des_sample|![](./doc/p60.png)|
+|43|lane_detect_sample|![](./doc/p61.png)|

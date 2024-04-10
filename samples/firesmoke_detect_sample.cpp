@@ -8,8 +8,8 @@
 #include "../utils/analysis_board/vp_analysis_board.h"
 
 /*
-* ## obstacle_detect_sample ##
-* detect obstacles using yolo on road.
+* ## firesmoke_detect_sample ##
+* detect firesmoke using yolo.
 */
 
 int main() {
