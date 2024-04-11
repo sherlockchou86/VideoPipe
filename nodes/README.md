@@ -27,60 +27,118 @@ file_src_1                                                                --> tr
 ```
 
 
+## 节点目录 ##
 
-## common node list [`ctrl+f` to search] ##
--------
+<details open>
+  <summary>ba</summary>
 
-|  id  |  node                    | usage        | status | sample code  |
-|  --  |  ----                    | -----------  | ----   | -----------  |
-|  1   |  vp_ba_node              | ++++         | not implemented yet | on the way       |
-|  2   |  vp_des_node             | base class for DES nodes | tested |               |
-|  3   |  vp_fake_des_node        | do nothing just keep pipe complete | tested |               |
-|  4   |  vp_file_des_node        | writing video to file | tested |               |
-|  5   |  vp_file_src_node        | reading video from file | tested |               |
-|  6   |  vp_infer_node           | base class for all infer nodes | tested |               |
-|  7   |  vp_message_broker_node  | ++++ | not implemented yet |               |
-|  8   |  vp_node                 | base class for all nodes | tested |               |
-|  9   |  vp_primary_infer_node   | base class for all primary infer nodes, which infer on whole frame | tested |               |
-|  10  |  vp_rtmp_des_node        | pushing video to server via rtmp | tested |               |
-|  11  |  vp_rtsp_src_node        | reading video from rtsp server | tested |               |
-|  12  |  vp_screen_des_node      | displaying video on screen | tested |               |
-|  13  |  vp_secondary_infer_node | base class for all secondary infer nodes, which infer on small cropped image | tested |               |
-|  14  |  vp_skip_node            | skip node which setting skipping rule for infer | not implemented yet |               |
-|  15  |  vp_split_node           | split pipe into multi branches, support by channel and deep-copy | tested |               |
-|  16  |  vp_src_node             | base class for all SRC nodes | tested |               |
-|  17  |  vp_track_node           | ++++ | not implemented yet |
-|  18  |  vp_udp_src_node         | reading video from network via udp/rtp | tested |               |
-|  19  |  vp_record_node          | video/image recording node | on the way |               |
-|  *   |  `more`                  | wait for your contribution | on the way |               |
+  - vp_ba_crossline_node：跨线判断
+  - vp_ba_jam_node：拥堵判断
+  - vp_ba_stop_node：停止判断
+</details>
 
-## infers node list [with some customization] ##
--------
-> `with some customization` means the node should be applied with other special nodes or depend on specific situation.
+<details open>
+  <summary>broker</summary>
+  
+  - vp_ba_socket_broker_node：使用udp转发行为分析结果
+  - vp_embeddings_properties_socket_broker_node：使用udp转发目标特征、属性结果
+  - vp_embeddings_socket_broker_node：使用udp转发目标特征结果
+  - vp_expr_socket_broker_node：使用udp转发数学表达式检查结果
+  - vp_json_console_broker_node：以json格式将结构化数据输出到控制台
+  - vp_json_kafka_broker_node：以json格式将结构化数据通过kafka发送给第三方
+  - vp_msg_broker_node：数据代理基类节点
+  - vp_plate_socket_broker_node：使用udp转发车牌识别结果
+  - vp_xml_file_broker_node：以xml格式将结构化数据存储到文件
+  - vp_xml_socket_broker_node：以xml格式将结构化数据通过udp发送给第三方
+</details>
 
-|  id  |  node                           | usage        | status | sample code  |
-|  --  |  ----                           | -----------  | ----   | -----------  |
-|  1   |  vp_classifier_node             | image classifier based opencv:dnn | tested         | on the way       |
-|  2   |  vp_feature_encoder_node        | image feature encoder based opencv::dnn | on the way         |               |
-|  3   |  vp_openpose_detector_node      | pose detector based on opencv::dnn(OpenPose) | tested         |               |
-|  4   |  vp_ppocr_text_detector_node    | ocr based on paddlepaddle(paddle_ocr from Badidu) | tested         |               |
-|  5   |  vp_sface_feature_encoder_node  | face feature encoder based on opencv::dnn(sface) | tested         |               |
-|  6   |  vp_trt_vehicle_detector        | vehicle detector based on tensorrt(YOLOv5s) | tested         |               |
-|  7   |  vp_trt_vehicle_plate_detector  | vehicle plate detector based on tensorrt(YOLOv5s) | tested         |               |
-|  8   |  vp_yolo_detector_node          | object detector based on opencv::dnn(yolo series) | tested         |               |
-|  9   |  vp_yunet_face_detector_node    | face detector based on opencv::dnn(yunet) | tested         |               |
-|  *   |  `more`                         | wait for your contribution | on the way         |               |
+<details open>
+  <summary>infers</summary>
+  
+  - vp_classifier_node：基于resnet系列的图像分类节点（opencv::dnn）
+  - vp_enet_seg_node：基于ENet网络的图像分割节点（opencv::dnn）
+  - vp_face_swap_node：基于insightface的人脸替换节点（opencv::dnn）
+  - vp_feature_encoder_node：基于resnet系列的目标特征提取节点（opencv::dnn）
+  - vp_lane_detector_node：基于CenterNet的车道线检测节点（opencv::dnn）
+  - vp_mask_rcnn_detector_node：基于maskrcnn的目标检测节点（opencv::dnn）
+  - vp_openpose_detector_node：基于openpose的肢体检测节点（opencv::dnn）
+  - vp_ppocr_text_detector_node：基于paddleocr的文字检测节点（paddleinference）
+  - vp_restoration_node：基于real-esrgan的图像增强修复节点（opencv::dnn）
+  - vp_sface_feature_encoder_node：基于sface网络的人脸特征提取节点（opencv::dnn）
+  - vp_trt_vehicle_color_classifier：基于resnet18的车辆颜色分类节点（tensorrt）
+  - vp_trt_vehicle_detector：基于yolov5s的车辆检测节点（tensorrt）
+  - vp_trt_vehicle_feature_encoder：基于fastreid的车辆特征提取节点（tensorrt）
+  - vp_trt_vehicle_plate_detector_v2：基于yolov5s的车牌检测识别节点（一级推理）（tensorrt）
+  - vp_trt_vehicle_plate_detector：基于yolov5s的车牌检测识别节点（二级推理）（tensorrt）
+  - vp_trt_vehicle_scanner：基于yolov5s的车身扫描节点（tensorrt）
+  - vp_trt_vehicle_type_classifier：基于resnet18的车辆车型分类节点（tensorrt）
+  - vp_yolo_detector_node：基于yolov3（含tiny）的目标检测节点（opencv::dnn）
+  - yolo_yunet_face_detector_node：基于yunet网络的人脸检测节点（opencv::dnn）
 
+</details>
 
-## osd node list [with some customization] ##
--------
+<details open>
+  <summary>osd</summary>
+  
+  - vp_ba_crossline_osd_node：跨线判断结果绘制节点
+  - vp_ba_jam_osd_node：拥堵判断结果绘制节点
+  - vp_ba_stop_osd_node：停止判断结果绘制节点
+  - vp_cluster_node：目标聚类结果绘制节点
+  - vp_expr_osd_node：数学表达式检查结果绘制节点
+  - vp_face_osd_node_v2：人脸检测结果绘制节点（含相似度显示）
+  - vp_face_osd_node：人脸检测结果绘制节点
+  - vp_lane_osd_node：车道线检测结果绘制节点
+  - vp_osd_node_v2：目标绘制节点（含子目标）
+  - vp_osd_node_v3：目标绘制节点（含目标mask）
+  - vp_osd_node：目标绘制节点
+  - vp_plate_osd_node：车牌检测识别结果绘制节点
+  - vp_pose_osd_node：肢体检测结果绘制节点
+  - vp_seg_osd_node：图像分割结果绘制节点
+  - vp_text_osd_node：文字检测识别结果绘制节点
+</details>
 
-|  id  |  node                    | usage        | status | sample code  |
-|  --  |  ----                    | -----------  | ----   | -----------  |
-|  1   |  vp_face_osd_node_v2     | face target display, including similarity at the bottom of frame | tested         | on the way       |
-|  2   |  vp_face_osd_node        | face target display | tested         |               |
-|  3   |  vp_osd_node_v2          | target display, including sub-target at the bottom of frame | tested         |               |
-|  4   |  vp_osd_node             | target display | tested         |               |
-|  5   |  vp_pose_osd_node        | pose target display | tested         |               |
-|  6   |  vp_text_osd_node        | text target display | tested         |               |
-|  *   |  `more`                  | wait for your contribution | on the way         |               |
+<details open>
+  <summary>proc</summary>
+  
+  - vp_expr_check_node：数学等式准确性判断节点
+</details>
+
+<details open>
+  <summary>record</summary>
+  
+  - vp_record_node：视频/图片录制节点
+</details>
+
+<details open>
+  <summary>track</summary>
+  
+  - vp_dsort_track_node：基于deepsort的跟踪节点
+  - vp_sort_track_node：基于sort的跟踪节点
+</details>
+
+<details open>
+  <summary>common</summary>
+  
+  - vp_app_des_node：将图片数据推送给application的目标节点
+  - vp_app_src_node：从application接收图片数据的原始节点
+  - vp_des_node：所有目标节点基类
+  - vp_fake_des_node：虚拟目标节点（不做任何事）
+  - vp_file_des_node：将视频数据存入文件的目标节点
+  - vp_file_src_node：从文件读取视频数据的原始节点
+  - vp_image_des_node：将数据以图片的形式发送给socket或者file的目标节点
+  - vp_image_src_node：从file或者socket读取图片数据的原始节点
+  - vp_infer_node：所有推理节点基类
+  - vp_message_broker_node：所有数据代理节点基类
+  - vp_node：所有节点基类
+  - vp_placeholder_node：虚拟中间节点（不做任何事）
+  - vp_primary_infer_node：所有一级推理节点基类
+  - vp_rtmp_des_node：将视频数据以rtmp格式推送到rtmp服务器的目标节点
+  - vp_rtsp_des_node：将视频数据以rtsp格式推送（无需rtsp服务器）的目标节点
+  - vp_rtsp_src_node：以rtsp格式读取网络流的原始节点
+  - vp_screen_des_node：将视频/图片显示到屏幕的目标节点
+  - vp_secondary_infer_node：所有二级推理节点基类
+  - vp_split_node：管道拆分节点
+  - vp_src_node：所有原始节点基类
+  - vp_sync_node：管道分支同步节点
+  - vp_udp_src_node：以udp格式读取网络流的原始节点
+</details>
