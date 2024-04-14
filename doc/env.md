@@ -1,18 +1,27 @@
 
 
-## personal environment ##
----------
-VS Code + Ubuntu 18.04 C++17  gcc 7.5
+## personal develop environment ##
 
+- VS Code for Windows 11
+- Ubuntu 18.04 x86_64 / C++17  / GCC 7.5 / GTX 1080 GPU
+- GStreamer 1.14.5 / OpenCV 4.6
 ---------
 
-install gstreamer(>=1.14.5):
+Install GStreamer (1.14.5 for Ubuntu 18.04 by default):
 ```
 apt-get install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgstreamer-plugins-bad1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav gstreamer1.0-tools gstreamer1.0-x gstreamer1.0-alsa gstreamer1.0-gl gstreamer1.0-gtk3 gstreamer1.0-qt5 gstreamer1.0-pulseaudio libgstrtspserver-1.0-dev gstreamer1.0-rtsp
 ```
 
-install opencv 4 from GitHub with `gstreamer` ON (cuda optional), opencv 4.6.0 cmake command:
+Install OpenCV from source with `gstreamer` ON (CUDA optional). download source code of OpenCV 4.6.0 (with extra contrib modules) from github first, put them at the same directory then run `cmake` and `make` command:
+
 ```
+step 1:
+cd `the path of opencv 4.6.0`
+mkdir build && cd build
+```
+
+```
+step 2:
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -D CMAKE_INSTALL_PREFIX=/usr/local \
 -D WITH_TBB=ON \
@@ -31,34 +40,35 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -D OPENCV_GENERATE_PKGCONFIG=ON \
 -D OPENCV_PC_FILE_NAME=opencv.pc \
 -D OPENCV_ENABLE_NONFREE=ON \
--D OPENCV_EXTRA_MODULES_PATH=/windows2/zhzhi/opencv_contrib-4.6.0/modules \
+-D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-4.6.0/modules \
 -D INSTALL_PYTHON_EXAMPLES=OFF \
 -D INSTALL_C_EXAMPLES=OFF \
 -D BUILD_EXAMPLES=OFF ..
 ```
 
+```
+step 3:
+make -j8
+```
+
 ---------
-VcXsrv for screen display from WSL1 to local pc (or from remote machine to local desktop)
-install: https://sourceforge.net/p/vcxsrv/wiki/Home/
+`VcXsrv` for screen display from remote machine to local desktop in case of using SSH terminal.
 
-export DISPLAY=local_ip:0.0 (or add to ~/.bashrc)
+- first install PC client from: https://sourceforge.net/p/vcxsrv/wiki/Home/
+- then run `export DISPLAY=local_ip:0.0` (or add it to ~/.bashrc) on remote machine (linux server or embedded board)
 
 ---------
-maybe you need install a nginx as rtmp server for debug purpose. 
+Maybe you need install nginx with `http-rtmp-module` as rtmp server for debug purpose (other tools such as `ZLMediaKit` works fine). 
 
-Also, maybe you need rtsp server to receive its stream for debug purpose.
+Also, maybe you need a rtsp server from which we can receive rtsp stream for debug purpose.
 
 ## tips ##
-use shared_ptr/make_shared in whole project, do not use new/delete.
+- Use shared_ptr/make_shared in whole project, do not use new/delete.
+- The pipeline is driven by stream data, if your app is not responding, maybe no stream input.
 
-the pipe is driven by stream data, if your app is not responding, maybe no stream input.
-
-## git tips ##
-if `git push --set-upstream origin new_branch` fails when pushing new local branch to remote, 
-try run `git remote add origin https://github.com/sherlockchou86/video_pipe_c.git` first.
 
 ## about Hardware Acceleration ##
-since decode & encode in VideoPipe depend on gstreamer (encapsulated inside opencv), if you want to use your GPUs/NPUs to accelerate decoding and encoding performace, you need get/install HARD decode or HARD encode `gstreamer plugins` correctly first and modify gst launch string (take `vp_file_des_node` for example):
+Since decode & encode in VideoPipe depend on gstreamer (encapsulated inside opencv), if you want to use your GPUs/NPUs to accelerate decoding and encoding performace, you need get/install HARD decode or HARD encode `gstreamer plugins` correctly first and modify gst launch string (take `vp_file_des_node` for example):
 ```cpp
 appsrc ! videoconvert ! x264enc bitrate=%d ! mp4mux ! filesink location=%s
 ```
