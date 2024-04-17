@@ -170,23 +170,21 @@ int main() {
 
 
 ## 5.4 案例原型
-|序号|sample|截图|
+|ID|Sample|截图|
 |--|--|--|
 |1|face_tracking_sample|![](./doc/p18.png)|
 |2|vehicle_tracking_sample|![](./doc/p22.png)|
 |3|mask_rcnn_sample|![](./doc/p30.png)|
 |4|openpose_sample|![](./doc/p31.png)|
-|5|obstacle_detect_sample|![](./doc/p55.png)|
+|5|face_swap_sample|![](./doc/p57.png)|
 
-共计 40 多个原型案例，[点击](./doc/sample.md)查看更多。
+共计 40 多个原型案例，[点击](./SAMPLES.md)查看更多。
 
 ## 六、更多资料
-- [sample code](./sample/README.md)
-- [node table](./nodes/README.md)
-- [how VideoPipe works](./doc/about.md)
-- [how record works](./nodes/record/README.md)
-- [environment for reference](./doc/env.md)
-- :blush: wait for update...
+- [Sample Code](./samples/README.md)
+- [Node Table](./nodes/README.md)
+- [How VideoPipe Works](./doc/about.md)
+- [Environment For Reference](./doc/env.md)
 
 ## 扫码入群交流
 ![](./doc/vx.png)
