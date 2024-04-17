@@ -20,7 +20,7 @@
 
 它采用面向插件的编码风格，可以根据不同的需求按需搭配，使用独立的插件，即框架中的 Node 类型，构建出不同类型的视频分析应用。你只需准备好模型并了解如何解析其输出即可，推理可以基于不同的后端实现，如 OpenCV::DNN（默认）、TensorRT、PaddleInference、ONNXRuntime 等，任何你喜欢的都可以。
 
-![](./doc/g2.png)
+![](./doc/p1.png)
 
 ## 三、演示
 
@@ -50,12 +50,13 @@ VideoPipe 是一个让计算机视觉的模型集成更加简单的框架，它�
 - Ubuntu 18.04 x86_64 NVIDIA rtx/tesla GPUs
 - Ubuntu 18.04 aarch64 NVIDIA jetson serials device，tx2 tested
 - Ubuntu 18.04 x86_64 Cambrian MLU serials device, MLU 370 tested (code not provided)
+- Ubuntu 18.04 aarch64 Rockchip RK35** serials device, RK3588 tested (code not provided)
 - Wait for your test
 
 基础
 - C++ 17
 - OpenCV >= 4.6
-- GStreamer 1.20 (Required by OpenCV)
+- GStreamer 1.14.5 (Required by OpenCV)
 - GCC >= 7.5
 
 可选，如果你需要实现自己的推理后端，或者使用除 `opencv::dnn` 之外的其他推理后端.
@@ -104,7 +105,7 @@ cmake ..
 ### 5.3 如何使用
 
 1. 先将 VideoPipe 编译成库，然后引用它.
-2. 或者直接引用源代码，然后编译整个 application.
+2. 或者直接引用源代码，然后编译整个Application.
 
 下面是一个如何构建 Pipeline 然后运行的 Sample(请先修改代码中的相关文件路径)：
 
@@ -169,7 +170,7 @@ int main() {
 ![](./doc/g3.png)
 
 
-## 5.4 案例原型
+### 5.4 案例原型
 |ID|Sample|截图|
 |--|--|--|
 |1|face_tracking_sample|![](./doc/p18.png)|
