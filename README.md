@@ -72,8 +72,8 @@ VideoPipe 是一个让计算机视觉的模型集成更加简单的框架，它�
 
 ### 5.2 编译和调试
 
-1. 运行 `git clone https://github.com/sherlockchou86/video_pipe_c.git`
-2. 运行 `cd video_pipe_c`
+1. 运行 `git clone https://github.com/sherlockchou86/VideoPipe.git`
+2. 运行 `cd VideoPipe`
 3. 运行 `mkdir build && cd build`
 4. 运行 `cmake ..`
 5. 运行 `make -j8`
@@ -98,7 +98,7 @@ cmake ..
 1. [谷歌网盘下载测试文件和模型](https://drive.google.com/drive/folders/1v9dVcR6xttUTB-WPsH3mZ_ZZMzD4wG-v?usp=sharing)
 2. [百度网盘下载测试文件和模型](https://pan.baidu.com/s/1jr2nBnEDmuNaM5DiMjbC0g?pwd=nf53)
 
-将下载好的目录（名称为 vp_data）放在任何位置（比如放在 `/root/abc` 下面），然后在 `同一目录` 下运行 Sample，比如在 `/root/abc` 下面执行命名：`[path to video_pipe_c]/build/bin/1-1-1_sample` 即可运行 1-1-1_sample。
+将下载好的目录（名称为 vp_data）放在任何位置（比如放在 `/root/abc` 下面），然后在 `同一目录` 下运行 Sample，比如在 `/root/abc` 下面执行命令：`[path to VideoPipe]/build/bin/1-1-1_sample` 即可运行 1-1-1_sample。
 
 **注意**：`./third_party/` 下面都是独立的项目，有的是 header-only 库，被 VideoPipe 直接引用；有的包含有 cpp 文件，可以独立编译或运行，VideoPipe 依赖这些库，在编译 VideoPipe 的过程中会自动编译这些库。这些库也包含自己的 Samples，具体使用方法可参见对应子目录下的 README 文件.
 
