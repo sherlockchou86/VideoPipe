@@ -80,3 +80,7 @@ https://github.com/sherlockchou86/video_pipe_c/assets/13251045/9c3c1a87-d9f7-463
 |41|app_des_sample|![](./doc/p59.png)|
 |42|app_src_des_sample|![](./doc/p60.png)|
 |43|lane_detect_sample|![](./doc/p61.png)|
+|44|frame_fusion_sample|![](./doc/p62.png)|
+|45|1-N-1_sample|![](./doc/p65.png)|
+|46|1-N-1_sample2|![](./doc/p64.png)|
+|47|1-N-1_sample3|![](./doc/p63.png)|

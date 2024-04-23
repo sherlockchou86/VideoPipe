@@ -87,6 +87,12 @@ target_link_libraries(app_src_des_sample ${PROJECT_NAME})
 add_executable(lane_detect_sample "lane_detect_sample.cpp")
 target_link_libraries(lane_detect_sample ${PROJECT_NAME})
 
+add_executable(frame_fusion_sample "frame_fusion_sample.cpp")
+target_link_libraries(frame_fusion_sample ${PROJECT_NAME})
+
+add_executable(vp_test "vp_test.cpp")
+target_link_libraries(vp_test ${PROJECT_NAME})
+
 # samples depend on PaddlePaddle
 if(VP_WITH_PADDLE)
     add_executable(app_src_sample "app_src_sample.cpp")
