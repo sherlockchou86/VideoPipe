@@ -101,6 +101,7 @@ file_src_1                                                                --> tr
   <summary>proc</summary>
   
   - vp_expr_check_node：数学等式准确性判断节点
+  - vp_frame_fusion_node：视频帧按像素比融合节点（支持2个通道）
 </details>
 
 <details open>
