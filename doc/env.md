@@ -1,6 +1,6 @@
 
 
-## personal develop environment ##
+## Personal Development Environment ##
 
 - VS Code for Windows 11
 - Ubuntu 18.04 x86_64 / C++17  / GCC 7.5 / GTX 1080 GPU
@@ -63,6 +63,12 @@ Maybe you need install nginx with `http-rtmp-module` as rtmp server for debug pu
 - [how to install ZLMeidaKit](https://github.com/ZLMediaKit/ZLMediaKit/wiki/vcpkg%E6%96%B9%E5%BC%8F%E5%AE%89%E8%A3%85zlmediakit)
 - [how to push stream to ZLMediaKit](https://github.com/ZLMediaKit/ZLMediaKit/wiki/ZLMediaKit%E6%8E%A8%E6%B5%81%E6%B5%8B%E8%AF%95), a few samples which used `vp_rtmp_des_node` in VidepPipe would push rtmp stream to server.
 - [how to pull/play stream from ZLMediaKit](https://github.com/ZLMediaKit/ZLMediaKit/wiki/%E6%92%AD%E6%94%BEurl%E8%A7%84%E5%88%99), VLC player or ffplay was recommended.
+
+---------
+Please prepare kafka server AND install `librdkafka` client sdk if you want to enable kafka-related codes.
+- [how to install kafka server](https://kafka.apache.org/quickstart)
+- how to install `librdkafka`? run `sudo apt-get install librdkafka-dev`
+
 
 ## tips ##
 - Use shared_ptr/make_shared in whole project, do not use new/delete.

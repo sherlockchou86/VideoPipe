@@ -93,6 +93,12 @@ target_link_libraries(frame_fusion_sample ${PROJECT_NAME})
 add_executable(vp_test "vp_test.cpp")
 target_link_libraries(vp_test ${PROJECT_NAME})
 
+# samples depend on Kafka
+if(VP_WITH_KAFKA)
+    add_executable(message_broker_kafka_sample "message_broker_kafka_sample.cpp")
+    target_link_libraries(message_broker_kafka_sample ${PROJECT_NAME})    
+endif()
+
 # samples depend on PaddlePaddle
 if(VP_WITH_PADDLE)
     add_executable(app_src_sample "app_src_sample.cpp")

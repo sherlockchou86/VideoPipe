@@ -1,20 +1,8 @@
 #[[
     prepare in advance：
     1. OpenCV >= 4.6
-    2. Gstreamer >= 1.14
-    3. CUDA, TensorRT, PADDLE for optional
-
-    build command:
-    1. mkdir build && cd build
-    2. cmake -DVP_WITH_CUDA=ON -DVP_WITH_TRT=ON -DVP_WITH_PADDLE=ON -DVP_BUILD_COMPLEX_SAMPLES=ON ..
-    3. make -j8
-    [note:]
-    1. -D***=ON means *** enabled
-    2. -D***=OFF means *** disabled(default)
-
-    results:
-    1. all libs saved to build/libs
-    2. all samples saved to build/bin
+    2. Gstreamer >= 1.14.5
+    3. CUDA, TensorRT, PADDLE and others for optional
 ]]
 
 cmake_minimum_required(VERSION 3.10)
@@ -30,6 +18,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/libs)
 option(VP_WITH_CUDA "prepared CUDA or not?" OFF)
 option(VP_WITH_TRT "prepared TensorRT or not?" OFF)
 option(VP_WITH_PADDLE "prepared PaddlePaddle or not?" OFF)
+option(VP_WITH_KAFKA "prepared Kafka or not?" OFF)
 option(VP_BUILD_COMPLEX_SAMPLES "build complex samples or not? (maybe source code not provided)" OFF)
 
 # OpenCV required
@@ -90,6 +79,12 @@ if(VP_WITH_PADDLE)  # PaddlePaddle enabled
     message(STATUS "    include path: ${VP_PADDLE_INC_PATH}")
     message(STATUS "    library path: ${VP_PADDLE_LIB_PATH}")
     message("--------------end build paddle_ocr---------------")
+endif()
+
+# optional for Kafka
+if(VP_WITH_KAFKA)
+    add_definitions(-DVP_WITH_KAFKA)
+    list(APPEND VP_DEPEND_LIBS rdkafka++)
 endif()
 
 # tinyexpr
