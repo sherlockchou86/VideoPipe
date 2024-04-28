@@ -190,10 +190,10 @@ int main() {
 共计 40 多个原型案例，[点击](./SAMPLES.md)查看更多。
 
 ## 六、更多资料
-- [Sample Code](./samples/README.md)
+- [Sample Code](./samples)
 - [Node Table](./nodes/README.md)
 - [How VideoPipe Works](./doc/about.md)
-- [Environment For Reference](./doc/env.md)
+- [Development Environment For Reference](./doc/env.md)
 
 ## 扫码入群交流
 ![](./doc/vx.png)
