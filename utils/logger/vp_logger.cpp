@@ -27,6 +27,13 @@ namespace vp_utils {
         // initialize file writer
         file_writer.init(log_dir, log_file_name_template);
 
+        #ifdef VP_WITH_KAFKA
+        // initialize kafka writer
+        auto servers_and_topic = vp_utils::string_split(kafka_servers_and_topic, '/');
+        assert(servers_and_topic.size() == 2);
+        kafka_writer.init(servers_and_topic[0], servers_and_topic[1]);
+        #endif
+
         // run thread
         auto t = std::thread(&vp_logger::log_write_run, this); 
         log_writer_th = std::move(t);
@@ -146,6 +153,9 @@ namespace vp_utils {
     }
 
     void vp_logger::write_to_kafka(const std::string& log) {
-        // TO-DO
+        #ifdef VP_WITH_KAFKA
+        // kafka_writer.write(log);
+        kafka_writer << log;
+        #endif
     }
 }

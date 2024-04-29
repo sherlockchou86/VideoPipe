@@ -28,12 +28,14 @@ VP_INFO(vp_utils::string_format("[%s] [record] save dir not exists, now creating
 VP_SET_LOG_LEVEL(_log_level);
 // log file dir
 VP_SET_LOG_DIR(_log_dir);
+// log kafka servers and topic
+VP_SET_LOG_KAFKA_SERVERS_AND_TOPIC(_kafka_servers_and_topic);
 
 // log to console or not
 VP_SET_LOG_TO_CONSOLE(_log_to_console);
 // log to file or not
 VP_SET_LOG_TO_FILE(_log_to_file);
-// TO-DO
+// log to kafka or not
 VP_SET_LOG_TO_KAFKA(_log_to_kafka);
 
 // include log level or not

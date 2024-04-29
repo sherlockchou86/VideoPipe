@@ -11,6 +11,7 @@
 #include "../vp_semaphore.h"
 #include "../vp_utils.h"
 #include "vp_log_file_writer.h"
+#include "vp_log_kafka_writer.h"
 
 namespace vp_utils {
     // log levels
@@ -52,6 +53,11 @@ namespace vp_utils {
         // file writer
         vp_utils::vp_log_file_writer file_writer;
 
+        #ifdef VP_WITH_KAFKA
+        // kafka writer
+        vp_utils::vp_log_kafka_writer kafka_writer;
+        #endif
+
         const std::map<vp_log_level, std::string> log_level_names = {{ERROR, "Error"},
                                                                     {WARN, "Warn "},
                                                                     {INFO, "Info "},
@@ -71,6 +77,7 @@ namespace vp_utils {
         // CONFIG
         vp_log_level log_level = vp_log_level::DEBUG; // filter
         std::string log_dir = "./log";                // folder saving log file
+        std::string kafka_servers_and_topic = "127.0.0.1:9092/vp_log";    // kafka servers and topic, splited by `/`. multiple servers splited by `,`
         const std::string log_file_name_template = "<year>-<mon>-<day>.txt";
         const std::string log_time_templete = "[<year>-<mon>-<day> <hour>:<min>:<sec>.<mili>]";
 
@@ -106,6 +113,7 @@ namespace vp_utils {
     // config Macros
     #define VP_SET_LOG_LEVEL(_log_level) vp_utils::vp_logger::get_logger().log_level = _log_level
     #define VP_SET_LOG_DIR(_log_dir) vp_utils::vp_logger::get_logger().log_dir = _log_dir
+    #define VP_SET_LOG_KAFKA_SERVERS_AND_TOPIC(_kafka_servers_and_topic) vp_utils::vp_logger::get_logger().kafka_servers_and_topic = _kafka_servers_and_topic
     #define VP_SET_LOG_TO_CONSOLE(_log_to_console) vp_utils::vp_logger::get_logger().log_to_console = _log_to_console
     #define VP_SET_LOG_TO_FILE(_log_to_file) vp_utils::vp_logger::get_logger().log_to_console = _log_to_file
     #define VP_SET_LOG_TO_KAFKA(_log_to_kafka) vp_utils::vp_logger::get_logger().log_to_kafka = _log_to_kafka

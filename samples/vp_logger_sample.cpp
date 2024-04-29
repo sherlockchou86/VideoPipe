@@ -17,7 +17,7 @@ int main() {
     // VP_SET_LOG_INCLUDE_LEVEL(false);
 
     // config for output
-    VP_SET_LOG_TO_CONSOLE(false);
+    // VP_SET_LOG_TO_CONSOLE(false);
     // VP_SET_LOG_TO_FILE(false);
 
     // config for log folder
@@ -25,6 +25,10 @@ int main() {
 
     // config log level
     VP_SET_LOG_LEVEL(vp_utils::vp_log_level::DEBUG);
+
+    // config for kafka, ignored automatically if not prepared for kafka
+    VP_SET_LOG_TO_KAFKA(true);  // false by default if not set
+    VP_SET_LOG_KAFKA_SERVERS_AND_TOPIC("192.168.77.87:9092/vp_log");
     
     // init
     VP_LOGGER_INIT();
