@@ -10,7 +10,7 @@ detection/segmentation/pose_estimation based on `yolov8`, codes come from [tenso
 
 1. download default `.pt` models of `yolov8/n/s/m/...(det/seg/pose)` from [github](https://github.com/ultralytics/assets/releases) (or trained by yourself)
 2. convert `.pt` to `.wts` using `samples/gen_wts.py`
-3. convert `.wts` to `.engine` using `samples/trt_yolov8_wts_2_engine`
+3. convert `.wts` to `.engine` using `samples/trt_yolov8_wts_2_engine.cpp` (**change classes number before compiling**)
 
 ### .pt -> .wts ###
 `python3 samples/gen_wts.py [-w] [.pt] [-o] [.wts] [-t] [detect/seg]`
