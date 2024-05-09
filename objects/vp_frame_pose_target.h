@@ -11,11 +11,12 @@ namespace vp_objects {
         coco,
         mpi_15,
         face,
-        hand
+        hand,
+        yolov8_pose_17
     };
     
     struct vp_pose_keypoint {
-        int point_type;       // point type, nose, neck or left_eye 
+        int point_type;       // point type (index), nose, neck or left_eye 
         int x;                // x in 2D image
         int y;                // y in 2D image
         float score;          // probability

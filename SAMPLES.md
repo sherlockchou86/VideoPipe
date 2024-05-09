@@ -85,3 +85,4 @@ https://github.com/sherlockchou86/video_pipe_c/assets/13251045/9c3c1a87-d9f7-463
 |46|1-N-1_sample2|![](./doc/p64.png)|
 |47|1-N-1_sample3|![](./doc/p63.png)|
 |48|message_broker_kafka_sample|![](./doc/p66.png)|
+|49|trt_yolov8_sample|![](./doc/p67.png)|

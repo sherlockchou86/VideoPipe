@@ -22,7 +22,7 @@ namespace vp_nodes {
         for (int i = 0; i < meta->pose_targets.size(); i++) {
             auto& pose_target = meta->pose_targets[i];
 
-            auto nPairs = posePairs_map.at(pose_target->type).size() - 2;
+            auto nPairs = posePairs_map.at(pose_target->type).size();
 
             for (int j = 0; j < nPairs; j++) {
                 auto& a = pose_target->key_points[posePairs_map.at(pose_target->type)[j].first];

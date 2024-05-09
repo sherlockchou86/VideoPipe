@@ -23,7 +23,9 @@ namespace vp_nodes {
                                             {5,17}}},
             {vp_objects::vp_pose_type::mpi_15, {{0,1}, {1,2}, {2,3}, {3,4}, {1,5}, {5,6}, {6,7}, {1,14}, {14,8}, {8,9}, {9,10}, {14,11}, {11,12}, {12,13}, {0, 2}, {0, 5}}},
             {vp_objects::vp_pose_type::hand, std::vector<std::pair<int,int>>()},
-            {vp_objects::vp_pose_type::face, std::vector<std::pair<int,int>>()}
+            {vp_objects::vp_pose_type::face, std::vector<std::pair<int,int>>()},
+            {vp_objects::vp_pose_type::yolov8_pose_17, {{0, 1}, {0, 2},  {0, 5}, {0, 6},  {1, 2},   {1, 3},   {2, 4},   {5, 6},   {5, 7},  {5, 11},
+                                            {6, 8}, {6, 12}, {7, 9}, {8, 10}, {11, 12}, {11, 13}, {12, 14}, {13, 15}, {14, 16}}}
         };
 
         void populateColorPalette(std::vector<cv::Scalar>& colors, int nColors) {

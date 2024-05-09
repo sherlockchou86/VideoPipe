@@ -55,14 +55,20 @@ if(VP_WITH_TRT)  # TensorRT enabled
     set(VP_BUILD_FROM ON)  # set flag for sub project
     set(VP_TRT_LIB_PATH "")
     set(VP_TRT_INC_PATH "")
+    # trt_vehicle
     message("-------------start build trt_vehicle--------------")
-    add_subdirectory(third_party/trt_vehicle) # build trt_vehicle
+    add_subdirectory(third_party/trt_vehicle)
     list(APPEND VP_DEPEND_LIBS trt_vehicle)
     link_directories(${VP_TRT_LIB_PATH})
     message(STATUS "TensorRT library status:")
     message(STATUS "    include path: ${VP_TRT_INC_PATH}")
     message(STATUS "    library path: ${VP_TRT_LIB_PATH}")
     message("--------------end build trt_vehicle---------------")
+    # trt_yolov8    
+    message("-------------start build trt_yolov8--------------")
+    add_subdirectory(third_party/trt_yolov8)
+    list(APPEND VP_DEPEND_LIBS trt_yolov8)
+    message("--------------end build trt_yolov8---------------")
 endif()
 
 # optional for PaddlePaddle

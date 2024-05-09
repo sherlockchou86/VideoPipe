@@ -45,6 +45,48 @@
             }
           ],
           "preLaunchTask": ""
+        },
+        {
+          "name": "debug trt_yolov8 samples",  // debug for trt samples at third_party/trt_yolov8
+          "type": "cppdbg",
+          "request": "launch",
+          "program": "${workspaceFolder}/third_party/trt_yolov8/build/samples/${fileBasenameNoExtension}",
+          "args": [""],
+          "stopAtEntry": false,
+          "cwd": "${workspaceFolder}/..",
+          "environment": [],
+          "externalConsole": false,
+          "MIMode": "gdb",
+          "miDebuggerPath": "/usr/bin/gdb",
+          "setupCommands": [
+            {
+              "description": "Enable pretty-printing for gdb",
+              "text": "-enable-pretty-printing",
+              "ignoreFailures": true
+            }
+          ],
+          "preLaunchTask": ""
+        },
+        {
+          "name": "debug trt_vehicle samples",  // debug for trt samples at third_party/trt_vehicle
+          "type": "cppdbg",
+          "request": "launch",
+          "program": "${workspaceFolder}/third_party/trt_vehicle/build/samples/${fileBasenameNoExtension}",
+          "args": [""],
+          "stopAtEntry": false,
+          "cwd": "${workspaceFolder}/..",
+          "environment": [],
+          "externalConsole": false,
+          "MIMode": "gdb",
+          "miDebuggerPath": "/usr/bin/gdb",
+          "setupCommands": [
+            {
+              "description": "Enable pretty-printing for gdb",
+              "text": "-enable-pretty-printing",
+              "ignoreFailures": true
+            }
+          ],
+          "preLaunchTask": ""
         }
     ]
 }

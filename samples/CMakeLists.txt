@@ -164,6 +164,9 @@ if(VP_WITH_TRT)
 
     add_executable(1-N-1_sample3 "1-N-1_sample3.cpp")
     target_link_libraries(1-N-1_sample3 ${PROJECT_NAME})
+
+    add_executable(trt_yolov8_sample "trt_yolov8_sample.cpp")
+    target_link_libraries(trt_yolov8_sample ${PROJECT_NAME})
 endif()
 
 if(VP_BUILD_COMPLEX_SAMPLES)

@@ -140,3 +140,5 @@ flask demo for face recognize<br/>
 ## license plate recognize ##
 flask demo for license plate recognize<br/>
 ![](../doc/p52.png)
+
+[for more samples](../SAMPLES.md)
