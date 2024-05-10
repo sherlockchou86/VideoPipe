@@ -11,6 +11,11 @@ struct alignas(float) Detection {
     float keypoints[51];  // 17*3 keypoints
 };
 
+struct Classification {
+    int class_id;
+    float conf;
+};
+
 struct AffineMatrix {
     float value[6];
 };

@@ -44,6 +44,9 @@ if(NOT DEFINED VP_BUILD_FROM)
     add_executable(trt_yolov8_seg_test "samples/trt_yolov8_seg_test.cpp")
     target_link_libraries(trt_yolov8_seg_test ${PROJECT_NAME})
 
+    add_executable(trt_yolov8_cls_test "samples/trt_yolov8_cls_test.cpp")
+    target_link_libraries(trt_yolov8_cls_test ${PROJECT_NAME})
+
     add_executable(trt_yolov8_wts_2_engine "samples/trt_yolov8_wts_2_engine.cpp")
     target_link_libraries(trt_yolov8_wts_2_engine ${PROJECT_NAME})
 endif()
