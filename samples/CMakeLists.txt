@@ -167,6 +167,9 @@ if(VP_WITH_TRT)
 
     add_executable(trt_yolov8_sample "trt_yolov8_sample.cpp")
     target_link_libraries(trt_yolov8_sample ${PROJECT_NAME})
+
+    add_executable(trt_yolov8_sample2 "trt_yolov8_sample2.cpp")
+    target_link_libraries(trt_yolov8_sample2 ${PROJECT_NAME})
 endif()
 
 if(VP_BUILD_COMPLEX_SAMPLES)

@@ -5,7 +5,7 @@
 #include "../../third_party/trt_yolov8/trt_yolov8_pose_detector.h"
 
 namespace vp_nodes {
-    // universal yolov8 detector based on tensorrt using third_party/trt_yolov8 library
+    // universal yolov8 pose detector based on tensorrt using third_party/trt_yolov8 library
     class vp_trt_yolov8_pose_detector: public vp_primary_infer_node
     {
     private:
