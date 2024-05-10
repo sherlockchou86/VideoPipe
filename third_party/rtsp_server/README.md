@@ -31,7 +31,7 @@ rtsp server will listen at ports(8000/9000/9005) to receive udp stream and distr
 (3) rtsp2==>9005==>rtsp://127.0.0.1:8555/rtsp2
 ```
 
-then you need push your stream to port `8000`, `9000`, `9005` using some multi-media tools like `gstreamer-launch-1.0` or your application.
+then you need push your stream to port `8000`, `9000`, `9005` using some multi-media tools like `gst-launch-1.0` or your application.
 
 ```
 # push udp stream to port 8000
@@ -44,7 +44,7 @@ gst-launch-1.0 filesrc location=face2.mp4 ! qtdemux ! h264parse ! avdec_h264 ! x
 gst-launch-1.0 filesrc location=face2.mp4 ! qtdemux ! h264parse ! avdec_h264 ! x264enc ! rtph264pay ! udpsink host=localhost port=9005
 ```
 
-now you can pull/play rtsp stream using `vlc` or `gstreamer-launch-1.0` by rtsp urls:
+now you can pull/play rtsp stream using `vlc` or `gst-launch-1.0` by rtsp urls:
 ```
 rtsp://127.0.0.1:8555/rtsp0
 rtsp://127.0.0.1:8555/rtsp1
