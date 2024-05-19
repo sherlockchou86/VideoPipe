@@ -211,3 +211,8 @@ if(VP_BUILD_COMPLEX_SAMPLES)
     endif()
     
 endif()
+
+if(VP_WITH_FFMPEG)
+    add_executable(ffmpeg_sample "ffmpeg_src_des_sample.cpp")
+    target_link_libraries(ffmpeg_sample ${PROJECT_NAME})
+endif()

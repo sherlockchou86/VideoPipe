@@ -1,4 +1,4 @@
-
+#ifdef VP_WITH_GST
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc.hpp>
@@ -117,3 +117,5 @@ namespace vp_nodes {
         return rtsp_url;
     }
 }
+
+#endif // VP_WITH_GST
