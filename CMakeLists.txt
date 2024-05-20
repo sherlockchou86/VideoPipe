@@ -19,7 +19,10 @@ option(VP_WITH_CUDA "prepared CUDA or not?" OFF)
 option(VP_WITH_TRT "prepared TensorRT or not?" OFF)
 option(VP_WITH_PADDLE "prepared PaddlePaddle or not?" OFF)
 option(VP_WITH_KAFKA "prepared Kafka or not?" OFF)
+option(VP_WITH_GST "prepared Gstreamer or not?" OFF)
+option(VP_WITH_FFMPEG "prepared FFmpeg or not?" ON)
 option(VP_BUILD_COMPLEX_SAMPLES "build complex samples or not? (maybe source code not provided)" OFF)
+
 
 # OpenCV required
 find_package(OpenCV REQUIRED)
@@ -29,7 +32,17 @@ message(STATUS "    libraries: ${OpenCV_LIBS}")
 message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
 include_directories(${OpenCV_INCLUDE_DIRS})
 
+if(VP_WITH_FFMPEG)
+# FFmpeg required
+add_definitions(-DVP_WITH_FFMPEG)
+add_subdirectory(third_party/ffmpeg)
+list(APPEND VP_DEPEND_LIBS ffmpeg)
+
+endif()
+
+if(VP_WITH_GST)
 # Gstreamer required
+add_definitions(-DVP_WITH_GST)
 include(FindPkgConfig)
 pkg_check_modules(GST   REQUIRED gstreamer-1.0)
 pkg_check_modules(GSTAPP REQUIRED gstreamer-app-1.0)
@@ -40,6 +53,7 @@ message(STATUS "    libraries: ${GST_LIBRARIES} ${GSTAPP_LIBRARIES} ${GST_RTSP_L
 message(STATUS "    include path: ${GST_INCLUDE_DIRS}")
 include_directories(${GST_INCLUDE_DIRS})
 set (GST_DEPEND_LIBS ${GST_LIBRARIES} ${GSTAPP_LIBRARIES} ${GST_RTSP_LIBRARIES})
+endif()
 
 # collect dependent libs for videopipe
 list(APPEND VP_DEPEND_LIBS ${OpenCV_LIBS} ${GST_DEPEND_LIBS} stdc++fs)

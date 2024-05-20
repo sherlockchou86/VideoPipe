@@ -1,4 +1,4 @@
-
+#ifdef VP_WITH_GST
 
 #include "vp_rtsp_des_node.h"
 
@@ -93,3 +93,5 @@ namespace vp_nodes {
         return "rtsp://localhost:" + std::to_string(rtsp_port) + "/" + rtsp_name;
     }
 }
+
+#endif

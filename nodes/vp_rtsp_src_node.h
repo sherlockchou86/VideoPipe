@@ -1,5 +1,7 @@
 #pragma once
 
+#ifdef VP_WITH_GST
+
 #include <string>
 
 #include "vp_src_node.h"
@@ -34,3 +36,5 @@ namespace vp_nodes {
         int skip_interval = 0;
     };
 }
+
+#endif

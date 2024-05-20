@@ -1,4 +1,5 @@
 #pragma once
+#ifdef VP_WITH_GST
 
 #include <gst/gst.h>
 #include <gst/rtsp-server/rtsp-server.h>
@@ -59,3 +60,6 @@ namespace vp_nodes {
          virtual std::string to_string() override;
     };
 }
+
+
+#endif
