@@ -41,7 +41,7 @@ namespace vp_nodes {
                     auto waiting_control_meta = dynamic_pointer_cast<vp_objects::vp_control_meta>((*i));
                     pendding_meta(waiting_control_meta);
                     i = meta_waiting_for_sync.erase(i);
-                    VP_DEBUG(vp_utils::string_format("[%s][channel%d] sync control meta for control_uid:[%s], now cache size of sync is:[%d]", node_name.c_str(), meta->channel_index, waiting_control_meta->control_uid, meta_waiting_for_sync.size()));
+                    VP_DEBUG(vp_utils::string_format("[%s][channel%d] sync control meta for control_uid:[%s], now cache size of sync is:[%d]", node_name.c_str(), meta->channel_index, waiting_control_meta->control_uid.c_str(), meta_waiting_for_sync.size()));
                 }
                 else {
                     // skip
