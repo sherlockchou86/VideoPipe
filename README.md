@@ -200,4 +200,4 @@ int main() {
 
 ## 鸣谢
 
-<a href="https://hellogithub.com/repository/4284d29e778642a4a51a471ab1eae6f0" target="_blank"><img src="https://api.hellogithub.com/v1/widgets/recommend.svg?rid=4284d29e778642a4a51a471ab1eae6f0" alt="Featured｜HelloGitHub" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+<a href="https://hellogithub.com/repository/4284d29e778642a4a51a471ab1eae6f0" target="_blank"><img src="https://api.hellogithub.com/v1/widgets/recommend.svg?rid=4284d29e778642a4a51a471ab1eae6f0&claim_uid=hBZTk0E2RAzJKyq" alt="Featured｜HelloGitHub" style="width: 250px; height: 54px;" width="250" height="54" /></a>
