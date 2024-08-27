@@ -180,16 +180,6 @@ int main() {
 }
 ```
 
-### Explanation:
-
-1. **Create Nodes**: Initialize the various nodes for video input, model inference, and output. Update the paths to the video and model files as per your setup.
-
-2. **Build Pipeline**: Connect the nodes in sequence. This includes linking the video source to the face detection node, the face detection node to the face recognition node, and so on. Also, set up output nodes for screen display and RTMP streaming.
-
-3. **Start Pipeline**: Begin processing by starting the video source node. 
-
-4. **Visualize Pipeline**: Use the `vp_analysis_board` to visualize the pipeline and monitor its status.
-
 **Note**: Running this code will show three displays:
 1. **Pipeline Status**: A live update of the pipeline’s status.
 2. **Screen Output**: The GUI display showing results.
@@ -198,7 +188,7 @@ int main() {
 ![](./doc/g3.png)
 
 
-### Prototype Example
+### Prototype Examples
 |ID|Sample|Screenshot|
 |--|--|--|
 |1|face_tracking_sample|![](./doc/p18.png)|
