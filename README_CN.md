@@ -2,7 +2,7 @@
   <img src="./doc/logo.png" alt="Logo" width="350" height="200">
 </p>
 <p style="" align="center">
-  <a href='./README.md'>英文README</a> | <a href='http://www.videopipe.cool'>VideoPipe网站</a>
+  <a href='./README.md'>英文README</a> | <a href='http://www.videopipe.cool'>VideoPipe网站</a> | <a href='http://www.videopipe.cool/index.php/2024/09/11/videopipetutorials/'>VideoPipe视频教程</a>
 </p>
 
 ## 一、介绍
