@@ -2,7 +2,7 @@
   <img src="./doc/logo.png" alt="Logo" width="350" height="200">
 </p>
 <p style="" align="center">
-  <a href='./README_CN.md'>中文README</a> | <a href='http://www.videopipe.cool'>VideoPipe Website </a> | <a href='http://www.videopipe.cool/index.php/2024/09/11/videopipetutorials/'>VideoPipe tutorials(视频教程) </a>
+  <a href='./README_CN.md'>中文README</a> | <a href='http://www.videopipe.cool'>VideoPipe Website </a> | <a href='http://www.videopipe.cool/index.php/2024/09/11/videopipetutorials/'>VideoPipe tutorials(视频教程) </a> | <a href='http://www.videopipe.cool/index.php/2025/07/25/have-dataset/'>HAVE Dataset(视频数据集) </a>
 </p>
 
 ## Introduction
