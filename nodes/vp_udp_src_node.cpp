@@ -37,6 +37,8 @@ namespace vp_nodes {
 
             // try to open capture
             if (!udp_capture.isOpened()) {
+                video_width = video_height = fps = 0;
+                original_width = original_height = original_fps = 0;
                 if (!udp_capture.open(this->gst_template, cv::CAP_GSTREAMER)) {
                     VP_WARN(vp_utils::string_format("[%s] open udp failed, try again...", node_name.c_str()));
                     continue;

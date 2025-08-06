@@ -57,6 +57,9 @@ target_link_libraries(record_sample ${PROJECT_NAME})
 add_executable(rtsp_des_sample "rtsp_des_sample.cpp")
 target_link_libraries(rtsp_des_sample ${PROJECT_NAME})
 
+add_executable(rtsp_src_sample "rtsp_src_sample.cpp")
+target_link_libraries(rtsp_src_sample ${PROJECT_NAME})
+
 add_executable(vp_logger_sample "vp_logger_sample.cpp")
 target_link_libraries(vp_logger_sample ${PROJECT_NAME})
 
