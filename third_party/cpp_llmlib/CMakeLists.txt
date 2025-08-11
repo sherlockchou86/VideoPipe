@@ -25,3 +25,6 @@ target_link_libraries(llmlib_ollama_test ${OpenCV_LIBS} ${OPENSSL_LIBRARIES})
 
 add_executable(llmlib_openai_test "llmlib_openai_test.cpp")
 target_link_libraries(llmlib_openai_test ${OpenCV_LIBS} ${OPENSSL_LIBRARIES})
+
+add_executable(llmlib_multi_chat_test "llmlib_multi_chat_test.cpp")
+target_link_libraries(llmlib_multi_chat_test ${OpenCV_LIBS} ${OPENSSL_LIBRARIES})
