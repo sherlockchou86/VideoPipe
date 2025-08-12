@@ -2,6 +2,11 @@
 #include "llmlib.hpp"
 using namespace llmlib;
 
+/**
+ * prepared information from https://bailian.console.aliyun.com/#/home (or other OpenAI-compatible Services)
+ * 1. api base url
+ * 2. api key
+*/
 int main() {
     LLMClient llmcli("https://dashscope.aliyuncs.com/compatible-mode/v1", "sk-XXX", LLMBackendType::OpenAI);
     /**

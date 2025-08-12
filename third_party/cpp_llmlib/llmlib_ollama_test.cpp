@@ -3,6 +3,11 @@
 #include "llmlib.hpp"
 using namespace llmlib;
 
+/**
+ * 1. install Ollama locally
+ * 2. start Ollama service and get api base url(no api key required for Ollama)
+ * 
+*/
 int main() {
     LLMClient llmcli("http://192.168.77.219:11434", "", LLMBackendType::Ollama);
     /**
