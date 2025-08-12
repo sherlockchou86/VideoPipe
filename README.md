@@ -39,7 +39,7 @@ To watch in fullscreen, use the button in the bottom right corner of the playerï
 
 - **Stream Reading**: Supports mainstream video stream protocols such as UDP, RTSP, RTMP, file, and application. It also supports image reading.
 - **Video Decoding**: Supports video and image decoding based on OpenCV/GStreamer (with hardware acceleration).
-- **Algorithm Inference**: Supports multi-level inference based on deep learning algorithms, such as object detection, image classification, feature extraction, and image generation. It also supports the integration of traditional image algorithms.
+- **Algorithm Inference**: Supports multi-level inference based on deep learning algorithms, such as object detection, image classification, feature extraction, and image generation. It also supports the integration of traditional image algorithms. **Support mLLM(Multimodal Large Language Model) integration now (update 2025/8/12)**
 - **Object Tracking**: Supports object tracking, such as IOU and SORT tracking algorithms.
 - **Behavior Analysis (BA)**: Supports behavior analysis based on tracking, such as traffic behavior detection like line-crossing, parking, and violations.
 - **Business Logic**: Allows integration of any custom business logic, which can be closely related to specific business requirements.
@@ -58,6 +58,7 @@ Platforms
 - Ubuntu 18.04 aarch64 NVIDIA jetson serials deviceï¼Œtx2 tested
 - Ubuntu 18.04 x86_64 Cambrian MLU serials device, MLU 370 tested (code not provided)
 - Ubuntu 18.04 aarch64 Rockchip RK35** serials device, RK3588 tested (code not provided)
+- Ubuntu 22.04 aarch64 Ascend 310/910 serials device, Atlas 300I-Pro tested (code not provided)
 - Wait for your test
 
 Basics
@@ -91,6 +92,7 @@ After compilation, all library files are stored in `build/libs`, and all sample 
 - `-DVP_WITH_TRT=ON` (Compile TensorRT-related features and samples; default is OFF)
 - `-DVP_WITH_PADDLE=ON` (Compile PaddlePaddle-related features and samples; default is OFF)
 - `-DVP_WITH_KAFKA=ON` (Compile Kafka-related features and samples; default is OFF)
+- `-DVP_WITH_LLM=ON` (Compile LLM-related features and samples; default is OFF)
 - `-DVP_BUILD_COMPLEX_SAMPLES=ON` (Compile advanced samples; default is OFF)
 
 For example, to enable CUDA and TensorRT modules, you can run:
