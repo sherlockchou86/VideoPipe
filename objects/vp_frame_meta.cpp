@@ -22,6 +22,7 @@ namespace vp_objects {
         frame_index(meta.frame_index),
         original_width(meta.original_width),
         original_height(meta.original_height),
+        description(meta.description),
         fps(meta.fps) {
             // deep copy frame data
             this->frame = meta.frame.clone();

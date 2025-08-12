@@ -102,6 +102,12 @@ if(VP_WITH_KAFKA)
     target_link_libraries(message_broker_kafka_sample ${PROJECT_NAME})    
 endif()
 
+# samples depend on LLM
+if(VP_WITH_LLM)
+    add_executable(mllm_analyse_sample "mllm_analyse_sample.cpp")
+    target_link_libraries(mllm_analyse_sample ${PROJECT_NAME})    
+endif()
+
 # samples depend on PaddlePaddle
 if(VP_WITH_PADDLE)
     add_executable(app_src_sample "app_src_sample.cpp")

@@ -28,6 +28,7 @@ namespace llmlib {
     */
     class LLMClient {
         public:
+            LLMClient() {}
             LLMClient(const std::string& api_base_url, 
                     const std::string& api_key,
                     LLMBackendType backend_type = LLMBackendType::OpenAI):

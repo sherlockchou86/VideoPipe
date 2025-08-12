@@ -63,6 +63,9 @@ namespace vp_objects {
         // deep copy needed here for this member.
         cv::Mat mask;
 
+        // text description for frame (output from LLM)
+        std::string description;
+
         // targets created/appended by primary infer nodes, and then updated by secondary infer nodes if exist.
         // it is shared_ptr<...> type just to keep same as elements.
         // deep copy needed here for this member.

@@ -19,6 +19,7 @@ option(VP_WITH_CUDA "prepared CUDA or not?" OFF)
 option(VP_WITH_TRT "prepared TensorRT or not?" OFF)
 option(VP_WITH_PADDLE "prepared PaddlePaddle or not?" OFF)
 option(VP_WITH_KAFKA "prepared Kafka or not?" OFF)
+option(VP_WITH_LLM "prepared LLM or not?" OFF)
 option(VP_BUILD_COMPLEX_SAMPLES "build complex samples or not? (maybe source code not provided)" OFF)
 
 # OpenCV required
@@ -91,6 +92,18 @@ endif()
 if(VP_WITH_KAFKA)
     add_definitions(-DVP_WITH_KAFKA)
     list(APPEND VP_DEPEND_LIBS rdkafka++)
+endif()
+
+# optional for LLM
+if(VP_WITH_LLM)
+    find_package(OpenSSL REQUIRED)
+    message(STATUS "OpenSSL library status:")
+    message(STATUS "    version: ${OPENSSL_VERSION}")
+    message(STATUS "    libraries: ${OPENSSL_LIBRARIES}")
+    message(STATUS "    include path: ${OPENSSL_INCLUDE_DIR}")
+    include_directories(${OPENSSL_INCLUDE_DIR})
+    list(APPEND VP_DEPEND_LIBS ${OPENSSL_LIBRARIES})
+    add_definitions(-DVP_WITH_LLM)
 endif()
 
 # tinyexpr
