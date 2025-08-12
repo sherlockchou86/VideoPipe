@@ -37,7 +37,7 @@ VideoPipe 是一个让计算机视觉算法模型集成更加简单的框架，�
 
 - 流读取：⽀持主流的视频流协议，如 udp、rtsp、rtmp、file、application。同时支持图片读取。
 - 视频解码：⽀持基于 OpenCV/GStreamer 的视频和图片解码（⽀持硬件加速）。
-- 算法推理：⽀持基于深度学习算法的多级推理，例如⽬标检测、图像分类、特征提取、图像生成等相关网络集成。同时支持传统图像算法集成。
+- 算法推理：⽀持基于深度学习算法的多级推理，例如⽬标检测、图像分类、特征提取、图像生成等相关网络集成。同时支持传统图像算法集成。**支持多模态大模型（mLLM）集成（2025/8/12更新）**
 - ⽬标跟踪：⽀持⽬标追踪，例如 IOU、SORT 跟踪算法等。
 - ⾏为分析（BA）：⽀持基于跟踪的⾏为分析，例如越线、停⻋、违章等交通行为判断。
 - 业务逻辑：支持任意自定义业务逻辑的集成，可以与业务强相关。
@@ -56,6 +56,7 @@ VideoPipe 是一个让计算机视觉算法模型集成更加简单的框架，�
 - Ubuntu 18.04 aarch64 NVIDIA jetson serials device，tx2 tested
 - Ubuntu 18.04 x86_64 Cambrian MLU serials device, MLU 370 tested (code not provided)
 - Ubuntu 18.04 aarch64 Rockchip RK35** serials device, RK3588 tested (code not provided)
+- Ubuntu 22.04 aarch64 Ascend 310/910 serials device, Atlas 300I-Pro tested (code not provided)
 - Wait for your test
 
 基础
@@ -69,6 +70,7 @@ VideoPipe 是一个让计算机视觉算法模型集成更加简单的框架，�
 - TensorRT
 - Paddle Inference
 - ONNX Runtime
+- mLLM（Ollama/vLLM/OpenAI-compatible API Services）
 - Anything you like
 
 [如何安装CUDA和TensorRT](./third_party/trt_vehicle/README.md)
@@ -88,6 +90,7 @@ VideoPipe 是一个让计算机视觉算法模型集成更加简单的框架，�
 - -DVP_WITH_TRT=ON （编译 TensorRT 相关功能和 Samples，默认为 OFF）
 - -DVP_WITH_PADDLE=ON （编译 PaddlePaddle 相关功能和 Samples，默认为 OFF）
 - -DVP_WITH_KAFKA=ON （编译 Kafka 相关功能和 Samples，默认为 OFF）
+- -DVP_WITH_LLM=ON （编译 LLM 相关功能和 Samples，默认为 OFF）
 - -DVP_BUILD_COMPLEX_SAMPLES=ON （编译高级 Samples，默认为 OFF）
 
 比如需要开启CUDA和TensorRT相关的模块，可以运行 `cmake -DVP_WITH_CUDA=ON -DVP_WITH_TRT=ON ..`。如果只运行 `cmake ..`，那么所有代码运行在 CPU 上。
@@ -189,6 +192,7 @@ int main() {
 |3|mask_rcnn_sample|![](./doc/p30.png)|
 |4|openpose_sample|![](./doc/p31.png)|
 |5|face_swap_sample|![](./doc/p57.png)|
+|6|mllm_analyse_sample|![](./doc/p69.png)|
 
 共计 40 多个原型案例，[点击](./SAMPLES.md)查看更多。
 

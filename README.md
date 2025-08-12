@@ -72,6 +72,7 @@ Optional, if you need to implement your own inference backend or use a backend o
 - TensorRT
 - Paddle Inference
 - ONNX Runtime
+- mLLM（Ollama/vLLM/OpenAI-compatible API Services）
 - Anything you like
 
 [how to install CUDA and TensorRT](./third_party/trt_vehicle/README.md)
@@ -198,6 +199,7 @@ int main() {
 |3|mask_rcnn_sample|![](./doc/p30.png)|
 |4|openpose_sample|![](./doc/p31.png)|
 |5|face_swap_sample|![](./doc/p57.png)|
+|6|mllm_analyse_sample|![](./doc/p69.png)|
 
 A total of over 40 prototype examples are available. [Click here](./SAMPLES.md) to view more.
 
