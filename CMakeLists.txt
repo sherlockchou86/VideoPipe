@@ -112,6 +112,43 @@ add_subdirectory(third_party/tinyexpr)
 list(APPEND VP_DEPEND_LIBS tinyexpr)
 message("--------------end build tinyexpr---------------")
 
+message("-------------collect version info--------------")
+string(TIMESTAMP BUILD_TIME "%Y%m%d-%H%M%S")
+find_package(Git QUIET)
+if(GIT_FOUND)
+    execute_process(
+        COMMAND ${GIT_EXECUTABLE} rev-parse --short HEAD
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        OUTPUT_VARIABLE GIT_COMMIT_HASH
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+    execute_process(
+        COMMAND ${GIT_EXECUTABLE} diff --quiet
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        RESULT_VARIABLE GIT_DIFF_RESULT
+    )
+    if(GIT_DIFF_RESULT EQUAL 0)
+        set(GIT_DIRTY "")
+    else()
+        set(GIT_DIRTY "-dirty")
+    endif()
+else()
+    message(WARNING "Git not found! Using default version info.")
+    set(GIT_COMMIT_HASH "nogit")
+    set(GIT_DIRTY "")
+endif()
+set(FINAL_GIT_VERSION "${GIT_COMMIT_HASH}${GIT_DIRTY}")
+configure_file(
+    ${CMAKE_SOURCE_DIR}/utils/vp_version.h.in
+    ${CMAKE_BINARY_DIR}/vp_version.h
+    @ONLY
+)
+include_directories(${CMAKE_BINARY_DIR})
+message(STATUS "version info:")
+message(STATUS "    build_time: ${BUILD_TIME}")
+message(STATUS "    commit_hash: ${FINAL_GIT_VERSION}")
+message("-------------collect version info--------------")
+
 # collect source files for videopipe
 file(GLOB_RECURSE NODES "nodes/*.cpp")
 file(GLOB_RECURSE OBJECTS "objects/*.cpp")

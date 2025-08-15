@@ -1,6 +1,7 @@
 
 
 #include "vp_analysis_board.h"
+#include "vp_version.h"
 #include "../vp_pipe_checker.h"
 
 namespace vp_utils {
@@ -163,10 +164,13 @@ namespace vp_utils {
                 }    
             }
 
-            // refresh time at the top left of canvas
+            // refresh time & version info at the top left of canvas
             if (!static_parts) {
                 auto time = vp_utils::time_format(NOW, "<hour>:<min>:<sec>");
                 cv::putText(canvas, time, cv::Point(20, 20), 1, 1, cv::Scalar(255, 0, 0));
+
+                auto version_info = APP_VERSION;
+                cv::putText(canvas, version_info, cv::Point(canvas.cols - 240, 20), 1, 0.8, cv::Scalar(255, 0, 0));
             }   
         }   
     }

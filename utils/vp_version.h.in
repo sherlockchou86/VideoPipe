@@ -1,0 +1,5 @@
+#pragma once
+
+#define APP_BUILD_TIME "@BUILD_TIME@"
+#define APP_GIT_COMMIT "@FINAL_GIT_VERSION@"
+#define APP_VERSION "v@BUILD_TIME@-@FINAL_GIT_VERSION@"

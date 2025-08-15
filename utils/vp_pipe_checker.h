@@ -1,7 +1,7 @@
 #pragma once
 
 #include <sstream>
-
+#include "vp_version.h"
 #include "../nodes/vp_node.h"
 #include "../excepts/vp_invalid_pipeline_error.h"
 
@@ -149,6 +149,15 @@ namespace vp_utils {
                 }
                 std::cout << ############# pipe check summary ############## << std::endl;
                 */
+
+                std::ostringstream v_stream;
+                v_stream << "\n################ version info #################\n";
+                v_stream << " build_time: " << APP_BUILD_TIME << "\n";
+                v_stream << " commit_hash: " << APP_GIT_COMMIT << "\n";
+                v_stream << " version: " << APP_VERSION << "\n";
+                v_stream << "################ version info ################" << "\n";
+                // to log
+                VP_INFO(v_stream.str());
 
                 std::ostringstream s_stream;
                 s_stream << "\n############# pipe check summary ##############\n";
