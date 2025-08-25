@@ -14,6 +14,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fPIC -w -fdiagnostics-color=always -
 # save all libs(including third_party's) to 'libs'
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/libs)
 
+if(WIN32)
+  set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)  # 自动导出所有符号
+endif()
+
+
 # optional for build, modify values when configure the project using 'cmake -DVP_WITH_CUDA=OFF ..'
 option(VP_WITH_CUDA "prepared CUDA or not?" OFF)
 option(VP_WITH_TRT "prepared TensorRT or not?" OFF)
@@ -43,7 +48,7 @@ include_directories(${GST_INCLUDE_DIRS})
 set (GST_DEPEND_LIBS ${GST_LIBRARIES} ${GSTAPP_LIBRARIES} ${GST_RTSP_LIBRARIES})
 
 # collect dependent libs for videopipe
-list(APPEND VP_DEPEND_LIBS ${OpenCV_LIBS} ${GST_DEPEND_LIBS} stdc++fs)
+list(APPEND VP_DEPEND_LIBS ${OpenCV_LIBS} ${GST_DEPEND_LIBS})
 
 # optional for CUDA
 if(VP_WITH_CUDA) # CUDA enabled
@@ -107,10 +112,9 @@ if(VP_WITH_LLM)
 endif()
 
 # tinyexpr
-message("-------------start build tinyexpr--------------")
-add_subdirectory(third_party/tinyexpr)
-list(APPEND VP_DEPEND_LIBS tinyexpr)
-message("--------------end build tinyexpr---------------")
+find_package(unofficial-tinyexpr CONFIG REQUIRED)
+
+
 
 message("-------------collect version info--------------")
 string(TIMESTAMP BUILD_TIME "%Y%m%d-%H%M%S")
@@ -158,7 +162,12 @@ list(APPEND VP_CPPS_SOURCES ${NODES} ${OBJECTS} ${UTILS})
 
 # build for videopipe
 add_library(${PROJECT_NAME} SHARED ${VP_CPPS_SOURCES})
-target_link_libraries(${PROJECT_NAME} ${VP_DEPEND_LIBS})
+target_link_libraries(${PROJECT_NAME} PUBLIC ${VP_DEPEND_LIBS})
+target_link_directories(${PROJECT_NAME} PUBLIC "D:\\Works\\github\\vcpkg\\installed\\x64-windows\\lib")
+
+
+target_link_libraries(${PROJECT_NAME} PUBLIC unofficial::tinyexpr::tinyexpr)
+target_compile_options(${PROJECT_NAME} PRIVATE /MP)
 
 # build for samples
 add_subdirectory(samples)

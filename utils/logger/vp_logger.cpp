@@ -42,7 +42,9 @@ namespace vp_utils {
     void vp_logger::log(vp_log_level level, const std::string& message, const char* code_file, int code_line) {
         // make sure logger is initialized
         if (!inited) {
-            throw "vp_logger is not initialized yet!";
+			std::cout << "vp_logger is not initialized yet!" << std::endl;
+            return;
+            //throw "vp_logger is not initialized yet!";
         }
         
         // level filter
