@@ -44,9 +44,9 @@ namespace vp_nodes {
             unsigned char c = text[i];
             size_t len = 1;
             if ((c & 0x80) == 0x00) len = 1;          // ASCII
-            else if ((c & 0xE0) == 0xC0) len = 2;     // 2字节
-            else if ((c & 0xF0) == 0xE0) len = 3;     // 3字节
-            else if ((c & 0xF8) == 0xF0) len = 4;     // 4字节
+            else if ((c & 0xE0) == 0xC0) len = 2;     // 2bytes
+            else if ((c & 0xF0) == 0xE0) len = 3;     // 3bytes
+            else if ((c & 0xF8) == 0xF0) len = 4;     // 4bytes
             chars.push_back(text.substr(i, len));
             i += len;
         }
@@ -62,25 +62,23 @@ namespace vp_nodes {
         std::string currentLine;
         int baseline = 0;
 
-        int y = rect.y; // 初始绘制高度
+        int y = rect.y;
 
         for (size_t i = 0; i < chars.size(); i++) {
             std::string tempLine = currentLine + chars[i];
             cv::Size textSize = ft2->getTextSize(tempLine, fontHeight, -1, &baseline);
 
             if (textSize.width > rect.width && !currentLine.empty()) {
-                // 绘制当前行
                 int drawY = y + textSize.height;
-                if (drawY > rect.y + rect.height) break; // 超出矩形区域
+                if (drawY > rect.y + rect.height) break;
                 ft2->putText(img, currentLine, cv::Point(rect.x, drawY),
                             fontHeight, color, -1, 8, true);
-                y += textSize.height + 5; // 行间距
+                y += textSize.height + 5;
                 currentLine.clear();
             }
             currentLine += chars[i];
         }
 
-        // 绘制最后一行
         if (!currentLine.empty()) {
             int drawY = y + ft2->getTextSize(currentLine, fontHeight, -1, &baseline).height;
             if (drawY <= rect.y + rect.height) {
