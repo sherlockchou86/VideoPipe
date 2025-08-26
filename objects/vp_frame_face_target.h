@@ -51,7 +51,7 @@ namespace vp_objects {
         std::shared_ptr<vp_frame_face_target> clone();
 
         // rect area of target
-        vp_rect get_rect() const;
+        vp_objects::vp_rect get_rect() const;
     };
 
 }

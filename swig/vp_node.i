@@ -2,25 +2,61 @@
 %module videopipe
 
 %{
-#include "nodes/vp_node.h"
-#include "nodes/vp_src_node.h"
-#include "nodes/vp_des_node.h"
-#include "nodes/vp_infer_node.h"
-#include "nodes/vp_primary_infer_node.h"
-#include "nodes/vp_secondary_infer_node.h"
-#include "nodes/vp_file_src_node.h"
-#include "nodes/vp_screen_des_node.h"
-#include "nodes/infers/vp_yunet_face_detector_node.h"
-#include "nodes/infers/vp_sface_feature_encoder_node.h"
-#include "nodes/osd/vp_face_osd_node_v2.h"
+#include "../nodes/vp_node.h"
+#include "../nodes/vp_src_node.h"
+#include "../nodes/vp_des_node.h"
+#include "../nodes/vp_infer_node.h"
+#include "../nodes/vp_primary_infer_node.h"
+#include "../nodes/vp_secondary_infer_node.h"
+#include "../nodes/vp_file_src_node.h"
+#include "../nodes/vp_screen_des_node.h"
+#include "../nodes/infers/vp_yunet_face_detector_node.h"
+#include "../nodes/infers/vp_sface_feature_encoder_node.h"
+#include "../nodes/osd/vp_face_osd_node_v2.h"
+#include "../nodes/vp_meta_hookable.h"
+#include "../nodes/vp_meta_subscriber.h"
+#include "../nodes/vp_meta_publisher.h"
+#include "../nodes/vp_stream_info_hookable.h"
+#include "../nodes/vp_stream_status_hookable.h"
+#include "../objects/vp_meta.h"
+#include "../objects/vp_frame_meta.h"
+#include "../objects/vp_control_meta.h"
+#include "../objects/vp_frame_target.h"
+#include "../objects/vp_frame_face_target.h"
+#include "../objects/shapes/vp_size.h"
+#include "../objects/shapes/vp_rect.h"
+#include "../objects/shapes/vp_point.h"
+#include "../objects/vp_frame_pose_target.h"
+#include "../objects/vp_frame_text_target.h"
+#include "../objects/vp_sub_target.h"
+#include "../objects/ba/vp_ba_result.h"
+
+
+
+
+
+
+
+
 using namespace vp_nodes;
 using namespace vp_objects;
 %}
 
 // C# specific directives
-%include "std_string.i"
-%include "std_vector.i"
-%include "std_shared_ptr.i"
+%include <std_string.i>
+%include <std_vector.i>
+%include <std_shared_ptr.i>
+%include <std_pair.i>
+
+%template(IntPair) std::pair<int, int>;
+%template(IntPairVector) std::vector<std::pair<int, int>>;
+
+%template(IntVector) std::vector<int>;
+%template(FloatVector) std::vector<float>;
+%template(StringVector) std::vector<std::string>;
+%template(RectVector) std::vector<vp_objects::vp_rect>;
+%template(PointVector) std::vector<vp_objects::vp_point>;
+
 
 // Enable directors for virtual methods that can be overridden in C#
 %feature("director") vp_nodes::vp_node;
@@ -29,6 +65,7 @@ using namespace vp_objects;
 %feature("director") vp_nodes::vp_infer_node;
 %feature("director") vp_nodes::vp_primary_infer_node;
 %feature("director") vp_nodes::vp_secondary_infer_node;
+%feature("director") vp_meta_hookable;
 
 // Handle shared_ptr for common types
 %shared_ptr(vp_nodes::vp_node);
@@ -45,27 +82,56 @@ using namespace vp_objects;
 %shared_ptr(vp_objects::vp_meta);
 %shared_ptr(vp_objects::vp_frame_meta);
 %shared_ptr(vp_objects::vp_control_meta);
+%shared_ptr(vp_nodes::vp_meta_hookable);
+%shared_ptr(vp_nodes::vp_meta_subscriber);
+%shared_ptr(vp_nodes::vp_meta_publisher);
+%shared_ptr(vp_nodes::vp_stream_info_hookable);
+%shared_ptr(vp_nodes::vp_stream_status_hookable);
+%shared_ptr(vp_objects::vp_ba_result);
 
-// Handle std::vector<std::shared_ptr<T>> templates
-%template(NodeVector) std::vector<std::shared_ptr<vp_nodes::vp_node> >;
-%template(FrameMetaVector) std::vector<std::shared_ptr<vp_objects::vp_frame_meta> >;
 
-// Enumerations
-enum vp_node_type { SRC, DES, MID };
-enum vp_infer_type { PRIMARY, SECONDARY };
+%shared_ptr(vp_objects::vp_frame_target);
+%shared_ptr(vp_objects::vp_frame_face_target);
+%shared_ptr(vp_objects::vp_frame_pose_target);
+%shared_ptr(vp_objects::vp_frame_text_target);
+%shared_ptr(vp_objects::vp_sub_target);
+%shared_ptr(vp_objects::vp_size);
+%shared_ptr(vp_objects::vp_rect);
+%shared_ptr(vp_objects::vp_point);
 
-// Forward declarations for dependencies
-namespace vp_objects {
-    class vp_meta;
-    class vp_frame_meta;
-    class vp_control_meta;
-    class vp_frame_target;
-    class vp_frame_face_target;
-    struct vp_size;
-}
+
+
+
+
+%template(vp_node_vector) std::vector<std::shared_ptr<vp_nodes::vp_node>>;
+%template(vp_frame_target_vector) std::vector<std::shared_ptr<vp_objects::vp_frame_target>>;
+%template(vp_frame_face_target_vector) std::vector<std::shared_ptr<vp_objects::vp_frame_face_target>>;
+%template(vp_frame_pose_target_vector) std::vector<std::shared_ptr<vp_objects::vp_frame_pose_target>>;
+%template(vp_frame_text_target_vector) std::vector<std::shared_ptr<vp_objects::vp_frame_text_target>>;
+%template(vp_sub_target_vector) std::vector<std::shared_ptr<vp_objects::vp_sub_target>>;
+
+
+// 添加回调函数的typemap
+%typemap(ctype) vp_meta_hooker "void*"
+%typemap(imtype) vp_meta_hooker "System.IntPtr"
+%typemap(cstype) vp_meta_hooker "vp_meta_hookable.MetaHookerDelegate"
+
+// 处理C#到C++的回调转换
+%typemap(csin) vp_meta_hooker %{
+    // 创建委托的回调指针
+    System.Runtime.InteropServices.GCHandle.Alloc($csinput);
+    vp_meta_hookable.MetaHookerDelegate.CreateDelegate($csinput).ToIntPtr()
+%}
+
+// 处理C++到C#的回调转换
+%typemap(csout) vp_meta_hooker %{
+    return vp_meta_hookable.MetaHookerDelegate.FromIntPtr($imcall);
+%}
+
 
 // Node creation functions
 %inline %{
+
     std::shared_ptr<vp_nodes::vp_file_src_node> create_file_src_node(const std::string& node_name, 
                                                            int channel_index, 
                                                            const std::string& file_path, 
@@ -101,301 +167,41 @@ namespace vp_objects {
     }
 %}
 
-namespace vp_nodes {
-    // Base classes
-    // vp_node - base class for all nodes
-    class vp_node {
-    private:
-        // Hide private members
-        std::vector<std::shared_ptr<vp_node> > pre_nodes;
-        std::thread handle_thread;
-        std::thread dispatch_thread;
-        
-    protected:
-        bool alive;
-        int frame_meta_handle_batch;
-        std::queue<std::shared_ptr<vp_objects::vp_meta> > in_queue;
-        std::mutex in_queue_lock;
-        std::queue<std::shared_ptr<vp_objects::vp_meta> > out_queue;
-        
-        // Virtual methods that can be overridden
-        virtual void handle_run();
-        virtual void dispatch_run();
-        virtual std::shared_ptr<vp_objects::vp_meta> handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta);
-        virtual std::shared_ptr<vp_objects::vp_meta> handle_control_meta(std::shared_ptr<vp_objects::vp_control_meta> meta);
-        virtual void handle_frame_meta(const std::vector<std::shared_ptr<vp_objects::vp_frame_meta> >& meta_with_batch);
-        virtual void deinitialized();
-        void pendding_meta(std::shared_ptr<vp_objects::vp_meta> meta);
-        
-    public:
-        // Constructor and destructor
-        vp_node(std::string node_name);
-        virtual ~vp_node();
-        
-        // Public members
-        std::string node_name;
-        
-        // Public methods
-        virtual void meta_flow(std::shared_ptr<vp_objects::vp_meta> meta);
-        virtual vp_node_type node_type();
-        void detach();
-        void detach_from(std::vector<std::string> pre_node_names);
-        void detach_recursively();
-        void attach_to(std::vector<std::shared_ptr<vp_node> > pre_nodes);
-        std::vector<std::shared_ptr<vp_node> > next_nodes();
-        virtual std::string to_string();
-        
-        // Needed for enable_shared_from_this
-        std::shared_ptr<vp_node> shared_from_this() {
-            return shared_from_this();
-        }
-    };
-    
-    // vp_src_node - base class for source nodes
-    class vp_src_node : public vp_node {
-    private:
-        // Hide private members
-        
-    protected:
-        virtual void handle_run() override;
-        virtual std::shared_ptr<vp_objects::vp_meta> handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) override; 
-        virtual std::shared_ptr<vp_objects::vp_meta> handle_control_meta(std::shared_ptr<vp_objects::vp_control_meta> meta) override;
-        
-        vp_src_node(std::string node_name, int channel_index, float resize_ratio = 1.0);
-        
-        int original_fps;
-        int original_width;
-        int original_height;
-        int frame_index;
-        int channel_index;
-        float resize_ratio;
-        virtual void deinitialized() override;
-        
-    public:
-        ~vp_src_node();
-        virtual vp_node_type node_type() override;
-        void start();
-        void stop();
-        virtual std::string to_string() override;
-    };
-    
-    // vp_des_node - base class for destination nodes
-    class vp_des_node : public vp_node {
-    private:
-        // Hide private members
-        
-    protected:
-        virtual void dispatch_run() override;
-        virtual std::shared_ptr<vp_objects::vp_meta> handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) override; 
-        virtual std::shared_ptr<vp_objects::vp_meta> handle_control_meta(std::shared_ptr<vp_objects::vp_control_meta> meta) override;
-        
-        vp_des_node(std::string node_name, int channel_index);
-        
-    public:
-        ~vp_des_node();
-        virtual vp_node_type node_type() override;
-        int channel_index;
-    };
-    
-    // vp_infer_node - base class for inference nodes
-    class vp_infer_node : public vp_node {
-    private:
-        void load_labels();
-        
-    protected:
-        vp_infer_type infer_type;
-        std::string model_path;
-        std::string model_config_path;
-        std::string labels_path;
-        int input_width;
-        int input_height;
-        int batch_size;
-        cv::Scalar mean;
-        cv::Scalar std;
-        float scale;
-        bool swap_rb;
-        bool swap_chn;
-        
-        vp_infer_node(std::string node_name, 
-                     vp_infer_type infer_type, 
-                     std::string model_path, 
-                     std::string model_config_path = "", 
-                     std::string labels_path = "", 
-                     int input_width = 128, 
-                     int input_height = 128, 
-                     int batch_size = 1,
-                     float scale = 1.0,
-                     cv::Scalar mean = cv::Scalar(123.675, 116.28, 103.53),
-                     cv::Scalar std = cv::Scalar(1),
-                     bool swap_rb = true,
-                     bool swap_chn = false);
-        
-        virtual void prepare(const std::vector<std::shared_ptr<vp_objects::vp_frame_meta> >& frame_meta_with_batch, std::vector<cv::Mat>& mats_to_infer) = 0;
-        virtual void preprocess(const std::vector<cv::Mat>& mats_to_infer, cv::Mat& blob_to_infer);
-        virtual void infer(const cv::Mat& blob_to_infer, std::vector<cv::Mat>& raw_outputs);
-        virtual void postprocess(const std::vector<cv::Mat>& raw_outputs, const std::vector<std::shared_ptr<vp_objects::vp_frame_meta> >& frame_meta_with_batch) = 0;
-        virtual void infer_combinations_time_cost(int data_size, int prepare_time, int preprocess_time, int infer_time, int postprocess_time);
-        virtual void run_infer_combinations(const std::vector<std::shared_ptr<vp_objects::vp_frame_meta> >& frame_meta_with_batch);
-        
-        std::vector<std::string> labels;
-        cv::dnn::Net net;
-        
-        virtual std::shared_ptr<vp_objects::vp_meta> handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) override;
-        virtual void handle_frame_meta(const std::vector<std::shared_ptr<vp_objects::vp_frame_meta> >& meta_with_batch) override;
-        
-    public:
-        ~vp_infer_node();
-    };
-    
-    // vp_primary_infer_node - base class for primary inference nodes
-    class vp_primary_infer_node : public vp_infer_node {
-    protected:
-        vp_primary_infer_node(std::string node_name, 
-                             std::string model_path, 
-                             std::string model_config_path = "", 
-                             std::string labels_path = "", 
-                             int input_width = 640, 
-                             int input_height = 640, 
-                             int batch_size = 1,
-                             float scale = 1.0,
-                             cv::Scalar mean = cv::Scalar(0, 0, 0),
-                             cv::Scalar std = cv::Scalar(1),
-                             bool swap_rb = true,
-                             bool swap_chn = false);
-        
-        virtual void prepare(const std::vector<std::shared_ptr<vp_objects::vp_frame_meta> >& frame_meta_with_batch, std::vector<cv::Mat>& mats_to_infer) override;
-        
-    public:
-        ~vp_primary_infer_node();
-    };
-    
-    // vp_secondary_infer_node - base class for secondary inference nodes
-    class vp_secondary_infer_node : public vp_infer_node {
-    protected:
-        vp_secondary_infer_node(std::string node_name, 
-                               std::string model_path, 
-                               std::string model_config_path = "", 
-                               std::string labels_path = "", 
-                               int input_width = 128, 
-                               int input_height = 128, 
-                               int batch_size = 1,
-                               float scale = 1.0,
-                               cv::Scalar mean = cv::Scalar(0, 0, 0),
-                               cv::Scalar std = cv::Scalar(1),
-                               bool swap_rb = true,
-                               bool swap_chn = false);
-                               
-        virtual void prepare(const std::vector<std::shared_ptr<vp_objects::vp_frame_meta> >& frame_meta_with_batch, std::vector<cv::Mat>& mats_to_infer) override;
-        
-    public:
-        ~vp_secondary_infer_node();
-    };
-    
-    // Concrete node classes
-    // vp_file_src_node - file source node
-    class vp_file_src_node : public vp_src_node {
-    private:
-        std::string gst_template;
-        cv::VideoCapture file_capture;
-        
-    protected:
-        virtual void handle_run() override;
-        
-    public:
-        vp_file_src_node(std::string node_name, 
-                        int channel_index, 
-                        std::string file_path, 
-                        float resize_ratio = 1.0, 
-                        bool cycle = true,
-                        std::string gst_decoder_name = "avdec_h264",
-                        int skip_interval = 0);
-        ~vp_file_src_node();
-        
-        virtual std::string to_string() override;
-        std::string file_path;
-        bool cycle;
-        std::string gst_decoder_name;
-        int skip_interval;
-    };
-    
-    // vp_screen_des_node - screen display node
-    class vp_screen_des_node : public vp_des_node {
-    private:
-        std::string gst_template;
-        cv::VideoWriter screen_writer;
-        
-    protected:
-        virtual std::shared_ptr<vp_objects::vp_meta> handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) override;
-        virtual std::shared_ptr<vp_objects::vp_meta> handle_control_meta(std::shared_ptr<vp_objects::vp_control_meta> meta) override;
-        
-    public:
-        vp_screen_des_node(std::string node_name, 
-                          int channel_index, 
-                          bool osd = true,
-                          vp_objects::vp_size display_w_h = vp_objects::vp_size());
-        ~vp_screen_des_node();
-        
-        bool osd;
-        vp_objects::vp_size display_w_h;
-    };
-    
-    // vp_yunet_face_detector_node - face detection node
-    class vp_yunet_face_detector_node : public vp_primary_infer_node {
-    private:
-        const std::vector<std::string> out_names;
-        float scoreThreshold;
-        float nmsThreshold;
-        int topK;
-        int inputW;
-        int inputH;
-        std::vector<cv::Rect2f> priors;
-        void generatePriors();
-        
-    protected:
-        virtual void infer(const cv::Mat& blob_to_infer, std::vector<cv::Mat>& raw_outputs) override;
-        virtual void preprocess(const std::vector<cv::Mat>& mats_to_infer, cv::Mat& blob_to_infer) override;
-        virtual void postprocess(const std::vector<cv::Mat>& raw_outputs, const std::vector<std::shared_ptr<vp_objects::vp_frame_meta> >& frame_meta_with_batch) override;
-        
-    public:
-        vp_yunet_face_detector_node(std::string node_name, std::string model_path, float score_threshold = 0.7, float nms_threshold = 0.5, int top_k = 50);
-        ~vp_yunet_face_detector_node();
-    };
-    
-    // vp_sface_feature_encoder_node - face feature encoding node
-    class vp_sface_feature_encoder_node : public vp_secondary_infer_node {
-    private:
-        cv::Mat getSimilarityTransformMatrix(float src[5][2]);
-        void alignCrop(cv::Mat& _src_img, float _src_point[5][2], cv::Mat& _aligned_img);
-        
-    protected:
-        virtual void prepare(const std::vector<std::shared_ptr<vp_objects::vp_frame_meta> >& frame_meta_with_batch, std::vector<cv::Mat>& mats_to_infer) override;
-        virtual void postprocess(const std::vector<cv::Mat>& raw_outputs, const std::vector<std::shared_ptr<vp_objects::vp_frame_meta> >& frame_meta_with_batch) override;
-        
-    public:
-        vp_sface_feature_encoder_node(std::string node_name, std::string model_path);
-        ~vp_sface_feature_encoder_node();
-    };
-    
-    // vp_face_osd_node_v2 - face on-screen display node
-    class vp_face_osd_node_v2 : public vp_node {
-    private:
-        int gap_height;
-        int padding;
-        cv::Mat the_baseline_face;
-        std::vector<float> the_baseline_face_feature;
-        std::vector<cv::Mat> faces_list;
-        std::vector<std::vector<float> > face_features;
-        std::vector<float> cosine_distances;
-        std::vector<float> l2_distances;
-        double cosine_similar_thresh;
-        double l2norm_similar_thresh;
-        double match(std::vector<float>& feature1, std::vector<float>& feature2, int dis_type);
-        
-    protected:
-        virtual std::shared_ptr<vp_objects::vp_meta> handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) override;
-        
-    public:
-        vp_face_osd_node_v2(std::string node_name);
-        ~vp_face_osd_node_v2();
-    };
-}
+%template(vp_pose_keypoint_vector) std::vector<vp_objects::vp_pose_keypoint>;
+
+%include "../objects/shapes/vp_point.h"
+%include "../objects/shapes/vp_size.h"
+%include "../objects/shapes/vp_rect.h"
+%include "../objects/ba/vp_ba_result.h"
+
+%include "../objects/vp_frame_target.h"
+%include "../nodes/vp_meta_hookable.h"
+%include "../nodes/vp_meta_subscriber.h"
+%include "../nodes/vp_meta_publisher.h"
+%include "../nodes/vp_stream_info_hookable.h"
+%include "../nodes/vp_stream_status_hookable.h"
+%include "../nodes/vp_node.h"
+%include "../nodes/vp_src_node.h"
+%include "../nodes/vp_des_node.h"
+%include "../nodes/vp_infer_node.h"
+%include "../nodes/vp_primary_infer_node.h"
+%include "../nodes/vp_secondary_infer_node.h"
+%include "../nodes/vp_file_src_node.h"
+%include "../nodes/vp_screen_des_node.h"
+%include "../nodes/infers/vp_yunet_face_detector_node.h"
+%include "../nodes/infers/vp_sface_feature_encoder_node.h"
+%include "../nodes/osd/vp_face_osd_node_v2.h"
+%include "../objects/vp_meta.h"
+%include "../objects/vp_frame_meta.h"
+%include "../objects/vp_control_meta.h"
+%include "../objects/vp_frame_face_target.h"
+%include "../objects/vp_frame_pose_target.h"
+%include "../objects/vp_frame_text_target.h"
+%include "../objects/vp_sub_target.h"
+
+
+
+
+
+
+

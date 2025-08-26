@@ -159,3 +159,4 @@ build/*
 swig/*.cs
 swig/*.cxx
 .vs/*
+VideoPipe/*
