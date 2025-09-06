@@ -22,7 +22,7 @@ namespace vp_nodes {
                                         gst_encoder_name(gst_encoder_name) {
         // compile tips:
         // remove experimental:: if gcc >= 8.0
-        assert(std::experimental::filesystem::exists(save_dir));
+        assert(std::filesystem::exists(save_dir));
         // max time to record
         assert(max_duration_for_single_file <= 30);
         VP_INFO(vp_utils::string_format("[%s] [%s]", node_name.c_str(), gst_template.c_str()));
@@ -84,13 +84,13 @@ namespace vp_nodes {
         auto stamp = vp_utils::time_format(NOW, "<year>-<mon>-<day>_<hour>-<min>-<sec>-<mili>");
         // compile tips:
         // remove experimental:: if gcc >= 8.0
-        std::experimental::filesystem::path p1(save_dir);
-        std::experimental::filesystem::path p2(name_prefix + "_" + stamp + ".mp4");
+        std::filesystem::path p1(save_dir);
+        std::filesystem::path p2(name_prefix + "_" + stamp + ".mp4");
 
         // save_dir/name_prefix_stamp.mp4
-        std::experimental::filesystem::path p = p1 / p2;
+        std::filesystem::path p = p1 / p2;
 
-        assert(!std::experimental::filesystem::exists(p));
+        assert(!std::filesystem::exists(p));
         return p.string();
     }
 }
