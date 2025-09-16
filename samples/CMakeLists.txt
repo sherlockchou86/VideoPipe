@@ -111,6 +111,15 @@ if(VP_WITH_LLM)
     target_link_libraries(mllm_analyse_sample_openai ${PROJECT_NAME})    
 endif()
 
+# samples depend on FFmpeg
+if(VP_WITH_FFMPEG)
+    add_executable(ffmpeg_src_des_sample "ffmpeg_src_des_sample.cpp")
+    target_link_libraries(ffmpeg_src_des_sample ${PROJECT_NAME})
+
+    add_executable(ffmpeg_transcode_sample "ffmpeg_transcode_sample.cpp")
+    target_link_libraries(ffmpeg_transcode_sample ${PROJECT_NAME})
+endif()
+
 # samples depend on PaddlePaddle
 if(VP_WITH_PADDLE)
     add_executable(app_src_sample "app_src_sample.cpp")

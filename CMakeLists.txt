@@ -20,6 +20,7 @@ option(VP_WITH_TRT "prepared TensorRT or not?" OFF)
 option(VP_WITH_PADDLE "prepared PaddlePaddle or not?" OFF)
 option(VP_WITH_KAFKA "prepared Kafka or not?" OFF)
 option(VP_WITH_LLM "prepared LLM or not?" OFF)
+option(VP_WITH_FFMPEG "prepared FFMPEG or not?" OFF)
 option(VP_BUILD_COMPLEX_SAMPLES "build complex samples or not? (maybe source code not provided)" OFF)
 
 # OpenCV required
@@ -104,6 +105,12 @@ if(VP_WITH_LLM)
     include_directories(${OPENSSL_INCLUDE_DIR})
     list(APPEND VP_DEPEND_LIBS ${OPENSSL_LIBRARIES})
     add_definitions(-DVP_WITH_LLM)
+endif()
+
+# optional for FFmpeg
+if(VP_WITH_FFMPEG)
+    add_definitions(-DVP_WITH_FFMPEG)
+    list(APPEND VP_DEPEND_LIBS avcodec avformat avdevice swscale swresample avutil)
 endif()
 
 # tinyexpr
