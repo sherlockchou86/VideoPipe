@@ -8,10 +8,12 @@
             "name": "debug samples for videopipe",  // debug for samples in videopipe
             "type": "cppdbg",
             "request": "launch",
+            // "program": "${workspaceFolder}/build/bin/${fileBasenameNoExtension}",
             "program": "${workspaceFolder}/build/bin/${fileBasenameNoExtension}",
             "args": [""],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/..",  // change this value to the path of your vp_data
+            // "cwd": "${workspaceFolder}/..",  // change this value to the path of your vp_data
+            "cwd": "${workspaceFolder}/",  // change this value to the path of your vp_data
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
@@ -46,6 +48,27 @@
           ],
           "preLaunchTask": ""
         },
+        {
+          "name": "debug cpp_llmlib samples",  // debug for trt samples at third_party/trt_yolov8
+          "type": "cppdbg",
+          "request": "launch",
+          "program": "${workspaceFolder}/third_party/cpp_llmlib/build/${fileBasenameNoExtension}",
+          "args": [""],
+          "stopAtEntry": false,
+          "cwd": "${workspaceFolder}/",  // change this value to the path of your vp_data
+          "environment": [],
+          "externalConsole": false,
+          "MIMode": "gdb",
+          "miDebuggerPath": "/usr/bin/gdb",
+          "setupCommands": [
+            {
+              "description": "Enable pretty-printing for gdb",
+              "text": "-enable-pretty-printing",
+              "ignoreFailures": true
+            }
+          ],
+          "preLaunchTask": ""
+        },        
         {
           "name": "debug trt_yolov8 samples",  // debug for trt samples at third_party/trt_yolov8
           "type": "cppdbg",

@@ -4,6 +4,10 @@
 !*/
 !*.*
 
+#  忽略任意位置的 vp_data 目录
+**/vp_data/
+key/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
