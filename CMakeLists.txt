@@ -105,6 +105,12 @@ if(VP_WITH_LLM)
     include_directories(${OPENSSL_INCLUDE_DIR})
     list(APPEND VP_DEPEND_LIBS ${OPENSSL_LIBRARIES})
     add_definitions(-DVP_WITH_LLM)
+    # #
+    # # 其他项目的 CMakeLists.txt
+    # add_subdirectory(third_party/cpp_analyzelib)
+
+    # add_executable(mllm_analyse_sample_openai_video_ex mllm_analyse_sample_openai_video_ex.cpp)
+    # target_link_libraries(mllm_analyse_sample_openai_video_ex doubao::doubao_analyzer)
 endif()
 
 # optional for FFmpeg

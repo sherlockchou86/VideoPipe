@@ -109,6 +109,31 @@ if(VP_WITH_LLM)
 
     add_executable(mllm_analyse_sample_openai "mllm_analyse_sample_openai.cpp")
     target_link_libraries(mllm_analyse_sample_openai ${PROJECT_NAME})    
+
+    add_executable(mllm_analyse_sample_openai_video "mllm_analyse_sample_openai_video.cpp")
+    target_link_libraries(mllm_analyse_sample_openai_video ${PROJECT_NAME})        
+
+    # 确保只添加一次
+    if(NOT TARGET doubao::doubao_analyzer)
+        message(STATUS "Adding cpp_analyzelib subdirectory...")
+        add_subdirectory(../third_party/cpp_analyzelib ${CMAKE_BINARY_DIR}/doubao_analyzer)
+    else()
+        message(STATUS "cpp_analyzelib target already exists")
+    endif()
+    
+    # 检查目标属性
+    if(TARGET doubao::doubao_analyzer)
+        get_target_property(DOUBAO_SOURCES doubao::doubao_analyzer SOURCES)
+        get_target_property(DOUBAO_LINK_LIBS doubao::doubao_analyzer LINK_LIBRARIES)
+        message(STATUS "Doubao analyzer sources: ${DOUBAO_SOURCES}")
+        message(STATUS "Doubao analyzer link libraries: ${DOUBAO_LINK_LIBS}")
+    else()
+        message(STATUS "doubao::doubao_analyzer target not found!")
+    endif()
+    
+    add_executable(mllm_analyse_sample_openai_video_ex mllm_analyse_sample_openai_video_ex.cpp)
+    target_link_libraries(mllm_analyse_sample_openai_video_ex ${PROJECT_NAME} doubao::doubao_analyzer)
+
 endif()
 
 # samples depend on FFmpeg
