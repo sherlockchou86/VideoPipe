@@ -26,7 +26,6 @@ set(LIB_SOURCES
     src/DoubaoMediaAnalyzer.cpp
     src/utils.cpp
     src/config.cpp
-    src/ThreadPool.cpp
     # 如果有其他源文件，确保都添加在这里
 )
 

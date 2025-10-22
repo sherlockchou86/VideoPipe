@@ -418,11 +418,89 @@ int main(int argc, char *argv[])
     // 批量媒体分析
     if (!folder_path.empty())
     {
-        std::cout << "\n📁 批量分析文件夹: " << folder_path << " (文件类型: " << file_type << ")" << std::endl;
-        std::string analysis_prompt = prompt.empty() ? (file_type == "video" ? get_video_prompt() : get_image_prompt()) : prompt;
+        // old 
+        // std::cout << "\n📁 批量分析文件夹: " << folder_path << " (文件类型: " << file_type << ")" << std::endl;
+        // std::string analysis_prompt = prompt.empty() ? (file_type == "video" ? get_video_prompt() : get_image_prompt()) : prompt;
 
-        auto batch_results = analyzer.batch_analyze(folder_path, analysis_prompt, max_files, file_type);
-        results.insert(results.end(), batch_results.begin(), batch_results.end());
+        // auto batch_results = analyzer.batch_analyze(folder_path, analysis_prompt, max_files, file_type);
+        // results.insert(results.end(), batch_results.begin(), batch_results.end());
+        //end old
+
+        //new 处理并发处理 
+        try {
+            // 获取文件列表
+            auto files = utils::find_media_files(folder_path, "all",max_files);
+            std::cout << "📁 找到 " << files.size() << " 个媒体文件进行并发分析" << std::endl;
+            
+            auto start_time = std::chrono::high_resolution_clock::now();
+            
+            // 并发分析所有文件
+            auto results = analyzer.analyze_batch_concurrent(
+                files, 
+                get_video_prompt() ,    // 使用视频提示词
+                5,  // max_frames
+                1,  // frame_interval
+                3   // 并发数，根据API限制调整
+            );
+            
+            auto end_time = std::chrono::high_resolution_clock::now();
+            double total_time = std::chrono::duration<double>(end_time - start_time).count();
+            
+            // 输出结果
+            int success_count = 0;
+            int image_count = 0;
+            int video_count = 0;
+            double total_processing_time = 0;
+            
+            for (size_t i = 0; i < results.size(); ++i) {
+                const auto& result = results[i];
+                std::string extension = utils::get_file_extension(result.filename);
+                
+                if (extension == ".jpg" || extension == ".jpeg" || extension == ".png") {
+                    image_count++;
+                } else {
+                    video_count++;
+                }
+                
+                std::cout << "\n============================================================" << std::endl;
+                std::cout << "📊 分析第 " << (i+1) << "/" << results.size() << " 个文件: " 
+                        << utils::get_filename(result.filename) << std::endl;
+                
+                if (result.success) {
+                    success_count++;
+                    total_processing_time += result.processing_time;
+                    
+                    std::cout << "✅ 分析成功!" << std::endl;
+                    std::cout << "⏱️  响应时间: " << result.processing_time << "秒" << std::endl;
+                    std::cout << "📝 分析结果: " << result.result << std::endl;
+                    
+                    if (!result.tags.empty()) {
+                        std::cout << "🏷️  提取标签: ";
+                        for (size_t j = 0; j < result.tags.size(); ++j) {
+                            std::cout << result.tags[j];
+                            if (j < result.tags.size() - 1) std::cout << ", ";
+                        }
+                        std::cout << std::endl;
+                    }
+                } else {
+                    std::cout << "❌ 分析失败: " << result.error_message << std::endl;
+                }
+            }
+        
+            // 输出统计信息
+            std::cout << "\n📊 并发分析统计:" << std::endl;
+            std::cout << "   总文件数: " << results.size() << std::endl;
+            std::cout << "   成功分析: " << success_count << "/" << results.size() << std::endl;
+            std::cout << "   图片文件: " << image_count << std::endl;
+            std::cout << "   视频文件: " << video_count << std::endl;
+            std::cout << "⏱️  总耗时: " << total_time << "秒" << std::endl;
+            std::cout << "   平均响应时间: " << (success_count > 0 ? total_processing_time / success_count : 0) << "秒" << std::endl;
+            std::cout << "   并发加速比: " << (success_count > 0 ? total_processing_time / total_time : 0) << "倍" << std::endl;
+            
+        } catch (const std::exception& e) {
+            std::cerr << "❌ 程序异常: " << e.what() << std::endl;
+        }
+
     }
 
     // 保存结果

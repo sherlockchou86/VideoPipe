@@ -5,6 +5,57 @@
 #include <sstream>
 #include <iostream>
 
+#include <omp.h>
+
+// 并发提取关键帧函数
+std::vector<cv::Mat> DoubaoMediaAnalyzer::extract_keyframes_concurrent(const std::string& video_path, int max_frames, int frame_interval) {
+    cv::VideoCapture cap(video_path);
+    if (!cap.isOpened()) {
+        throw std::runtime_error("无法打开视频文件: " + video_path);
+    }
+    
+    int total_frames = static_cast<int>(cap.get(cv::CAP_PROP_FRAME_COUNT));
+    int fps = static_cast<int>(cap.get(cv::CAP_PROP_FPS));
+    
+    if (total_frames <= 0) {
+        throw std::runtime_error("无法获取视频帧数");
+    }
+    
+    // 计算实际要提取的帧数
+    int actual_frames = std::min(max_frames, total_frames);
+    if (frame_interval > 1) {
+        actual_frames = std::min(max_frames, total_frames / frame_interval);
+    }
+    
+    std::vector<cv::Mat> frames;
+    frames.reserve(actual_frames);
+    
+    // 计算帧位置
+    std::vector<int> frame_positions;
+    for (int i = 0; i < actual_frames; ++i) {
+        int pos = (total_frames - 1) * i / std::max(1, actual_frames - 1);
+        frame_positions.push_back(pos);
+    }
+    
+    // 并行提取帧
+    #pragma omp parallel for schedule(dynamic)
+    for (int i = 0; i < actual_frames; ++i) {
+        cv::Mat frame;
+        cv::VideoCapture local_cap(video_path);
+        local_cap.set(cv::CAP_PROP_POS_FRAMES, frame_positions[i]);
+        local_cap.read(frame);
+        
+        if (!frame.empty()) {
+            #pragma omp critical
+            frames.push_back(frame.clone());
+        }
+        local_cap.release();
+    }
+    
+    cap.release();
+    return frames;
+}
+
     
 // HTTP回调函数
 static size_t write_callback(void* contents, size_t size, size_t nmemb, std::string* response) {
@@ -247,10 +298,10 @@ std::vector<AnalysisResult> DoubaoMediaAnalyzer::batch_analyze(const std::string
         results.push_back(result);
         
         // 添加延迟避免频繁调用
-        if (i < media_files.size() - 1) {
-            std::cout << "⏳ 等待3秒后继续..." << std::endl;
-            utils::sleep_seconds(3);
-        }
+        // if (i < media_files.size() - 1) {
+        //     //std::cout << "⏳ 等待3秒后继续..." << std::endl;
+        //     //utils::sleep_seconds(3);
+        // }
     }
     
     return results;
@@ -417,4 +468,59 @@ std::string DoubaoMediaAnalyzer::make_http_request(const std::string& url,
     }
     
     return response;
+}
+
+std::vector<BatchAnalysisResult> DoubaoMediaAnalyzer::analyze_batch_concurrent(
+    const std::vector<std::string>& file_paths,
+    const std::string& prompt,
+    int max_frames,
+    int frame_interval,
+    int max_concurrent) {
+    
+    // 初始化线程池
+    if (!thread_pool) {
+        thread_pool = std::make_shared<ThreadPool>(max_concurrent);
+    }
+    
+    std::vector<std::future<BatchAnalysisResult>> futures;
+    std::vector<BatchAnalysisResult> results;
+    
+    // 提交所有任务到线程池
+    for (const auto& file_path : file_paths) {
+        auto future = thread_pool->enqueue([this, file_path, prompt, max_frames, frame_interval]() -> BatchAnalysisResult {
+            BatchAnalysisResult batch_result;
+            batch_result.filename = file_path;
+            
+            auto start_time = std::chrono::high_resolution_clock::now();
+            
+            try {
+                AnalysisResult result = this->analyze_single_video(file_path, prompt, 2000, max_frames);
+                batch_result.success = result.success;
+                batch_result.result = result.content;  // 修复：使用正确的字段名
+                if (result.success) {
+                    batch_result.tags = utils::extract_tags(result.content);  // 修复：使用正确的字段名
+                } else {
+                    batch_result.error_message = result.error;
+                }
+            } catch (const std::exception& e) {
+                batch_result.success = false;
+                batch_result.error_message = e.what();
+            }
+            
+            auto end_time = std::chrono::high_resolution_clock::now();
+            batch_result.processing_time = 
+                std::chrono::duration<double>(end_time - start_time).count();
+            
+            return batch_result;
+        });
+        
+        futures.push_back(std::move(future));
+    }
+    
+    // 收集结果
+    for (auto& future : futures) {
+        results.push_back(future.get());
+    }
+    
+    return results;
 }

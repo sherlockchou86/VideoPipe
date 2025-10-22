@@ -66,4 +66,7 @@ namespace utils {
     // 时间工具
     double get_current_time();
     void sleep_seconds(int seconds);
+
+    // 或者更兼容的版本
+    std::string get_filename(const std::string& filepath);
 }

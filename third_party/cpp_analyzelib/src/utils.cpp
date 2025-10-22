@@ -264,4 +264,13 @@ void sleep_seconds(int seconds) {
     std::this_thread::sleep_for(std::chrono::seconds(seconds));
 }
 
+// 或者更兼容的版本
+std::string get_filename(const std::string& filepath) {
+    size_t last_slash = filepath.find_last_of("/\\");
+    if (last_slash != std::string::npos) {
+        return filepath.substr(last_slash + 1);
+    }
+    return filepath;
+}
+
 } // namespace utils

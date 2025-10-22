@@ -162,3 +162,4 @@ cmake-build-debug-remote/
 cmake-build-debug/
 build/*
 !build/build.sh
+.vscode/launch.json

@@ -3,7 +3,10 @@
 #include <string>
 #include <vector>
 #include <memory>
-#include <nlohmann/json.hpp>
+#include <nlohmann/json.hpp>  
+#include <future>
+#include "ThreadPool.h"  // 直接包含，而不是前向声明
+#include <opencv2/opencv.hpp> // 包含OpenCV头文件
 
 #ifdef _WIN32
     #ifdef DOUBAO_ANALYZER_EXPORTS
@@ -14,6 +17,17 @@
 #else
     #define DOUBAO_API __attribute__((visibility("default")))
 #endif
+
+
+struct BatchAnalysisResult {
+    std::string filename;
+    bool success;
+    std::string result;
+    std::vector<std::string> tags;
+    double processing_time;
+    std::string error_message;
+};
+
 
 
 struct AnalysisResult {
@@ -31,6 +45,7 @@ class DoubaoMediaAnalyzer {
 private:
     std::string api_key_;
     std::string base_url_;
+    std::shared_ptr<ThreadPool> thread_pool;  // 添加线程池成员变量
     
 public:
     explicit DoubaoMediaAnalyzer(const std::string& api_key);
@@ -58,7 +73,20 @@ public:
     // 标签提取
     std::vector<std::string> extract_tags(const std::string& content);
 
-    
+    // 并发批量分析
+    std::vector<BatchAnalysisResult> analyze_batch_concurrent(
+        const std::vector<std::string>& file_paths,
+        const std::string& prompt = "",
+        int max_frames = 10,
+        int frame_interval = 1,
+        int max_concurrent = 5
+    );
+
+    // 添加缺失的方法声明
+    std::vector<cv::Mat> extract_keyframes_concurrent(const std::string& video_path, 
+                                                     int max_frames = 10, 
+                                                     int frame_interval = 1);
+
     ~DoubaoMediaAnalyzer();  // 添加这行    
     
 private:
