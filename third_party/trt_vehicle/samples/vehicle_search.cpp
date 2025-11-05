@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <memory>
-#include <experimental/filesystem>
+#include <filesystem>
 
 #include "../models/vehicle_feature_encoder.h"
 #include "../../../utils/vp_utils.h"
@@ -55,7 +55,7 @@ void load_vehicle_dataset(std::string dataset_dir,
                         std::vector<std::pair<std::string, std::vector<float>>>& features_set) {
     features_set.clear();
     // iterate directory
-    using recursive_directory_iterator = std::experimental::filesystem::recursive_directory_iterator;
+    using recursive_directory_iterator = std::filesystem::recursive_directory_iterator;
     for (const auto& dir_entry : recursive_directory_iterator(dataset_dir))
         if (vp_utils::ends_with(dir_entry.path(), ".jpg")) {    
             std::cout << "load vehicle image: " << dir_entry << std::endl;

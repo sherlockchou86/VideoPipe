@@ -46,10 +46,10 @@ namespace vp_utils {
     }
 
     std::string vp_log_file_writer::create_valid_log_file_name() {
-        if (!std::experimental::filesystem::exists(log_dir)) {
-            std::experimental::filesystem::create_directories(log_dir);
+        if (!std::filesystem::exists(log_dir)) {
+            std::filesystem::create_directories(log_dir);
         }
-        std::experimental::filesystem::path root_dir(log_dir);
+        std::filesystem::path root_dir(log_dir);
 
         auto f_name = vp_utils::time_format(NOW, log_file_name_template);
         auto p = root_dir / f_name;

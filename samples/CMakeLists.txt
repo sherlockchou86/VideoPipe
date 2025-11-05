@@ -5,7 +5,7 @@ endif()
 
 message("start build for simple samples...")
 # save all exe to 'build/bin'
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 add_executable(1-1-1_sample "1-1-1_sample.cpp")
 target_link_libraries(1-1-1_sample ${PROJECT_NAME})
 

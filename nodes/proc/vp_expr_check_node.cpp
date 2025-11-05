@@ -1,6 +1,6 @@
 
 #include "vp_expr_check_node.h"
-#include "../../third_party/tinyexpr/tinyexpr.h"
+#include "tinyexpr.h"
 
 namespace vp_nodes {
     
