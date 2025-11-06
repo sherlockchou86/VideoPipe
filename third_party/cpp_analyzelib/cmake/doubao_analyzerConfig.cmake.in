@@ -1,0 +1,13 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+# 查找依赖
+find_dependency(OpenCV REQUIRED)
+find_dependency(CURL REQUIRED)
+
+# 包含目标文件
+include("${CMAKE_CURRENT_LIST_DIR}/doubao_analyzerTargets.cmake")
+
+# 检查目标是否存在
+check_required_components(doubao_analyzer)

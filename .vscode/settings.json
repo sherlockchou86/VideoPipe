@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.yaml": "yaml",
         "memory": "cpp",
         "cmath": "cpp",
         "cstddef": "cpp",
@@ -88,7 +89,14 @@
         "cinttypes": "cpp",
         "__nullptr": "cpp",
         "__locale": "cpp",
-        "regex": "cpp"
+        "regex": "cpp",
+        "csignal": "cpp",
+        "forward_list": "cpp",
+        "ranges": "cpp",
+        "shared_mutex": "cpp",
+        "typeindex": "cpp",
+        "valarray": "cpp",
+        "variant": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

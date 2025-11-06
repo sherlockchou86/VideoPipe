@@ -8,11 +8,11 @@ using namespace llmlib;
  * 2. api key
 */
 int main() {
-    LLMClient llmcli("https://dashscope.aliyuncs.com/compatible-mode/v1", "sk-XXX", LLMBackendType::OpenAI);
+    LLMClient llmcli("https://ark.cn-beijing.volces.com/api/v3", "sk_key", LLMBackendType::OpenAI);
     /**
      * 1. test for simple chat
     */
-    auto res1 = llmcli.simple_chat("qwen2.5-vl-7b-instruct", "坐飞机为什么要付机票钱？", {}, {{"temperature", 0.1}, {"top_k", 1}});
+    auto res1 = llmcli.simple_chat("doubao-1.5-vision-lite-250315", "坐飞机为什么要付机票钱？", {}, {{"temperature", 0.1}, {"top_k", 1}});
     std::cout << "------test for simple chat-----" << std::endl;
     std::cout << res1 << std::endl;
     std::cout << "-------------------------------" << std::endl;
@@ -20,9 +20,9 @@ int main() {
     /**
      * 2. test for simple chat with images
     */
-    auto image1 = cv::imread("/windows2/zhzhi/github/vp_data/test_images/vehicle/0.jpg");
-    auto image2 = cv::imread("/windows2/zhzhi/github/vp_data/test_images/vehicle/27.jpg");
-    auto res2 = llmcli.simple_chat("qwen2.5-vl-7b-instruct", "描述这两幅图片的差异", {image1, image2}, {});
+    auto image1 = cv::imread("./vp_data/test_images/vehicle/0.jpg");
+    auto image2 = cv::imread("./vp_data/test_images/vehicle/27.jpg");
+    auto res2 = llmcli.simple_chat("doubao-1.5-vision-lite-250315", "描述这两幅图片的差异", {image1, image2}, {});    
     std::cout << "-----test for simple chat with images-----" << std::endl;
     std::cout << res2 << std::endl;
     std::cout << "------------------------------------------" << std::endl;
@@ -48,7 +48,8 @@ int main() {
             "top_k": 2
         }
     )"_json;
-    auto res3 = llmcli.chat("qwen2.5-vl-7b-instruct", messages, options);
+    auto res3 = llmcli.chat("doubao-1.5-vision-lite-250315", messages, options);
+    
     std::cout << "---------test for chat---------" << std::endl;
     std::cout << res3 << std::endl;
     std::cout << "-------------------------------" << std::endl;
@@ -72,7 +73,7 @@ int main() {
             }}
         }
     };
-    auto res4 = llmcli.chat("qwen2.5-vl-7b-instruct", messages4, {{"temperature", 0.1}, {"top_k", 1}});
+    auto res4 = llmcli.chat("doubao-1.5-vision-lite-250315", messages4, {{"temperature", 0.1}, {"top_k", 1}});
     std::cout << "---------test for chat with images---------" << std::endl;
     std::cout << res4 << std::endl;
     std::cout << "-------------------------------------------" << std::endl;
