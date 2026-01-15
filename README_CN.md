@@ -1,5 +1,5 @@
 <p style="" align="center">
-  <img src="./doc/logo.png" alt="Logo" width="350" height="200">
+  <img src="./doc/logo.png" alt="Logo" width="75%">
 </p>
 <p style="margin:0px" align="center">
   <a href='./README.md'>英文README</a> | <a href='http://www.videopipe.cool'>VideoPipe网站</a> | <a href='http://www.videopipe.cool/index.php/2024/09/11/videopipetutorials/'>VideoPipe视频教程</a>
