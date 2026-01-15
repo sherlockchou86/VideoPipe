@@ -93,6 +93,9 @@ target_link_libraries(lane_detect_sample ${PROJECT_NAME})
 add_executable(frame_fusion_sample "frame_fusion_sample.cpp")
 target_link_libraries(frame_fusion_sample ${PROJECT_NAME})
 
+add_executable(yolov5_seg_sample "yolov5_seg_sample.cpp")
+target_link_libraries(yolov5_seg_sample ${PROJECT_NAME})
+
 add_executable(vp_test "vp_test.cpp")
 target_link_libraries(vp_test ${PROJECT_NAME})
 
