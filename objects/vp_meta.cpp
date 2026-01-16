@@ -22,6 +22,18 @@ namespace vp_objects {
         return "";
     }
 
+    std::string vp_meta::get_create_time_str() {
+
+        auto time_t = std::chrono::system_clock::to_time_t(create_time);
+        auto local_time = *std::localtime(&time_t);
+        
+        char buffer[20];
+        std::strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", &local_time);
+        
+        return std::string(buffer);
+    }
+
+
 /*
     void vp_meta::attach_trace(std::string node_name) {
         if (trace_table.count(node_name)) {

@@ -83,6 +83,8 @@ namespace vp_objects {
         // the time when meta created
         std::chrono::system_clock::time_point create_time;
 
+        std::string get_create_time_str();
+
         vp_meta_type meta_type;
 
         // channel the meta belongs to
