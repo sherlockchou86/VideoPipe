@@ -1,0 +1,48 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C/C++: g++ 生成活动文件",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-fdiagnostics-color=always",                     //彩色输出
+				"-g",										   	  //调试信息								
+				"${file}",								          //编译当前文件
+				"-o",	  								          //指定输出
+				"${fileDirname}/${fileBasenameNoExtension}",      //输出可执行文件路径
+				"-I${workspaceFolder}",		                      //项目头文件路径   
+				"-I${workspaceFolder}/third_party/cpp_llmlib",  //llmlib头文件路径
+				// "-I/home/whj00/VideoPipe/nodes/mllm",			      //mllm节点头文件路径 
+				"-I${workspaceFolder}/nodes",					  //nodes节点头文件路径
+				"-I${workspaceFolder}/nodes/infers",			  //infers节点头文件路径
+				"-I${workspaceFolder}/nodes/track",			      //track节点头文件路径
+				"-I${workspaceFolder}/nodes/osd",			      //osd节点头文件路径
+				"-I${workspaceFolder}/utils/analysis_board",	  //analysis_board工具头文件路径
+				"-I/usr/local/cuda/include",
+				"-I/usr/include/x86_64-linux-gnu",
+				"-I/usr/local/include/opencv4",                    //OpenCV头文件路径
+				"-L${fileDirname}/../build/libs",		           //库文件路径
+				"-L/home/whj00/VideoPipe/third_party/cpp_llmlib/../build/libs",		  //库文件路径
+				"-lvideo_pipe",		                               //链接video_pipe库
+				"-ltinyexpr",		                               //链接tinyexpr库  
+				"-Wl,-rpath,${fileDirname}/../build/libs",		   //运行时库文件路径
+				"-Wl,-rpath,/usr/local/cuda/lib64",
+				"-lssl",
+				"-lcrypto",								//链接OpenSSL库
+				"`pkg-config", "--cflags", "--libs", "opencv4`"	   //链接OpenCV库	  
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "编译器: /usr/bin/g++"
+		}
+	]
+}
