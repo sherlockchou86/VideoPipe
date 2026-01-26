@@ -21,6 +21,12 @@ namespace vp_utils {
         log_cache_semaphore.signal();
     }
 
+    vp_logger& vp_logger::get_logger() {
+        static vp_logger logger;
+
+        return logger;
+    }
+
     void vp_logger::init() {
         inited = true;
 
@@ -37,6 +43,8 @@ namespace vp_utils {
         // run thread
         auto t = std::thread(&vp_logger::log_write_run, this); 
         log_writer_th = std::move(t);
+
+        std::cout << "Logger instance address: " << this << " logger status: " << inited << std::endl;
     }
 
     void vp_logger::log(vp_log_level level, const std::string& message, const char* code_file, int code_line) {

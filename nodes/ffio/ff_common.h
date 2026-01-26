@@ -13,6 +13,7 @@ extern "C" {
 #include <libswscale/swscale.h>
 #include <libavutil/avutil.h>
 #include <libavutil/pixdesc.h>
+#include<libavutil/rational.h>
 #include <libavutil/imgutils.h>
 #include <libavdevice/avdevice.h>
 }

@@ -80,6 +80,14 @@ VideoPipe 是一个让计算机视觉算法模型集成更加简单的框架，�
 
 [如何安装Paddle_Inference](./third_party/paddle_ocr/README.md)
 
+### 安装 VideoPipe在 windows
+1. 安装Vcpkg软件
+2. 执行命令，.\vcpkg install opencv[freetype,contrib] tinyexpr ffmpeg[x264]
+3. 切换到 win-dev 分支
+4. 使用 cmake-gui 配置并生成项目文件
+
+注：由于gstreamer在windows上的支持不是很好，所以只推荐使用ffmpeg后端
+
 ### 5.2 编译和调试
 
 1. 运行 `git clone https://github.com/sherlockchou86/VideoPipe.git`
