@@ -89,6 +89,7 @@ Optional, if you need to implement your own inference backend or use a backend o
 4. use cmake-gui to configure and generate project files
 
 ps:because gstreamer is poor for windows, only recommend to use ffmpeg backend.
+if you encounter any compilation errors, try converting the error file to utf8 bom encoding.
 
 ### Compilation and Debugging
 
