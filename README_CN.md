@@ -4,6 +4,9 @@
 <p style="margin:0px" align="center">
   <a href='./README.md'>英文README</a> | <a href='http://www.videopipe.cool'>VideoPipe网站</a> | <a href='http://www.videopipe.cool/index.php/2024/09/11/videopipetutorials/'>VideoPipe视频教程</a>
 </p>
+<p style="margin:0px" align="center">
+  <a href='https://github.com/sherlockchou86/one-yolo'>🚀one-yolo, make all in one for Yolo integration. All Tasks, All Versions, All Runtimes. 🚀</a>
+</p>
 
 ---
 
