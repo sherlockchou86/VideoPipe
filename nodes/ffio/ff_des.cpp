@@ -306,6 +306,8 @@ namespace vp_nodes {
         }
         if (!(m_ofmt_ctx->flags & AVFMT_NOFILE)) {
             ret = avio_open(&m_ofmt_ctx->pb, uri.c_str(), AVIO_FLAG_WRITE);
+            m_ofmt_ctx->flush_packets = 1;
+            m_ofmt_ctx->flags |= AVFMT_FLAG_FLUSH_PACKETS;
             if (ret < 0) {
                 VP_ERROR(vp_utils::string_format("[ffio/ff_des][%d][inner_open] avio_open failed on output uri(%s). ret: %d", 
                                                  get_channel_index(), uri.c_str(), ret));

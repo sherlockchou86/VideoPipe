@@ -21,11 +21,13 @@ extern "C" {
 #define ff_av_frame_ptr std::shared_ptr<AVFrame>
 #define ff_src_ptr std::shared_ptr<vp_nodes::ff_src>
 #define ff_des_ptr std::shared_ptr<vp_nodes::ff_des>
-#define ff_packet_queue_ptr std::shared_ptr<vp_nodes::ff_packet_queue>
+#define ff_scaler_ptr std::shared_ptr<vp_nodes::ff_scaler>
 
 #define alloc_ff_src(channel_index) std::make_shared<vp_nodes::ff_src>(channel_index)
 #define alloc_ff_des(channel_index) std::make_shared<vp_nodes::ff_des>(channel_index)
-
+#define alloc_ff_scaler(src_width, src_height, src_fmt, dst_width, dst_height, dst_fmt)               \
+        std::make_shared<vp_nodes::ff_scaler>(src_width, src_height, src_fmt, dst_width, dst_height, dst_fmt)
+        
 #define alloc_ff_av_frame()                                                                           \
         std::shared_ptr<AVFrame>(av_frame_alloc(), [](AVFrame *frame) { av_frame_free(&frame); })
 #define alloc_ff_av_packet()                                                                          \
@@ -57,23 +59,6 @@ namespace vp_nodes {
                  AVPixelFormat dst_fmt);
         ~ff_scaler();
         bool scale(ff_av_frame_ptr src, ff_av_frame_ptr& dst);
-    };
-
-    /* safe queue used for saving AVPacket. */
-    class ff_packet_queue {
-    public:
-        ff_packet_queue(int max_num = 25);
-        /* disable copy and assignment operations */
-        ff_packet_queue(const ff_packet_queue&) = delete;
-        ff_packet_queue& operator=(const ff_packet_queue&) = delete;
-        void push(ff_av_packet_ptr packet);
-        bool try_pop(ff_av_packet_ptr& packet);
-        void wait_and_pop(ff_av_packet_ptr& packet);
-    private:
-        std::queue<ff_av_packet_ptr> queue_;
-        std::mutex mutex_;
-        std::condition_variable cond_var_;
-        int m_max_num_ = 25;
     };
 }
 #endif

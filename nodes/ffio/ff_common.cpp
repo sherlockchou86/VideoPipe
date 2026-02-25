@@ -51,34 +51,5 @@ namespace vp_nodes {
         dst->pkt_dts = src->pkt_dts;
         return ret >= 0;
     }
-
-    ff_packet_queue::ff_packet_queue(int max_num): m_max_num_(max_num) {}
-    
-    void ff_packet_queue::push(ff_av_packet_ptr packet) {
-        std::unique_lock<std::mutex> lock(mutex_);
-        queue_.push(packet);
-        if (queue_.size() > m_max_num_) {
-            queue_.pop();  // make sure queue is not too much data
-            return;
-        }
-        cond_var_.notify_one();
-    }
-
-    bool ff_packet_queue::try_pop(ff_av_packet_ptr& packet) {
-        std::unique_lock<std::mutex> lock(mutex_);
-        if (queue_.empty()) {
-            return false;
-        }
-        packet = queue_.front();
-        queue_.pop();
-        return true;
-    }
-
-    void ff_packet_queue::wait_and_pop(ff_av_packet_ptr& packet) {
-        std::unique_lock<std::mutex> lock(mutex_);
-        cond_var_.wait(lock, [this] { return !queue_.empty(); });
-        packet = queue_.front();
-        queue_.pop();
-    }
 }
 #endif
