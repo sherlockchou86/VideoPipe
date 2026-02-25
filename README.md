@@ -85,6 +85,15 @@ Optional, if you need to implement your own inference backend or use a backend o
 
 [how to install Paddle_Inference](./third_party/paddle_ocr/README.md)
 
+### Build VideoPipe on windows
+1. Install Vcpkg on windows
+2. .\vcpkg install opencv[freetype,contrib] tinyexpr ffmpeg[x264]
+3. change branch win-dev
+4. use cmake-gui to configure and generate project files
+
+ps:because gstreamer is poor for windows, only recommend to use ffmpeg backend.
+if you encounter any compilation errors, try converting the error file to utf8 bom encoding.
+
 ### Compilation and Debugging
 
 1. run `git clone https://github.com/sherlockchou86/VideoPipe.git`

@@ -17,11 +17,18 @@ namespace vp_utils {
     // string format in C++17
     template<typename ... Args>
     inline string string_format(const string& format, Args ... args){
-        size_t size = 1 + snprintf(nullptr, 0, format.c_str(), args ...); 
-        // unique_ptr<char[]> buf(new char[size]);
-        char bytes[size];
-        snprintf(bytes, size, format.c_str(), args ...);
-        return string(bytes);
+        int size = std::snprintf(nullptr, 0, format.c_str(), args...);
+        if (size <= 0) return {};
+
+        std::unique_ptr<char[]> buffer = std::make_unique<char[]>(size + 1);
+
+        // 使用 snprintf，现代 MSVC 支持
+        int result = std::snprintf(buffer.get(), size + 1, format.c_str(), args...);
+        if (result < 0 || result >= size + 1) {
+            return {}; // 格式化失败
+        }
+
+        return std::string(buffer.get(), size);
     }
 
     // get optimal font scale depend on screen width and height

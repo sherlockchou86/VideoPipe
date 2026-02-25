@@ -14,6 +14,10 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fPIC -w -fdiagnostics-color=always -
 # save all libs(including third_party's) to 'libs'
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/libs)
 
+if(WIN32)
+  set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)  # 自动导出所有符号
+endif()
+
 # optional for build, modify values when configure the project using 'cmake -DVP_WITH_CUDA=OFF ..'
 option(VP_WITH_CUDA "prepared CUDA or not?" OFF)
 option(VP_WITH_TRT "prepared TensorRT or not?" OFF)
@@ -31,20 +35,9 @@ message(STATUS "    libraries: ${OpenCV_LIBS}")
 message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-# Gstreamer required
-include(FindPkgConfig)
-pkg_check_modules(GST   REQUIRED gstreamer-1.0)
-pkg_check_modules(GSTAPP REQUIRED gstreamer-app-1.0)
-pkg_check_modules(GST_RTSP REQUIRED gstreamer-rtsp-server-1.0)
-message(STATUS "GStreamer library status:")
-message(STATUS "    version: ${GST_VERSION}")
-message(STATUS "    libraries: ${GST_LIBRARIES} ${GSTAPP_LIBRARIES} ${GST_RTSP_LIBRARIES}")
-message(STATUS "    include path: ${GST_INCLUDE_DIRS}")
-include_directories(${GST_INCLUDE_DIRS})
-set (GST_DEPEND_LIBS ${GST_LIBRARIES} ${GSTAPP_LIBRARIES} ${GST_RTSP_LIBRARIES})
 
 # collect dependent libs for videopipe
-list(APPEND VP_DEPEND_LIBS ${OpenCV_LIBS} ${GST_DEPEND_LIBS} stdc++fs)
+list(APPEND VP_DEPEND_LIBS ${OpenCV_LIBS} ${GST_DEPEND_LIBS})
 
 # optional for CUDA
 if(VP_WITH_CUDA) # CUDA enabled
@@ -115,8 +108,9 @@ endif()
 
 # tinyexpr
 message("-------------start build tinyexpr--------------")
-add_subdirectory(third_party/tinyexpr)
-list(APPEND VP_DEPEND_LIBS tinyexpr)
+find_package(unofficial-tinyexpr CONFIG REQUIRED)
+list(APPEND VP_DEPEND_LIBS unofficial::tinyexpr::tinyexpr)
+
 message("--------------end build tinyexpr---------------")
 
 message("-------------collect version info--------------")
@@ -166,6 +160,8 @@ list(APPEND VP_CPPS_SOURCES ${NODES} ${OBJECTS} ${UTILS})
 # build for videopipe
 add_library(${PROJECT_NAME} SHARED ${VP_CPPS_SOURCES})
 target_link_libraries(${PROJECT_NAME} ${VP_DEPEND_LIBS})
+target_link_directories(${PROJECT_NAME} PUBLIC "F:\\Works\\vcpkg\\export\\vcpkg-export-20260126-192350\\installed\\x64-windows-release\\lib")
+target_compile_options(${PROJECT_NAME} PRIVATE /MP)
 
 # build for samples
 add_subdirectory(samples)

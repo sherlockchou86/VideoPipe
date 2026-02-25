@@ -68,10 +68,7 @@ namespace vp_utils {
         vp_logger& operator=(const vp_logger&) = delete;
 
         // singleton
-        static vp_logger& get_logger() {
-            static vp_logger logger;
-            return logger;
-        }
+        static vp_logger& get_logger();
         ~vp_logger();
 
         // CONFIG

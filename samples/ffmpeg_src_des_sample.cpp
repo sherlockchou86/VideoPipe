@@ -29,11 +29,13 @@ int main() {
        1. rtmp://192.168.77.196/live/10000       --> pushing rtmp live stream
        2. ./output/records.mp4                   --> saving to video file
     */
-    auto ff_src_0 = std::make_shared<vp_nodes::vp_ff_src_node>("ff_src_0", 0, "./vp_data/test_video/face.mp4", "h264", 0.6);
-    auto yunet_face_detector_0 = std::make_shared<vp_nodes::vp_yunet_face_detector_node>("yunet_face_detector_0", "./vp_data/models/face/face_detection_yunet_2022mar.onnx");
-    auto sface_face_encoder_0 = std::make_shared<vp_nodes::vp_sface_feature_encoder_node>("sface_face_encoder_0", "./vp_data/models/face/face_recognition_sface_2021dec.onnx");
+    std::string base_dir = "F:\\BaiduYunDownload";
+    auto ff_src_0 = std::make_shared<vp_nodes::vp_ff_src_node>("ff_src_0", 0, base_dir+"./vp_data/test_video/face.mp4", "h264", 0.6);
+    auto yunet_face_detector_0 = std::make_shared<vp_nodes::vp_yunet_face_detector_node>("yunet_face_detector_0", base_dir+"./vp_data/models/face/face_detection_yunet_2022mar.onnx");
+    auto sface_face_encoder_0 = std::make_shared<vp_nodes::vp_sface_feature_encoder_node>("sface_face_encoder_0", base_dir+"./vp_data/models/face/face_recognition_sface_2021dec.onnx");
     auto osd_0 = std::make_shared<vp_nodes::vp_face_osd_node_v2>("osd_0");
-    auto ff_des_0 = std::make_shared<vp_nodes::vp_ff_des_node>("ff_des_0", 0, "rtmp://192.168.77.60/live/20000");
+    //auto ff_des_0 = std::make_shared<vp_nodes::vp_ff_des_node>("ff_des_0", 0, "rtmp://192.168.77.60/live/20000");
+    auto ff_des_0 = std::make_shared<vp_nodes::vp_ff_des_node>("ff_des_0", 0, base_dir+"./vp_data/output/records.mp4");
     //auto rtmp_des_0 = std::make_shared<vp_nodes::vp_rtmp_des_node>("rtmp_des_0", 0, "rtmp://192.168.77.196/live/20000");
     auto screen_des_0 = std::make_shared<vp_nodes::vp_screen_des_node>("screen_des_0", 0);
 

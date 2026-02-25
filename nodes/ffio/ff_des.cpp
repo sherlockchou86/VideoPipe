@@ -68,7 +68,7 @@ namespace vp_nodes {
                                                 get_channel_index()));
                 break;
             }
-            ff_frame->pts = m_enc_ctx->frame_number;
+            ff_frame->pts = m_enc_ctx->frame_num;
             ret = avcodec_send_frame(m_enc_ctx, ff_frame.get());
             if (ret < 0) {
                 VP_ERROR(vp_utils::string_format("[ffio/ff_des][%d][encode_run] avcodec_send_frame failed. ret: %d", 
@@ -255,7 +255,7 @@ namespace vp_nodes {
             return false;
         }
         /* set parameters for encoder */
-        m_enc_ctx->framerate = (AVRational) {fps, 1};
+        m_enc_ctx->framerate = av_make_q(fps,1);
         m_enc_ctx->time_base = av_inv_q(m_enc_ctx->framerate);
         m_enc_ctx->pix_fmt   = sw_pix_fmt;
         m_enc_ctx->width     = width;
