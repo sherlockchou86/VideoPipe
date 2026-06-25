@@ -44,7 +44,7 @@ To watch in fullscreen, use the button in the bottom right corner of the playerï
 
 - **Stream Reading**: Supports mainstream video stream protocols such as UDP, RTSP, RTMP, file, and application. It also supports image reading.
 - **Video Decoding**: Supports video and image decoding based on OpenCV/GStreamer (with hardware acceleration).
-- **Algorithm Inference**: Supports multi-level inference based on deep learning algorithms, such as object detection, image classification, feature extraction, and image generation. It also supports the integration of traditional image algorithms. **Support mLLM(Multimodal Large Language Model) integration now (update 2025/8/12)**
+- **Algorithm Inference**: Supports multi-level inference based on deep learning algorithms, such as object detection, image classification, feature extraction, and image generation. It also supports the integration of traditional image algorithms. **Support mLLM(Multimodal Large Language Model) integration now (update 2025/8/12)**. **Support TwelveLabs Pegasus whole-video understanding/structuring now (`vp_pegasus_analyser_node`)** â€” grab a free API key at https://twelvelabs.io.
 - **Object Tracking**: Supports object tracking, such as IOU and SORT tracking algorithms.
 - **Behavior Analysis (BA)**: Supports behavior analysis based on tracking, such as traffic behavior detection like line-crossing, parking, and violations.
 - **Business Logic**: Allows integration of any custom business logic, which can be closely related to specific business requirements.

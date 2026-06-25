@@ -111,7 +111,10 @@ if(VP_WITH_LLM)
     target_link_libraries(mllm_analyse_sample ${PROJECT_NAME})    
 
     add_executable(mllm_analyse_sample_openai "mllm_analyse_sample_openai.cpp")
-    target_link_libraries(mllm_analyse_sample_openai ${PROJECT_NAME})    
+    target_link_libraries(mllm_analyse_sample_openai ${PROJECT_NAME})
+
+    add_executable(pegasus_analyse_sample "pegasus_analyse_sample.cpp")
+    target_link_libraries(pegasus_analyse_sample ${PROJECT_NAME})
 endif()
 
 # samples depend on FFmpeg
