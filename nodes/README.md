@@ -62,6 +62,7 @@ file_src_1                                                                --> tr
   - vp_lane_detector_node：基于CenterNet的车道线检测节点（opencv::dnn）
   - vp_mask_rcnn_detector_node：基于maskrcnn的目标检测节点（opencv::dnn）
   - vp_openpose_detector_node：基于openpose的肢体检测节点（opencv::dnn）
+  - vp_pegasus_analyser_node：基于TwelveLabs Pegasus的整段视频语义理解/结构化节点（cloud api）
   - vp_ppocr_text_detector_node：基于paddleocr的文字检测节点（paddleinference）
   - vp_restoration_node：基于real-esrgan的图像增强修复节点（opencv::dnn）
   - vp_sface_feature_encoder_node：基于sface网络的人脸特征提取节点（opencv::dnn）

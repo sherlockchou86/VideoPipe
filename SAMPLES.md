@@ -91,3 +91,4 @@ https://github.com/sherlockchou86/video_pipe_c/assets/13251045/9c3c1a87-d9f7-463
 |52|mllm_analyse_sample_openai|![](./doc/p70.png)|
 |53|rtmp_src_sample|![](./doc/p71.png)|
 |54|yolov5_seg_sample|![](./doc/p72.png)|
+|55|pegasus_analyse_sample|--|
