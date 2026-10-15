@@ -79,6 +79,8 @@ Optional, if you need to implement your own inference backend or use a backend o
 - Paddle Inference
 - ONNX Runtime
 - mLLM（Ollama/vLLM/OpenAI-compatible API Services）
+
+For the OpenAI-compatible mLLM sample, see [`samples/mllm_analyse_sample_openai.cpp`](./samples/mllm_analyse_sample_openai.cpp). Replace its model ID, API base URL, and API key with values from the same service, and choose a vision-capable model because the sample sends image frames. For example, [A2Agent](https://a2agent.me/) documents `https://a2agent.me/v1` as its base URL; check its model catalog for a model that accepts images before using it with this sample.
 - Anything you like
 
 [how to install CUDA and TensorRT](./third_party/trt_vehicle/README.md)
